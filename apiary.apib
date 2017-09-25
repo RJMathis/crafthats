@@ -5,76 +5,303 @@ HOST: http://polls.apiblueprint.org/
 
 Polls is a simple API allowing consumers to view polls and vote in them.
 
-## Questions Collection [/questions]
+## Breweries Collection [/breweries?offset=xx&limit=xx] 
+optional parameters for pagination
 
-### List All Questions [GET]
+### List All Breweries [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "state": "e.g. Texas",
+                "city": "e.g. Austin",
+                "name": "e.g. 512",
+                "established": "e.g. 1982",
+                "image": "/files/brewery1.jpg"
+            },
+            .
+            .
+            .
+            {
+                "state": "e.g. Texas",
+                "city": "e.g. Austin",
+                "name": "e.g. LiveOak",
+                "established": "e.g. 1999",
+                "image": "/files/breweryn.jpg"
             }
         ]
 
-### Create a New Question [POST]
+## Breweries Collection [/breweries?attribute=state] 
+attribute is one of the attributes of breweries, returns json object of all breweries with attribute
+that equals state
+ex: /brewereis/established=1982
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### List All Breweries [GET]
 
-+ Request (application/json)
++ Response 200 (application/json)
 
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
-    + Body
-
+        [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+                "state": "e.g. Texas",
+                "city": "e.g. Austin",
+                "name": "e.g. 512",
+                "established": "1982",
+                "image": "/files/brewery1.jpg"
+            },
+            .
+            .
+            .
+            {
+                "state": "e.g. Texas",
+                "city": "e.g. Austin",
+                "name": "e.g. LiveOak",
+                "established": "1982",
+                "image": "/files/breweryn.jpg"
             }
+        ]
+      
+## Reviews Collection [/reviews/?offset=xx&limit=xx]
+
+### List All Reviews [GET]
+optional parameters for pagination
++ Response 200 (application/json)
+
+        [
+            {
+                "reviewer": "e.g. John",
+                "brewery": {
+                "state": "Tx",
+                "city" : "Austin",
+                "name": "512"
+                },
+                "beer_name": "Pecan Porter",
+                "rating": "x/5"
+            },
+            .
+            .
+            .
+            {
+                "reviewer": "e.g. Janice",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "beer_name": "Pecan Porter",
+                "rating": "x/5"
+            }
+        ]
+## Reviews Collection [/reviews/?attribute=state]
+optional filter params returns all objects where attribute = state
+ex : /reviews/rating=5/5
+### List All Reviews [GET]
++ Response 200 (application/json)
+
+        [
+            {
+                "reviewer": "e.g. John",
+                "brewery": {
+                "state": "Tx",
+                "city" : "Austin",
+                "name": "512"
+                },
+                "beer_name": "Pecan Porter",
+                "rating": "5/5"
+            },
+            .
+            .
+            .
+            {
+                "reviewer": "e.g. Janice",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "beer_name": "Pecan Porter",
+                "rating": "5/5"
+            }
+        ]
+        
+## Beers Collection [/beers/?offset=xx&limit=xx]
+
+### List All Beers [GET]
+optional parameters for pagination
++ Response 200 (application/json)
+
+        [
+            {
+                "abv": "xxx",
+                "beer_name": "xx",
+                "ibu": "xx",
+                "glassware": "cup",
+                "organic": "yes",
+                "price": "$$",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "calories": "210",
+                "style": "ipa"
+            },
+            .
+            .
+            .
+            {
+                "abv": "e.g. John",
+                "beer_name": "xx",
+                "ibu": "xx",
+                "glassware": "cup",
+                "organic": "yes",
+                "price": "$$",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "calories": "210"
+                "syle": "ipa"
+            }
+        ]
+## Beers Collection Filter [/beers?attribute=state]
+option is one of the attributes of beers, returns json object of all beers with option attribute
+that equals state
+ex: /beers?organic=Y
++ Response 200 (application/json)
+
+        [
+            {
+                "abv": "xxx",
+                "beer_name": "xx",
+                "ibu": "xx",
+                "glassware": "cup",
+                "organic": "Y",
+                "price": "$$",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "calories": "210",
+                "style": "ipa"
+            },
+            .
+            .
+            .
+            {
+                "abv": "e.g. John",
+                "beer_name": "xx",
+                "ibu": "xx",
+                "glassware": "cup",
+                "organic": "Y",
+                "price": "$$",
+                "brewery": {
+                    "state": "Tx",
+                    "city" : "Austin",
+                    "name": "512"
+                    },
+                "calories": "210"
+                "syle": "ipa"
+            }
+        ]
+
+        
+## Styles Collection [/styles]
+
+### List All Styles [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "ipa",
+                "description": "hoppy af",
+                "ibu_range": "min/max",
+                "abv_range": "min-max",
+                "srm": "hexcolor"
+            },
+            .
+            .
+            .
+            {
+                "name": "ale",
+                "description": "hoppy af",
+                "ibu_range": "min/max",
+                "abv_range": "min-max",
+                "srm": "hexcolor"
+            }
+        ]
+## About Collection [/about]
+
+### List Info About Team and Project [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "site_desc": "the purpose ....",
+                "group_name": "craftHats",
+                "group_members":
+                [
+                    {
+                        "name": "Sam",
+                        "photo": "/images/Sam.jpg",
+                        "bio": "just a grey suit",
+                        "major_responsibilities": "drank the brews",
+                        "num_commits":"0",
+                        "num_issues":"0",
+                        "num_unit_tests":"0"
+                    },
+                    .
+                    .
+                    .
+                    {
+                        "name": "Person2",
+                        "photo": "/images/Person2.jpg",
+                        "bio": "a human being",
+                        "major_responsibilities": "this, that, the other",
+                        "num_commits":"4",
+                        "num_issues":"7",
+                        "num_unit_tests":">9000"
+                    }
+                ],
+               "total_commits": "xxx",
+               "total_issues": "xxxx",
+               "total_unit_tests":"xxxx",
+               "apiary_link": "www.apiary.io/crafthats",
+               "github_link": "www.github.com/crafthats",
+               "trello_link": "www.trello.com/crafthats",
+               "data_info": 
+               [
+                    {
+                        "resource_link": "www.resource1.com/api",
+                        "resource_info": "description on how the resource was scraped"
+                    }
+                    .
+                    .
+                    .
+                    {
+                        "resource_link": "www.resource2.com/api",
+                        "resource_info": "description on how the resource was scraped"
+                    }
+               ],
+              "tools":
+              [
+                {
+                    "name": "tool1",
+                    "usage": " description of how it was used"
+                }
+                .
+                .
+                .
+                {
+                    "name": "tool2",
+                    "usage": " description of how it was used"
+                }
+              ],
+             "report_link": "utexas.app.box.com/report.pdf"
+            }
+            
+        ]
