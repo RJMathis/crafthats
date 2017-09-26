@@ -15,4 +15,8 @@ Please delete options that are not relevant.
 
 Requires at least one approval prior to merging:
 
-- [ ] Approved
+- [ ] Approved By: @RJMathis
+- [ ] Approved By: @audricganser
+- [ ] Approved By: @FIxBayonets
+- [ ] Approved By: @pulv
+- [ ] Approved By: @travisreed7
