@@ -17,6 +17,6 @@ Requires at least one approval prior to merging:
 
 - [ ] Approved By: @RJMathis
 - [ ] Approved By: @audricganser
-- [ ] Approved By: @FixBayonets
+- [ ] Approved By: @FIxBayonets
 - [ ] Approved By: @pulv
 - [ ] Approved By: @travisreed7
