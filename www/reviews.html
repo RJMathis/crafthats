@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <!-- Latest compiled and minified JQuery -->
+	<!-- Latest compiled and minified JQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Latest compiled and minified CSS -->
+	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Optional theme -->
@@ -15,7 +15,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
 	<!--favicons-->
 	<link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
@@ -40,55 +40,87 @@
 <body>
 
 	<div class="navbar navbar-default navbar-static-top">
-    <div class="container">
-      <h1>Brewtiful</h1>
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="beer.html">Beer</a></li>
-          <li><a href="breweries.html">Breweries</a></li>
-          <li><a href="styles.html">Styles</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
-          <li><a href="about.html">About</a></li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-  </div>
+		<div class="container">
+			<h1>Brewtiful</h1>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="home.html">Home</a></li>
+					<li><a href="beer.html">Beer</a></li>
+					<li><a href="breweries.html">Breweries</a></li>
+					<li><a href="styles.html">Styles</a></li>
+					<li><a href="reviews.html">Reviews</a></li>
+					<li><a href="about.html">About</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<h2 class="sub-header">Beers</h2>
+		<table class="table table-responsive table-striped">
+			<thead>
+				<tr>
+					<th>Beer</th>
+					<th>Review</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="#">Beer name</a></td>
+					<td>Review of beer</td>
+					<th>star rating 1</th>
+				</tr>
+				<tr>
+					<td><a href="#">Beer name</a></td>
+					<td>Review of beer</td>
+					<th>star rating 2</th>
+				</tr>
+				<tr>
+					<td><a href="#">Beer name</a></td>
+					<td>Review of beer</td>
+					<th>star rating 3</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
-  <table class="table table-responsive table-hover">
-  <thead>
-    <tr>
-      <th>Brewery</th>
-      <th>Beer</th>
-      <th>Rating</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>review of the brewery</td>
-      <td>review of that breweries beer</td>
-      <th>star rating 1</th>
-    </tr>
-    <tr>
-      <td>review of the brewery</td>
-      <td>review of that breweries beer</td>
-      <th>star rating 2</th>
-    </tr>
-    <tr>
-      <td>review of the brewery</td>
-      <td>review of that breweries beer</td>
-      <th>star rating 2</th>
-    </tr>
-  </tbody>
-</table>
+	<div class="col-xs-6">
+		<h2 class="sub-header">Breweries</h2>
+		<table class="table table-responsive table-striped">
+			<thead>
+				<tr>
+					<th>Brewery</th>
+					<th>Review</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="#">Brewery name</a></td>
+					<td>review of that brewery</td>
+					<th>star rating 2</th>
+				</tr>
+				<tr>
+					<td><a href="#">Brewery name</a></td>
+					<td>review of that brewery</td>
+					<th>star rating 1</th>
+				</tr>
+				<tr>
+					<td><a href="#">Brewery name</a></td>
+					<td>review of that brewery</td>
+					<th>star rating 3</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 </body>
 </html>
