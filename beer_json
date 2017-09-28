@@ -1,0 +1,412 @@
+{
+    "currentPage": 1,
+    "numberOfPages": 195,
+    "totalResults": 9715,
+    "data": [
+        {
+            "name": "Bronx Rye Pale Ale",
+            "nameDisplay": "Bronx Rye Pale Ale",
+            "description": "Malted and flaked rye make up nearly a quarter of the grain bill for this Rye Pale Ale, offering it a unique and intense spicy rye flavor and golden-orange hue. Chinook and Crystal hops lend a gentle bitterness and spicy, piney and herbal character and aroma to this rich, bold rye beer.",
+            "abv": "6.3",
+            "ibu": "58",
+            "srmId": 8,
+            "availableId": 1,
+            "styleId": 117,
+            "isOrganic": "N",
+            "labels": {
+                "icon": "https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-icon.png",
+                "medium": "https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-medium.png",
+                "large": "https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-large.png"
+            },
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "originalGravity": "1.064",
+            "createDate": "2013-11-12 12:56:22",
+            "updateDate": "2015-12-17 07:15:28",
+            "srm": {
+                "id": 8,
+                "name": "8",
+                "hex": "EA8F00"
+            },
+            "available": {
+                "id": 1,
+                "name": "Year Round",
+                "description": "Available year round as a staple beer."
+            },
+            "style": {
+                "id": 117,
+                "categoryId": 11,
+                "category": {
+                    "id": 11,
+                    "name": "Hybrid/mixed Beer",
+                    "createDate": "2012-03-21 20:06:46"
+                },
+                "name": "Rye Ale or Lager with or without Yeast",
+                "shortName": "Rye Ale",
+                "description": "Rye beers can be made using either ale or lager yeast. It should be brewed with at least 20 percent rye malt, and low to medium perception of hop bitterness. Hop aroma and flavor can be low to medium-high. These are often versions of classic styles that contain noticeable rye character in balance with other qualities of the beer. A spicy, fruity-estery aroma and flavor are typical but at low levels; however, phenolic, clove-like characteristics should not be perceived. Color is straw to amber, and the body should be light to medium in character. Diacetyl should not be perceived. If this style is packaged and served without yeast, no yeast characters should be evident in mouthfeel, flavor, or aroma. A low level of tannin derived astringency may be perceived. If this style is served with yeast, the character should portray a full yeasty mouthfeel and appear hazy to very cloudy. Yeast flavor and aroma should be low to medium but not overpowering the balance and character of rye and barley malt and hops. Darker versions of this style will be dark amber to dark brown, and the body should be light to medium in character. Roasted malts are optionally evident in aroma and flavor with a low level of roast malt astringency acceptable when appropriately balanced with malt sweetness. Roast malts may be evident as a cocoa/chocolate or caramel character. Aromatic toffee-like, caramel, or biscuit-like characters may be part of the overall flavor/aroma profile. As in the lighter colored versions, diacetyl should not be perceived. Competition directors may create specific styles of rye beer, such as Rye Pale Ale or Rye Brown Ale. A statement by the brewer indicating if the beer is based on a classic style is essential for accurate judging.",
+                "createDate": "2012-03-21 20:06:46",
+                "updateDate": "2015-04-07 15:44:12"
+            },
+            "breweries": [
+                {
+                    "id": "V0wvf7",
+                    "name": "The Bronx Brewery",
+                    "nameShortDisplay": "The Bronx",
+                    "description": "We're a small craft brewery in the South Bronx, New York and have a maniacal love for two things in this world: beer and the Bronx. Cheers!\r\n\r\nThe Bronx Brewery is a craft brewer and distributor based in the South Bronx. It launched in 2011 by a small team with two things in common: a maniacal focus on creating high-quality beer and a passion for the Bronx. Its traditionally-crafted ales use only premium and minimally-processed materials to create fresh, bold beer from a borough known for its own uniquely bold character. The team is enthused to bring a rich brewing tradition back to the Bronx and craft a beer that the people of the Bronx and New York City can be proud to call their own.",
+                    "website": "http://www.thebronxbrewery.com/",
+                    "established": "2011",
+                    "isOrganic": "N",
+                    "images": {
+                        "icon": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-icon.png",
+                        "medium": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-medium.png",
+                        "large": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-large.png",
+                        "squareMedium": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png",
+                        "squareLarge": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareLarge.png"
+                    },
+                    "status": "verified",
+                    "statusDisplay": "Verified",
+                    "createDate": "2012-01-03 02:42:10",
+                    "updateDate": "2015-12-22 15:23:58",
+                    "isMassOwned": "N",
+                    "brandClassification": "craft",
+                    "locations": [
+                        {
+                            "id": "GZQpRX",
+                            "name": "Main Brewery",
+                            "streetAddress": "856 E. 136th St.",
+                            "locality": "Bronx",
+                            "region": "New York",
+                            "postalCode": "10454",
+                            "phone": "718-402-1000",
+                            "website": "http://www.thebronxbrewery.com/",
+                            "latitude": 40.8018969,
+                            "longitude": -73.91061,
+                            "isPrimary": "Y",
+                            "inPlanning": "N",
+                            "isClosed": "N",
+                            "openToPublic": "Y",
+                            "locationType": "micro",
+                            "locationTypeDisplay": "Micro Brewery",
+                            "countryIsoCode": "US",
+                            "yearOpened": "2011",
+                            "status": "verified",
+                            "statusDisplay": "Verified",
+                            "createDate": "2012-01-03 02:42:10",
+                            "updateDate": "2015-06-29 17:10:53",
+                            "country": {
+                                "isoCode": "US",
+                                "name": "UNITED STATES",
+                                "displayName": "United States",
+                                "isoThree": "USA",
+                                "numberCode": 840,
+                                "createDate": "2012-01-03 02:41:33"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "hu5Jgx",
+            "name": "Crown Light",
+            "nameDisplay": "Crown Light",
+            "description": "Crown Light is our lightest offering and is brewed to be an extremely drinkable session beer. This beautiful blonde ale has an excellent balance of flavors with a light malty character and low bitterness creating a clean crisp finish. It is a favorite for many of our patrons.",
+            "abv": "3.8",
+            "ibu": "20",
+            "glasswareId": 5,
+            "availableId": 1,
+            "styleId": 36,
+            "isOrganic": "N",
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "createDate": "2012-01-03 02:43:02",
+            "updateDate": "2012-03-22 13:05:31",
+            "glass": {
+                "id": 5,
+                "name": "Pint",
+                "createDate": "2012-01-03 02:41:33"
+            },
+            "available": {
+                "id": 1,
+                "name": "Year Round",
+                "description": "Available year round as a staple beer."
+            },
+            "style": {
+                "id": 36,
+                "categoryId": 3,
+                "category": {
+                    "id": 3,
+                    "name": "North American Origin Ales",
+                    "createDate": "2012-03-21 20:06:45"
+                },
+                "name": "Golden or Blonde Ale",
+                "shortName": "Blonde",
+                "description": "Golden or Blonde ales are straw to golden blonde in color. They have a crisp, dry palate, light to medium body, and light malt sweetness. Low to medium hop aroma may be present but does not dominate. Bitterness is low to medium. Fruity esters may be perceived but do not predominate. Diacetyl should not be perceived. Chill haze should be absent.",
+                "ibuMin": "15",
+                "ibuMax": "25",
+                "abvMin": "4",
+                "abvMax": "5",
+                "srmMin": "3",
+                "srmMax": "7",
+                "ogMin": "1.045",
+                "fgMin": "1.008",
+                "fgMax": "1.016",
+                "createDate": "2012-03-21 20:06:46",
+                "updateDate": "2015-04-07 15:27:26"
+            },
+            "breweries": [
+                {
+                    "id": "h88zok",
+                    "name": "Crown Brewing",
+                    "nameShortDisplay": "Crown",
+                    "description": "When the Crown Brewing Company opened its doors in 2008 we had one goal in mind, \"Craft the Best Beer Period!\" In 2010 our Industrial Porter won a Bronze Medal in the World Beer Cup, Brown Porter category.\r\n\r\nWe offer a selection of six to eight of our hand-crafted beers, fresh and on tap year round. In addition to our foundation beers, we brew special seasonal beers throughout the year. So, stop on in and see what's new!",
+                    "website": "http://crownbrewing.com/",
+                    "established": "2008",
+                    "isOrganic": "N",
+                    "images": {
+                        "icon": "https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-icon.png",
+                        "medium": "https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-medium.png",
+                        "large": "https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-large.png",
+                        "squareMedium": "https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png",
+                        "squareLarge": "https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareLarge.png"
+                    },
+                    "status": "verified",
+                    "statusDisplay": "Verified",
+                    "createDate": "2012-01-03 02:41:52",
+                    "updateDate": "2015-12-22 15:27:07",
+                    "isMassOwned": "N",
+                    "brandClassification": "craft",
+                    "locations": [
+                        {
+                            "id": "DTsVn8",
+                            "name": "Main Brewery",
+                            "streetAddress": "211 S. East Street",
+                            "locality": "Crown Point",
+                            "region": "Indiana",
+                            "postalCode": "46307",
+                            "phone": "219-663-4545",
+                            "hoursOfOperation": "Mon: 11:00 am - 11:00 pm\r\nWed: 11:00 am - 11:00 pm\r\nSun: 11:00 am - 11:00 pm",
+                            "latitude": 41.415835,
+                            "longitude": -87.363439,
+                            "isPrimary": "Y",
+                            "inPlanning": "N",
+                            "isClosed": "N",
+                            "openToPublic": "Y",
+                            "locationType": "micro",
+                            "locationTypeDisplay": "Micro Brewery",
+                            "countryIsoCode": "US",
+                            "yearOpened": "2008",
+                            "status": "verified",
+                            "statusDisplay": "Verified",
+                            "createDate": "2012-01-03 02:41:52",
+                            "updateDate": "2014-07-23 19:11:34",
+                            "country": {
+                                "isoCode": "US",
+                                "name": "UNITED STATES",
+                                "displayName": "United States",
+                                "isoThree": "USA",
+                                "numberCode": 840,
+                                "createDate": "2012-01-03 02:41:33"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "Wrh3tC",
+            "name": "Brooklyn East India Pale Ale",
+            "nameDisplay": "Brooklyn East India Pale Ale",
+            "description": "Brooklyn East India Pale Ale is inspired by the original East India Pale Ales brewed in England in the early 1800’s for the troops in India. Everyday English ales were spoiling during shipment from London, around Africa’s Cape of Good Hope, to Calcutta. Using extra malt and hops, British brewer George Hodgson developed an ale with the bitterness and strength to endure the long sea voyage, giving rise to a great beer style. Our East India Pale Ale is a deep golden beer brewed from British malt and a blend of hops featuring the choice East Kent Golding variety. It is traditionally dry-hopped for a bright aroma of hops, lemongrass, pine and citrus fruit, and has a robust bitterness, a warming malt palate and a clean hoppy finish. We think Hodgson would be rather pleased.",
+            "abv": "6.9",
+            "ibu": "47",
+            "glasswareId": 5,
+            "availableId": 1,
+            "styleId": 30,
+            "isOrganic": "N",
+            "labels": {
+                "icon": "https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-icon.png",
+                "medium": "https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-medium.png",
+                "large": "https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-large.png"
+            },
+            "status": "verified",
+            "statusDisplay": "Verified",
+            "foodPairings": "Spicy foods, especially Thai, Indian, Vietnamese, Malaysian, Szcheuan and Mexican dishes. EIPA is also great with crab cakes and salmon. If you're going the cheese route, try it with a good aged cheddar.",
+            "originalGravity": "1.07",
+            "createDate": "2012-01-03 02:43:08",
+            "updateDate": "2015-12-15 22:13:09",
+            "glass": {
+                "id": 5,
+                "name": "Pint",
+                "createDate": "2012-01-03 02:41:33"
+            },
+            "available": {
+                "id": 1,
+                "name": "Year Round",
+                "description": "Available year round as a staple beer."
+            },
+            "style": {
+                "id": 30,
+                "categoryId": 3,
+                "category": {
+                    "id": 3,
+                    "name": "North American Origin Ales",
+                    "createDate": "2012-03-21 20:06:45"
+                },
+                "name": "American-Style India Pale Ale",
+                "shortName": "American IPA",
+                "description": "American-style India pale ales are perceived to have medium-high to intense hop bitterness, flavor and aroma with medium-high alcohol content. The style is further characterized by floral, fruity, citrus-like, piney, resinous, or sulfur-like American-variety hop character. Note that one or more of these American-variety hop characters is the perceived end, but the hop characters may be a result of the skillful use of hops of other national origins. The use of water with high mineral content results in a crisp, dry beer. This pale gold to deep copper-colored ale has a full, flowery hop aroma and may have a strong hop flavor (in addition to the perception of hop bitterness). India pale ales possess medium maltiness which contributes to a medium body. Fruity-ester flavors and aromas are moderate to very strong. Diacetyl can be absent or may be perceived at very low levels. Chill and/or hop haze is allowable at cold temperatures. (English and citrus-like American hops are considered enough of a distinction justifying separate American-style IPA and English-style IPA categories or subcategories. Hops of other origins may be used for bitterness or approximating traditional American or English character. See English-style India Pale Ale",
+                "ibuMin": "50",
+                "ibuMax": "70",
+                "abvMin": "6.3",
+                "abvMax": "7.5",
+                "srmMin": "6",
+                "srmMax": "14",
+                "ogMin": "1.06",
+                "fgMin": "1.012",
+                "fgMax": "1.018",
+                "createDate": "2012-03-21 20:06:45",
+                "updateDate": "2015-04-07 15:26:37"
+            },
+            "breweries": [
+                {
+                    "id": "4OBVPn",
+                    "name": "Brooklyn Brewery",
+                    "nameShortDisplay": "Brooklyn",
+                    "description": "Since its founding in 1988, The Brooklyn Brewery brews flavorful beers that enrich the life, tradition and culture of the communities it serves. Its award-winning roster of year round, season and specialty products have gained the Brewery notoriety as one of the top craft beer producers in the world. Brooklyn beers are currently distributed in 25 states and 17 countries, and throughout 2011 the brewery underwent an expansion that will double overall capacity by 2013. In addition to facilitating community meetings at its event space, brewery employees serve on not-for-profit boards, including the Prospect Park Alliance, the Open Space Alliance, Transportation Alternatives and the Brooklyn Historical Society. Each year the company supports many charitable and arts organizations including BAM, Brooklyn Museum and MoMA, and partners with food purveyors across the country to produce beer dinners and tasting events. The Brewery is open to the public Monday-Thursday from 5-7pm for reservation-only Small Batch tours, Friday evening for Happy Hour, and Saturdays and Sundays for Tours and Tastings. For more info, visit BrooklynBrewery.com and follow @BrooklynBrewery on Twitter.",
+                    "website": "http://www.brooklynbrewery.com/",
+                    "established": "1988",
+                    "isOrganic": "N",
+                    "images": {
+                        "icon": "https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-icon.png",
+                        "medium": "https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-medium.png",
+                        "large": "https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-large.png",
+                        "squareMedium": "https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png",
+                        "squareLarge": "https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareLarge.png"
+                    },
+                    "status": "verified",
+                    "statusDisplay": "Verified",
+                    "createDate": "2012-01-03 02:41:48",
+                    "updateDate": "2015-12-22 14:41:38",
+                    "isMassOwned": "N",
+                    "brandClassification": "craft",
+                    "locations": [
+                        {
+                            "id": "OEO8JG",
+                            "name": "Main Brewery",
+                            "streetAddress": "79 North Eleventh Street",
+                            "locality": "Brooklyn",
+                            "region": "New York",
+                            "postalCode": "11211",
+                            "phone": "718-486-7422",
+                            "website": "http://www.brooklynbrewery.com/",
+                            "latitude": 40.721535,
+                            "longitude": -73.95745,
+                            "isPrimary": "Y",
+                            "inPlanning": "N",
+                            "isClosed": "N",
+                            "openToPublic": "Y",
+                            "locationType": "micro",
+                            "locationTypeDisplay": "Micro Brewery",
+                            "countryIsoCode": "US",
+                            "yearOpened": "1987",
+                            "status": "verified",
+                            "statusDisplay": "Verified",
+                            "createDate": "2012-01-03 02:41:48",
+                            "updateDate": "2014-07-23 19:11:34",
+                            "country": {
+                                "isoCode": "US",
+                                "name": "UNITED STATES",
+                                "displayName": "United States",
+                                "isoThree": "USA",
+                                "numberCode": 840,
+                                "createDate": "2012-01-03 02:41:33"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "status": "success"
+}
+
+
+
+
+BREWERY JSONS
+{
+    "message": "Request Successful",
+    "data": {
+        "id": "V0wvf7",
+        "name": "The Bronx Brewery",
+        "nameShortDisplay": "The Bronx",
+        "description": "We're a small craft brewery in the South Bronx, New York and have a maniacal love for two things in this world: beer and the Bronx. Cheers!\r\n\r\nThe Bronx Brewery is a craft brewer and distributor based in the South Bronx. It launched in 2011 by a small team with two things in common: a maniacal focus on creating high-quality beer and a passion for the Bronx. Its traditionally-crafted ales use only premium and minimally-processed materials to create fresh, bold beer from a borough known for its own uniquely bold character. The team is enthused to bring a rich brewing tradition back to the Bronx and craft a beer that the people of the Bronx and New York City can be proud to call their own.",
+        "website": "http://www.thebronxbrewery.com/",
+        "established": "2011",
+        "isOrganic": "N",
+        "images": {
+            "icon": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-icon.png",
+            "medium": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-medium.png",
+            "large": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-large.png",
+            "squareMedium": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png",
+            "squareLarge": "https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareLarge.png"
+        },
+        "status": "verified",
+        "statusDisplay": "Verified",
+        "createDate": "2012-01-03 02:42:10",
+        "updateDate": "2015-12-22 15:23:58",
+        "isMassOwned": "N",
+        "brandClassification": "craft"
+    },
+    "status": "success"
+}
+
+
+STYLE JSONS
+{
+    "message": "Request Successful",
+    "data": {
+        "id": 117,
+        "categoryId": 11,
+        "category": {
+            "id": 11,
+            "name": "Hybrid/mixed Beer",
+            "createDate": "2012-03-21 20:06:46"
+        },
+        "name": "Rye Ale or Lager with or without Yeast",
+        "shortName": "Rye Ale",
+        "description": "Rye beers can be made using either ale or lager yeast. It should be brewed with at least 20 percent rye malt, and low to medium perception of hop bitterness. Hop aroma and flavor can be low to medium-high. These are often versions of classic styles that contain noticeable rye character in balance with other qualities of the beer. A spicy, fruity-estery aroma and flavor are typical but at low levels; however, phenolic, clove-like characteristics should not be perceived. Color is straw to amber, and the body should be light to medium in character. Diacetyl should not be perceived. If this style is packaged and served without yeast, no yeast characters should be evident in mouthfeel, flavor, or aroma. A low level of tannin derived astringency may be perceived. If this style is served with yeast, the character should portray a full yeasty mouthfeel and appear hazy to very cloudy. Yeast flavor and aroma should be low to medium but not overpowering the balance and character of rye and barley malt and hops. Darker versions of this style will be dark amber to dark brown, and the body should be light to medium in character. Roasted malts are optionally evident in aroma and flavor with a low level of roast malt astringency acceptable when appropriately balanced with malt sweetness. Roast malts may be evident as a cocoa/chocolate or caramel character. Aromatic toffee-like, caramel, or biscuit-like characters may be part of the overall flavor/aroma profile. As in the lighter colored versions, diacetyl should not be perceived. Competition directors may create specific styles of rye beer, such as Rye Pale Ale or Rye Brown Ale. A statement by the brewer indicating if the beer is based on a classic style is essential for accurate judging.",
+        "createDate": "2012-03-21 20:06:46",
+        "updateDate": "2015-04-07 15:44:12"
+    },
+    "status": "success"
+}
+
+{
+    "message": "Request Successful",
+    "data": {
+        "id": 36,
+        "categoryId": 3,
+        "category": {
+            "id": 3,
+            "name": "North American Origin Ales",
+            "createDate": "2012-03-21 20:06:45"
+        },
+        "name": "Golden or Blonde Ale",
+        "shortName": "Blonde",
+        "description": "Golden or Blonde ales are straw to golden blonde in color. They have a crisp, dry palate, light to medium body, and light malt sweetness. Low to medium hop aroma may be present but does not dominate. Bitterness is low to medium. Fruity esters may be perceived but do not predominate. Diacetyl should not be perceived. Chill haze should be absent.",
+        "ibuMin": "15",
+        "ibuMax": "25",
+        "abvMin": "4",
+        "abvMax": "5",
+        "srmMin": "3",
+        "srmMax": "7",
+        "ogMin": "1.045",
+        "fgMin": "1.008",
+        "fgMax": "1.016",
+        "createDate": "2012-03-21 20:06:46",
+        "updateDate": "2015-04-07 15:27:26"
+    },
+    "status": "success"
+}
