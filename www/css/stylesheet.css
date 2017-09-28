@@ -6,3 +6,8 @@
 	margin-bottom: 0;
 
 }
+.item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
