@@ -1,242 +1,210 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# crafthats
+# brewtiful.world API
+This is a rough draft of the final API, it contains the projected
+API calls needed to link the front-end and back-end of the www.brewtiful.world.
+We include, endpoints, response status, and requrired paramters.
 
-Polls is a simple API allowing consumers to view polls and vote in them.
-
-## Breweries Collection [/breweries?offset=xx&limit=xx] 
-optional parameters for pagination
-
+## Breweries Collection [/breweries] 
+ 
 ### List All Breweries [GET]
+URL:
+<www.brewtiful.world/breweries>
+Method : |GET|
+
+URL Params: offset=[integer]
+            limit=[integer]
+            
+            These paramters are used for pagination, gvies the offset (start index value),
+            and the limit (how many values to get starting from offset)
+            
+Success Response Code: 200 + JSON Body
+
+Returned if the API returns the right data and has 
+no back end problems fetching it
+
+Error Response Code: 500 + ERROR MESSAGE
+Returned if some back-end error occurs and data is not
+fetched for any reason
 
 + Response 200 (application/json)
 
         [
             {
-                "state": "e.g. Texas",
-                "city": "e.g. Austin",
-                "name": "e.g. 512",
-                "established": "e.g. 1982",
-                "image": "/files/brewery1.jpg"
-            },
-            .
-            .
-            .
-            {
-                "state": "e.g. Texas",
-                "city": "e.g. Austin",
-                "name": "e.g. LiveOak",
-                "established": "e.g. 1999",
-                "image": "/files/breweryn.jpg"
+                "state": "Texas",
+                "city": "Austin",
+                "name": "Adelberts",
+                "established": "1982",
+                "image": "/files/breweries/adelberts.jpg"
             }
         ]
 
-## Breweries Collection [/breweries?attribute=state] 
-attribute is one of the attributes of breweries, returns json object of all breweries with attribute
-that equals state
-ex: /brewereis/established=1982
-
-### List All Breweries [GET]
-
-+ Response 200 (application/json)
++ Response 500 (application/json)
 
         [
             {
-                "state": "e.g. Texas",
-                "city": "e.g. Austin",
-                "name": "e.g. 512",
-                "established": "1982",
-                "image": "/files/brewery1.jpg"
-            },
-            .
-            .
-            .
-            {
-                "state": "e.g. Texas",
-                "city": "e.g. Austin",
-                "name": "e.g. LiveOak",
-                "established": "1982",
-                "image": "/files/breweryn.jpg"
+                "error": "INTERNAL SERVER ERROR",
+               
             }
         ]
-      
-## Reviews Collection [/reviews/?offset=xx&limit=xx]
+
+## Reviews Collection [/reviews/]
 
 ### List All Reviews [GET]
-optional parameters for pagination
+URL:
+<www.brewtiful.world/reviews>
+Method : |GET|
+
+URL Params: offset=[integer]
+            limit=[integer]
+            
+            These paramters are used for pagination, gvies the offset (start index value),
+            and the limit (how many values to get starting from offset)
+            
+Success Response Code: 200 + JSON Body
+
+Returned if the API returns the right data and has 
+no back end problems fetching it
+
+Error Response Code: 500 + ERROR MESSAGE
+Returned if some back-end error occurs and data is not
+fetched for any reason
 + Response 200 (application/json)
 
         [
             {
-                "reviewer": "e.g. John",
-                "brewery": {
-                "state": "Tx",
+                "reviewer": "John",
+                "brewery": 
+                {
+                "state": "Texas",
                 "city" : "Austin",
-                "name": "512"
+                "name": "Adelberts"
                 },
-                "beer_name": "Pecan Porter",
-                "rating": "x/5"
-            },
-            .
-            .
-            .
-            {
-                "reviewer": "e.g. Janice",
-                "brewery": {
-                    "state": "Tx",
-                    "city" : "Austin",
-                    "name": "512"
-                    },
-                "beer_name": "Pecan Porter",
-                "rating": "x/5"
-            }
-        ]
-## Reviews Collection [/reviews/?attribute=state]
-optional filter params returns all objects where attribute = state
-ex : /reviews/rating=5/5
-### List All Reviews [GET]
-+ Response 200 (application/json)
-
-        [
-            {
-                "reviewer": "e.g. John",
-                "brewery": {
-                "state": "Tx",
-                "city" : "Austin",
-                "name": "512"
-                },
-                "beer_name": "Pecan Porter",
-                "rating": "5/5"
-            },
-            .
-            .
-            .
-            {
-                "reviewer": "e.g. Janice",
-                "brewery": {
-                    "state": "Tx",
-                    "city" : "Austin",
-                    "name": "512"
-                    },
-                "beer_name": "Pecan Porter",
+                "beer_name": "Mango Wit",
                 "rating": "5/5"
             }
         ]
-        
-## Beers Collection [/beers/?offset=xx&limit=xx]
++ Response 500 (application/json)
+
+        [
+            {
+                "error": "INTERNAL SERVER ERROR",
+               
+            }
+        ]
+
+## Beers Collection [/beers]
 
 ### List All Beers [GET]
-optional parameters for pagination
+URL:
+<www.brewtiful.world/beers>
+Method : |GET|
+
+URL Params: offset=[integer]
+            limit=[integer]
+            
+            These paramters are used for pagination, gvies the offset (start index value),
+            and the limit (how many values to get starting from offset)
+            
+Success Response Code: 200 + JSON Body
+
+Returned if the API returns the right data and has 
+no back end problems fetching it
+
+Error Response Code: 500 + ERROR MESSAGE
+Returned if some back-end error occurs and data is not
+fetched for any reason
 + Response 200 (application/json)
 
         [
             {
-                "abv": "xxx",
-                "beer_name": "xx",
-                "ibu": "xx",
-                "glassware": "cup",
+                "abv": "5.3%",
+                "beer_name": "Mango Wit",
+                "ibu": "3",
+                "glassware": "glass cup",
                 "organic": "yes",
                 "price": "$$",
-                "brewery": {
-                    "state": "Tx",
+                "brewery": 
+                    {
+                    "state": "Texas",
                     "city" : "Austin",
-                    "name": "512"
+                    "name": "Adelberts"
                     },
                 "calories": "210",
-                "style": "ipa"
-            },
-            .
-            .
-            .
-            {
-                "abv": "e.g. John",
-                "beer_name": "xx",
-                "ibu": "xx",
-                "glassware": "cup",
-                "organic": "yes",
-                "price": "$$",
-                "brewery": {
-                    "state": "Tx",
-                    "city" : "Austin",
-                    "name": "512"
-                    },
-                "calories": "210"
-                "syle": "ipa"
+                "style": "ale"
             }
         ]
-## Beers Collection Filter [/beers?attribute=state]
-option is one of the attributes of beers, returns json object of all beers with option attribute
-that equals state
-ex: /beers?organic=Y
-+ Response 200 (application/json)
++ Response 500 (application/json)
 
         [
             {
-                "abv": "xxx",
-                "beer_name": "xx",
-                "ibu": "xx",
-                "glassware": "cup",
-                "organic": "Y",
-                "price": "$$",
-                "brewery": {
-                    "state": "Tx",
-                    "city" : "Austin",
-                    "name": "512"
-                    },
-                "calories": "210",
-                "style": "ipa"
-            },
-            .
-            .
-            .
-            {
-                "abv": "e.g. John",
-                "beer_name": "xx",
-                "ibu": "xx",
-                "glassware": "cup",
-                "organic": "Y",
-                "price": "$$",
-                "brewery": {
-                    "state": "Tx",
-                    "city" : "Austin",
-                    "name": "512"
-                    },
-                "calories": "210"
-                "syle": "ipa"
+                "error": "INTERNAL SERVER ERROR",
+               
             }
         ]
 
-        
 ## Styles Collection [/styles]
 
 ### List All Styles [GET]
+URL:
+<www.brewtiful.world/styles>
+Method : |GET|
 
+URL Params: offset=[integer]
+            limit=[integer]
+            
+            These paramters are used for pagination, gvies the offset (start index value),
+            and the limit (how many values to get starting from offset)
+            
+Success Response Code: 200 + JSON Body
+
+Returned if the API returns the right data and has 
+no back end problems fetching it
+
+Error Response Code: 500 + ERROR MESSAGE
+Returned if some back-end error occurs and data is not
+fetched for any reason
 + Response 200 (application/json)
 
         [
             {
-                "name": "ipa",
-                "description": "hoppy af",
-                "ibu_range": "min/max",
-                "abv_range": "min-max",
-                "srm": "hexcolor"
-            },
-            .
-            .
-            .
-            {
                 "name": "ale",
-                "description": "hoppy af",
-                "ibu_range": "min/max",
-                "abv_range": "min-max",
-                "srm": "hexcolor"
+                "description": "a perfectly rich, hoppy af .... ",
+                "ibu_range": "3-5",
+                "abv_range": "5.5-6.2",
+                "srm": "0x033F"
             }
         ]
++ Response 500 (application/json)
+
+        [
+            {
+                "error": "INTERNAL SERVER ERROR",
+               
+            }
+        ]        
 ## About Collection [/about]
 
 ### List Info About Team and Project [GET]
+URL:
+<www.brewtiful.world/about>
+Method : |GET|
 
+URL Params: offset=[integer]
+            limit=[integer]
+            
+            These paramters are used for pagination, gvies the offset (start index value),
+            and the limit (how many values to get starting from offset)
+            
+Success Response Code: 200 + JSON Body
+
+Returned if the API returns the right data and has 
+no back end problems fetching it
+
+Error Response Code: 500 + ERROR MESSAGE
+Returned if some back-end error occurs and data is not
+fetched for any reason
 + Response 200 (application/json)
 
         [
@@ -253,23 +221,11 @@ ex: /beers?organic=Y
                         "num_commits":"0",
                         "num_issues":"0",
                         "num_unit_tests":"0"
-                    },
-                    .
-                    .
-                    .
-                    {
-                        "name": "Person2",
-                        "photo": "/images/Person2.jpg",
-                        "bio": "a human being",
-                        "major_responsibilities": "this, that, the other",
-                        "num_commits":"4",
-                        "num_issues":"7",
-                        "num_unit_tests":">9000"
                     }
                 ],
-               "total_commits": "xxx",
-               "total_issues": "xxxx",
-               "total_unit_tests":"xxxx",
+               "total_team_commits": "xxx",
+               "total_team_issues": "xxxx",
+               "total_team_unit_tests":"xxxx",
                "apiary_link": "www.apiary.io/crafthats",
                "github_link": "www.github.com/crafthats",
                "trello_link": "www.trello.com/crafthats",
@@ -279,29 +235,23 @@ ex: /beers?organic=Y
                         "resource_link": "www.resource1.com/api",
                         "resource_info": "description on how the resource was scraped"
                     }
-                    .
-                    .
-                    .
-                    {
-                        "resource_link": "www.resource2.com/api",
-                        "resource_info": "description on how the resource was scraped"
-                    }
                ],
               "tools":
               [
-                {
-                    "name": "tool1",
-                    "usage": " description of how it was used"
-                }
-                .
-                .
-                .
-                {
-                    "name": "tool2",
-                    "usage": " description of how it was used"
-                }
+                    {
+                        "name": "tool1",
+                        "usage": " description of how it was used"
+                    }
               ],
              "report_link": "utexas.app.box.com/report.pdf"
             }
             
+        ]
++ Response 500 (application/json)
+
+        [
+            {
+                "error": "INTERNAL SERVER ERROR",
+               
+            }
         ]
