@@ -45,3 +45,8 @@
 .about-description {
 	height: 100px;
 }
+.item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
