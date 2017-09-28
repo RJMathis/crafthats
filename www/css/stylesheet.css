@@ -6,6 +6,45 @@
 	margin-bottom: 0;
 
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba( 255, 255, 255, 0.8 );
+}
+
+.container-thumbnail:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.img-thumbnail {
+	box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+}
+
+.img-about {
+	width: 318px;
+}
+
+.about-description {
+	height: 100px;
+}
 .item img {
     display: block;
     margin-left: auto;
