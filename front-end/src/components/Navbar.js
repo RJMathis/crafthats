@@ -15,12 +15,12 @@ export default class Navbar extends Component {
             </div>
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../htmlPages/beers.html">Beers</a></li>
-                <li><a href="breweries.html">Breweries</a></li>
-                <li><a href="styles.html">Styles</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="/Home">Home</a></li>
+                <li><a href="/Beers">Beers</a></li>
+                <li><a href="/Breweries">Breweries</a></li>
+                <li><a href="/Styles">Styles</a></li>
+                <li><a href="/Reviews">Reviews</a></li>
+                <li><a href="/About">About</a></li>
               </ul>
             </div>
           </div>
