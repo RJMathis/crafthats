@@ -35,18 +35,18 @@ export default class About extends Component {
 
     render() {
       return (
-          <div class="page-container">
-              <div class="row">
-                  <div class="col-md-4">
-                      <div class="text-center">
-                          <img class="img-about" src="images/travis_bitmoji.png" alt="Travis Bitmoji" />
+          <div className="page-container">
+              <div className="row">
+                  <div className="col-md-4">
+                      <div className="text-center">
+                          <img className="img-about" src="images/travis_bitmoji.png" alt="Travis Bitmoji" />
                           <h2>Travis Reed</h2>
-                          <p class="text-left about-description">
+                          <p className="text-left about-description">
                               I am a senior at UT Austin in my final semester pursuing a degree in Computer Science.
                               My technological interests include autonomous vehicles and augmented reality.
                               In my free time, I enjoy playing guitar, rock climbing, and just about everything outdoors.
                           </p>
-                          <table class="table table-responsive">
+                          <table className="table table-responsive">
                               <thead>
                               <tr></tr>
                               </thead>
@@ -79,15 +79,15 @@ export default class About extends Component {
                           </table>
                       </div>
                   </div>
-                  <div class="col-md-4">
-                      <div class="text-center">
-                          <img class="img-about" src="images/rita_bitmoji.png" alt="Rita Bitmoji" />
+                  <div className="col-md-4">
+                      <div className="text-center">
+                          <img className="img-about" src="images/rita_bitmoji.png" alt="Rita Bitmoji" />
                           <h2>Rita Mathis</h2>
-                          <p class="text-left about-description">
+                          <p className="text-left about-description">
                               I am a senior at the University of Texas at Austin.
                               I enjoy craft beer, drumming, and playing with my dogs.
                           </p>
-                          <table class="table table-responsive">
+                          <table className="table table-responsive">
                               <thead>
                               <tr></tr>
                               </thead>
@@ -120,14 +120,14 @@ export default class About extends Component {
                           </table>
                       </div>
                   </div>
-                  <div class="col-md-4">
-                      <div class="text-center">
-                          <img class="img-about" src="images/sam_bitmoji.png" alt="Sam Bitmoji" />
+                  <div className="col-md-4">
+                      <div className="text-center">
+                          <img className="img-about" src="images/sam_bitmoji.png" alt="Sam Bitmoji" />
                           <h2>Samuel Borisov</h2>
-                          <p class="text-left about-description">
+                          <p className="text-left about-description">
                               I'm a CS Major at UT Austin. I enjoy traveling, reading, and weightlifting.
                           </p>
-                          <table class="table table-responsive">
+                          <table className="table table-responsive">
                               <thead>
                               <tr></tr>
                               </thead>
@@ -161,17 +161,17 @@ export default class About extends Component {
                       </div>
                   </div>
               </div>
-              <div class="row">
-                  <div class="col-md-6">
-                      <div class="text-center">
-                          <img class="img-about" src="images/audric_bitmoji2.png" alt="Audric Bitmoji" />
+              <div className="row">
+                  <div className="col-md-6">
+                      <div className="text-center">
+                          <img className="img-about" src="images/audric_bitmoji2.png" alt="Audric Bitmoji" />
                           <h2>Audric Ganser</h2>
-                          <p class="text-left about-description">
+                          <p className="text-left about-description">
                               I am a Senior Computer Science Student at UT Austin.
                               My tech interests include Full-Stack Development as well as Mobile Development.
                               In my spare time I like to ride and work on vintage motorcycles.
                           </p>
-                          <table class="table table-responsive ">
+                          <table className="table table-responsive ">
                               <thead>
                               <tr></tr>
                               </thead>
@@ -204,14 +204,14 @@ export default class About extends Component {
                           </table>
                       </div>
                   </div>
-                  <div class="col-md-6">
-                      <div class="text-center">
-                          <img class="img-about" src="images/pablo_bitmoji2.png" alt="Pablo Bitmoji" />
+                  <div className="col-md-6">
+                      <div className="text-center">
+                          <img className="img-about" src="images/pablo_bitmoji2.png" alt="Pablo Bitmoji" />
                           <h2>Pablo Velasco</h2>
-                          <p class="text-left about-description">
+                          <p className="text-left about-description">
                               I am a senior computer science student at UT Austin.
                               I enjoy programming, weightlifting, and gaming.</p>
-                          <table class="table table-responsive">
+                          <table className="table table-responsive">
                               <thead>
                               <tr></tr>
                               </thead>
@@ -245,9 +245,9 @@ export default class About extends Component {
                       </div>
                   </div>
               </div>
-              <div class="row">
-                  <div class="col">
-                      <div class="text-center">
+              <div className="row">
+                  <div className="col">
+                      <div className="text-center">
                           <u><h1>Stats</h1></u>
                           <h2>Apiary API</h2>
                           <a href="http://docs.crafthats.apiary.io/"><h4>http://docs.crafthats.apiary.io//</h4></a>

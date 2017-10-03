@@ -35,10 +35,10 @@ export default class Reviews extends Component {
 
     render() {
       return (
-          <div class="page-container">
-              <div class="col-xs-6">
-                  <h2 class="sub-header">Beers</h2>
-                  <table class="table table-responsive table-striped">
+          <div className="page-container">
+              <div className="col-xs-6">
+                  <h2 className="sub-header">Beers</h2>
+                  <table className="table table-responsive table-striped">
                       <thead>
                       <tr>
                           <th>Beer</th>
@@ -66,9 +66,9 @@ export default class Reviews extends Component {
                   </table>
               </div>
 
-              <div class="col-xs-6">
-                  <h2 class="sub-header">Breweries</h2>
-                  <table class="table table-responsive table-striped">
+              <div className="col-xs-6">
+                  <h2 className="sub-header">Breweries</h2>
+                  <table className="table table-responsive table-striped">
                       <thead>
                       <tr>
                           <th>Brewery</th>

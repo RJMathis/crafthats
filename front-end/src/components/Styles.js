@@ -35,34 +35,34 @@ export default class Styles extends Component {
 
     render() {
       return (
-          <div class="page-container">
-              <div class="row">
-                  <div class="col-md-4 container-thumbnail">
-                      <div class="text-center">
+          <div className="page-container">
+              <div className="row">
+                  <div className="col-md-4 container-thumbnail">
+                      <div className="text-center">
                           <a href="RyeAle.html">
-                              <img class="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Bronx Rye Pale Ale" title="style 1"/>
-                              <div class="overlay">
-                                  <div class="text">Rye Ale</div>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Bronx Rye Pale Ale" title="style 1"/>
+                              <div className="overlay">
+                                  <div className="text">Rye Ale</div>
                               </div>
                           </a>
                       </div>
                   </div>
-                  <div class="col-md-4 container-thumbnail">
-                      <div class="text-center">
+                  <div className="col-md-4 container-thumbnail">
+                      <div className="text-center">
                           <a href="AmericanIpa.html">
-                              <img class="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Style 2"/>
-                              <div class="overlay">
-                                  <div class="text">American IPA</div>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Style 2"/>
+                              <div className="overlay">
+                                  <div className="text">American IPA</div>
                               </div>
                           </a>
                       </div>
                   </div>
-                  <div class="col-md-4 container-thumbnail">
-                      <div class="text-center">
+                  <div className="col-md-4 container-thumbnail">
+                      <div className="text-center">
                           <a href="Blonde.html">
-                              <img class="img-thumbnail" src="http://via.placeholder.com/200x200" alt="style 3"/>
-                              <div class="overlay">
-                                  <div class="text">Blonde</div>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="style 3"/>
+                              <div className="overlay">
+                                  <div className="text">Blonde</div>
                               </div>
                           </a>
                       </div>
