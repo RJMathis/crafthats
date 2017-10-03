@@ -1,0 +1,39 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+#- url: /$
+#  static_files: public/index.html
+#  upload: public/index.html
+#
+#- url: /favicon\.ico
+#  static_files: favicon.ico
+#  upload: favicon\.ico
+#
+#- url: /htmlPages
+#  static_dir: htmlPages
+#
+#- url: /src
+#  static_dir: src
+#
+#- url: /components
+#  static_dir: components
+
+- url: /images
+  static_dir: images
+
+- url: /css
+  static_dir: css
+
+- url: /htmlPages/(.*\.html)
+  mime_type: text/html
+  static_files: \1
+  upload: (.*\.html)
+
+- url: /$
+  static_files: build/index.html
+  upload: build/index.html
+
+- url: /
+  static_dir: build

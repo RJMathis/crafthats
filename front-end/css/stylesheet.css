@@ -4,7 +4,6 @@
 
 .navbar-home {
 	margin-bottom: 0;
-
 }
 
 .overlay {
@@ -49,4 +48,10 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 50px;
+}
+
+#carousel-example-generic {
+  padding-bottom: 50px;
+  margin-bottom: auto;
 }
