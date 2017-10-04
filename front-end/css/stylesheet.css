@@ -61,6 +61,6 @@
     align-items: center;
 }
 
-.carousel {
-    margin-bottom: 50px;
+.page-container {
+    padding-bottom: 50px;
 }
