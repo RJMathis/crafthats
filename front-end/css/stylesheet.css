@@ -1,10 +1,6 @@
-/**{
-	border: 1px solid red !important;
-}*/
 
 .navbar-home {
 	margin-bottom: 0;
-
 }
 
 .overlay {
@@ -22,6 +18,11 @@
 
 .container-thumbnail:hover .overlay {
   opacity: 1;
+}
+
+.container-thumbnail {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .text {
@@ -49,4 +50,17 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+    width: 100%;
+    max-height: 650px;
+    align-items: center;
+}
+
+.page-container {
+    padding-bottom: 50px;
 }
