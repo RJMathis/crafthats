@@ -8,12 +8,13 @@
 * Ensure you have the most up-to-date code <br />
 `$ git pull`
 
-* (If you want to inspect a feature branch: follow step 2, otherwise continue to step 3) <br />
+* (If you want to inspect a feature branch: execute this step, otherwise continue to the next step) <br />
 `$ git checkout <featureBranch>`
 
 ### Install Dependencies
 
 * Install dependencies using NPM ([This requires NPM to be installed locally](https://www.npmjs.com/get-npm)) <br />
+  Run the following command from the front-end directory: <br />
 `$ npm install`
 
 ### Deploy the app to a local server
