@@ -20,6 +20,7 @@
 ### Deploy the app to a local server
 
 * Create an optimized production build of the app <br />
+  Run the following command from the front-end directory: <br />
 `$ npm run build`
 
 * ### Google Cloud SDK (Preferred Method)
