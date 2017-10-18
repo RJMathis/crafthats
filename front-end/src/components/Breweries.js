@@ -35,7 +35,7 @@ export default class Breweries extends Component {
 
     render() {
       return (
-          <div className="page-container">
+          <div className="container">
               <div className="row">
                   <div className="col-md-4 container-thumbnail">
                       <div className="text-center">

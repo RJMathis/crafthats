@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Home extends Component {
   render() {
     return (
-        <div className="page-container">
+        <div className="container">
             <div id="carousel" className="carousel slide" data-ride="carousel">
                 {/* Indicators */}
                 <ol className="carousel-indicators">
