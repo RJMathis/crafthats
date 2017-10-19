@@ -61,6 +61,18 @@
     align-items: center;
 }
 
+.nav-container {
+  padding-bottom: 0;
+}
+
+.navbar > .container {
+  padding-bottom: 0;
+}
+
+.container {
+  padding-bottom: 50px;
+}
+
 .footer {
   padding: 0;
 }
