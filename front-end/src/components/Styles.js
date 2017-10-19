@@ -40,7 +40,7 @@ export default class Styles extends Component {
                   <div className="col-md-4 container-thumbnail">
                       <div className="text-center">
                           <a href="RyeAle.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Bronx Rye Pale Ale" title="style 1"/>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="Bronx Rye Pale Ale" title="style 1"/>
                               <div className="overlay">
                                   <div className="text">Rye Ale</div>
                               </div>
@@ -50,7 +50,7 @@ export default class Styles extends Component {
                   <div className="col-md-4 container-thumbnail">
                       <div className="text-center">
                           <a href="AmericanIpa.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Style 2"/>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="Style 2"/>
                               <div className="overlay">
                                   <div className="text">American IPA</div>
                               </div>
@@ -60,7 +60,7 @@ export default class Styles extends Component {
                   <div className="col-md-4 container-thumbnail">
                       <div className="text-center">
                           <a href="Blonde.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="style 3"/>
+                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="style 3"/>
                               <div className="overlay">
                                   <div className="text">Blonde</div>
                               </div>

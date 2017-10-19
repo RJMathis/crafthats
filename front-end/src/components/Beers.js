@@ -50,7 +50,7 @@ export default class Beers extends Component {
               <div className="col-md-4 container-thumbnail">
                 <div className="text-center">
                   <a href="CrownLight.html">
-                    <img className="img-thumbnail" src="http://via.placeholder.com/200x200" alt="Crown Light"/>
+                    <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="Crown Light"/>
                     <div className="overlay">
                       <div className="text">Crown Light</div>
                     </div>
