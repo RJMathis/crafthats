@@ -35,7 +35,7 @@ export default class About extends Component {
 
     render() {
       return (
-          <div className="page-container">
+          <div className="container">
               <div className="row">
                   <div className="col-md-4">
                       <div className="text-center">

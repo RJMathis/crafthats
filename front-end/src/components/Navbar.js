@@ -5,7 +5,7 @@ export default class Navbar extends Component {
     return (
         <div className="navbar navbar-home navbar-default navbar-static-top">
           <div className="container">
-            <h1>Brewtiful World</h1>
+            <h1 className="title">Brewtiful World</h1>
             <div className="navbar-header">
               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span className="icon-bar"/>

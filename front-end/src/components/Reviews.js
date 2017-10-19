@@ -35,7 +35,7 @@ export default class Reviews extends Component {
 
     render() {
       return (
-          <div className="page-container">
+          <div className="container">
               <div className="col-xs-6">
                   <h2 className="sub-header">Beers</h2>
                   <table className="table table-responsive table-striped">
