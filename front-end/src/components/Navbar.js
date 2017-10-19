@@ -4,8 +4,8 @@ export default class Navbar extends Component {
   render() {
     return (
         <div className="navbar navbar-home navbar-default navbar-static-top">
-          <div className="nav-container container">
-            <h1>Brewtiful World</h1>
+          <div className="container">
+            <h1 className="title">Brewtiful World</h1>
             <div className="navbar-header">
               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span className="icon-bar"/>
