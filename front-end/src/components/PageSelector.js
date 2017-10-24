@@ -39,7 +39,15 @@ export default class PageSelector extends Component {
         return (
             <div className="row">
                 <div className="col-md-12 container-thumbnail">
-                    <div className="text-center">Prev | 1 | 2 | 3 | 4 | Next</div>
+                    <div className="text-center">
+                        <ul class="pagination pagination-lg">
+                            <li class="active"><a href="#">1</a></li>
+                            <li class="disabled"><a href="#">2</a></li>
+                            <li class="disabled"><a href="#">3</a></li>
+                            <li class="disabled"><a href="#">4</a></li>
+                            <li class="disabled"><a href="#">5</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         );
