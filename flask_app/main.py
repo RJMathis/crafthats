@@ -11,10 +11,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-# BreweryStyleAssocTable = db.Table('BreweryStyleAssocTable',
-#     db.Column('style_id',db.Integer, db.ForeignKey('Style.id')),
-#     db.Column('brewery_name',db.String(64), db.ForeignKey('Brewery.name'))
-#     )
 association_table = db.Table('association', db.Model.metadata,
     db.Column('brewery_id', db.Integer, db.ForeignKey('brewery.id')),
     db.Column('style_id', db.Integer, db.ForeignKey('style.id'))
@@ -39,15 +35,10 @@ class Brewery (db.Model):
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
     established = db.Column(db.String(64))
-    # beer_id = db.Column(db.Integer, db.ForeignKey('beer.id'))
-    # beer = db.relationship("Beer", backref="brewery", lazy="dynamic")
     beers = db.relationship("Beer", backref="beers", lazy="dynamic")
     images = db.Column(db.String(80))
-    # beer = db.relationship("Beer", backref ="brewery", lazy='dynamic')
     reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
     styles = db.relationship("Style",secondary=association_table, backref="breweries")
-    # styles = db.relationship ('Style', secondary=BreweryStyleAssocTable, backref=db.backref('brewery',lazy='dynamic'))
-    # styles = db.relationship ('Style', backref="brewery",lazy='dynamic')
 
 
 class Style (db.Model):
@@ -76,6 +67,71 @@ class Review (db.Model):
 @app.route('/')
 def home():
 	return "hello world"
+
+@beerapp.route('/breweries', methods=['GET'])
+def getBreweries():
+    
+    allBreweries = []
+
+    breweries = Brewery.query.all()
+
+    for brewery in breweries:
+        b = {
+            'name' : brewery.name,
+            'city' : brewery.city,
+            'state':brewery.state,
+            'established': brewery.established
+        }
+        allBreweries.append(b)
+    
+    response = jsonify(allBreweries)
+    response.status_code = 200
+
+    return response
+
+@beerapp.route('/beers', methods=['GET'])
+def getBeers():
+    
+    allBeers = []
+
+    beers = Beer.query.all()
+
+    for beer in beers:
+        
+        b = {
+         'name' : beer.name,
+         'organic' : beer.organic,
+         'abv'  : beer.abv,
+         'brewery' : beer.brewery_name,
+         'style' : beer.style_name,
+         'brewery' : beer.brewery_name
+
+        }
+        allBeers.append(b)
+
+    response = jsonify(allBeers)
+    response.status_code = 200
+
+    return response
+@beerapp.route('/styles',methods=['GET'])
+def getStyles():
+    allStyles = []
+
+    styles = Style.query.all()
+
+    for style in styles:
+        s = {
+        'name' : style.name,
+        'desicription' : style.description,
+        'ibu' : style.ibu,
+        'abv' :style.abv
+        }
+        allStyles.append(s)
+
+    response = jsonify(allStyles)
+    response.status_code = 200
+
+    return response
 
 @app.errorhandler(500)
 def server_error(e):
