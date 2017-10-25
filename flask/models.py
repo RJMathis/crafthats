@@ -3,24 +3,24 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-BreweryStyleAssocTable = db.Table('BreweryStyleAssocTable', 
-    db.Column('style_id',db.Integer, db.ForeignKey('Style.id')),
-    db.Column('brewery_name',db.String(64), db.ForeignKey('Brewery.name'))
+BreweryStyleAssocTable = db.Table('breweryStyleAssocTable', 
+    db.Column('style_name',db.String(64), db.ForeignKey('style.name')),
+    db.Column('brewery_name',db.String(64), db.ForeignKey('brewery.name'))
     ) 
 
 class Beer (db.Model):
-    __tablename__ = "Beer"
+    __tablename__ = 'beer'
     name = db.Column(db.String(64), primary_key = True)
     organic = db.Column(db.Boolean)
-    abv = db.Column(db.Integer)
+    abv = db.Column(db.Integer)    
+    brewery_name = db.Column(db.String(64), db.ForeignKey('brewery.name'))
+    style_name = db.Column(db.String(64), db.ForeignKey('style.name'))
     
-    brewery_name = db.Column(db.String(64), db.ForeignKey('Brewery.name'))
-    style_id = db.Column(db.Integer, db.ForeignKey('Style.id'))
+   # reviews = db.relationship('Review', backref='beer', lazy='dynamic')
 
-    reviews = db.relationship("Review", backref='beer', lazy='dynamic')
 
 class Brewery (db.Model):
-    __tablename__ = "Brewery"
+    __tablename__ = 'brewery'
     name = db.Column(db.String(64), primary_key = True)
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
@@ -32,8 +32,8 @@ class Brewery (db.Model):
     styles = db.relationship ('Style', secondary=BreweryStyleAssocTable, backref=db.backref('brewery',lazy='dynamic'))
 
 class Style (db.Model):
-    __tablename__ = "Style"
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    __tablename__ = "style"
+    name = db.Column(db.String(64), primary_key=True)
     description = db.Column(db.Text)
     ibu = db.Column(db.String(64))
     abv = db.Column(db.Integer)
@@ -41,12 +41,13 @@ class Style (db.Model):
     beers = db.relationship("Beer", backref="style", lazy='dynamic')
 
 class Review (db.Model):
-    __tablename__ = "Review"
+    __tablename__ = "review"
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     rating = db.Column(db.Numeric(1,1))
     flavor = db.Column(db.Numeric(1,1))
     comment = db.Column(db.Text)
-    beer_name = db.column(db.String(64),db.ForeignKey('Beer.name'))    
-    brewery_name = db.Column(db.String(64), db.ForeignKey('Brewery.name')) 
+    
+    #beer_name = db.column(db.String(64), db.ForeignKey('beer.name'))    
+    brewery_name = db.Column(db.String(64), db.ForeignKey('brewery.name')) 
 
  
