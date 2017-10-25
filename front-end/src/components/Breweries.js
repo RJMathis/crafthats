@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ItemSelector from './ItemSelector';
+import PageSelector from './PageSelector';
 
 export default class Breweries extends Component {
     constructor (props) {
@@ -37,37 +39,21 @@ export default class Breweries extends Component {
       return (
           <div className="container">
               <div className="row">
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="TheBronxBrewery.html">
-                              <img className="img-thumbnail" src="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Beer1 Name" />
-                                  <div className="overlay">
-                                      <div className="text">The Bronx Brewery</div>
-                                  </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="CrownBrewing.html">
-                              <img className="img-thumbnail" src="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Beer2 Name" />
-                                  <div className="overlay">
-                                      <div className="text">Crown Brewing</div>
-                                  </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="BrooklynBrewery.html">
-                              <img className="img-thumbnail" src="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Beer3 Name"/>
-                                  <div className="overlay">
-                                      <div className="text">Brooklyn Brewery</div>
-                                  </div>
-                          </a>
-                      </div>
-                  </div>
+                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
+                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
+                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
               </div>
+              <div className="row">
+                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
+                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
+                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
+              </div>
+              <div className="row">
+                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
+                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
+                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
+              </div>
+              <PageSelector />
           </div>
       );
     }

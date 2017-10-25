@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ItemSelector from './ItemSelector';
+import PageSelector from './PageSelector';
 
 export default class Styles extends Component {
     constructor (props) {
@@ -37,37 +39,21 @@ export default class Styles extends Component {
       return (
           <div className="container">
               <div className="row">
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="RyeAle.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="Bronx Rye Pale Ale" title="style 1"/>
-                              <div className="overlay">
-                                  <div className="text">Rye Ale</div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="AmericanIpa.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="Style 2"/>
-                              <div className="overlay">
-                                  <div className="text">American IPA</div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-md-4 container-thumbnail">
-                      <div className="text-center">
-                          <a href="Blonde.html">
-                              <img className="img-thumbnail" src="http://via.placeholder.com/266x266" alt="style 3"/>
-                              <div className="overlay">
-                                  <div className="text">Blonde</div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
+                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
+                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
+                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
               </div>
+              <div className="row">
+                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
+                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
+                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
+              </div>
+              <div className="row">
+                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
+                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
+                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
+              </div>
+              <PageSelector/>
           </div>
       );
     }
