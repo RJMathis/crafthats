@@ -1,4 +1,3 @@
-version: 1
 runtime: python27
 entrypoint: gunicorn -b :$PORT main.app
 api_version: 1
@@ -22,6 +21,8 @@ env_variables:
     SQLALCHEMY_DATABASE_URI: >-
       mysql+pymysql://root:downing/stagingdb?unix_socket=/cloudsql/backend-staging:us-central1:stagingdb
     # SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:downing@127.0.0.1/stagingdb
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+
 #[END env]
 
 #[START cloudsql_settings]
