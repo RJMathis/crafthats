@@ -22,6 +22,7 @@ env_variables:
       mysql+pymysql://root:downing/stagingdb?unix_socket=/cloudsql/backend-staging:us-central1:stagingdb
     # SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:downing@127.0.0.1/stagingdb
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+    #
 
 #[END env]
 
