@@ -10,4 +10,9 @@ querystring = {"availableId":"%d" % (count),"key":"9a55c9a82cfe2e8ae6ec46d13543e
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 
-print(json.dumps(response.json(), indent=2))
+data = (response.json())
+# print(data)
+# print(data[0])
+for item in data["data"]:
+	print(item.description)
+
