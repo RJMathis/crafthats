@@ -1,7 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy 
 from main import app
 
-
 db = SQLAlchemy(app)
 
 association_table = db.Table('association', db.Model.metadata,
@@ -21,13 +20,16 @@ class Beer (db.Model):
     images = db.Column(db.String(80))
     reviews = db.relationship("Review", backref='reviews', lazy='dynamic')
 
+
 class Brewery (db.Model):
     __tablename__ = "brewery"
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(64))
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
+    country = db.Column(db.String(64))
     established = db.Column(db.String(64))
+    description = db.Column(db.String(200))
     beers = db.relationship("Beer", backref="beers", lazy="dynamic")
     images = db.Column(db.String(80))
     reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
@@ -37,12 +39,15 @@ class Brewery (db.Model):
 class Style (db.Model):
     __tablename__ = "style"
     id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(40))
     description = db.Column(db.Text)
     ibu_min = db.Column(db.String(8))
     ibu_max = db.Column(db.String(8))
     abv_min = db.Column(db.String(8))
     abv_max = db.Column(db.String(8))
+    
     beers = db.relationship("Beer", backref="beers", lazy='dynamic')
+    breweries = db.relationship("Brewery",secondary=association_table, backref="styles") # IS THIS RIGHT?
 
 
 class Review (db.Model):
@@ -50,16 +55,11 @@ class Review (db.Model):
     id = db.Column(db.Integer, primary_key = True)
     date = db.Column(db.String(24))
     rating = db.Column(db.String(64))
-    flavor = db.Column(db.String(8))
     comment = db.Column(db.Text)
     beer_name = db.Column(db.Integer, db.ForeignKey('beer.id'))
     brewery_name = db.Column(db.Integer, db.ForeignKey('brewery.id'))
 
-    def serialize(self):
-        return {
-        'id' : self.id,
-        'date' : self,date,
-        'rating' : self.rating,
-        'flavor' : self.flavor,
-        'comment' :self.comment,
-        }
+
+
+
+
