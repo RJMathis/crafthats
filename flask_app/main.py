@@ -19,12 +19,15 @@ db.init_app(app)
 def home1():
     return "alternate"
 
+from models import db
+
+
 @app.route('/')
 def home():
     # x = db.session.query(Beer).all()
     return "hello world"
 
-@app.route('/breweries')
+@app.route('/breweries', methods=['GET'])
 def getBreweries():
     
     allBreweries = []

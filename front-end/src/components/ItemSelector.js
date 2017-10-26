@@ -2,6 +2,7 @@
  * Created by travisreed7 on 10/19/17.
  */
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 
 export default class ItemSelector extends Component {
     constructor (props) {
@@ -10,7 +11,8 @@ export default class ItemSelector extends Component {
             image: this.props.image,
             title: this.props.title,
             alt: this.props.alt,
-            overlayText: this.props.overlayText
+            overlayText: this.props.overlayText,
+            navigate: false
         }
     }
 
@@ -38,16 +40,23 @@ export default class ItemSelector extends Component {
 
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
+
+
+
     render() {
+
+        if (this.state.navigate) {
+            return < Redirect to="/Beer" push={true} />
+        }
         return (
             <div className="col-md-4 container-thumbnail">
                 <div className="text-center">
-                    <a href="BronxRyePaleAle.html">
+                    <div onClick={() => this.setState({navigate: true})}>
                         <img className="img-thumbnail" src={this.state.image} alt={this.state.alt} title={this.state.title} />
                         <div className="overlay">
                             <div className="text">{this.state.overlayText}</div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         );
