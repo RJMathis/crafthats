@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Beer extends Component {
+export default class Review extends Component {
     constructor (props) {
         super (props);
         this.state = {
@@ -42,34 +42,33 @@ export default class Beer extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src="https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-large.png" alt="..." />
+                            <img  src="http://via.placeholder.com/300x300" alt="..." />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">Bronx Rye Pale Ale</h2>
+                        <h2 className="sub-header">The Bronx Brewery Review</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>
-                                <td>ABV:</td>
-                                <td>6.3</td>
+                                <td>Reviewer:</td>
+                                <td>Sample</td>
                             </tr>
                             <tr>
-                                <td>IBU:</td>
-                                <td>58</td>
+                                <td>Location:</td>
+                                <td>Sample</td>
                             </tr>
                             <tr>
-                                <td>Brewery:</td>
-                                <td><a href="">The Bronx Brewery</a></td>
+                                <td><a href="BronxRyePaleAle.html">Beer:</a></td>
+                                <td>Sample</td>
+                            </tr>
+                            <tr>
+                                <td><a href="TheBronxBrewery.html">Brewery:</a></td>
+                                <td>Sample</td>
                             </tr>
 
                             <tr>
-                                <td>Style:</td>
-                                <td>Rye Ale</td>
-                            </tr>
-
-                            <tr>
-                                <td><a href="">Review:</a></td>
-                                <td>Star Rating</td>
+                                <td>Review:</td>
+                                <td>Sample</td>
                             </tr>
                             </tbody>
                         </table>
