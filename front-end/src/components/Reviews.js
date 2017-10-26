@@ -10,7 +10,7 @@ export default class Reviews extends Component {
             navigate: false,
             navigateTo: '/Review'
         }
-        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/reviews';
+        this.apiUrl = 'https://59ef8ec3684745001253e842.mockapi.io/api/v1/reviews';
     }
 
     /* Mounting
@@ -45,7 +45,8 @@ export default class Reviews extends Component {
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
-    handleNavigation = () => {
+    handleNavigation = (e) => {
+        e.preventDefault()
         this.setState({
             navigate: true
         })
@@ -57,10 +58,10 @@ export default class Reviews extends Component {
         }
 
         // Create an array of X components with 1 for each Review gathered from API call
-        let reviewRows = this.state.reviews.map(function(review) {
+        let reviewRows = this.state.reviews.map((review) => {
             return (
                 <tr>
-                    <td><button type="button" className="btn btn-link" onClick={() => this.handleNavigation()}>{review.name}</button></td>
+                    <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{review.name}</button></td>
                     <td>#</td>
                     <th>star rating 1</th>
                 </tr>
