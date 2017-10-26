@@ -15,9 +15,6 @@ from models import db, Beer, Review, Style, Brewery
 # db = SQLAlchemy(app)
 # db.init_app(app)
 
-@app.route('/1')
-def home1():
-    return "alternate"
 
 from models import db
 
@@ -72,15 +69,15 @@ def getBeers():
 
 
     for beer in beers:
-        
         b = {
-         'name' : beer.name,
-         'organic' : beer.organic,
-         'abv'  : beer.abv,
-         'ibu'  : beer.ibu,
-         'images' :beer.images,
-         'brewery' : Brewery.query.filter_by(id=beer.brewery_id).first().name,
-         'style' : Style.query.filter_by(id=beer.style_id).first().name
+            'id': beer.id,
+            'name': beer.name,
+            'organic': beer.organic,
+            'abv': beer.abv,
+            'ibu': beer.ibu,
+            'images': beer.images,
+            'brewery': Brewery.query.filter_by(id=beer.brewery_id).first().name,
+            'style': Style.query.filter_by(id=beer.style_id).first().name
         }
         allBeers.append(b)
 
