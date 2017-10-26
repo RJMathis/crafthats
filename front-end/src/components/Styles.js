@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
+import axios from 'axios';
+
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
@@ -6,9 +9,9 @@ export default class Styles extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            attribute1: '',
-            attribute2: ''
+            styles: [],
         }
+        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/styles';
     }
 
     /* Mounting
@@ -18,6 +21,14 @@ export default class Styles extends Component {
             * render()
             * componentDidMount()
      */
+
+    componentDidMount() {
+        axios.get(this.apiUrl)
+            .then((res) => {
+                // Set state with result
+                this.setState({styles: res.data});
+            });
+    }
 
     /* Updating
         An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
@@ -36,25 +47,30 @@ export default class Styles extends Component {
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-      return (
-          <div className="container">
-              <div className="row">
-                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
-                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
-                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
-                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
-                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Rye Ale" image="http://via.placeholder.com/266x266" alt="Rye Ale" overlayText="Rye Ale"/>
-                  <ItemSelector title="American IPA" image="http://via.placeholder.com/266x266" alt="American IPA" overlayText="American IPA"/>
-                  <ItemSelector title="Blonde" image="http://via.placeholder.com/266x266" alt="Blonde" overlayText="Blonde"/>
-              </div>
-              <PageSelector/>
-          </div>
-      );
+
+        // Create an array of X components with 1 for each Style gathered from API call
+        let styleComponents = this.state.styles.map(function(style) {
+            return (
+                <ItemSelector title={style.name}
+                              image={style.image}
+                              alt={style.name}
+                              overlayText={style.name}
+                              navigateTo="/Style"/>
+            );
+        })
+
+        return (
+            <div className="container">
+                {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
+                { lodash.chunk(styleComponents, 3).map(function(row) {
+                    return (
+                        <div className="row">
+                            { row }
+                        </div>
+                    )
+                })}
+                <PageSelector />
+            </div>
+        );
     }
 }

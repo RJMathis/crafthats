@@ -48,19 +48,20 @@ export default class Beers extends Component {
 
     render() {
 
-        // Create an array of 9 components with 1 for each beer gathered from API call
+        // Create an array of X components with 1 for each beer gathered from API call
         let beerComponents = this.state.beers.map(function(beer) {
             return (
                 <ItemSelector title={beer.name}
                               image={beer.image}
                               alt={beer.name}
-                              overlayText={beer.name}/>
+                              overlayText={beer.name}
+                              navigateTo="/Beer"/>
             );
         })
 
         return (
           <div className="container">
-              {/* Break beerComponents array into 3 separate arrays and wrap each array containing 3 components in a row div */}
+              {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
               { lodash.chunk(beerComponents, 3).map(function(row) {
                   return (
                       <div className="row">

@@ -13,7 +13,7 @@ export default class ItemSelector extends Component {
                 alt: this.props.alt,
                 overlayText: this.props.overlayText,
                 navigate: false,
-                navigateTo: '/Review'
+                navigateTo: this.props.navigateTo
             }
     }
 

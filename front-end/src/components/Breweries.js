@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
+import axios from 'axios';
+
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
@@ -6,9 +9,9 @@ export default class Breweries extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            attribute1: '',
-            attribute2: ''
+            breweries: [],
         }
+        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/breweries';
     }
 
     /* Mounting
@@ -18,6 +21,14 @@ export default class Breweries extends Component {
             * render()
             * componentDidMount()
      */
+
+    componentDidMount() {
+        axios.get(this.apiUrl)
+            .then((res) => {
+                // Set state with result
+                this.setState({breweries: res.data});
+            });
+    }
 
     /* Updating
         An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
@@ -34,27 +45,31 @@ export default class Breweries extends Component {
      */
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
-
     render() {
-      return (
-          <div className="container">
-              <div className="row">
-                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
-                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
-                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
-                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
-                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Bronx Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareMedium.png" alt="Bronx Brewery" overlayText="The Bronx Brewery"/>
-                  <ItemSelector title="Crown Brewing" image="https://s3.amazonaws.com/brewerydbapi/brewery/h88zok/upload_EOwvDQ-squareMedium.png" alt="Crown Brewing" overlayText="Crown Brewing"/>
-                  <ItemSelector title="Brooklyn Brewery" image="https://s3.amazonaws.com/brewerydbapi/brewery/4OBVPn/upload_gBsb8n-squareMedium.png" alt="Brooklyn Brewery" overlayText="Brooklyn Brewery"/>
-              </div>
-              <PageSelector />
-          </div>
-      );
+
+        // Create an array of X components with 1 for each brewery gathered from API call
+        let breweryComponents = this.state.breweries.map(function(brewery) {
+            return (
+                <ItemSelector title={brewery.name}
+                              image={brewery.image}
+                              alt={brewery.name}
+                              overlayText={brewery.name}
+                              navigateTo="/Brewery"/>
+            );
+        })
+
+        return (
+            <div className="container">
+                {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
+                { lodash.chunk(breweryComponents, 3).map(function(row) {
+                    return (
+                        <div className="row">
+                            { row }
+                        </div>
+                    )
+                })}
+                <PageSelector />
+            </div>
+        );
     }
 }
