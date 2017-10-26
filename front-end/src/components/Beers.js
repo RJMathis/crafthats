@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import lodash from 'lodash';
+import axios from 'axios';
+
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
@@ -6,11 +9,9 @@ export default class Beers extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            image: 'Default',
-            title: 'Default',
-            alt: 'Default',
-            overlayText: 'Default'
+            beers: []
         }
+        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/beers';
     }
 
     /* Mounting
@@ -20,6 +21,14 @@ export default class Beers extends Component {
             * render()
             * componentDidMount()
      */
+
+    componentDidMount() {
+        axios.get(this.apiUrl)
+            .then((res) => {
+                // Set state with result
+                this.setState({beers: res.data});
+            });
+    }
 
     /* Updating
         An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
@@ -38,23 +47,27 @@ export default class Beers extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-      return (
+
+        // Create an array of 9 components with 1 for each beer gathered from API call
+        let beerComponents = this.state.beers.map(function(beer) {
+            return (
+                <ItemSelector title={beer.name}
+                              image={beer.image}
+                              alt={beer.name}
+                              overlayText={beer.name}/>
+            );
+        })
+
+        return (
           <div className="container">
-              <div className="row">
-                  <ItemSelector title="Bronx Rye Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-medium.png" alt="Bronx Rye Pale Ale" overlayText="Bronx Rye Pale Ale"/>
-                  <ItemSelector title="Crown Light" image="http://via.placeholder.com/266x266" alt="Crown Light" overlayText="Crown Light"/>
-                  <ItemSelector title="Brooklyn East India Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-medium.png" alt="Brooklyn East India Pale Ale" overlayText="Brooklyn East India Pale Ale"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Bronx Rye Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-medium.png" alt="Bronx Rye Pale Ale" overlayText="Bronx Rye Pale Ale"/>
-                  <ItemSelector title="Crown Light" image="http://via.placeholder.com/266x266" alt="Crown Light" overlayText="Crown Light"/>
-                  <ItemSelector title="Brooklyn East India Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-medium.png" alt="Brooklyn East India Pale Ale" overlayText="Brooklyn East India Pale Ale"/>
-              </div>
-              <div className="row">
-                  <ItemSelector title="Bronx Rye Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-medium.png" alt="Bronx Rye Pale Ale" overlayText="Bronx Rye Pale Ale"/>
-                  <ItemSelector title="Crown Light" image="http://via.placeholder.com/266x266" alt="Crown Light" overlayText="Crown Light"/>
-                  <ItemSelector title="Brooklyn East India Pale Ale" image="https://s3.amazonaws.com/brewerydbapi/beer/Wrh3tC/upload_otteRK-medium.png" alt="Brooklyn East India Pale Ale" overlayText="Brooklyn East India Pale Ale"/>
-              </div>
+              {/* Break beerComponents array into 3 separate arrays and wrap each array containing 3 components in a row div */}
+              { lodash.chunk(beerComponents, 3).map(function(row) {
+                  return (
+                      <div className="row">
+                          { row }
+                      </div>
+                  )
+              })}
               <PageSelector />
           </div>
       );
