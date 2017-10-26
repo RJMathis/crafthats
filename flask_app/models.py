@@ -1,57 +1,65 @@
 from flask_sqlalchemy import SQLAlchemy 
-# from app import app
-
-db = SQLAlchemy()
-
-from flask_sqlalchemy import SQLAlchemy 
-
-db = SQLAlchemy()
+from main import app
 
 
-BreweryStyleAssocTable = db.Table('BreweryStyleAssocTable', 
-    db.Column('style_id',db.Integer, db.ForeignKey('Style.id')),
-    db.Column('brewery_name',db.String(64), db.ForeignKey('Brewery.name'))
-    ) 
+db = SQLAlchemy(app)
+
+association_table = db.Table('association', db.Model.metadata,
+    db.Column('brewery_id', db.Integer, db.ForeignKey('brewery.id')),
+    db.Column('style_id', db.Integer, db.ForeignKey('style.id'))
+)
 
 class Beer (db.Model):
-    __tablename__ = "Beer"
-    name = db.Column(db.String(64), primary_key = True)
-    organic = db.Column(db.Boolean)
-    abv = db.Column(db.Integer)
-    
-    brewery_name = db.Column(db.String(64), db.ForeignKey('Brewery.name'))
-    style_id = db.Column(db.Integer, db.ForeignKey('Style.id'))
-
-    reviews = db.relationship("Review", backref='beer', lazy='dynamic')
+    __tablename__ = "beer"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(64))
+    organic = db.Column(db.String(8))
+    abv = db.Column(db.String(8))
+    ibu = db.Column(db.String(8))
+    brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id'))
+    style_id = db.Column(db.Integer, db.ForeignKey('style.id'))
+    images = db.Column(db.String(80))
+    reviews = db.relationship("Review", backref='reviews', lazy='dynamic')
 
 class Brewery (db.Model):
-    __tablename__ = "Brewery"
-    name = db.Column(db.String(64), primary_key = True)
+    __tablename__ = "brewery"
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(64))
     city = db.Column(db.String(64))
     state = db.Column(db.String(64))
-    established = db.Column(db.Integer)
+    established = db.Column(db.String(64))
+    beers = db.relationship("Beer", backref="beers", lazy="dynamic")
+    images = db.Column(db.String(80))
+    reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
+    styles = db.relationship("Style",secondary=association_table, backref="breweries")
 
-    beers = db.relationship("Beer", backref ="brewery", lazy='dynamic')
-    reviews = db.relationship("Review", backref="brewery", lazy='dynamic')
-
-    styles = db.relationship ('Style', secondary=BreweryStyleAssocTable, backref=db.backref('brewery',lazy='dynamic'))
 
 class Style (db.Model):
-    __tablename__ = "Style"
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
+    __tablename__ = "style"
+    id = db.Column(db.Integer, primary_key = True)
     description = db.Column(db.Text)
-    ibu = db.Column(db.String(64))
-    abv = db.Column(db.Integer)
+    ibu_min = db.Column(db.String(8))
+    ibu_max = db.Column(db.String(8))
+    abv_min = db.Column(db.String(8))
+    abv_max = db.Column(db.String(8))
+    beers = db.relationship("Beer", backref="beers", lazy='dynamic')
 
-    beers = db.relationship("Beer", backref="style", lazy='dynamic')
 
 class Review (db.Model):
-    __tablename__ = "Review"
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True)
-    rating = db.Column(db.Numeric(1,1))
-    flavor = db.Column(db.Numeric(1,1))
+    __tablename__ = "review"
+    id = db.Column(db.Integer, primary_key = True)
+    date = db.Column(db.String(24))
+    rating = db.Column(db.String(64))
+    flavor = db.Column(db.String(8))
     comment = db.Column(db.Text)
-    beer_name = db.column(db.String(64),db.ForeignKey('Beer.name'))    
-    brewery_name = db.Column(db.String(64), db.ForeignKey('Brewery.name')) 
+    beer_name = db.Column(db.Integer, db.ForeignKey('beer.id'))
+    brewery_name = db.Column(db.Integer, db.ForeignKey('brewery.id'))
 
- 
+    def serialize(self):
+        return {
+        'id' : self.id,
+        'date' : self,date,
+        'rating' : self.rating,
+        'flavor' : self.flavor,
+        'comment' :self.comment,
+        }
