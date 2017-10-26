@@ -1,35 +1,56 @@
 import os
 import socket
 import logging
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
+from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ 
+from models import db, Beer, Review, Style, Brewery
+# db = SQLAlchemy(app)
+# db.init_app(app)
+
+@app.route('/1')
+def home1():
+    return "alternate"
 
 from models import db
 
 
 @app.route('/')
 def home():
-	return "hello world"
+    # x = db.session.query(Beer).all()
+    return "hello world"
 
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     
     allBreweries = []
 
-    breweries = Brewery.query.all()
+    breweries = db.session.query(Brewery).all()
 
     for brewery in breweries:
+        for beer in brewery.beers.all():
+            beersOfBrewery = []
+            beersOfBrewery.append(beer.name)
+
+        #to do styles!
+        
         b = {
             'name' : brewery.name,
             'city' : brewery.city,
             'state':brewery.state,
-            'established': brewery.established
-        }
+            'country' : brewery.country,
+            'established': brewery.established,
+            'description': brewery.description,
+            'beers' : beersOfBrewery,
+            'images' : brewery.images
+            }
         allBreweries.append(b)
     
     response = jsonify(allBreweries)
@@ -42,7 +63,8 @@ def getBeers():
     
     allBeers = []
 
-    beers = Beer.query.all()
+    beers = db.session.query(Beer).all()
+
 
     for beer in beers:
         
@@ -50,10 +72,10 @@ def getBeers():
          'name' : beer.name,
          'organic' : beer.organic,
          'abv'  : beer.abv,
-         'brewery' : beer.brewery_name,
-         'style' : beer.style_name,
-         'brewery' : beer.brewery_name
-
+         'ibu'  : beer.ibu,
+         'images' :beer.images,
+         'brewery' : Brewery.query.filter_by(id=beer.brewery_id).first().name,
+         'style' : Style.query.filter_by(id=beer.style_id).first().name
         }
         allBeers.append(b)
 
@@ -65,14 +87,21 @@ def getBeers():
 def getStyles():
     allStyles = []
 
-    styles = Style.query.all()
+    styles = db.session.query(Style).all()
 
     for style in styles:
+        for beer in style.beers.all():
+            beersOfStyle = []
+            beersOfStyle.append(beer.name)
+
         s = {
         'name' : style.name,
         'desicription' : style.description,
-        'ibu' : style.ibu,
-        'abv' :style.abv
+        'ibu_min' : style.ibu_min,
+        'ibu_max' : style.ibu_max,
+        'abv_min' : style.abv_min,
+        'abv_max' : style.abv_max,
+        'beers' : beersOfStyle
         }
         allStyles.append(s)
 
