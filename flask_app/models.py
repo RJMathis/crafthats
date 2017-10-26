@@ -1,13 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy 
-<<<<<<< HEAD
 # from main import app
 
-db = SQLAlchemy()
-=======
 from main import app
 
 db = SQLAlchemy(app)
->>>>>>> b469ab41e01bdbc0062f1abdfa361a6d23e011e1
 
 association_table = db.Table('association', db.Model.metadata,
     db.Column('brewery_id', db.Integer, db.ForeignKey('brewery.id')),
@@ -25,7 +21,7 @@ class Beer (db.Model):
     style_id = db.Column(db.Integer, db.ForeignKey('style.id'))
     images = db.Column(db.String(80))
 
-    reviews = db.relationship("Review", backref='reviews', lazy='dynamic')
+    reviews = db.relationship("Review", backref='beer', lazy='dynamic')
 
 
 class Brewery (db.Model):
@@ -38,9 +34,9 @@ class Brewery (db.Model):
     established = db.Column(db.String(64))
     description = db.Column(db.String(200))
 
-    beers = db.relationship("Beer", backref="beers", lazy="dynamic")
+    beers = db.relationship("Beer", backref="brewery", lazy="dynamic")
     images = db.Column(db.String(80))
-    reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
+    # reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
     styles = db.relationship("Style",secondary=association_table, backref="breweries")
 
 
@@ -55,8 +51,8 @@ class Style (db.Model):
     abv_max = db.Column(db.String(8))
     
 
-    beers = db.relationship("Beer", backref="beers", lazy='dynamic')
-    breweries = db.relationship("Brewery",secondary=association_table, backref="styles") # IS THIS RIGHT?
+    beers = db.relationship("Beer", backref="style", lazy='dynamic')
+    # breweries = db.relationship("Brewery",secondary=association_table, backref="styles") # IS THIS RIGHT?
 
 
 class Review (db.Model):
@@ -66,7 +62,7 @@ class Review (db.Model):
     rating = db.Column(db.String(64))
     comment = db.Column(db.Text)
     beer_name = db.Column(db.Integer, db.ForeignKey('beer.id'))
-    brewery_name = db.Column(db.Integer, db.ForeignKey('brewery.id'))
+    # brewery_name = db.Column(db.Integer, db.ForeignKey('brewery.id'))
 
 
 

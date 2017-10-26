@@ -1,6 +1,5 @@
 ../mimerender.py
 ../mimerender.pyc
-.
 dependency_links.txt
 PKG-INFO
 requires.txt

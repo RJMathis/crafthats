@@ -46,8 +46,8 @@ gunicorn-19.7.1.dist-info/WHEEL,sha256=o2k-Qa-RMNIJmUdIc7KU6VWR_ErNRbWNlxDIpl7lm
 gunicorn-19.7.1.dist-info/entry_points.txt,sha256=XeFINKRdSUKwJwaVSolO24PuV_YeO71IMF-rOra5JO8,184
 gunicorn-19.7.1.dist-info/metadata.json,sha256=pnwtIEmGk3PCJ2KXBlAeY48xpJqPWE8nqA5z4UUgQ0g,1747
 gunicorn-19.7.1.dist-info/top_level.txt,sha256=cdMaa2yhxb8do-WioY9qRHUCfwf55YztjwQCncaInoE,9
-../../bin/gunicorn,sha256=cuaRgmw70L3LiGT5rnhnOAcH36JzATIWeZG5f0MdCuk,220
-../../bin/gunicorn_paster,sha256=FPHjx-sFK-Rtv9uCuIqvdvlRUOu2G-Cuwe8SgX_xbjQ,222
+../../bin/gunicorn,sha256=U9skSXn_gmwQJCc9HnPT20OXGPjhVhPrgkj5VqpQEK0,297
+../../bin/gunicorn_paster,sha256=g1lgjVRL2oFIlutMRipzK4MnJhPna63dU_ZpT9-DwQw,299
 gunicorn-19.7.1.dist-info/INSTALLER,sha256=zuuue4knoyJ-UwPPXg8fezS7VCrXJQrAP7zeNuwvFQg,4
 gunicorn/instrument/__init__.pyc,,
 gunicorn/http/unreader.pyc,,

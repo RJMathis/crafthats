@@ -14,7 +14,6 @@
 ../aniso8601/resolution.pyc
 ../aniso8601/time.pyc
 ../aniso8601/timezone.pyc
-.
 dependency_links.txt
 PKG-INFO
 requires.txt

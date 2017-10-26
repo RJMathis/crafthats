@@ -8,7 +8,6 @@
 ../flask_restless/manager.pyc
 ../flask_restless/search.pyc
 ../flask_restless/views.pyc
-.
 dependency_links.txt
 not-zip-safe
 PKG-INFO

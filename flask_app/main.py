@@ -7,13 +7,13 @@ import sqlalchemy
 from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
  
 from models import db, Beer, Review, Style, Brewery
 # db = SQLAlchemy(app)
-db.init_app(app)
+# db.init_app(app)
 
 @app.route('/1')
 def home1():
