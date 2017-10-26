@@ -5,9 +5,9 @@ from main import app
 
 db = SQLAlchemy(app)
 
-association_table = db.Table('association', db.Model.metadata,
-    db.Column('brewery_id', db.Integer, db.ForeignKey('brewery.id')),
-    db.Column('style_id', db.Integer, db.ForeignKey('style.id'))
+association_table = db.Table('association',
+    db.Column('brewery_id',db.Integer,db.ForeignKey('brewery.id')),
+    db.Column('style_id',db.Integer, db.ForeignKey('style.id'),)
 )
 
 class Beer (db.Model):
@@ -37,7 +37,7 @@ class Brewery (db.Model):
     beers = db.relationship("Beer", backref="brewery", lazy="dynamic")
     images = db.Column(db.String(80))
     # reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
-    styles = db.relationship("Style",secondary=association_table, backref="breweries")
+    styles = db.relationship("Style", secondary=association_table, backref=db.backref('breweries', lazy='dynamic'))
 
 
 class Style (db.Model):
@@ -49,9 +49,7 @@ class Style (db.Model):
     ibu_max = db.Column(db.String(8))
     abv_min = db.Column(db.String(8))
     abv_max = db.Column(db.String(8))
-    
     beers = db.relationship("Beer", backref="style", lazy='dynamic')
-    # breweries = db.relationship("Brewery",secondary=association_table, backref="styles") # IS THIS RIGHT?
 
 
 class Review (db.Model):

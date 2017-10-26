@@ -12,10 +12,16 @@ handlers:
 # - url: /.*
 #   script: main.app
 
-- url: /breweries
+- url: /beers
   script: main.app
 
 - url: /styles
+  script: main.app
+
+- url: /breweries
+  script: main.app
+
+- url: /reviews
   script: main.app
 
 libraries:

@@ -111,6 +111,27 @@ def getStyles():
 
     return response
 
+@app.route('/reviews', methods = ['GET'])
+def getReviews():
+    allReviews = []
+
+    reviews = db.session.query(Review).all()
+
+    for review in reviews:
+        r = {
+        'id' : review.id,
+        'date': review.date,
+        'rating' : review.rating,
+        'comment' : review.comment,
+        'beer_name' : Beer.query.filter_by(id=review.beer_name).first().name
+        }
+        allReviews.append(r)
+
+    response = jsonify(allReviews)
+    response.status_code = 200
+
+    return response
+
 @app.errorhandler(500)
 def server_error(e):
     logging.exception('An error occurred during a request.')
