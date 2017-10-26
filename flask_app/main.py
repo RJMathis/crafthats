@@ -94,27 +94,34 @@ def getStyles():
     allStyles = []
 
     styles = db.session.query(Style).all()
-
     for style in styles:
         for beer in style.beers.all():
             beersOfStyle = []
             beersOfStyle.append(beer.name)
+            breweries = Style.query.filter(Style.breweries.any(id=style.id)).all()
+        for brewery in breweries:
+            breweriesOfStyle = []
+            breweriesOfStyle.append(brewery.name)
 
         s = {
+        'id' : style.id,
         'name' : style.name,
         'desicription' : style.description,
         'ibu_min' : style.ibu_min,
         'ibu_max' : style.ibu_max,
         'abv_min' : style.abv_min,
         'abv_max' : style.abv_max,
-        # 'beers' : beersOfStyle
+        'beers' : beersOfStyle,
+        'breweries':breweriesOfStyle
         }
         allStyles.append(s)
 
     response = jsonify(allStyles)
     response.status_code = 200
 
+    assert isinstance(response, object)
     return response
+
 
 @app.route('/reviews', methods = ['GET'])
 def getReviews():
