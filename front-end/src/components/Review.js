@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+
 
 export default class Review extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            abv: 'Default',
-            ibu: 'Default',
-            brewery: 'Default',
-            style: 'Default',
-            review: 'Default'
+            score: 'Default',
+            beerName: 'Default',
+            brewerName: 'Default',
+            comment: 'Default',
+            commentDate: 'Default',
+            navigate: false,
+            navigateTo: ''
         }
     }
 
@@ -37,6 +41,9 @@ export default class Review extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
+        if (this.state.navigate) {
+            return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
+        }
         return (
             <div className="container">
                 <div className="row">
@@ -46,29 +53,36 @@ export default class Review extends Component {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">The Bronx Brewery Review</h2>
+                        <h2 className="sub-header">{this.state.beerName}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>
-                                <td>Reviewer:</td>
-                                <td>Sample</td>
+                                <td>Score:</td>
+                                <td>{this.state.score}</td>
                             </tr>
                             <tr>
-                                <td>Location:</td>
-                                <td>Sample</td>
+                                <td>Beer:</td>
+                                <td>
+                                    <button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Beer'})}>
+                                        {this.state.beerName}
+                                    </button>
+                                </td>
                             </tr>
                             <tr>
-                                <td><a href="BronxRyePaleAle.html">Beer:</a></td>
-                                <td>Sample</td>
+                                <td>Brewery:</td>
+                                <td>
+                                    <button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Brewery'})}>
+                                        {this.state.brewerName}
+                                    </button>
+                                </td>
                             </tr>
                             <tr>
-                                <td><a href="TheBronxBrewery.html">Brewery:</a></td>
-                                <td>Sample</td>
+                                <td>Comment:</td>
+                                <td>{this.state.comment}</td>
                             </tr>
-
                             <tr>
-                                <td>Review:</td>
-                                <td>Sample</td>
+                                <td>Date of Comment:</td>
+                                <td>{this.state.commentDate}</td>
                             </tr>
                             </tbody>
                         </table>

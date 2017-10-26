@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+import axios from 'axios';
 
 export default class Reviews extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            attribute1: '',
-            attribute2: '',
+            reviews: [],
             navigate: false,
             navigateTo: '/Review'
         }
+        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/reviews';
     }
 
     /* Mounting
@@ -29,6 +30,14 @@ export default class Reviews extends Component {
      * componentDidUpdate()
      */
 
+    componentDidMount() {
+        axios.get(this.apiUrl)
+            .then((res) => {
+                // Set state with result
+                this.setState({reviews: res.data});
+            });
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()
@@ -36,13 +45,31 @@ export default class Reviews extends Component {
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
+    handleNavigation = () => {
+        this.setState({
+            navigate: true
+        })
+    }
+
     render() {
         if (this.state.navigate) {
             return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
         }
+
+        // Create an array of X components with 1 for each Review gathered from API call
+        let reviewRows = this.state.reviews.map(function(review) {
+            return (
+                <tr>
+                    <td><button type="button" className="btn btn-link" onClick={() => this.handleNavigation()}>{review.name}</button></td>
+                    <td>#</td>
+                    <th>star rating 1</th>
+                </tr>
+            );
+        })
+
         return (
             <div className="container">
-                <div className="col-xs-6">
+                <div className="col-xs-12">
                     <h2 className="sub-header">Beers</h2>
                     <table className="table table-responsive table-striped">
                         <thead>
@@ -53,51 +80,7 @@ export default class Reviews extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>Bronx Rye Pale Ale</button></td>
-                            <td>#</td>
-                            <th>star rating 1</th>
-                        </tr>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>Crown Light</button></td>
-                            <td>#</td>
-                            <th>star rating 2</th>
-                        </tr>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>Brooklyn East India Pale Ale</button></td>
-                            <td>#</td>
-                            <th>star rating 3</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className="col-xs-6">
-                    <h2 className="sub-header">Breweries</h2>
-                    <table className="table table-responsive table-striped">
-                        <thead>
-                        <tr>
-                            <th>Brewery</th>
-                            <th>Number of Reviews</th>
-                            <th>Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>The Bronx Brewery</button></td>
-                            <td>#</td>
-                            <th>star rating 1</th>
-                        </tr>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>Crown Brewing</button></td>
-                            <td>#</td>
-                            <th>star rating 2</th>
-                        </tr>
-                        <tr>
-                            <td><button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true})}>Brooklyn Brewery</button></td>
-                            <td>#</td>
-                            <th>star rating 3</th>
-                        </tr>
+                        {reviewRows}
                         </tbody>
                     </table>
                 </div>
