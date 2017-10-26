@@ -10,6 +10,12 @@ handlers:
 - url: /
   script: main.app
 
+- url: /.*
+  script: main.app
+
+- url: /breweries
+  script: main.app
+
 libraries:
 - name: MySQLdb
   version: "latest"
@@ -19,7 +25,7 @@ env_variables:
     # Replace user, password, database, project, and instance with the values obtained
     # when configuring your Cloud SQL instance.
     SQLALCHEMY_DATABASE_URI: >-
-      mysql+pymysql://root:downing/stagingdb?unix_socket=/cloudsql/backend-staging:us-central1:stagingdb
+      mysql+pymysql://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging:us-central1:stagingdb
     # SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:downing@127.0.0.1/stagingdb
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
     #

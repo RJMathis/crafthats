@@ -1,0 +1,13 @@
+# Review
+INSERT INTO stagingdb.`review` (id, date, rating, comment, beer_name) VALUES (1, '0/1996', '0.1', 'comment sucks', 1);
+# Beer
+INSERT INTO stagingdb.`beer` (id, name, organic, abv, ibu, brewery_id, style_id, images) VALUES (1, "beer1", 1, "10", "15", 1, 1, "youtube.com");
+
+#Brewery
+INSERT INTO stagingdb.`brewery` (id, name, city, state, country, established, description, images) VALUES (1, "brewery1", "austin", "texas", "us", "1982", "brewery description sucks", "youtube.com");
+
+# Style
+INSERT INTO stagingdb.`style` (id, name, description, ibu_min, ibu_max, abv_min, abv_max) VALUES (1, "style1", "style description", "10", "15", 1, 5);
+
+# Association
+INSERT INTO stagingdb.`association` (brewery_id, style_id) VALUES (1, 1);
