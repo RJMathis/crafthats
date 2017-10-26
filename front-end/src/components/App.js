@@ -10,6 +10,7 @@ import Breweries from './Breweries';
 import Styles from './Styles';
 import Reviews from './Reviews';
 import About from './About';
+import Beer from './Beer';
 
 export default class App extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class App extends Component {
                       <Route exact path="/" component={Home} />
                       <Route exact path="/Home" component={Home} />
                       <Route exact path="/Beers" component={Beers} />
+                      <Route exact path="/Beer" component={Beer} />
                       <Route exact path="/Breweries" component={Breweries} />
                       <Route exact path="/Styles" component={Styles} />
                       <Route exact path="/Reviews" component={Reviews} />
