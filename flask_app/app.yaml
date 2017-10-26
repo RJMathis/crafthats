@@ -8,11 +8,14 @@ runtime_config:
 handlers:
 - url: /
   script: main.app
-
- - url: /.*
-   script: main.app
+#
+# - url: /.*
+#   script: main.app
 
 - url: /breweries
+  script: main.app
+
+- url: /styles
   script: main.app
 
 libraries:

@@ -50,7 +50,6 @@ class Style (db.Model):
     abv_min = db.Column(db.String(8))
     abv_max = db.Column(db.String(8))
     
-
     beers = db.relationship("Beer", backref="style", lazy='dynamic')
     # breweries = db.relationship("Brewery",secondary=association_table, backref="styles") # IS THIS RIGHT?
 

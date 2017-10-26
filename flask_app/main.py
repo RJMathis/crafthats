@@ -83,6 +83,7 @@ def getBeers():
     response.status_code = 200
 
     return response
+
 @app.route('/styles',methods=['GET'])
 def getStyles():
     allStyles = []
@@ -101,7 +102,7 @@ def getStyles():
         'ibu_max' : style.ibu_max,
         'abv_min' : style.abv_min,
         'abv_max' : style.abv_max,
-        'beers' : beersOfStyle
+        # 'beers' : beersOfStyle
         }
         allStyles.append(s)
 
