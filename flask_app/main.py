@@ -27,9 +27,9 @@ def home():
     # x = db.session.query(Beer).all()
     return "hello world"
 
+
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
-    
     allBreweries = []
 
     breweries = db.session.query(Brewery).all()
@@ -38,21 +38,26 @@ def getBreweries():
         for beer in brewery.beers.all():
             beersOfBrewery = []
             beersOfBrewery.append(beer.name)
+        for style in brewery.styles:
+            stylesOfBrewery = []
+            stylesOfBrewery.append(style.name)
 
-        #to do styles!
-        
+        # to do styles!
+
         b = {
-            'name' : brewery.name,
-            'city' : brewery.city,
-            'state':brewery.state,
-            'country' : brewery.country,
+            'id': brewery.id,
+            'name': brewery.name,
+            'city': brewery.city,
+            'state': brewery.state,
+            'country': brewery.country,
             'established': brewery.established,
             'description': brewery.description,
-            'beers' : beersOfBrewery,
-            'images' : brewery.images
-            }
+            'beers': beersOfBrewery,
+            'images': brewery.images,
+            'styles': stylesOfBrewery
+        }
         allBreweries.append(b)
-    
+
     response = jsonify(allBreweries)
     response.status_code = 200
 
