@@ -11,7 +11,7 @@ export default class Beers extends Component {
         this.state = {
             beers: []
         }
-        this.apiUrl = 'http://59ef8ec3684745001253e842.mockapi.io/api/v1/beers';
+        this.apiUrl = 'https://59ef8ec3684745001253e842.mockapi.io/api/v1/beers';
     }
 
     /* Mounting

@@ -15,7 +15,7 @@ export default class Navbar extends Component {
             </div>
             <div className="navbar-collapse collapse">
               <ul className="nav navbar-nav">
-                <li><a href="/Home">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/Beers">Beers</a></li>
                 <li><a href="/Breweries">Breweries</a></li>
                 <li><a href="/Styles">Styles</a></li>
