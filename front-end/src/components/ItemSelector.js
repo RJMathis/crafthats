@@ -7,13 +7,14 @@ import {Redirect} from 'react-router-dom';
 export default class ItemSelector extends Component {
     constructor (props) {
         super (props);
-        this.state = {
-            image: this.props.image,
-            title: this.props.title,
-            alt: this.props.alt,
-            overlayText: this.props.overlayText,
-            navigate: false
-        }
+            this.state = {
+                image: this.props.image,
+                title: this.props.title,
+                alt: this.props.alt,
+                overlayText: this.props.overlayText,
+                navigate: false,
+                navigateTo: '/Review'
+            }
     }
 
     /* Mounting
@@ -40,13 +41,10 @@ export default class ItemSelector extends Component {
 
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
-
-
-
     render() {
 
         if (this.state.navigate) {
-            return < Redirect to="/Beer" push={true} />
+            return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
         }
         return (
             <div className="col-md-4 container-thumbnail">

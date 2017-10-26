@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Beer extends Component {
+export default class Style extends Component {
     constructor (props) {
         super (props);
         this.state = {
@@ -42,34 +42,34 @@ export default class Beer extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src="https://s3.amazonaws.com/brewerydbapi/beer/wSybgO/upload_YO6evM-large.png" alt="..." />
+                            <img  src="http://via.placeholder.com/300x300" alt="..." />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">Bronx Rye Pale Ale</h2>
+                        <h2 className="sub-header">Blonde</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>
-                                <td>ABV:</td>
-                                <td>6.3</td>
+                                <td>Type:</td>
+                                <td>North American Origin Ales</td>
                             </tr>
                             <tr>
-                                <td>IBU:</td>
-                                <td>58</td>
+                                <td>Description:</td>
+                                <td>Golden or Blonde ales are straw to golden blonde in color. They have a crisp, dry palate, light to medium body, and light malt sweetness. Low to medium hop aroma may be present but does not dominate. Bitterness is low to medium. Fruity esters may be perceived but do not predominate. Diacetyl should not be perceived. Chill haze should be absent.</td>
                             </tr>
                             <tr>
-                                <td>Brewery:</td>
-                                <td><a href="">The Bronx Brewery</a></td>
-                            </tr>
-
-                            <tr>
-                                <td>Style:</td>
-                                <td>Rye Ale</td>
+                                <td>IBU(min - max):</td>
+                                <td>15 - 25</td>
                             </tr>
 
                             <tr>
-                                <td><a href="">Review:</a></td>
-                                <td>Star Rating</td>
+                                <td>ABV(min - max):</td>
+                                <td>4 - 5</td>
+                            </tr>
+
+                            <tr>
+                                <td>Beers:</td>
+                                <td><a href="CrownLight.html">Crown Light</a></td>
                             </tr>
                             </tbody>
                         </table>
