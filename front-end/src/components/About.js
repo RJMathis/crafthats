@@ -242,7 +242,7 @@ export default class About extends Component {
                           <h4>Facebook</h4>
                           <h4>Google Hangouts</h4>
                           <u><h1>Report</h1></u>
-                          <a href="https://utexas.app.box.com/s/s9iv2im949pci0cp5xmraw6k2mr6tc76"><h4>SWE Technical Report</h4></a>
+                          <a href="https://utexas.box.com/s/qgev95e80ag6khwj6vnayoo1yyevilmm"><h4>SWE Technical Report</h4></a>
                       </div>
                   </div>
               </div>
