@@ -1,37 +1,60 @@
 import os
 import socket
 import logging
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
+from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+ 
+from models import db, Beer, Review, Style, Brewery
+# db = SQLAlchemy(app)
+# db.init_app(app)
+
 
 from models import db
 
 
 @app.route('/')
 def home():
-	return "hello world"
+    # x = db.session.query(Beer).all()
+    return "hello world"
+
 
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
-    
     allBreweries = []
 
-    breweries = Brewery.query.all()
+    breweries = db.session.query(Brewery).all()
 
     for brewery in breweries:
+        for beer in brewery.beers.all():
+            beersOfBrewery = []
+            beersOfBrewery.append(beer.name)
+        for style in brewery.styles:
+            stylesOfBrewery = []
+            stylesOfBrewery.append(style.name)
+
+        # to do styles!
+
         b = {
-            'name' : brewery.name,
-            'city' : brewery.city,
-            'state':brewery.state,
-            'established': brewery.established
+            'id': brewery.id,
+            'name': brewery.name,
+            'city': brewery.city,
+            'state': brewery.state,
+            'country': brewery.country,
+            'established': brewery.established,
+            'description': brewery.description,
+            'beers': beersOfBrewery,
+            'images': brewery.images,
+            'styles': stylesOfBrewery
         }
         allBreweries.append(b)
-    
+
     response = jsonify(allBreweries)
     response.status_code = 200
 
@@ -42,18 +65,19 @@ def getBeers():
     
     allBeers = []
 
-    beers = Beer.query.all()
+    beers = db.session.query(Beer).all()
+
 
     for beer in beers:
-        
         b = {
-         'name' : beer.name,
-         'organic' : beer.organic,
-         'abv'  : beer.abv,
-         'brewery' : beer.brewery_name,
-         'style' : beer.style_name,
-         'brewery' : beer.brewery_name
-
+            'id': beer.id,
+            'name': beer.name,
+            'organic': beer.organic,
+            'abv': beer.abv,
+            'ibu': beer.ibu,
+            'images': beer.images,
+            'brewery': Brewery.query.filter_by(id=beer.brewery_id).first().name,
+            'style': Style.query.filter_by(id=beer.style_id).first().name
         }
         allBeers.append(b)
 
@@ -61,22 +85,58 @@ def getBeers():
     response.status_code = 200
 
     return response
+
 @app.route('/styles',methods=['GET'])
 def getStyles():
     allStyles = []
 
-    styles = Style.query.all()
-
+    styles = db.session.query(Style).all()
     for style in styles:
+        for beer in style.beers.all():
+            beersOfStyle = []
+            beersOfStyle.append(beer.name)
+            breweries = Style.query.filter(Style.breweries.any(id=style.id)).all()
+        for brewery in breweries:
+            breweriesOfStyle = []
+            breweriesOfStyle.append(brewery.name)
+
         s = {
+        'id' : style.id,
         'name' : style.name,
         'desicription' : style.description,
-        'ibu' : style.ibu,
-        'abv' :style.abv
+        'ibu_min' : style.ibu_min,
+        'ibu_max' : style.ibu_max,
+        'abv_min' : style.abv_min,
+        'abv_max' : style.abv_max,
+        'beers' : beersOfStyle,
+        'breweries':breweriesOfStyle
         }
         allStyles.append(s)
 
     response = jsonify(allStyles)
+    response.status_code = 200
+
+    assert isinstance(response, object)
+    return response
+
+
+@app.route('/reviews', methods = ['GET'])
+def getReviews():
+    allReviews = []
+
+    reviews = db.session.query(Review).all()
+
+    for review in reviews:
+        r = {
+        'id' : review.id,
+        'date': review.date,
+        'rating' : review.rating,
+        'comment' : review.comment,
+        'beer_name' : Beer.query.filter_by(id=review.beer_name).first().name
+        }
+        allReviews.append(r)
+
+    response = jsonify(allReviews)
     response.status_code = 200
 
     return response
@@ -92,5 +152,5 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
-    app.run(host='127.0.0.1', port=5000, debug=True)
+    app.run(host='127.0.0.1', port=5000, config=None, debug=True)
 
