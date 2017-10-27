@@ -18,13 +18,15 @@ from models import db, Beer, Review, Style, Brewery
 
 from models import db
 
-
+#test connection
 @app.route('/')
 def home():
     # x = db.session.query(Beer).all()
     return "hello world"
 
+''' BREWERIES ROUTES '''
 
+#get all the breweries from db
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     allBreweries = []
@@ -60,6 +62,7 @@ def getBreweries():
 
     return response
 
+##### BEER ROUTES
 @app.route('/beers', methods=['GET'])
 def getBeers():
     
@@ -86,6 +89,9 @@ def getBeers():
 
     return response
 
+''' STYLE ROUTES '''
+
+#get all the styles from db
 @app.route('/styles',methods=['GET'])
 def getStyles():
     allStyles = []
@@ -119,7 +125,9 @@ def getStyles():
     assert isinstance(response, object)
     return response
 
+''' REVIEW ROUTES '''
 
+#get all the reviews from db
 @app.route('/reviews', methods = ['GET'])
 def getReviews():
     allReviews = []
@@ -141,6 +149,7 @@ def getReviews():
 
     return response
 
+#error handler
 @app.errorhandler(500)
 def server_error(e):
     logging.exception('An error occurred during a request.')
