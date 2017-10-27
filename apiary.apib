@@ -2,15 +2,19 @@ FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
 # brewtiful.world API
-This is a rough draft of the final API, it contains the projected
+This is a working draft of the final API. It contains the implemented 
 API calls needed to link the front-end and back-end of the www.brewtiful.world.
-We include, endpoints, response status, and requrired paramters.
+We include, endpoints, response status, and requrired paramters as well as future API calls.
 
 ## Breweries Collection [/breweries] 
  
 ### List All Breweries [GET]
 URL:
 <www.brewtiful.world/breweries>
+<www.brewtiful.world/breweries/id>
+<www.brewtiful.world/breweries/name>
+<www.brewtiful.world/breweries/state>
+
 Method : |GET|
 
 URL Params: offset=[integer]
@@ -31,21 +35,29 @@ fetched for any reason
 + Response 200 (application/json)
 
         [
-            {
-                "state": "Texas",
-                "city": "Austin",
-                "name": "Adelberts",
-                "established": "1982",
-                "image": "/files/breweries/adelberts.jpg"
-            }
+          {
+            "beers": [
+              "beer1"
+            ], 
+            "city": "austin", 
+            "country": "us", 
+            "description": "brewery description sucks", 
+            "established": "1982", 
+            "id": 1, 
+            "images": "youtube.com", 
+            "name": "brewery1", 
+            "state": "texas", 
+            "styles": [
+              "style1"
+            ]
+          }
         ]
 
 + Response 500 (application/json)
 
         [
             {
-                "error": "INTERNAL SERVER ERROR",
-               
+                "error": "An internal error occurred: See logs for full stacktrace.",
             }
         ]
 
@@ -54,6 +66,9 @@ fetched for any reason
 ### List All Reviews [GET]
 URL:
 <www.brewtiful.world/reviews>
+<www.brewtiful.world/reviews/highest>
+<www.brewtiful.world/reviews/lowest>
+
 Method : |GET|
 
 URL Params: offset=[integer]
@@ -73,24 +88,19 @@ fetched for any reason
 + Response 200 (application/json)
 
         [
-            {
-                "reviewer": "John",
-                "brewery": 
-                {
-                "state": "Texas",
-                "city" : "Austin",
-                "name": "Adelberts"
-                },
-                "beer_name": "Mango Wit",
-                "rating": "5/5"
-            }
+          {
+            "beer_name": "beer1", 
+            "comment": "comment sucks", 
+            "date": "0/1996", 
+            "id": 1, 
+            "rating": "0.1"
+          }
         ]
 + Response 500 (application/json)
 
         [
             {
-                "error": "INTERNAL SERVER ERROR",
-               
+                "error": "An internal error occurred: See logs for full stacktrace.",
             }
         ]
 
@@ -99,6 +109,10 @@ fetched for any reason
 ### List All Beers [GET]
 URL:
 <www.brewtiful.world/beers>
+<www.brewtiful.world/beer/beer_id>
+<www.brewtiful.world/beer/beer_name>
+
+
 Method : |GET|
 
 URL Params: offset=[integer]
@@ -118,37 +132,32 @@ fetched for any reason
 + Response 200 (application/json)
 
         [
-            {
-                "abv": "5.3%",
-                "beer_name": "Mango Wit",
-                "ibu": "3",
-                "glassware": "glass cup",
-                "organic": "yes",
-                "price": "$$",
-                "brewery": 
-                    {
-                    "state": "Texas",
-                    "city" : "Austin",
-                    "name": "Adelberts"
-                    },
-                "calories": "210",
-                "style": "ale"
-            }
+          {
+            "abv": "10", 
+            "brewery": "brewery1", 
+            "ibu": "15", 
+            "id": 1, 
+            "images": "youtube.com", 
+            "name": "beer1", 
+            "organic": "1", 
+            "style": "style1"
+          }
         ]
-+ Response 500 (application/json)
-
         [
             {
-                "error": "INTERNAL SERVER ERROR",
-               
+                "error": "An internal error occurred: See logs for full stacktrace.",
             }
         ]
+        
 
 ## Styles Collection [/styles]
 
 ### List All Styles [GET]
 URL:
 <www.brewtiful.world/styles>
+Todo:
+<www.brewtiful.world/style_name>
+
 Method : |GET|
 
 URL Params: offset=[integer]
@@ -166,24 +175,29 @@ Error Response Code: 500 + ERROR MESSAGE
 Returned if some back-end error occurs and data is not
 fetched for any reason
 + Response 200 (application/json)
-
         [
-            {
-                "name": "ale",
-                "description": "a perfectly rich, hoppy af .... ",
-                "ibu_range": "3-5",
-                "abv_range": "5.5-6.2",
-                "srm": "0x033F"
-            }
+          {
+            "abv_max": "5", 
+            "abv_min": "1", 
+            "beers": [
+              "beer1"
+            ], 
+            "breweries": [
+              "style1"
+            ], 
+            "desicription": "style description", 
+            "ibu_max": "15", 
+            "ibu_min": "10", 
+            "id": 1, 
+            "name": "style1"
+          }
         ]
 + Response 500 (application/json)
-
         [
             {
-                "error": "INTERNAL SERVER ERROR",
-               
+                "error": "An internal error occurred: See logs for full stacktrace.",
             }
-        ]        
+        ]       
 ## About Collection [/about]
 
 ### List Info About Team and Project [GET]
