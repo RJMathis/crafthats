@@ -7,7 +7,7 @@ import sqlalchemy
 from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:downing@127.0.0.1/stagingdb'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
  

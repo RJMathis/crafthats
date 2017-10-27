@@ -19,7 +19,7 @@ class Beer (db.Model):
     ibu = db.Column(db.String(8))
     brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id'))
     style_id = db.Column(db.Integer, db.ForeignKey('style.id'))
-    images = db.Column(db.String(80))
+    images = db.Column(db.String(2000))
 
     reviews = db.relationship("Review", backref='beer', lazy='dynamic')
 
@@ -32,10 +32,10 @@ class Brewery (db.Model):
     state = db.Column(db.String(64))
     country = db.Column(db.String(64))
     established = db.Column(db.String(64))
-    description = db.Column(db.String(200))
+    description = db.Column(db.String(1000))
 
     beers = db.relationship("Beer", backref="brewery", lazy="dynamic")
-    images = db.Column(db.String(80))
+    images = db.Column(db.String(2000))
     # reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
     styles = db.relationship("Style", secondary=association_table, backref=db.backref('breweries', lazy='dynamic'))
 
