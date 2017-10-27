@@ -50,19 +50,19 @@ export default class About extends Component {
                               <tr>
                                   <td>
                                       <strong>Commits:</strong>
-                                      10
+                                      34
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Issues Closed:</strong>
-                                      3
+                                      5
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Unit Tests:</strong>
-                                      0
+                                      10
                                   </td>
                               </tr>
                               </tbody>
@@ -88,13 +88,13 @@ export default class About extends Component {
                               <tr>
                                   <td>
                                       <strong>Commits:</strong>
-                                      7
+                                      16
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Issues Closed:</strong>
-                                      2
+                                      6
                                   </td>
                               </tr>
                               <tr>
@@ -125,13 +125,13 @@ export default class About extends Component {
                               <tr>
                                   <td>
                                       <strong>Commits:</strong>
-                                      6
+                                      2
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Issues Closed:</strong>
-                                      0
+                                      6
                                   </td>
                               </tr>
                               <tr>
@@ -166,13 +166,13 @@ export default class About extends Component {
                               <tr>
                                   <td>
                                       <strong>Commits:</strong>
-                                      10
+                                      27
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Issues Closed:</strong>
-                                      0
+                                      3
                                   </td>
                               </tr>
                               <tr>
@@ -203,13 +203,13 @@ export default class About extends Component {
                               <tr>
                                   <td>
                                       <strong>Commits:</strong>
-                                      9
+                                      18
                                   </td>
                               </tr>
                               <tr>
                                   <td>
                                       <strong>Issues Closed:</strong>
-                                      0
+                                      1
                                   </td>
                               </tr>
                               <tr>
