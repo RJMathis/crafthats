@@ -6,9 +6,6 @@ This is a working draft of the final API. It contains the implemented
 API calls needed to link the front-end and back-end of the www.brewtiful.world.
 We include, endpoints, response status, and requrired paramters as well as future API calls.
 
-## Breweries Collection [/breweries] 
- 
-### List All Breweries [GET]
 URL:
 <www.brewtiful.world/breweries>
 Method : |GET|
@@ -27,6 +24,9 @@ no back end problems fetching it
 Error Response Code: 500 + ERROR MESSAGE
 Returned if some back-end error occurs and data is not
 fetched for any reason
+## Breweries Collection [/breweries] 
+ 
+### List All Breweries [GET]
 
 + Response 200 (application/json)
 
@@ -60,24 +60,7 @@ fetched for any reason
 ## Reviews Collection [/reviews/]
 
 ### List All Reviews [GET]
-URL:
-<www.brewtiful.world/reviews>
-Method : |GET|
 
-URL Params: offset=[integer]
-            limit=[integer]
-            
-            These paramters are used for pagination, gvies the offset (start index value),
-            and the limit (how many values to get starting from offset)
-            
-Success Response Code: 200 + JSON Body
-
-Returned if the API returns the right data and has 
-no back end problems fetching it
-
-Error Response Code: 500 + ERROR MESSAGE
-Returned if some back-end error occurs and data is not
-fetched for any reason
 + Response 200 (application/json)
 
         [
@@ -100,25 +83,7 @@ fetched for any reason
 ## Beers Collection [/beers]
 
 ### List All Beers [GET]
-URL:
-<www.brewtiful.world/beers>
 
-Method : |GET|
-
-URL Params: offset=[integer]
-            limit=[integer]
-            
-            These paramters are used for pagination, gvies the offset (start index value),
-            and the limit (how many values to get starting from offset)
-            
-Success Response Code: 200 + JSON Body
-
-Returned if the API returns the right data and has 
-no back end problems fetching it
-
-Error Response Code: 500 + ERROR MESSAGE
-Returned if some back-end error occurs and data is not
-fetched for any reason
 + Response 200 (application/json)
 
         [
@@ -143,26 +108,9 @@ fetched for any reason
 ## Styles Collection [/styles]
 
 ### List All Styles [GET]
-URL:
-<www.brewtiful.world/styles>
 
-Method : |GET|
-
-URL Params: offset=[integer]
-            limit=[integer]
-            
-            These paramters are used for pagination, gvies the offset (start index value),
-            and the limit (how many values to get starting from offset)
-            
-Success Response Code: 200 + JSON Body
-
-Returned if the API returns the right data and has 
-no back end problems fetching it
-
-Error Response Code: 500 + ERROR MESSAGE
-Returned if some back-end error occurs and data is not
-fetched for any reason
 + Response 200 (application/json)
+       
         [
           {
             "abv_max": "5", 
@@ -180,33 +128,19 @@ fetched for any reason
             "name": "style1"
           }
         ]
+        
 + Response 500 (application/json)
+        
         [
             {
                 "error": "An internal error occurred: See logs for full stacktrace.",
             }
-        ]       
+        ] 
+        
 ## About Collection [/about]
 
 ### List Info About Team and Project [GET]
-URL:
-<www.brewtiful.world/about>
-Method : |GET|
 
-URL Params: offset=[integer]
-            limit=[integer]
-            
-            These paramters are used for pagination, gvies the offset (start index value),
-            and the limit (how many values to get starting from offset)
-            
-Success Response Code: 200 + JSON Body
-
-Returned if the API returns the right data and has 
-no back end problems fetching it
-
-Error Response Code: 500 + ERROR MESSAGE
-Returned if some back-end error occurs and data is not
-fetched for any reason
 + Response 200 (application/json)
 
         [
