@@ -11,7 +11,7 @@ export default class Breweries extends Component {
         this.state = {
             breweries: [],
         }
-        this.apiUrl = 'https://59ef8ec3684745001253e842.mockapi.io/api/v1/breweries';
+        this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
     }
 
     /* Mounting

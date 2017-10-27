@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
 import axios from 'axios';
+
+import ReviewSelector from './ReviewSelector';
 
 export default class Reviews extends Component {
     constructor (props) {
@@ -45,26 +46,12 @@ export default class Reviews extends Component {
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
-    handleNavigation = (e) => {
-        e.preventDefault()
-        this.setState({
-            navigate: true
-        })
-    }
-
     render() {
-        if (this.state.navigate) {
-            return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
-        }
 
         // Create an array of X components with 1 for each Review gathered from API call
         let reviewRows = this.state.reviews.map((review) => {
             return (
-                <tr>
-                    <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{review.name}</button></td>
-                    <td>#</td>
-                    <th>star rating 1</th>
-                </tr>
+                <ReviewSelector item={review} navigateTo="/Review"/>
             );
         })
 
