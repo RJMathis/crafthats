@@ -12,6 +12,7 @@ export default class ItemSelector extends Component {
                 title: this.props.title,
                 alt: this.props.alt,
                 overlayText: this.props.overlayText,
+                item: this.props.item,
                 navigate: false,
                 navigateTo: this.props.navigateTo
             }
@@ -44,8 +45,9 @@ export default class ItemSelector extends Component {
     render() {
 
         if (this.state.navigate) {
-            return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
+            return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.item}}} push={true} />;
         }
+
         return (
             <div className="col-md-4 container-thumbnail">
                 <div className="text-center">

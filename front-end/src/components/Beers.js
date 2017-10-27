@@ -55,6 +55,7 @@ export default class Beers extends Component {
                               image={beer.image}
                               alt={beer.name}
                               overlayText={beer.name}
+                              item={beer}
                               navigateTo="/Beer"/>
             );
         })

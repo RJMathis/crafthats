@@ -55,6 +55,7 @@ export default class Styles extends Component {
                               image={style.image}
                               alt={style.name}
                               overlayText={style.name}
+                              item={style}
                               navigateTo="/Style"/>
             );
         })
