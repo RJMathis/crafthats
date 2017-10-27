@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 
 export default class About extends Component {
-    constructor (props) {
-        super (props);
-        this.state = {
-            attribute1: '',
-            attribute2: ''
-        }
-    }
 
     /* Mounting
         These methods are called when an instance of a component is being created and inserted into the DOM:
@@ -47,9 +40,6 @@ export default class About extends Component {
                               In my free time, I enjoy playing guitar, rock climbing, and just about everything outdoors.
                           </p>
                           <table className="table table-responsive">
-                              <thead>
-                              <tr></tr>
-                              </thead>
                               <tbody>
                               <tr>
                                   <td>
@@ -88,9 +78,6 @@ export default class About extends Component {
                               I enjoy craft beer, drumming, and playing with my dogs.
                           </p>
                           <table className="table table-responsive">
-                              <thead>
-                              <tr></tr>
-                              </thead>
                               <tbody>
                               <tr>
                                   <td>
@@ -123,14 +110,11 @@ export default class About extends Component {
                   <div className="col-md-4">
                       <div className="text-center">
                           <img className="img-about" src="images/sam_bitmoji.png" alt="Sam Bitmoji" />
-                          <h2>Samuel Borisov</h2>
+                          <h2>Samuil Borisov</h2>
                           <p className="text-left about-description">
                               I'm a CS Major at UT Austin. I enjoy traveling, reading, and weightlifting.
                           </p>
                           <table className="table table-responsive">
-                              <thead>
-                              <tr></tr>
-                              </thead>
                               <tbody>
                               <tr>
                                   <td>
@@ -172,9 +156,6 @@ export default class About extends Component {
                               In my spare time I like to ride and work on vintage motorcycles.
                           </p>
                           <table className="table table-responsive ">
-                              <thead>
-                              <tr></tr>
-                              </thead>
                               <tbody>
                               <tr>
                                   <td>
@@ -212,9 +193,6 @@ export default class About extends Component {
                               I am a senior computer science student at UT Austin.
                               I enjoy programming, weightlifting, and gaming.</p>
                           <table className="table table-responsive">
-                              <thead>
-                              <tr></tr>
-                              </thead>
                               <tbody>
                               <tr>
                                   <td>

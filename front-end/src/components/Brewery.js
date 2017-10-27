@@ -4,11 +4,8 @@ export default class Brewery extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            abv: 'Default',
-            ibu: 'Default',
-            brewery: 'Default',
-            style: 'Default',
-            review: 'Default'
+            name: this.props.location.state.name,
+            item: this.props.location.state.item
         }
     }
 
@@ -37,16 +34,17 @@ export default class Brewery extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
+        console.log(this.state.item)
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src="https://s3.amazonaws.com/brewerydbapi/brewery/V0wvf7/upload_j82fbp-squareLarge.png" alt="..." />
+                            <img  src={this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">The Bronx Brewery</h2>
+                        <h2 className="sub-header">{this.state.item.name}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>

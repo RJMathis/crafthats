@@ -54,6 +54,7 @@ export default class Breweries extends Component {
                               image={brewery.image}
                               alt={brewery.name}
                               overlayText={brewery.name}
+                              item={brewery}
                               navigateTo="/Brewery"/>
             );
         })
