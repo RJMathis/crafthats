@@ -11,7 +11,7 @@ export default class Styles extends Component {
         this.state = {
             styles: [],
         }
-        this.apiUrl = 'https://backend-staging-183303.appspot.com/styles';
+        this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
     }
 
     /* Mounting
