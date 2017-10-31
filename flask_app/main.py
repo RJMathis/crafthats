@@ -7,16 +7,17 @@ import sqlalchemy
 from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb_dev'
+#app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqldb://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging-183303:us-central1:stagingdb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# from sqlalchemy import create_engine
+# engine = create_engine('mysql+mysqldb://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging-183303:us-central1:stagingdb')
  
-from models import db, Beer, Review, Style, Brewery
+from models import db 
 # db = SQLAlchemy(app)
-# db.init_app(app)
+db.init_app(app)
 
-
-from models import db
+from models import db, Beer, Review, Style, Brewery
 
 
 @app.route('/')
@@ -28,19 +29,12 @@ def home():
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     allBreweries = []
-
-    breweries = db.session.query(Brewery).all()
+    
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
     for brewery in breweries:
-        for beer in brewery.beers.all():
-            beersOfBrewery = []
-            beersOfBrewery.append(beer.name)
-        for style in brewery.styles:
-            stylesOfBrewery = []
-            stylesOfBrewery.append(style.name)
-
-        # to do styles!
-
         b = {
             'id': brewery.id,
             'name': brewery.name,
@@ -49,9 +43,9 @@ def getBreweries():
             'country': brewery.country,
             'established': brewery.established,
             'description': brewery.description,
-            'beers': beersOfBrewery,
+            'beers': [beer.serializeName for beer in brewery.beers],
             'images': brewery.images,
-            'styles': stylesOfBrewery
+            'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
 
@@ -64,8 +58,11 @@ def getBreweries():
 def getBeers():
     
     allBeers = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
 
-    beers = db.session.query(Beer).all()
+    #beers = db.session.query(Beer).all()
+    beers = db.session.query(Beer).limit(lim).offset(off).all()
 
 
     for beer in beers:
@@ -76,8 +73,8 @@ def getBeers():
             'abv': beer.abv,
             'ibu': beer.ibu,
             'images': beer.images,
-            'brewery': Brewery.query.filter_by(id=beer.brewery_id).first().name,
-            'style': Style.query.filter_by(id=beer.style_id).first().name
+            'brewery': beer.brewery.name,
+            'style': beer.style.name
         }
         allBeers.append(b)
 
@@ -90,16 +87,12 @@ def getBeers():
 def getStyles():
     allStyles = []
 
-    styles = db.session.query(Style).all()
-    for style in styles:
-        for beer in style.beers.all():
-            beersOfStyle = []
-            beersOfStyle.append(beer.name)
-            breweries = Style.query.filter(Style.breweries.any(id=style.id)).all()
-        for brewery in breweries:
-            breweriesOfStyle = []
-            breweriesOfStyle.append(brewery.name)
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
 
+    #styles = db.session.query(Style).all()
+    styles = db.session.query(Style).limit(lim).offset(off).all()
+    for style in styles:
         s = {
         'id' : style.id,
         'name' : style.name,
@@ -108,8 +101,8 @@ def getStyles():
         'ibu_max' : style.ibu_max,
         'abv_min' : style.abv_min,
         'abv_max' : style.abv_max,
-        'beers' : beersOfStyle,
-        'breweries':breweriesOfStyle
+        'beers' : [beer.serializeName for beer in style.beers],
+        'breweries':[brewery.serializeName for brewery in style.breweries]
         }
         allStyles.append(s)
 
@@ -124,7 +117,10 @@ def getStyles():
 def getReviews():
     allReviews = []
 
-    reviews = db.session.query(Review).all()
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+
+    reviews = db.session.query(Review).limit(lim).offset(off).all()
 
     for review in reviews:
         r = {
@@ -132,7 +128,7 @@ def getReviews():
         'date': review.date,
         'rating' : review.rating,
         'comment' : review.comment,
-        'beer_name' : Beer.query.filter_by(id=review.beer_name).first().name
+        'beer_name' : review.beer.name
         }
         allReviews.append(r)
 
@@ -140,6 +136,69 @@ def getReviews():
     response.status_code = 200
 
     return response
+
+@app.route('/beers/<beer_id>', methods = ['GET'])
+def getBeerInfo(beer_id):
+    
+    beer = db.session.query(Beer).filter_by(id=beer_id).first()
+    b = {
+        'name' : beer.name,
+        'organic' : beer.organic,
+        'abv'  : beer.abv,
+        'ibu'  : beer.ibu,
+        'images' :beer.images,
+        'brewery' : beer.brewery.name,
+        'style' : beer.style.name,
+        'reviews': [review.serialize for review in beer.reviews]
+    }
+    response = jsonify(b)
+
+    return response
+
+@app.route('/reviews/<review_id>', methods = ['GET'])
+def getReviewInfo(review_id):
+    review = db.session.query(Review).filter_by(id=review_id).first()
+    r = {
+        'id' : review.id,
+        'date': review.date,
+        'rating' : review.rating,
+        'comment' : review.comment,
+        'beer_name' : review.beer.name
+        }
+    return jsonify(r)
+
+@app.route('/breweries/<brewery_id>', methods = ['GET'])
+def getBreweryInfo(brewery_id):
+    brewery = db.session.query(Brewery).filter_by(id=brewery_id).first()
+    b = {
+            'id': brewery.id,
+            'name': brewery.name,
+            'city': brewery.city,
+            'state': brewery.state,
+            'country': brewery.country,
+            'established': brewery.established,
+            'description': brewery.description,
+            'beers':  [beer.name for beer in brewery.beers],
+            'images': brewery.images,
+            'styles': [style.serializeName for style in brewery.styles]
+        }
+    return jsonify(b)
+
+@app.route('/styles/<style_id>', methods = ['GET'])
+def getStyleInfo(style_id):
+    style = db.session.query(Style).filter_by(id=style_id).first()
+    s = {
+        'id' : style.id,
+        'name' : style.name,
+        'desicription' : style.description,
+        'ibu_min' : style.ibu_min,
+        'ibu_max' : style.ibu_max,
+        'abv_min' : style.abv_min,
+        'abv_max' : style.abv_max,
+        'beers' : [beer.serializeName for beer in style.beers],
+        'breweries':[brewery.serializeName for brewery in style.breweries]
+        }
+    return jsonify(s)
 
 @app.errorhandler(500)
 def server_error(e):
@@ -152,5 +211,5 @@ def server_error(e):
 if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
-    app.run(host='127.0.0.1', port=5000, config=None, debug=True)
+    app.run(host='127.0.0.1', port=5000,debug=True)
 

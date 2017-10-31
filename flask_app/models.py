@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy 
+from flask import jsonify
 # from main import app
 
-from main import app
+#from main import app
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
+
 
 association_table = db.Table('association',
     db.Column('brewery_id',db.Integer,db.ForeignKey('brewery.id')),
@@ -23,6 +25,10 @@ class Beer (db.Model):
 
     reviews = db.relationship("Review", backref='beer', lazy='dynamic')
 
+    @property
+    def serializeName(self):
+       return self.name
+
 
 class Brewery (db.Model):
     __tablename__ = "brewery"
@@ -39,6 +45,9 @@ class Brewery (db.Model):
     # reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
     styles = db.relationship("Style", secondary=association_table, backref=db.backref('breweries', lazy='dynamic'))
 
+    @property
+    def serializeName(self):
+        return self.name
 
 class Style (db.Model):
     __tablename__ = "style"
@@ -51,6 +60,10 @@ class Style (db.Model):
     abv_max = db.Column(db.String(8))
     beers = db.relationship("Beer", backref="style", lazy='dynamic')
 
+    @property
+    def serializeName(self):
+        return self.name
+
 
 class Review (db.Model):
     __tablename__ = "review"
@@ -60,6 +73,16 @@ class Review (db.Model):
     comment = db.Column(db.Text)
     beer_name = db.Column(db.Integer, db.ForeignKey('beer.id'))
     # brewery_name = db.Column(db.Integer, db.ForeignKey('brewery.id'))
+    # 
+    @property
+    def serialize(self):
+        return {
+        'id' : self.id,
+        'date': self.date,
+        'rating' : self.rating,
+        'comment' : self.comment
+        }
+        
 
 
 
