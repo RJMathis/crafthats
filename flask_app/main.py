@@ -7,7 +7,7 @@ import sqlalchemy
 from sqlalchemy.orm import lazyload
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb_dev'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:downing@127.0.0.1/stagingdb_test'
 #app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqldb://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging-183303:us-central1:stagingdb"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # from sqlalchemy import create_engine
@@ -61,7 +61,6 @@ def getBeers():
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
 
-    #beers = db.session.query(Beer).all()
     beers = db.session.query(Beer).limit(lim).offset(off).all()
 
 
@@ -90,7 +89,6 @@ def getStyles():
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
 
-    #styles = db.session.query(Style).all()
     styles = db.session.query(Style).limit(lim).offset(off).all()
     for style in styles:
         s = {
@@ -128,7 +126,8 @@ def getReviews():
         'date': review.date,
         'rating' : review.rating,
         'comment' : review.comment,
-        'beer_name' : review.beer.name
+        'beer_name' : review.beer.name,
+        'brewery_name' : review.beer.brewery.name
         }
         allReviews.append(r)
 
@@ -139,65 +138,78 @@ def getReviews():
 
 @app.route('/beers/<beer_id>', methods = ['GET'])
 def getBeerInfo(beer_id):
-    
-    beer = db.session.query(Beer).filter_by(id=beer_id).first()
-    b = {
-        'name' : beer.name,
-        'organic' : beer.organic,
-        'abv'  : beer.abv,
-        'ibu'  : beer.ibu,
-        'images' :beer.images,
-        'brewery' : beer.brewery.name,
-        'style' : beer.style.name,
-        'reviews': [review.serialize for review in beer.reviews]
-    }
-    response = jsonify(b)
+    try:
+        beer = db.session.query(Beer).filter_by(id=beer_id).first()
+
+        b = {
+            'name' : beer.name,
+            'organic' : beer.organic,
+            'abv'  : beer.abv,
+            'ibu'  : beer.ibu,
+            'images' :beer.images,
+            'brewery' : beer.brewery.name,
+            'style' : beer.style.name,
+            'reviews': [review.serialize for review in beer.reviews]
+        }
+        response = jsonify(b)
+    except AttributeError:
+        response = "Server Error 500: Invalid beer_id"
 
     return response
 
 @app.route('/reviews/<review_id>', methods = ['GET'])
 def getReviewInfo(review_id):
-    review = db.session.query(Review).filter_by(id=review_id).first()
-    r = {
-        'id' : review.id,
-        'date': review.date,
-        'rating' : review.rating,
-        'comment' : review.comment,
-        'beer_name' : review.beer.name
-        }
+    try:
+        review = db.session.query(Review).filter_by(id=review_id).first()
+        r = {
+            'id' : review.id,
+            'date': review.date,
+            'rating' : review.rating,
+            'comment' : review.comment,
+            'beer_name' : review.beer.name,
+            'brewery_name': review.beer.brewery.name
+            }
+    except AttributeError:
+        return "Server Error 500: Invalid review_id"
     return jsonify(r)
 
 @app.route('/breweries/<brewery_id>', methods = ['GET'])
 def getBreweryInfo(brewery_id):
-    brewery = db.session.query(Brewery).filter_by(id=brewery_id).first()
-    b = {
-            'id': brewery.id,
-            'name': brewery.name,
-            'city': brewery.city,
-            'state': brewery.state,
-            'country': brewery.country,
-            'established': brewery.established,
-            'description': brewery.description,
-            'beers':  [beer.name for beer in brewery.beers],
-            'images': brewery.images,
-            'styles': [style.serializeName for style in brewery.styles]
-        }
+    try:
+        brewery = db.session.query(Brewery).filter_by(id=brewery_id).first()
+        b = {
+                'id': brewery.id,
+                'name': brewery.name,
+                'city': brewery.city,
+                'state': brewery.state,
+                'country': brewery.country,
+                'established': brewery.established,
+                'description': brewery.description,
+                'beers':  [beer.name for beer in brewery.beers],
+                'images': brewery.images,
+                'styles': [style.serializeName for style in brewery.styles]
+            }
+    except AttributeError:
+        return "Server Error 500: Invalid brewery_id"
     return jsonify(b)
 
 @app.route('/styles/<style_id>', methods = ['GET'])
 def getStyleInfo(style_id):
-    style = db.session.query(Style).filter_by(id=style_id).first()
-    s = {
-        'id' : style.id,
-        'name' : style.name,
-        'desicription' : style.description,
-        'ibu_min' : style.ibu_min,
-        'ibu_max' : style.ibu_max,
-        'abv_min' : style.abv_min,
-        'abv_max' : style.abv_max,
-        'beers' : [beer.serializeName for beer in style.beers],
-        'breweries':[brewery.serializeName for brewery in style.breweries]
-        }
+    try:
+        style = db.session.query(Style).filter_by(id=style_id).first()
+        s = {
+            'id' : style.id,
+            'name' : style.name,
+            'desicription' : style.description,
+            'ibu_min' : style.ibu_min,
+            'ibu_max' : style.ibu_max,
+            'abv_min' : style.abv_min,
+            'abv_max' : style.abv_max,
+            'beers' : [beer.serializeName for beer in style.beers],
+            'breweries':[brewery.serializeName for brewery in style.breweries]
+            }
+    except AttributeError:
+        return "Server Error 500: Invalid style_id"
     return jsonify(s)
 
 @app.errorhandler(500)
