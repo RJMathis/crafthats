@@ -43,6 +43,7 @@ def getBreweries():
             'country': brewery.country,
             'established': brewery.established,
             'description': brewery.description,
+            'website' : brewery.website,
             'beers': [beer.serializeName for beer in brewery.beers],
             'images': brewery.images,
             'styles': [style.serializeName for style in brewery.styles]
@@ -184,6 +185,7 @@ def getBreweryInfo(brewery_id):
                 'state': brewery.state,
                 'country': brewery.country,
                 'established': brewery.established,
+                'website': brewery.website,
                 'description': brewery.description,
                 'beers':  [beer.name for beer in brewery.beers],
                 'images': brewery.images,

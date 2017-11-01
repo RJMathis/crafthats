@@ -39,7 +39,7 @@ class Brewery (db.Model):
     country = db.Column(db.String(64))
     established = db.Column(db.String(64))
     description = db.Column(db.String(200))
-
+    website = db.Column(db.String(2000))
     beers = db.relationship("Beer", backref="brewery", lazy="dynamic")
     images = db.Column(db.String(80))
     # reviews = db.relationship("Review", backref="reviews", lazy='dynamic')
