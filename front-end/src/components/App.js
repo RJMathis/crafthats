@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -20,7 +20,6 @@ export default class App extends Component {
     return (
       <div className="App">
         <Navbar />
-          <BrowserRouter>
               <div className="App">
                   <Switch>
                       <Route exact path="/" component={Home} />
@@ -36,7 +35,6 @@ export default class App extends Component {
                       <Route component={NotFound} />
                   </Switch>
               </div>
-          </BrowserRouter>
         <Footer />
       </div>
     );
