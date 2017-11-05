@@ -14,7 +14,7 @@ export default class Home extends Component {
             <div className="carousel-inner" role="listbox">
                 <div className="item active">
                     <div className="carousel-item-container">
-                        <img className="d-block w-100" src="../images/beer.jpg" alt="..." />
+                        <img className="d-block w-100" src="../images/brewtiful_1.png" alt="..." />
                         <div className="carousel-caption"/>
                     </div>
                 </div>

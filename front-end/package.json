@@ -1,12 +1,12 @@
 {
   "name": "front-end",
-  "homepage": "http://brewtiful.world/",
+  "homepage": "https://brewtiful.world",
   "version": "0.1.0",
   "main": "index.js",
   "private": true,
   "dependencies": {
     "axios": "^0.17.0",
-    "lodash": "^4.17.4",
+    "lodash.chunk": "^4.2.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2",

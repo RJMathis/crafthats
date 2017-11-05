@@ -54,7 +54,7 @@ export default class Reviews extends Component {
                 <ReviewSelector item={review} navigateTo="/Review"/>
             );
         })
-
+        // Add column for Brewery
         return (
             <div className="container">
                 <div className="col-xs-12">
@@ -63,7 +63,7 @@ export default class Reviews extends Component {
                         <thead>
                         <tr>
                             <th>Beer</th>
-                            <th>Number of Reviews</th>
+                            <th>Date</th>
                             <th>Rating</th>
                         </tr>
                         </thead>
