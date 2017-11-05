@@ -52,11 +52,11 @@ export default class Beer extends Component {
                             <tbody>
                             <tr>
                                 <td>ABV:</td>
-                                <td>{this.state.item.abvMax}</td>
+                                <td>{this.state.item.abv}</td>
                             </tr>
                             <tr>
                                 <td>IBU:</td>
-                                <td>{this.state.item.ibuMax}</td>
+                                <td>{this.state.item.ibu}</td>
                             </tr>
                             <tr>
                                 <td>Brewery:</td>
