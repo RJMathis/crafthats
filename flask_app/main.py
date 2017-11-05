@@ -49,7 +49,7 @@ def getBreweries():
             'description': brewery.description,
             'website' : brewery.website,
             'beers': [beer.serializeName for beer in brewery.beers],
-            'images': brewery.images,
+            'image': brewery.images,
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
@@ -76,7 +76,7 @@ def getBeers():
             'organic': beer.organic,
             'abv': beer.abv,
             'ibu': beer.ibu,
-            'images': beer.images,
+            'image': beer.images,
             'brewery': beer.brewery.name,
             'style': beer.style.name
         }
