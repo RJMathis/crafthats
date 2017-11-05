@@ -208,35 +208,35 @@ export default class About extends Component {
                       <div className="text-center">
                           <h1><u>Stats</u></h1>
                           <ul>
-                              <li><h4 className="text-left"><strong>total no. of commits:</strong> 107</h4></li>
-                              <li><h4 className="text-left"><strong>total no. of issues:</strong> 20</h4></li>
-                              <li><h4 className="text-left"><strong>total no. of unit tests:</strong> 10</h4></li>
-                              <li><a className="text-left" href="http://docs.crafthats.apiary.io/"><h4>Apiary API</h4></a></li>
-                              <li><a className="text-left" href="https://github.com/RJMathis/crafthats"><h4>GitHub Repo</h4></a></li>
-                              <li><a className="text-left" href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>Trello</h4></a></li>
+                              <li className="text-left"><h4><strong>total no. of commits:</strong> 107</h4></li>
+                              <li className="text-left"><h4><strong>total no. of issues:</strong> 20</h4></li>
+                              <li className="text-left"><h4><strong>total no. of unit tests:</strong> 10</h4></li>
+                              <li className="text-left"><a href="http://docs.crafthats.apiary.io/"><h4>Apiary API</h4></a></li>
+                              <li className="text-left"><a href="https://github.com/RJMathis/crafthats"><h4>GitHub Repo</h4></a></li>
+                              <li className="text-left"><a href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>Trello</h4></a></li>
                           </ul>
                       </div>
                   </div>
                   <div className="col-md-3 border-right">
-                      <div className="text-left">
+                      <div className="text-center">
                           <h1><u>Tools</u></h1>
                           <ul>
-                              <li><h4>PlanIt Poker</h4></li>
-                              <li><h4>Slack</h4></li>
-                              <li><h4>Facebook</h4></li>
-                              <li><h4>Google Hangouts</h4></li>
+                              <li className="text-left"><h4>PlanIt Poker</h4></li>
+                              <li className="text-left"><h4>Slack</h4></li>
+                              <li className="text-left"><h4>Facebook</h4></li>
+                              <li className="text-left"><h4>Google Hangouts</h4></li>
                           </ul>
                       </div>
                   </div>
                   <div className="col-md-3 border-right">
-                      <div className="text-left">
+                      <div className="text-center">
                           <h1><u>Data</u></h1>
-                          <h4>Brewery DB: Used API to collect data via HTTP GET requests</h4>
-                          <h4>RateBeer:   Used API to collect data via HTTP POST requests</h4>
+                          <p><strong>Brewery DB:</strong> Used API to collect data via HTTP GET requests</p>
+                          <p><strong>RateBeer:</strong>   Used API to collect data via HTTP POST requests</p>
                       </div>
                   </div>
                   <div className="col-md-3 ">
-                      <div className="text-left">
+                      <div className="text-center">
                           <h1><u>Technical</u></h1>
                               <a href="https://utexas.app.box.com/s/s9iv2im949pci0cp5xmraw6k2mr6tc76"><h4>Technical Report</h4></a>
                               <a href="https://yuml.me/12ee86c4.pdf"><h4>UML Diagram</h4></a>
