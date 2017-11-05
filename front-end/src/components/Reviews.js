@@ -11,7 +11,7 @@ export default class Reviews extends Component {
             navigate: false,
             navigateTo: '/Review'
         }
-        this.apiUrl = 'https://59ef8ec3684745001253e842.mockapi.io/api/v1/reviews';
+        this.apiUrl = 'https://backend-staging-183303.appspot.com/reviews';
     }
 
     /* Mounting

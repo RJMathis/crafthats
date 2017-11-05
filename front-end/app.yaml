@@ -4,18 +4,22 @@ threadsafe: true
 
 handlers:
 
+- url: /
+  static_files: build/index.html
+  upload: build/index.html
+
 - url: /images
   static_dir: images
 
 - url: /css
   static_dir: css
 
-- url: /$
+- url: /static
+  static_dir: build/static
+
+- url: /.*
   static_files: build/index.html
   upload: build/index.html
-
-- url: /
-  static_dir: build
 
 
 #- url: /htmlPages/(.*\.html)
