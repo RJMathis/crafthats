@@ -14,12 +14,6 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# from sqlalchemy import create_engine
-# engine = create_engine('mysql+mysqldb://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging-183303:us-central1:stagingdb')
- 
-# from models import db
-db = SQLAlchemy(app)
-# db.init_app(app)
 
 from models import db, Beer, Review, Style, Brewery
 
