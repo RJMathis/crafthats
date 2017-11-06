@@ -34,7 +34,7 @@ export default class About extends Component {
                       <div className="text-center">
                           <img className="img-about" src="images/travis_bitmoji.png" alt="Travis Bitmoji" />
                           <h2>Travis Reed</h2>
-                          <p className="text-left about-description">
+                          <p className="text-center about-description">
                               I am a senior at UT Austin in my final semester pursuing a degree in Computer Science.
                               My technological interests include autonomous vehicles and augmented reality.
                               In my free time, I enjoy playing guitar, rock climbing, and just about everything outdoors.
@@ -43,26 +43,22 @@ export default class About extends Component {
                               <tbody>
                               <tr>
                                   <td>
-                                      <strong>Responsibilities:</strong>
-                                      Front-End, Technical Documentation
+                                      <strong>Responsibilities:</strong> Front-End, Technical Documentation
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong>
-                                      34
+                                      <strong>Commits:</strong> 34
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong>
-                                      5
+                                      <strong>Issues Closed:</strong> 5
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong>
-                                      10
+                                      <strong>Unit Tests:</strong> 10
                                   </td>
                               </tr>
                               </tbody>
@@ -73,7 +69,7 @@ export default class About extends Component {
                       <div className="text-center">
                           <img className="img-about" src="images/rita_bitmoji.png" alt="Rita Bitmoji" />
                           <h2>Rita Mathis</h2>
-                          <p className="text-left about-description">
+                          <p className="text-center about-description">
                               I am a senior at the University of Texas at Austin.
                               I enjoy craft beer, drumming, and playing with my dogs.
                           </p>
@@ -81,26 +77,22 @@ export default class About extends Component {
                               <tbody>
                               <tr>
                                   <td>
-                                      <strong>Responsibilities:</strong>
-                                      API, Database
+                                      <strong>Responsibilities:</strong> API, Database
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong>
-                                      16
+                                      <strong>Commits:</strong> 16
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong>
-                                      6
+                                      <strong>Issues Closed:</strong> 6
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong>
-                                      0
+                                      <strong>Unit Tests:</strong> 0
                                   </td>
                               </tr>
                               </tbody>
@@ -111,33 +103,29 @@ export default class About extends Component {
                       <div className="text-center">
                           <img className="img-about" src="images/sam_bitmoji.png" alt="Sam Bitmoji" />
                           <h2>Samuil Borisov</h2>
-                          <p className="text-left about-description">
+                          <p className="text-center about-description">
                               I'm a CS Major at UT Austin. I enjoy traveling, reading, and weightlifting.
                           </p>
                           <table className="table table-responsive">
                               <tbody>
                               <tr>
                                   <td>
-                                      <strong>Responsibilities:</strong>
-                                      API, Back-End, DB
+                                      <strong>Responsibilities:</strong> API, Back-End, DB
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong>
-                                      2
+                                      <strong>Commits:</strong> 2
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong>
-                                      6
+                                      <strong>Issues Closed:</strong> 6
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong>
-                                      0
+                                      <strong>Unit Tests:</strong> 0
                                   </td>
                               </tr>
                               </tbody>
@@ -150,7 +138,7 @@ export default class About extends Component {
                       <div className="text-center">
                           <img className="img-about" src="images/audric_bitmoji2.png" alt="Audric Bitmoji" />
                           <h2>Audric Ganser</h2>
-                          <p className="text-left about-description">
+                          <p className="text-center about-description">
                               I am a Senior Computer Science Student at UT Austin.
                               My tech interests include Full-Stack Development as well as Mobile Development.
                               In my spare time I like to ride and work on vintage motorcycles.
@@ -159,26 +147,22 @@ export default class About extends Component {
                               <tbody>
                               <tr>
                                   <td>
-                                      <strong>Responsibilities:</strong>
-                                      Front-End, API's
+                                      <strong>Responsibilities:</strong> Front-End, API's
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong>
-                                      27
+                                      <strong>Commits:</strong> 27
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong>
-                                      3
+                                      <strong>Issues Closed:</strong> 3
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong>
-                                      0
+                                      <strong>Unit Tests:</strong> 0
                                   </td>
                               </tr>
                               </tbody>
@@ -189,33 +173,29 @@ export default class About extends Component {
                       <div className="text-center">
                           <img className="img-about" src="images/pablo_bitmoji2.png" alt="Pablo Bitmoji" />
                           <h2>Pablo Velasco</h2>
-                          <p className="text-left about-description">
+                          <p className="text-center about-description">
                               I am a senior computer science student at UT Austin.
                               I enjoy programming, weightlifting, and gaming.</p>
                           <table className="table table-responsive">
                               <tbody>
                               <tr>
                                   <td>
-                                      <strong>Responsibilities:</strong>
-                                      Back-End, Database, Front-End
+                                      <strong>Responsibilities:</strong> Back-End, Database, Front-End
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong>
-                                      18
+                                      <strong>Commits:</strong> 18
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong>
-                                      1
+                                      <strong>Issues Closed:</strong> 1
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong>
-                                      0
+                                      <strong>Unit Tests:</strong> 0
                                   </td>
                               </tr>
                               </tbody>
@@ -223,26 +203,43 @@ export default class About extends Component {
                       </div>
                   </div>
               </div>
-              <div className="row">
-                  <div className="col">
+              <div className="row border">
+                  <div className="col-md-3 border-right">
                       <div className="text-center">
-                          <u><h1>Stats</h1></u>
-                          <h2>Apiary API</h2>
-                          <a href="http://docs.crafthats.apiary.io/"><h4>http://docs.crafthats.apiary.io//</h4></a>
-                          <h2>GitHub Repo</h2>
-                          <a href="https://github.com/RJMathis/crafthats"><h4>https://github.com/RJMathis/crafthats</h4></a>
-                          <h2>Trello</h2>
-                          <a href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>trello.com/swe-project-1</h4></a>
-                          <u><h1>Data</h1></u>
-                          <h4>Brewery DB: Used API GET call to get data</h4>
-                          <u><h1>tools</h1></u>
-                          <h4>Trello</h4>
-                          <h4>PlanIt Poker</h4>
-                          <h4>Slack</h4>
-                          <h4>Facebook</h4>
-                          <h4>Google Hangouts</h4>
-                          <u><h1>Report</h1></u>
-                          <a href="https://utexas.app.box.com/s/s9iv2im949pci0cp5xmraw6k2mr6tc76"><h4>SWE Technical Report</h4></a>
+                          <h1><u>Stats</u></h1>
+                          <ul>
+                              <li className="text-left"><h4><strong>total no. of commits:</strong> 107</h4></li>
+                              <li className="text-left"><h4><strong>total no. of issues:</strong> 20</h4></li>
+                              <li className="text-left"><h4><strong>total no. of unit tests:</strong> 10</h4></li>
+                              <li className="text-left"><a href="http://docs.crafthats.apiary.io/"><h4>Apiary API</h4></a></li>
+                              <li className="text-left"><a href="https://github.com/RJMathis/crafthats"><h4>GitHub Repo</h4></a></li>
+                              <li className="text-left"><a href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>Trello</h4></a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div className="col-md-3 border-right">
+                      <div className="text-center">
+                          <h1><u>Tools</u></h1>
+                          <ul>
+                              <li className="text-left"><h4>PlanIt Poker</h4></li>
+                              <li className="text-left"><h4>Slack</h4></li>
+                              <li className="text-left"><h4>Facebook</h4></li>
+                              <li className="text-left"><h4>Google Hangouts</h4></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div className="col-md-3 border-right">
+                      <div className="text-center">
+                          <h1><u>Data</u></h1>
+                          <p><strong>Brewery DB:</strong> Used API to collect data via HTTP GET requests</p>
+                          <p><strong>RateBeer:</strong>   Used API to collect data via HTTP POST requests</p>
+                      </div>
+                  </div>
+                  <div className="col-md-3 ">
+                      <div className="text-center">
+                          <h1><u>Technical</u></h1>
+                              <a href="https://utexas.app.box.com/s/s9iv2im949pci0cp5xmraw6k2mr6tc76"><h4>Technical Report</h4></a>
+                              <a href="https://yuml.me/12ee86c4.pdf"><h4>UML Diagram</h4></a>
                       </div>
                   </div>
               </div>

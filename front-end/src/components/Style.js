@@ -40,7 +40,7 @@ export default class Style extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src={this.state.item.image} alt={this.state.item.name} />
+                            <img  className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -53,21 +53,27 @@ export default class Style extends Component {
                             </tr>
                             <tr>
                                 <td>Description:</td>
-                                <td>Golden or Blonde ales are straw to golden blonde in color. They have a crisp, dry palate, light to medium body, and light malt sweetness. Low to medium hop aroma may be present but does not dominate. Bitterness is low to medium. Fruity esters may be perceived but do not predominate. Diacetyl should not be perceived. Chill haze should be absent.</td>
+                                <td>{this.state.item.description ? this.state.item.description : "No Description Available"}</td>
                             </tr>
                             <tr>
-                                <td>IBU(min - max):</td>
-                                <td>15 - 25</td>
+                                <td>IBU Min:</td>
+                                <td>{this.state.item.ibu_min}</td>
                             </tr>
-
                             <tr>
-                                <td>ABV(min - max):</td>
-                                <td>4 - 5</td>
+                                <td>IBU Max:</td>
+                                <td>{this.state.item.ibu_max}</td>
                             </tr>
-
+                            <tr>
+                                <td>ABV Min:</td>
+                                <td>{this.state.item.abv_min}</td>
+                            </tr>
+                            <tr>
+                                <td>ABV Max:</td>
+                                <td>{this.state.item.abv_max}</td>
+                            </tr>
                             <tr>
                                 <td>Beers:</td>
-                                <td><a href="CrownLight.html">Crown Light</a></td>
+                                <td>{this.state.item.beers}</td>
                             </tr>
                             </tbody>
                         </table>

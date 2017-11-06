@@ -46,32 +46,24 @@ export default class Review extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src={this.state.item.image} alt={this.state.item.name} />
+                            <img  src={this.state.item.image} alt={this.state.item.beer_name} />
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">{this.state.item.name}</h2>
+                        <h2 className="sub-header">{this.state.item.beer_name}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>
-                                <td>Score:</td>
-                                <td>{this.state.item.score}</td>
+                                <td>Rating:</td>
+                                <td>{this.state.item.rating}</td>
                             </tr>
                             <tr>
                                 <td>Beer:</td>
-                                <td>
-                                    <button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Beer'})}>
-                                        {this.state.item.name}
-                                    </button>
-                                </td>
+                                <td>{this.state.item.beer_name}</td>
                             </tr>
                             <tr>
                                 <td>Brewery:</td>
-                                <td>
-                                    <button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Brewery'})}>
-                                        {this.state.item.brewerName}
-                                    </button>
-                                </td>
+                                <td>{this.state.item.brewery_name}</td>
                             </tr>
                             <tr>
                                 <td>Comment:</td>
@@ -79,7 +71,7 @@ export default class Review extends Component {
                             </tr>
                             <tr>
                                 <td>Date of Comment:</td>
-                                <td>{this.state.item.commentDate}</td>
+                                <td>{this.state.item.date}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -89,3 +81,7 @@ export default class Review extends Component {
         );
     }
 }
+
+{/*<button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Brewery'})}>*/}
+    {/*{this.state.item.brewery_name}*/}
+{/*</button>*/}

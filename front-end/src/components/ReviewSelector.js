@@ -50,12 +50,12 @@ export default class ReviewSelector extends Component {
         if (this.state.navigate) {
             return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.item}}} push={true} />;
         }
-
+        // Add column for brewery
         return (
             <tr>
-                <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{this.state.item.name}</button></td>
-                <td>#</td>
-                <th>star rating 1</th>
+                <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{this.state.item.beer_name}</button></td>
+                <td>{this.state.item.date}</td>
+                <th>{this.state.item.rating}</th>
             </tr>
         );
     }
