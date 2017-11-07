@@ -5,8 +5,11 @@ import React, { Component } from 'react';
 
 
 export default class PageSelector extends Component {
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
+        this.state = {
+            navigateTo: this.props.navigateTo
+        }
     }
 
     /* Mounting
@@ -39,11 +42,11 @@ export default class PageSelector extends Component {
                 <div className="col-md-12 container-thumbnail">
                     <div className="text-center">
                         <ul className="pagination pagination-lg">
-                            <li><a onClick={() => this.props.handlePageChange(0)}>1</a></li>
-                            <li><a onClick={() => this.props.handlePageChange(1)}>2</a></li>
-                            <li><a onClick={() => this.props.handlePageChange(2)}>3</a></li>
-                            <li><a onClick={() => this.props.handlePageChange(3)}>4</a></li>
-                            <li><a onClick={() => this.props.handlePageChange(4)}>5</a></li>
+                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(0, e)}>1</a></li>
+                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(1, e)}>2</a></li>
+                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(2, e)}>3</a></li>
+                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(3, e)}>4</a></li>
+                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(4, e)}>5</a></li>
                         </ul>
                     </div>
                 </div>

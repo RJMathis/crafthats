@@ -5,6 +5,9 @@ import axios from 'axios';
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
+import number from 'prop-types';
+
+
 export default class Breweries extends Component {
     constructor (props) {
         super (props);
@@ -12,7 +15,8 @@ export default class Breweries extends Component {
             breweries: [],
             page: 0,
             prevPage: 0,
-            nextPage: 0
+            nextPage: 0,
+            pathname: "/Breweries"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
     }
@@ -29,18 +33,15 @@ export default class Breweries extends Component {
         this.callAPI()
     }
 
-    handlePageChange = (page) => {
+    handlePageChange = (page, e) => {
+        e.preventDefault()
         console.log("in handlePageChange")
+        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
-
     }
 
     callAPI = () => {
+        console.log("in callAPI")
         let limit = 9
         let offset = this.state.page * 9
         let self = this
@@ -64,8 +65,24 @@ export default class Breweries extends Component {
             * componentDidUpdate()
      */
 
-    componentWillUpdate() {
-        this.callAPI()
+    // shouldComponentUpdate(nextState, prevState) {
+    //     console.log("in should")
+    //     console.log(this.state.page, nextState.page)
+    //     console.log(this.state.page !== prevState.page)
+    //     return prevState.page !== this.state.page
+    // }
+
+    componentDidUpdate(prevState, nextState) {
+        console.log("updated component")
+        console.log(this.state.page, nextState.page)
+        if (nextState.page !== this.state.page) {
+            this.callAPI()
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
     }
 
     /* Unmounting
@@ -78,8 +95,7 @@ export default class Breweries extends Component {
         // Create an array of X components with 1 for each brewery gathered from API call
         let breweryComponents = this.state.breweries.map(function(brewery) {
             return (
-                <ItemSelector item={brewery}
-                              navigateTo="/Brewery"/>
+                <ItemSelector item={brewery} navigateTo="/Brewery"/>
             );
         })
 
@@ -93,7 +109,7 @@ export default class Breweries extends Component {
                         </div>
                     )
                 })}
-                <PageSelector handlePageChange={this.handlePageChange}/>
+                <PageSelector handlePageChange={this.handlePageChange} navigateTo="/Breweries"/>
             </div>
         );
     }
