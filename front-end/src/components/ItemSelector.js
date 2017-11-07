@@ -8,10 +8,6 @@ export default class ItemSelector extends Component {
     constructor (props) {
         super (props);
             this.state = {
-                image: this.props.image,
-                title: this.props.title,
-                alt: this.props.alt,
-                overlayText: this.props.overlayText,
                 item: this.props.item,
                 navigate: false,
                 navigateTo: this.props.navigateTo
@@ -25,6 +21,9 @@ export default class ItemSelector extends Component {
      * render()
      * componentDidMount()
      */
+    componentDidMount() {
+        this.setState({item: this.props.item})
+    }
 
     /* Updating
      An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
@@ -34,6 +33,12 @@ export default class ItemSelector extends Component {
      * render()
      * componentDidUpdate()
      */
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props !== nextProps) {
+            this.setState({item: nextProps.item})
+        }
+    }
 
     /* Unmounting
      This method is called when a component is being removed from the DOM:
@@ -52,9 +57,9 @@ export default class ItemSelector extends Component {
             <div className="col-md-4 container-thumbnail">
                 <div className="text-center">
                     <div onClick={() => this.setState({navigate: true})}>
-                        <img className="img-thumbnail" src={this.state.image} alt={this.state.alt} title={this.state.title} />
+                        <img className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} title={this.state.item.name} />
                         <div className="overlay">
-                            <div className="text">{this.state.overlayText}</div>
+                            <div className="text">{this.state.item.name}</div>
                         </div>
                     </div>
                 </div>

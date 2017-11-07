@@ -10,6 +10,9 @@ export default class Breweries extends Component {
         super (props);
         this.state = {
             breweries: [],
+            page: 0,
+            prevPage: 0,
+            nextPage: 0
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
     }
@@ -22,11 +25,33 @@ export default class Breweries extends Component {
             * componentDidMount()
      */
 
-    componentDidMount() {
-        axios.get(this.apiUrl)
+    componentDidMount () {
+        this.callAPI()
+    }
+
+    handlePageChange = (page) => {
+        console.log("in handlePageChange")
+        this.setState({page: page})
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
+
+    }
+
+    callAPI = () => {
+        let limit = 9
+        let offset = this.state.page * 9
+        let self = this
+
+        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                this.setState({breweries: res.data});
+                self.setState({breweries: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
 
@@ -39,22 +64,21 @@ export default class Breweries extends Component {
             * componentDidUpdate()
      */
 
+    componentWillUpdate() {
+        this.callAPI()
+    }
+
     /* Unmounting
         This method is called when a component is being removed from the DOM:
             * componentWillUnmount()
      */
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
-    render() {
-
+    render () {
         // Create an array of X components with 1 for each brewery gathered from API call
         let breweryComponents = this.state.breweries.map(function(brewery) {
             return (
-                <ItemSelector title={brewery.name}
-                              image={brewery.image}
-                              alt={brewery.name}
-                              overlayText={brewery.name}
-                              item={brewery}
+                <ItemSelector item={brewery}
                               navigateTo="/Brewery"/>
             );
         })
@@ -69,7 +93,7 @@ export default class Breweries extends Component {
                         </div>
                     )
                 })}
-                <PageSelector />
+                <PageSelector handlePageChange={this.handlePageChange}/>
             </div>
         );
     }

@@ -11,7 +11,7 @@ export default class Reviews extends Component {
             navigate: false,
             navigateTo: '/Review'
         }
-        this.apiUrl = 'https://backend-staging-183303.appspot.com/reviews';
+        this.apiUrl = 'https://backend-staging-183303.appspot.com/reviews?limit=9&offset=0';
     }
 
     /* Mounting

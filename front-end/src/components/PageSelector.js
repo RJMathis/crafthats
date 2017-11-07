@@ -3,12 +3,10 @@
  */
 import React, { Component } from 'react';
 
+
 export default class PageSelector extends Component {
     constructor (props) {
         super (props);
-        this.state = {
-            attribute1: ''
-        }
     }
 
     /* Mounting
@@ -40,12 +38,12 @@ export default class PageSelector extends Component {
             <div className="row">
                 <div className="col-md-12 container-thumbnail">
                     <div className="text-center">
-                        <ul class="pagination pagination-lg">
-                            <li class="active"><a href="#">1</a></li>
-                            <li class="disabled"><a href="#">2</a></li>
-                            <li class="disabled"><a href="#">3</a></li>
-                            <li class="disabled"><a href="#">4</a></li>
-                            <li class="disabled"><a href="#">5</a></li>
+                        <ul className="pagination pagination-lg">
+                            <li><a onClick={() => this.props.handlePageChange(0)}>1</a></li>
+                            <li><a onClick={() => this.props.handlePageChange(1)}>2</a></li>
+                            <li><a onClick={() => this.props.handlePageChange(2)}>3</a></li>
+                            <li><a onClick={() => this.props.handlePageChange(3)}>4</a></li>
+                            <li><a onClick={() => this.props.handlePageChange(4)}>5</a></li>
                         </ul>
                     </div>
                 </div>
