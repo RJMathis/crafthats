@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ReviewSelector from './ReviewSelector';
+import PageSelector from './PageSelector';
+
 
 export default class Reviews extends Component {
     constructor (props) {
         super (props);
         this.state = {
             reviews: [],
+            page: 0,
+            numPages: 5,
             navigate: false,
             navigateTo: '/Review'
         }
@@ -31,11 +35,44 @@ export default class Reviews extends Component {
      * componentDidUpdate()
      */
 
-    componentDidMount() {
-        axios.get(this.apiUrl)
+    componentDidMount () {
+        this.callAPI()
+    }
+
+    handlePageChange = (page, e) => {
+        e.preventDefault()
+        console.log("in handlePageChange")
+        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
+        this.setState({page: page})
+    }
+
+    handlePrev = (e) => {
+        e.preventDefault()
+        if (this.state.page > 0) {
+            this.setState({page: this.state.page - 1})
+        }
+    }
+
+    handleNext = (e) => {
+        e.preventDefault()
+        if (this.state.page < this.state.numPages - 1) {
+            this.setState({page: this.state.page + 1})
+        }
+    }
+
+    callAPI = () => {
+        console.log("in callAPI")
+        let limit = 10
+        let offset = this.state.page * 10
+        let self = this
+
+        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                this.setState({reviews: res.data});
+                self.setState({reviews: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
 
@@ -43,6 +80,18 @@ export default class Reviews extends Component {
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()
      */
+
+    componentDidUpdate(prevState, nextState) {
+        if (nextState.page !== this.state.page) {
+            this.callAPI()
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
@@ -72,6 +121,11 @@ export default class Reviews extends Component {
                         </tbody>
                     </table>
                 </div>
+                <PageSelector handlePageChange={this.handlePageChange}
+                              handlePrev={this.handlePrev}
+                              handleNext={this.handleNext}
+                              numPages={this.state.numPages}
+                              navigateTo="/Reviews"/>
             </div>
         );
     }

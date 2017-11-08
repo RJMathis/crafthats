@@ -9,7 +9,10 @@ export default class Beers extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            beers: []
+            beers: [],
+            page: 0,
+            numPages: 5,
+            pathname: "/Beers"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/beers';
     }
@@ -22,11 +25,44 @@ export default class Beers extends Component {
             * componentDidMount()
      */
 
-    componentDidMount() {
-        axios.get(this.apiUrl)
+    componentDidMount () {
+        this.callAPI()
+    }
+
+    handlePageChange = (page, e) => {
+        e.preventDefault()
+        console.log("in handlePageChange")
+        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
+        this.setState({page: page})
+    }
+
+    handlePrev = (e) => {
+        e.preventDefault()
+        if (this.state.page > 0) {
+            this.setState({page: this.state.page - 1})
+        }
+    }
+
+    handleNext = (e) => {
+        e.preventDefault()
+        if (this.state.page < this.state.numPages - 1) {
+            this.setState({page: this.state.page + 1})
+        }
+    }
+
+    callAPI = () => {
+        console.log("in callAPI")
+        let limit = 9
+        let offset = this.state.page * 9
+        let self = this
+
+        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                this.setState({beers: res.data});
+                self.setState({beers: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
 
@@ -38,6 +74,20 @@ export default class Beers extends Component {
             * render()
             * componentDidUpdate()
      */
+
+    componentDidUpdate(prevState, nextState) {
+        console.log("updated component")
+        console.log(this.state.page, nextState.page)
+        if (nextState.page !== this.state.page) {
+            this.callAPI()
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
 
     /* Unmounting
         This method is called when a component is being removed from the DOM:
@@ -52,12 +102,7 @@ export default class Beers extends Component {
         // Create an array of X components with 1 for each beer gathered from API call
         let beerComponents = this.state.beers.map(function(beer) {
             return (
-                <ItemSelector title={beer.name}
-                              image={beer.image}
-                              alt={beer.name}
-                              overlayText={beer.name}
-                              item={beer}
-                              navigateTo="/Beer"/>
+                <ItemSelector item={beer} navigateTo="/Beer"/>
             );
         })
 
@@ -71,7 +116,11 @@ export default class Beers extends Component {
                       </div>
                   )
               })}
-              <PageSelector />
+              <PageSelector handlePageChange={this.handlePageChange}
+                            handlePrev={this.handlePrev}
+                            handleNext={this.handleNext}
+                            numPages={this.state.numPages}
+                            navigateTo="/Beers"/>
           </div>
       );
     }

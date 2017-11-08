@@ -5,11 +5,15 @@ import axios from 'axios';
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
+
 export default class Breweries extends Component {
     constructor (props) {
         super (props);
         this.state = {
             breweries: [],
+            page: 0,
+            numPages: 5,
+            pathname: "/Breweries"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
     }
@@ -22,11 +26,44 @@ export default class Breweries extends Component {
             * componentDidMount()
      */
 
-    componentDidMount() {
-        axios.get(this.apiUrl)
+    componentDidMount () {
+        this.callAPI()
+    }
+
+    handlePageChange = (page, e) => {
+        e.preventDefault()
+        console.log("in handlePageChange")
+        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
+        this.setState({page: page})
+    }
+
+    handlePrev = (e) => {
+        e.preventDefault()
+        if (this.state.page > 0) {
+            this.setState({page: this.state.page - 1})
+        }
+    }
+
+    handleNext = (e) => {
+        e.preventDefault()
+        if (this.state.page < this.state.numPages - 1) {
+            this.setState({page: this.state.page + 1})
+        }
+    }
+
+    callAPI = () => {
+        console.log("in callAPI")
+        let limit = 9
+        let offset = this.state.page * 9
+        let self = this
+
+        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                this.setState({breweries: res.data});
+                self.setState({breweries: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
             });
     }
 
@@ -39,23 +76,28 @@ export default class Breweries extends Component {
             * componentDidUpdate()
      */
 
+    componentDidUpdate(prevState, nextState) {
+        if (nextState.page !== this.state.page) {
+            this.callAPI()
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }
+
     /* Unmounting
         This method is called when a component is being removed from the DOM:
             * componentWillUnmount()
      */
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
-    render() {
-
+    render () {
         // Create an array of X components with 1 for each brewery gathered from API call
         let breweryComponents = this.state.breweries.map(function(brewery) {
             return (
-                <ItemSelector title={brewery.name}
-                              image={brewery.image}
-                              alt={brewery.name}
-                              overlayText={brewery.name}
-                              item={brewery}
-                              navigateTo="/Brewery"/>
+                <ItemSelector item={brewery} navigateTo="/Brewery"/>
             );
         })
 
@@ -69,7 +111,11 @@ export default class Breweries extends Component {
                         </div>
                     )
                 })}
-                <PageSelector />
+                <PageSelector handlePageChange={this.handlePageChange}
+                              handlePrev={this.handlePrev}
+                              handleNext={this.handleNext}
+                              numPages={this.state.numPages}
+                              navigateTo="/Breweries"/>
             </div>
         );
     }

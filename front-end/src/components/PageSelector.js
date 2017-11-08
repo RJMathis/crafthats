@@ -3,11 +3,12 @@
  */
 import React, { Component } from 'react';
 
+
 export default class PageSelector extends Component {
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
         this.state = {
-            attribute1: ''
+            currentId: 0
         }
     }
 
@@ -36,16 +37,26 @@ export default class PageSelector extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
+        let pageNumbers = [];
+
+        for (let i = 0; i < this.props.numPages; i++) {
+            pageNumbers.push(
+                <li>
+                    <a key={i}
+                       className={i === this.state.activeId ? "active" : ""}
+                       href={this.props.navigateTo}
+                       onClick={(e) => this.props.handlePageChange(i, e)}>{i+1}</a>
+                </li>);
+        }
+
         return (
             <div className="row">
                 <div className="col-md-12 container-thumbnail">
                     <div className="text-center">
-                        <ul class="pagination pagination-lg">
-                            <li class="active"><a href="#">1</a></li>
-                            <li class="disabled"><a href="#">2</a></li>
-                            <li class="disabled"><a href="#">3</a></li>
-                            <li class="disabled"><a href="#">4</a></li>
-                            <li class="disabled"><a href="#">5</a></li>
+                        <ul className="pagination pagination-lg">
+                            <li><a href={this.props.navigateTo} onClick={(e) => this.props.handlePrev(e)}>Prev</a></li>
+                            {pageNumbers}
+                            <li><a href={this.props.navigateTo} onClick={(e) => this.props.handleNext(e)}>Next</a></li>
                         </ul>
                     </div>
                 </div>

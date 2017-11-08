@@ -4,7 +4,6 @@ export default class Style extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            name: this.props.location.state.name,
             item: this.props.location.state.item
         }
     }
