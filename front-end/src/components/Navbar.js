@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Search from './Search';
 
 export default class Navbar extends Component {
   render() {
@@ -21,6 +22,7 @@ export default class Navbar extends Component {
                 <li><a href="/Styles">Styles</a></li>
                 <li><a href="/Reviews">Reviews</a></li>
                 <li><a href="/About">About</a></li>
+                <li><Search /></li>
               </ul>
             </div>
           </div>

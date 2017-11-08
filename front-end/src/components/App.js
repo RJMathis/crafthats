@@ -14,6 +14,7 @@ import Beer from './Beer';
 import Brewery from './Brewery';
 import Style from './Style';
 import Review from './Review';
+import SearchResults from './SearchResults';
 
 export default class App extends Component {
   render() {
@@ -32,6 +33,8 @@ export default class App extends Component {
                       <Route exact path="/Reviews" component={Reviews} />
                       <Route exact path="/Review" component={Review} />
                       <Route exact path="/About" component={About} />
+                      <Route exact path="/SearchResults" component={SearchResults} />
+                      <Route exact path="/Result" component={Beer} />
                       <Route component={NotFound} />
                   </Switch>
               </div>
