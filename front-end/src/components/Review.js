@@ -81,7 +81,3 @@ export default class Review extends Component {
         );
     }
 }
-
-{/*<button type="button" className="btn btn-link" onClick={() => this.setState({navigate: true, navigateTo: '/Brewery'})}>*/}
-    {/*{this.state.item.brewery_name}*/}
-{/*</button>*/}
