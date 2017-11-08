@@ -12,6 +12,7 @@ export default class Reviews extends Component {
             reviews: [],
             page: 0,
             numPages: 5,
+            pgSize: 10,
             navigate: false,
             navigateTo: '/Review'
         }
@@ -62,14 +63,15 @@ export default class Reviews extends Component {
 
     callAPI = () => {
         console.log("in callAPI")
-        let limit = 10
-        let offset = this.state.page * 10
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
         let self = this
 
         axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                self.setState({reviews: res.data});
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+
             })
             .catch((error) => {
                 console.log(error)
