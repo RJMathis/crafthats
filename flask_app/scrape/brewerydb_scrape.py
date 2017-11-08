@@ -1,8 +1,13 @@
+"""
+A script that queries brewerydb for most of the beer info
+"""
+
 import json
 import requests
 from main import db
 from models import Beer, Brewery, Style, Review
 
+#variables to keep track of duplilcates
 beer_names = []
 styles_dic = {}
 style_obj = {}
@@ -11,14 +16,14 @@ brew_obj = {}
 
 beer_to_brew = {}
 def parse_this(payload):
-
+	# serialize brewery db payload
 	for key,values in payload.items():
 
 		if "data" in key:
 
 			data = json.dumps(values)
 			data = json.loads(data)
-			for x in data:
+			for x in data: #initialize bc many db model attributes can't handle Null values
 				b_description = ""
 				established = ""
 				country = ""
