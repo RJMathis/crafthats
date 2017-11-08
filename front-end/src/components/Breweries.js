@@ -12,7 +12,9 @@ export default class Breweries extends Component {
         this.state = {
             breweries: [],
             page: 0,
-            numPages: 5,
+            numPages: 0,
+            totalCount: 0,
+            pgSize: 9,
             pathname: "/Breweries"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
@@ -53,14 +55,14 @@ export default class Breweries extends Component {
 
     callAPI = () => {
         console.log("in callAPI")
-        let limit = 9
-        let offset = this.state.page * 9
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
         let self = this
 
         axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                self.setState({breweries: res.data});
+                self.setState({breweries: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
             })
             .catch((error) => {
                 console.log(error)
