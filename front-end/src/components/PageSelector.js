@@ -8,7 +8,7 @@ export default class PageSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            navigateTo: this.props.navigateTo
+            currentId: 0
         }
     }
 
@@ -37,16 +37,26 @@ export default class PageSelector extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
+        let pageNumbers = [];
+
+        for (let i = 0; i < this.props.numPages; i++) {
+            pageNumbers.push(
+                <li>
+                    <a key={i}
+                       className={i === this.state.activeId ? "active" : ""}
+                       href={this.props.navigateTo}
+                       onClick={(e) => this.props.handlePageChange(i, e)}>{i+1}</a>
+                </li>);
+        }
+
         return (
             <div className="row">
                 <div className="col-md-12 container-thumbnail">
                     <div className="text-center">
                         <ul className="pagination pagination-lg">
-                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(0, e)}>1</a></li>
-                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(1, e)}>2</a></li>
-                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(2, e)}>3</a></li>
-                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(3, e)}>4</a></li>
-                            <li><a href={this.state.navigateTo} onClick={(e) => this.props.handlePageChange(4, e)}>5</a></li>
+                            <li><a href={this.props.navigateTo} onClick={(e) => this.props.handlePrev(e)}>Prev</a></li>
+                            {pageNumbers}
+                            <li><a href={this.props.navigateTo} onClick={(e) => this.props.handleNext(e)}>Next</a></li>
                         </ul>
                     </div>
                 </div>

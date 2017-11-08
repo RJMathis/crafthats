@@ -5,8 +5,6 @@ import axios from 'axios';
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
-import number from 'prop-types';
-
 
 export default class Breweries extends Component {
     constructor (props) {
@@ -14,8 +12,7 @@ export default class Breweries extends Component {
         this.state = {
             breweries: [],
             page: 0,
-            prevPage: 0,
-            nextPage: 0,
+            numPages: 5,
             pathname: "/Breweries"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
@@ -38,6 +35,20 @@ export default class Breweries extends Component {
         console.log("in handlePageChange")
         //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
+    }
+
+    handlePrev = (e) => {
+        e.preventDefault()
+        if (this.state.page > 0) {
+            this.setState({page: this.state.page - 1})
+        }
+    }
+
+    handleNext = (e) => {
+        e.preventDefault()
+        if (this.state.page < this.state.numPages - 1) {
+            this.setState({page: this.state.page + 1})
+        }
     }
 
     callAPI = () => {
@@ -65,16 +76,7 @@ export default class Breweries extends Component {
             * componentDidUpdate()
      */
 
-    // shouldComponentUpdate(nextState, prevState) {
-    //     console.log("in should")
-    //     console.log(this.state.page, nextState.page)
-    //     console.log(this.state.page !== prevState.page)
-    //     return prevState.page !== this.state.page
-    // }
-
     componentDidUpdate(prevState, nextState) {
-        console.log("updated component")
-        console.log(this.state.page, nextState.page)
         if (nextState.page !== this.state.page) {
             this.callAPI()
             window.scrollTo({
@@ -109,7 +111,11 @@ export default class Breweries extends Component {
                         </div>
                     )
                 })}
-                <PageSelector handlePageChange={this.handlePageChange} navigateTo="/Breweries"/>
+                <PageSelector handlePageChange={this.handlePageChange}
+                              handlePrev={this.handlePrev}
+                              handleNext={this.handleNext}
+                              numPages={this.state.numPages}
+                              navigateTo="/Breweries"/>
             </div>
         );
     }
