@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import lodash from 'lodash';
+import chunk from 'lodash.chunk';
 import axios from 'axios';
 
 import ItemSelector from './ItemSelector';
@@ -104,7 +104,7 @@ export default class Breweries extends Component {
         return (
             <div className="container">
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
-                { lodash.chunk(breweryComponents, 3).map(function(row) {
+                { chunk(breweryComponents, 3).map(function(row) {
                     return (
                         <div className="row">
                             { row }

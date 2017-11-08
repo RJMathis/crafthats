@@ -1,10 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy 
 from flask import jsonify
-# from main import app
 
 from main import app
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 
 
 association_table = db.Table('association',

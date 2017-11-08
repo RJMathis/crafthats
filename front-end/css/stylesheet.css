@@ -83,3 +83,13 @@
     margin-right: auto;
     width: 100%;
 }
+
+.border > .border-right {
+    flex: 1;
+    border-right: 1px solid black;
+}
+
+.border {
+    display: flex;
+    border: 1px solid black;
+}

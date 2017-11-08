@@ -34,12 +34,15 @@ export default class Beer extends Component {
 
     render() {
         console.log(this.state.item);
+        let review = this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed";
+        console.log(review.type);
+
         return (
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src={this.state.item.image} alt={this.state.item.name} />
+                            <img   className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -48,25 +51,23 @@ export default class Beer extends Component {
                             <tbody>
                             <tr>
                                 <td>ABV:</td>
-                                <td>{this.state.item.abvMax}</td>
+                                <td>{this.state.item.abv}</td>
                             </tr>
                             <tr>
                                 <td>IBU:</td>
-                                <td>{this.state.item.ibuMax}</td>
+                                <td>{this.state.item.ibu}</td>
                             </tr>
                             <tr>
                                 <td>Brewery:</td>
-                                <td><button type="button" className="btn btn-link" onClick={() => console.log('clicked link')}>Brewery Link</button></td>
+                                <td>{this.state.item.brewery}</td>
                             </tr>
-
                             <tr>
                                 <td>Style:</td>
                                 <td>Rye Ale</td>
                             </tr>
-
                             <tr>
                                 <td>Review:</td>
-                                <td><button type="button" className="btn btn-link" onClick={() => console.log('clicked link')}>Review Link</button></td>
+                                <td>{ this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed"}</td>
                             </tr>
                             </tbody>
                         </table>

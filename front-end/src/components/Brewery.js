@@ -39,7 +39,7 @@ export default class Brewery extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src={this.state.item.image} alt={this.state.item.name} />
+                            <img  className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -56,7 +56,7 @@ export default class Brewery extends Component {
                             </tr>
                             <tr>
                                 <td>Description:</td>
-                                <td>Were a small craft brewery in the South Bronx, New York and have a maniacal love for two things in this world: beer and the Bronx. Cheers! The Bronx Brewery is a craft brewer and distributor based in the South Bronx. It launched in 2011 by a small team with two things in common: a maniacal focus on creating high-quality beer and a passion for the Bronx. Its traditionally-crafted ales use only premium and minimally-processed materials to create fresh, bold beer from a borough known for its own uniquely bold character. The team is enthused to bring a rich brewing tradition back to the Bronx and craft a beer that the people of the Bronx and New York City can be proud to call their own.</td>
+                                <td>{this.state.item.description ? this.state.item.description : "No Description Available"}</td>
                             </tr>
                             <tr>
                                 <td>Established:</td>
@@ -64,7 +64,7 @@ export default class Brewery extends Component {
                             </tr>
                             <tr>
                                 <td>Website:</td>
-                                <td><a href="http://www.thebronxbrewery.com">http://www.thebronxbrewery.com</a></td>
+                                <td><a href={this.state.item.website}>{this.state.item.website}</a></td>
                             </tr>
 
                             <tr>
