@@ -1,18 +1,29 @@
+"""
+A script that queries brewerydb for most of the beer info
+"""
+
 import json
 import requests
 from main import db
 from models import Beer, Brewery, Style, Review
 
+#variables to keep track of duplilcates
 beer_names = []
-def parse_this(payload):
+styles_dic = {}
+style_obj = {}
+brew_dic = {}
+brew_obj = {}
 
+beer_to_brew = {}
+def parse_this(payload):
+	# serialize brewery db payload
 	for key,values in payload.items():
 
 		if "data" in key:
 
 			data = json.dumps(values)
 			data = json.loads(data)
-			for x in data:
+			for x in data: #initialize bc many db model attributes can't handle Null values
 				b_description = ""
 				established = ""
 				country = ""
@@ -31,8 +42,7 @@ def parse_this(payload):
 				ibuMax = ""
 				abvMin = ""
 				abvMax = ""
-
-				# print("heill")
+				srm = ""
 
 				if "breweries" in x:
 					brewery = x['breweries'][0]["name"]
@@ -48,10 +58,12 @@ def parse_this(payload):
 					try:
 						if 'established' in x['breweries'][0]:
 							established = x['breweries'][0]['established']
+							# print(established)
 					except KeyError:
 						# established = "Unavailable"
 						continue
-					
+					if established == "":
+						continue
 					try:
 						if x['breweries'][0]['locations'][0]['country']['displayName'] != None:
 							country = x['breweries'][0]['locations'][0]['country']['displayName']
@@ -145,6 +157,14 @@ def parse_this(payload):
 						continue
 
 					try:
+						if x['style']['srmMin'] and x['style']['srmMax']:
+							srm = (float(x['style']['srmMin']) + float(x['style']['srmMax'])) / 2
+					except KeyError:
+						# ibuMin = "IBU Minimum Unavailable"
+						# assert(False)
+						continue
+
+					try:
 						if x['style']['ibuMin']:
 							ibuMin = x['style']['ibuMin']
 					except KeyError:
@@ -172,20 +192,35 @@ def parse_this(payload):
 						# abvMax = "ABV Maximum Unavailable"
 						continue
 
-				st = Style(name=shortName, description=description, ibu_min=ibuMin, ibu_max=ibuMax, abv_min=abvMin, abv_max=abvMax)
-				db.session.add(st)
-				db.session.commit()
+				st_id = -1
+				if not styles_dic.get(shortName):
+					st = Style(name=shortName, description=description, ibu_min=float(ibuMin), ibu_max=float(ibuMax), abv_min=float(abvMin), abv_max=float(abvMax), srm=srm)
+					db.session.add(st)
+					db.session.commit()
+					styles_dic[shortName] = st.id
+					style_obj[shortName] = st
+					st_id = st.id
+				else:
+					st_id = styles_dic[shortName]
+					st = style_obj[shortName]
 
 
-				b = Beer(name=nameDisplay, organic=organic, abv=abv, ibu=ibu, brewery_id=1, style_id=1, images=pic)
+				brw_id = -1
+				if not brew_dic.get(brewery):
+					brw = Brewery(name=brewery, city=city, state=state, country=country, established=int(established), description=b_description, images=images, website=website)
+					db.session.add(brw)
+					db.session.commit()
+					brew_dic[brewery] = brw.id
+					brew_obj[brewery] = brw
+					brw_id = brw.id
+				else:
+					brw_id = brew_dic[brewery]
+					brw = brew_obj[brewery]
+
+
+				b = Beer(name=nameDisplay, organic=organic, abv=float(abv), ibu=float(ibu), brewery_id=brw_id, style_id=st_id, images=pic)
 				db.session.add(b)
-				db.session.commit()	
-
-
-				brw = Brewery(name=brewery, city=city, state=state, country=country, established=established, description=b_description, images=images, website=website)
-				db.session.add(brw)
 				db.session.commit()
-
 				brw.styles.append(st)
 
 				brew_ind = brewery.lower().find("brew")
@@ -200,15 +235,15 @@ def parse_this(payload):
 	return beer_names
 
 count = 1
-for page_num in range(50, 70):
-	url = 'http://api.brewerydb.com/v2/beers?p=%d&withBreweries=Y' % (page_num * count)
+for page_num in range(1, 250):
+	url = 'http://api.brewerydb.com/v2/beers?p=%d&order=random&randomCount=10&withBreweries=Y' % (page_num)
 	headers = {'content-type': 'application/json', 'Authorization': '0a7e4bd6d2fc7e0dd1e9ca1067608af0'}
 
 	response = requests.request("GET", url, headers=headers)
 	if response.status_code is not 200 :
 		print(response.status_code)
 
-
+	print(count)
 	raw_data = (response.json())
 	payload = json.dumps(raw_data, sort_keys=True, indent=4, separators=(',',': ') )
 
