@@ -1,6 +1,5 @@
 from main import db
-from models import Beer, Review, Brewery, Style, engine
-from sqlalchemy import MetaData
+from models import Beer, Brewery, Style, Review
 
 if __name__ == '__main__':
 	print('Creating all database tables...')

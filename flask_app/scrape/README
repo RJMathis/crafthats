@@ -1,0 +1,8 @@
+If you want to run these scripts:
+from within the flask_app folder run:
+
+python -m <script_name>
+
+with NO .py at the end
+
+pretty sure I updated all the imports

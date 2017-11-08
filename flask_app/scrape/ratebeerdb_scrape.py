@@ -1,10 +1,8 @@
 import json
 import requests
-from pprint import pprint
-import ast
-from main import app, db
-from models import Style, Beer, Review, Brewery
-# from brewerydb_scrape import beer_names
+from main import db
+from models import Beer, Brewery, Style, Review
+
 from beer_names import beer_names
 
 url = "https://api.ratebeer.com/v1/api/graphql"
