@@ -27,7 +27,7 @@ class DBASE(unittest.TestCase):
 
     def testBeer(self):
         b = Beer(name="Beer1", organic="Y", abv=10, ibu=15, brewery_id=None, style_id=None,
-                 images="https://battleforliberty.com/wp-content/uploads/2017/06/beer-793x526.jpg")
+                 images="thisisalink.html")
         db.session.add(b)
         db.session.commit()
         self.assertEqual(b.abv, 15)
