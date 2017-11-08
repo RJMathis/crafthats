@@ -1,9 +1,7 @@
 import json
 import requests
-from pprint import pprint
-import ast
-from main import app, db
-from models import Style, Beer, Review, Brewery
+from main import db
+from models import Beer, Brewery, Style, Review
 
 beer_names = []
 def parse_this(payload):

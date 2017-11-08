@@ -1,8 +1,5 @@
-
-import json
 import requests
-from pprint import pprint
-  
+
 i = "Bronx Rye Pale Ale"
 url = "https://api.ratebeer.com/v1/api/graphql/"
 
