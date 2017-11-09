@@ -66,3 +66,28 @@ def getBreweryInfo(brewery_id):
     except AttributeError:
         return "Server Error 500: Invalid brewery_id"
     return jsonify(b)
+
+@app.route('/breweries/state/<state_name>', methods = ['GET'])
+def filterByState(state_name):
+    allBreweries = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    breweries = db.session.query(Brewery).filter_by(state=state_name).limit(lim).offset(off).all()
+    for brewery in breweries:
+        b = {
+            'type' : "brewery",
+            'id': brewery.id,
+            'name': brewery.name,
+            'city': brewery.city,
+            'state': brewery.state,
+            'country': brewery.country,
+            'established': brewery.established,
+            'description': brewery.description,
+            'website' : brewery.website,
+            'beers': [beer.serializeName for beer in brewery.beers],
+            'image': brewery.images,
+            'styles': [style.serializeName for style in brewery.styles]
+        }
+        allBreweries.append(b)
+
+    return jsonify(allBreweries)
