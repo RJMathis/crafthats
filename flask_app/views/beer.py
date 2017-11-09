@@ -56,7 +56,7 @@ def getBeerInfo(beer_id):
             'id' : beer.id,
             'name' : beer.name,
             'organic' : beer.organic,
-            'abv'  : float("{0:.2f}".format(beer.abv)),
+            'abv'  : beer.abv,
             'ibu'  : beer.ibu,
             'images' :beer.images,
             'brewery' : beer.brewery.name,
