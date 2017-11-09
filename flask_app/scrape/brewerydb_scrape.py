@@ -1,18 +1,38 @@
+"""
+A script that queries brewerydb for most of the beer info
+"""
+
 import json
 import requests
 from main import db
 from models import Beer, Brewery, Style, Review
 
+"""
+Data structures to hold values for foreign keys for styls and breweries and a list of beer names so we don't grab
+duplicates
+"""
+
 beer_names = []
+styles_dic = {}
+style_obj = {}
+brew_dic = {}
+brew_obj = {}
+
+beer_to_brew = {}
 def parse_this(payload):
 
-	for key,values in payload.items():
 
+	# Parsing through data. Each item we pull must have every attribute present for us to grab it.
+	for key,values in payload.items():
 		if "data" in key:
 
 			data = json.dumps(values)
 			data = json.loads(data)
+
+
+			# Going through the json of the data that we will scrape (each is a beer/brewery/style combo)
 			for x in data:
+
 				b_description = ""
 				established = ""
 				country = ""
@@ -31,9 +51,9 @@ def parse_this(payload):
 				ibuMax = ""
 				abvMin = ""
 				abvMax = ""
+				srm = ""
 
-				# print("heill")
-
+				# Checking if brewery exists for a beer and other attributes for a brewery that we have for the model.
 				if "breweries" in x:
 					brewery = x['breweries'][0]["name"]
 					try:
@@ -48,10 +68,12 @@ def parse_this(payload):
 					try:
 						if 'established' in x['breweries'][0]:
 							established = x['breweries'][0]['established']
+							# print(established)
 					except KeyError:
 						# established = "Unavailable"
 						continue
-					
+					if established == "":
+						continue
 					try:
 						if x['breweries'][0]['locations'][0]['country']['displayName'] != None:
 							country = x['breweries'][0]['locations'][0]['country']['displayName']
@@ -128,6 +150,7 @@ def parse_this(payload):
 					# pic = "www.empty.com"
 					continue
 
+				# Checking if style exists for a beer. We also grab other attributes that we need for our style model.
 				if 'style' in x:
 
 					try:
@@ -142,6 +165,14 @@ def parse_this(payload):
 							description = x['style']['description']
 					except KeyError:
 						# description = "Description Unavailable"
+						continue
+
+					try:
+						if x['style']['srmMin'] and x['style']['srmMax']:
+							srm = (float(x['style']['srmMin']) + float(x['style']['srmMax'])) / 2
+					except KeyError:
+						# ibuMin = "IBU Minimum Unavailable"
+						# assert(False)
 						continue
 
 					try:
@@ -171,23 +202,48 @@ def parse_this(payload):
 					except KeyError:
 						# abvMax = "ABV Maximum Unavailable"
 						continue
+				"""
+				This is checking if we have not already encountered this style, and if so, make the style 
+				and make the style's pk the beer's fk style to the value recorded. If not, we set 
+				the fk of beer to the value recorded of the style we have already seen.
+				"""
+				st_id = -1
+				if not styles_dic.get(shortName):
+					st = Style(name=shortName, description=description, ibu_min=float(ibuMin), ibu_max=float(ibuMax), abv_min=float(abvMin), abv_max=float(abvMax), srm=srm)
+					db.session.add(st)
+					db.session.commit()
+					styles_dic[shortName] = st.id
+					style_obj[shortName] = st
+					st_id = st.id
+				else:
+					st_id = styles_dic[shortName]
+					st = style_obj[shortName]
 
-				st = Style(name=shortName, description=description, ibu_min=ibuMin, ibu_max=ibuMax, abv_min=abvMin, abv_max=abvMax)
-				db.session.add(st)
-				db.session.commit()
+				"""
+				Same as the block of code above, only that this deals with breweries.
+				"""
+				brw_id = -1
+				if not brew_dic.get(brewery):
+					brw = Brewery(name=brewery, city=city, state=state, country=country, established=int(established), description=b_description, images=images, website=website)
+					db.session.add(brw)
+					db.session.commit()
+					brew_dic[brewery] = brw.id
+					brew_obj[brewery] = brw
+					brw_id = brw.id
+				else:
+					brw_id = brew_dic[brewery]
+					brw = brew_obj[brewery]
 
 
-				b = Beer(name=nameDisplay, organic=organic, abv=abv, ibu=ibu, brewery_id=1, style_id=1, images=pic)
+				"""
+				Creating a beer to be put into our database.
+				"""
+				b = Beer(name=nameDisplay, organic=organic, abv=float(abv), ibu=float(ibu), brewery_id=brw_id, style_id=st_id, images=pic)
 				db.session.add(b)
-				db.session.commit()	
-
-
-				brw = Brewery(name=brewery, city=city, state=state, country=country, established=established, description=b_description, images=images, website=website)
-				db.session.add(brw)
 				db.session.commit()
-
 				brw.styles.append(st)
 
+				# This is to append brewery name to the beer name to search in ratebeer.
 				brew_ind = brewery.lower().find("brew")
 				if brew_ind == -1:
 					brew_ind == ""
@@ -199,16 +255,17 @@ def parse_this(payload):
 
 	return beer_names
 
+# Calling brewerDB API a total of 250 pages. Each page has 10 beers that are random.
 count = 1
-for page_num in range(50, 70):
-	url = 'http://api.brewerydb.com/v2/beers?p=%d&withBreweries=Y' % (page_num * count)
+for page_num in range(1, 250):
+	url = 'http://api.brewerydb.com/v2/beers?p=%d&order=random&randomCount=10&withBreweries=Y' % (page_num)
 	headers = {'content-type': 'application/json', 'Authorization': '0a7e4bd6d2fc7e0dd1e9ca1067608af0'}
 
 	response = requests.request("GET", url, headers=headers)
 	if response.status_code is not 200 :
 		print(response.status_code)
 
-
+	print(count)
 	raw_data = (response.json())
 	payload = json.dumps(raw_data, sort_keys=True, indent=4, separators=(',',': ') )
 
@@ -216,7 +273,6 @@ for page_num in range(50, 70):
 	parse_this(json_payload)
 	count+= 1				
 
-# print(len(beer_names))
 print(beer_names)
 
 
