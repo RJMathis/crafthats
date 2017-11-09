@@ -82,7 +82,7 @@ export default class SearchSelector extends Component {
         }
 
         return (
-            <tr>
+            <tr className="clickable-row" onClick={this.handleNavigation}>
                 <tr>
                     <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}><h3><strong>{attr1}</strong></h3></button></td>
                 </tr>
