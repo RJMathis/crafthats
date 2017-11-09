@@ -68,3 +68,27 @@ def getBeerInfo(beer_id):
         response = "Server Error 500: Invalid beer_id"
 
     return response
+@app.route('/beers/organic/<organic_bool>', methods = ['GET'])
+def filterByOrganic(organic_bool):
+    allBeers = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    beers = db.session.query(Beer).filter_by(organic=organic_bool).limit(lim).offset(off).all()
+
+    for beer in beers:
+        b = {
+            'type' : "beer",
+            'id': beer.id,
+            'name': beer.name,
+            'organic': beer.organic,
+            'abv': beer.abv,
+            'ibu': beer.ibu,
+            'image': beer.images,
+            'brewery': beer.brewery.name,
+            'style': beer.style.name
+        }
+        allBeers.append(b)
+
+    return jsonify(allBeers)
+
+

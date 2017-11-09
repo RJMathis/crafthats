@@ -19,6 +19,9 @@ handlers:
 - url: ".*/beers/[0-9]+"
   script: main.app
 
+- url: ".*/beers/organic/(Y|N)"
+  script: main.app
+
 - url: /styles
   script: main.app
 
