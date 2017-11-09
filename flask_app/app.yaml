@@ -39,7 +39,10 @@ handlers:
 
 - url: ".*/breweries/state/.*"
   script: main.app
-  
+
+- url: ".*/breweries/country/.*"
+  script: main.app
+
 - url: /reviews
   script: main.app
 
