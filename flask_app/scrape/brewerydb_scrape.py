@@ -1,3 +1,7 @@
+"""
+A script that queries brewerydb for most of the beer info
+"""
+
 import json
 import requests
 from main import db
@@ -17,6 +21,7 @@ brew_obj = {}
 beer_to_brew = {}
 def parse_this(payload):
 
+
 	# Parsing through data. Each item we pull must have every attribute present for us to grab it.
 	for key,values in payload.items():
 		if "data" in key:
@@ -24,8 +29,10 @@ def parse_this(payload):
 			data = json.dumps(values)
 			data = json.loads(data)
 
+
 			# Going through the json of the data that we will scrape (each is a beer/brewery/style combo)
 			for x in data:
+
 				b_description = ""
 				established = ""
 				country = ""

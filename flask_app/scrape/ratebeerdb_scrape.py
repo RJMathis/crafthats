@@ -1,3 +1,7 @@
+"""
+A script to get beer reviews from ratebeer api
+"""
+
 import json
 import requests
 import re
