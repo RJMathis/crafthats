@@ -39,7 +39,7 @@ export default class Style extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
+                            <img  className="img-thumbnail .style-image" data-srm={this.state.item.srm} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
