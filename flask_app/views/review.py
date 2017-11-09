@@ -7,13 +7,16 @@ from models import db, Review
 @app.route('/reviews', methods = ['GET'])
 def getReviews():
     allReviews = []
+    totalCount = db.session.query(Review.id).count()
 
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
     order = request.args.get('order')
+    if order == "asc" or order == "desc":
+        lim = totalCount
+    else:
+        lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
 
     reviews = db.session.query(Review).limit(lim).offset(off).all()
-    totalCount = db.session.query(Review.id).count()
 
     for review in reviews:
         r = {
@@ -28,9 +31,9 @@ def getReviews():
         allReviews.append(r)
 
     if order == "asc":
-        allReviews = allReviews.sort()
+        allReviews = sorted(allReviews, key=lambda review: review['name'])
     elif order == "desc":
-        allReviews = (allReviews.sort())[::-1]
+        allReviews = sorted(allReviews, key=lambda review: review['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allReviews}
     response = jsonify(payload)

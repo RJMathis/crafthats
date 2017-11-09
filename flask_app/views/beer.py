@@ -8,12 +8,17 @@ from models import db, Beer
 @app.route('/beers', methods=['GET'])
 def getBeers():
     allBeers = []
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset', 0)
+    totalCount = db.session.query(Beer.id).count()
+
     order = request.args.get('order')
+    if order == "asc" or order == "desc":
+        lim = totalCount
+    else:
+        lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    
     beers = db.session.query(Beer).limit(lim).offset(off).all()
 
-    totalCount = db.session.query(Beer.id).count()
 
     for beer in beers:
         b = {
@@ -30,9 +35,9 @@ def getBeers():
         allBeers.append(b)
 
     if order == "asc":
-        allBeers = allBeers.sort()
+        allBeers = sorted(allBeers, key=lambda beer: beer['name'])
     elif order == "desc":
-        allBeers = (allBeers.sort())[::-1]
+        allBeers = sorted(allBeers, key=lambda beer: beer['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allBeers}
     response = jsonify(payload)

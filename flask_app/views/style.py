@@ -8,14 +8,19 @@ from models import db, Style
 @app.route('/styles',methods=['GET'])
 def getStyles():
     allStyles = []
+    totalCount = db.session.query(Style.id).count()
 
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
+
     order = request.args.get('order')
+    if order == "asc" or order == "desc":
+        lim = totalCount
+    else:
+        lim = request.args.get('limit', 9)
+        
+    off = request.args.get('offset',0)
 
     styles = db.session.query(Style).limit(lim).offset(off).all()
 
-    totalCount = db.session.query(Style.id).count()
 
     for style in styles:
         s = {
@@ -34,9 +39,9 @@ def getStyles():
         allStyles.append(s)
 
     if order == "asc":
-        allStyles = allStyles.sort()
+        allStyles = sorted(allStyles, key=lambda style: style['name'])
     elif order == "desc":
-        allStyles = (allStyles.sort())[::-1]
+        allStyles = sorted(allStyles, key=lambda style: style['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allStyles}
     response = jsonify(payload)

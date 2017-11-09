@@ -7,13 +7,17 @@ from models import db, Brewery
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     allBreweries = []
+    totalCount = db.session.query(Brewery.id).count()
     
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
     order = request.args.get('order')
+    if order == "asc" or order == "desc":
+        lim = totalCount
+    else:
+        lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+        
     breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
-    totalCount = db.session.query(Brewery.id).count()
 
     for brewery in breweries:
         b = {
@@ -31,11 +35,11 @@ def getBreweries():
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
-    
+
     if order == "asc":
-        allBreweries = allBreweries.sort()
+        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])
     elif order == "desc":
-        allBreweries = (allBreweries.sort())[::-1]
+        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allBreweries}
     response = jsonify(payload)
