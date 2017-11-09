@@ -32,7 +32,7 @@ def getStyles():
         'ibu_max' : style.ibu_max,
         'abv_min' : style.abv_min,
         'abv_max' : style.abv_max,
-        # 'srm'     : style.srm,
+        'srm'     : style.srm,
         'beers' : [beer.serializeName for beer in style.beers],
         'breweries':[brewery.serializeName for brewery in style.breweries]
         }
