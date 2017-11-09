@@ -2,7 +2,7 @@
 
 from flask import Flask, request, jsonify
 from main import app
-from models import db, Beer
+from models import db, Beer, Style
 
 #GET ALL BEERS
 @app.route('/beers', methods=['GET'])
@@ -88,5 +88,31 @@ def filterByOrganic(organic_bool):
         allBeers.append(b)
 
     return jsonify(allBeers)
+
+@app.route('/beers/style/<style_name>', methods = ['GET'])
+def filterByStyle(style_name):
+    allBeers = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    style = db.session.query(Style).filter_by(name=style_name).first()
+    style_id = style.id
+    beers = db.session.query(Beer).filter_by(style_id=style_id).limit(lim).offset(off).all()
+
+    for beer in beers:
+        b = {
+            'type' : "beer",
+            'id': beer.id,
+            'name': beer.name,
+            'organic': beer.organic,
+            'abv': beer.abv,
+            'ibu': beer.ibu,
+            'image': beer.images,
+            'brewery': beer.brewery.name,
+            'style': beer.style.name
+        }
+        allBeers.append(b)
+
+    return jsonify(allBeers)
+
 
 

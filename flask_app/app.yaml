@@ -22,6 +22,9 @@ handlers:
 - url: ".*/beers/organic/(Y|N)"
   script: main.app
 
+- url: ".*/beers/style/.*"
+  script: main.app
+
 - url: /styles
   script: main.app
 
