@@ -15,6 +15,7 @@ import Brewery from './Brewery';
 import Style from './Style';
 import Review from './Review';
 import SearchResults from './SearchResults';
+import Result from './Result';
 
 export default class App extends Component {
   render() {
@@ -34,7 +35,7 @@ export default class App extends Component {
                       <Route exact path="/Review" component={Review} />
                       <Route exact path="/About" component={About} />
                       <Route exact path="/SearchResults" component={SearchResults} />
-                      <Route exact path="/Result" component={Beer} />
+                      <Route exact path="/Result" component={Result} />
                       <Route component={NotFound} />
                   </Switch>
               </div>

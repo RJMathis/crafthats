@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 export default class Beer extends Component {
     constructor (props) {
         super (props);
+        let item;
+        if ('location' in this.props) {
+            item = this.props.location.state.item
+        } else {
+            item = this.props.item
+        }
         this.state = {
-            item: this.props.location.state.item
+            item: item
         }
     }
 

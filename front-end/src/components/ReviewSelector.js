@@ -55,7 +55,7 @@ export default class ReviewSelector extends Component {
             <tr>
                 <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{this.state.item.beer_name}</button></td>
                 <td>{this.state.item.date}</td>
-                <th>{this.state.item.rating}</th>
+                <td>{this.state.item.rating}</td>
             </tr>
         );
     }

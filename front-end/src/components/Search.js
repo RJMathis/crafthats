@@ -24,64 +24,74 @@ export default class Search extends Component {
             e.preventDefault()
         }
         this.setState({ searchTerm: this.input.value });
-        console.log("in handle search")
         this.callAPI()
     }
 
     callAPI = () => {
+        console.log("in callAPI")
         let self = this
+        let beerKeys = ["abv", "ibu", "brewery", "name", "style"]
+        let breweryKeys = ["beers", "city", "country", "description", "established", "name", "state", "styles"]
+        let styleKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
+        let reviewKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name"]
 
-        axios.get(self.apiUrl+"/beers?limit=500")
-            .then((res) => {
+        axios.all([
+            axios.get(self.apiUrl+"/beers?limit=500"),
+            axios.get(self.apiUrl+"/breweries?limit=500"),
+            axios.get(self.apiUrl+"/styles?limit=500"),
+            axios.get(self.apiUrl+"/reviews?limit=500")
+        ])
+            .then(axios.spread((beers, breweries, styles, reviews) => {
                 // Set state with result
-                console.log(res.data.records)
-                self.searchData(res.data.records)
-            })
+                console.log("in then, finished get requests")
+
+                let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
+                let allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
+                self.searchData(allRecords, allKeys)
+            }))
             .catch((error) => {
                 console.log(error)
             });
     }
 
-    searchData = (records) => {
+    searchData = (records, keys) => {
+        console.log("in searchData")
         let options = {
             shouldSort: true,
             threshold: 0.2,
             maxPatternLength: 16,
             minMatchCharLength: 1,
-            keys: [
-                "abv",
-                "brewery",
-                "name",
-                "style",
-                "ibu"
-            ]
+            keys: keys
         };
-        console.log("records")
-        console.log(records)
         let fuse = new Fuse(records, options);
         let result = fuse.search(this.state.searchTerm);
-        console.log("result")
-        console.log(result)
         this.setState({ results: result, navigate: true });
     }
 
 
     render() {
+        console.log("in render")
 
         if (this.state.navigate) {
-            console.log("navigating")
-            console.log(this.state.results)
-            return <Redirect to={{pathname: '/SearchResults', state: {results: this.state.results}}} push={true} />;
+            return <Redirect to={{pathname: '/SearchResults', state: {results: this.state.results, navigate: false, searchTerm: this.state.searchTerm}}} push={true} />;
+
         }
         return (
-            <form onSubmit={this.handleSearch} className="form-inline ml-auto">
-                <input className="form-control mr-sm-2"
-                       type="text"
-                       placeholder="Search"
-                       aria-label="Search"
-                       ref={(element) => { this.input = element }}
-                />
-                <button className="btn btn-primary btn-sm my-0" type="submit">Search</button>
+            <form className="navbar-form navbar-right" onSubmit={this.handleSearch}>
+                <div className="form-group">
+                    <div className="input-group">
+                        <input type="text"
+                               className="form-control"
+                               placeholder="Search"
+                               aria-label="Search"
+                               ref={(element) => { this.input = element }} />
+                            <div className="input-group-btn">
+                                <button className="btn btn-default" type="submit">
+                                    <i className="glyphicon glyphicon-search"/>
+                                </button>
+                            </div>
+                    </div>
+                </div>
             </form>
         );
     }
