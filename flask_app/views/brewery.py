@@ -7,15 +7,21 @@ from models import db, Brewery
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     allBreweries = []
+    totalCount = db.session.query(Brewery.id).count()
     
-    lim = request.args.get('limit', 9)
+    order = request.args.get('order')
+    if order == "asc" or order == "desc":
+        lim = totalCount
+    else:
+        lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
+        
     breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
-    totalCount = db.session.query(Brewery.id).count()
 
     for brewery in breweries:
         b = {
+            'type' : "brewery",
             'id': brewery.id,
             'name': brewery.name,
             'city': brewery.city,
@@ -30,6 +36,11 @@ def getBreweries():
         }
         allBreweries.append(b)
 
+    if order == "asc":
+        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])
+    elif order == "desc":
+        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])[::-1]
+
     payload = {'totalCount': totalCount, 'records': allBreweries}
     response = jsonify(payload)
     response.status_code = 200
@@ -42,6 +53,7 @@ def getBreweryInfo(brewery_id):
     try:
         brewery = db.session.query(Brewery).filter_by(id=brewery_id).first()
         b = {
+                'type' : "brewery",
                 'id': brewery.id,
                 'name': brewery.name,
                 'city': brewery.city,
