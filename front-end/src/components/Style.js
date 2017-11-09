@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 export default class Style extends Component {
     constructor (props) {
         super (props);
+        let item;
+        if ('location' in this.props) {
+            item = this.props.location.state.item
+        } else {
+            item = this.props.item
+        }
         this.state = {
-            item: this.props.location.state.item
+            item: item
         }
     }
 
@@ -33,7 +39,6 @@ export default class Style extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.item);
         return (
             <div className="container">
                 <div className="row">
@@ -46,10 +51,6 @@ export default class Style extends Component {
                         <h2 className="sub-header">{this.state.name}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
-                            <tr>
-                                <td>Type:</td>
-                                <td>North American Origin Ales</td>
-                            </tr>
                             <tr>
                                 <td>Description:</td>
                                 <td>{this.state.item.description ? this.state.item.description : "No Description Available"}</td>

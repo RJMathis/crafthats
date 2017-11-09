@@ -1,16 +1,15 @@
-/**
- * Created by travisreed7 on 10/19/17.
- */
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import Beer from './Beer';
+import Brewery from './Brewery';
+import Style from './Style';
+import Review from './Review';
 
-export default class ReviewSelector extends Component {
+
+export default class Result extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            item: this.props.item,
-            navigate: false,
-            navigateTo: this.props.navigateTo
+            item: this.props.location.state.item
         }
     }
 
@@ -38,25 +37,16 @@ export default class ReviewSelector extends Component {
 
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
-    handleNavigation = (e) => {
-        e.preventDefault()
-        this.setState({
-            navigate: true
-        })
-    }
-
     render() {
 
-        if (this.state.navigate) {
-            return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.item}}} push={true} />;
+        if ('organic' in this.state.item) {               // This is a beer item
+            return <Beer item={this.state.item} />
+        } else if ('established' in this.state.item) {    // This is a brewery item
+            return <Brewery item={this.state.item} />
+        } else if ('comment' in this.state.item) {        // This is a review item
+            return <Review item={this.state.item} />
+        } else if ('abv_max' in this.state.item) {        // This is a style item
+            return <Style item={this.state.item} />
         }
-        // Add column for brewery
-        return (
-            <tr>
-                <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{this.state.item.beer_name}</button></td>
-                <td>{this.state.item.date}</td>
-                <td>{this.state.item.rating}</td>
-            </tr>
-        );
     }
 }

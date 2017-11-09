@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 export default class Brewery extends Component {
     constructor (props) {
         super (props);
+        let item;
+        if ('location' in this.props) {
+            item = this.props.location.state.item
+        } else {
+            item = this.props.item
+        }
         this.state = {
-            item: this.props.location.state.item
+            item: item
         }
     }
 
@@ -48,11 +54,11 @@ export default class Brewery extends Component {
                             <tbody>
                             <tr>
                                 <td>State:</td>
-                                <td>New York</td>
+                                <td>{this.state.item.state}</td>
                             </tr>
                             <tr>
                                 <td>City:</td>
-                                <td>Bronx</td>
+                                <td>{this.state.item.city}</td>
                             </tr>
                             <tr>
                                 <td>Description:</td>
@@ -60,7 +66,7 @@ export default class Brewery extends Component {
                             </tr>
                             <tr>
                                 <td>Established:</td>
-                                <td>2011</td>
+                                <td>{this.state.item.established}</td>
                             </tr>
                             <tr>
                                 <td>Website:</td>
@@ -69,12 +75,11 @@ export default class Brewery extends Component {
 
                             <tr>
                                 <td>Styles:</td>
-                                <td><a href="RyeAle.html">Rye Ale</a></td>
+                                <td>{this.state.item.styles}</td>
                             </tr>
-
                             <tr>
-                                <td><a href="TheBronxBreweryReview.html">Review:</a></td>
-                                <td>Sample</td>
+                                <td>Review:</td>
+                                <td>{this.state.item.review}</td>
                             </tr>
                             </tbody>
                         </table>

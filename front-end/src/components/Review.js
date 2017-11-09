@@ -5,8 +5,14 @@ import {Redirect} from 'react-router-dom';
 export default class Review extends Component {
     constructor (props) {
         super (props);
+        let item;
+        if ('location' in this.props) {
+            item = this.props.location.state.item
+        } else {
+            item = this.props.item
+        }
         this.state = {
-            item: this.props.location.state.item,
+            item: item,
             navigate: false,
             navigateTo: ''
         }
@@ -37,7 +43,6 @@ export default class Review extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.item)
         if (this.state.navigate) {
             return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
         }
