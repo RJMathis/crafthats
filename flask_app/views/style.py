@@ -11,6 +11,7 @@ def getStyles():
 
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
+    order = request.args.get('order')
 
     styles = db.session.query(Style).limit(lim).offset(off).all()
 
@@ -18,6 +19,7 @@ def getStyles():
 
     for style in styles:
         s = {
+        'type' : "style",
         'id' : style.id,
         'name' : style.name,
         'description' : style.description,
@@ -31,6 +33,11 @@ def getStyles():
         }
         allStyles.append(s)
 
+    if order == "asc":
+        allStyles = allStyles.sort()
+    elif order == "desc":
+        allStyles = (allStyles.sort())[::-1]
+
     payload = {'totalCount': totalCount, 'records': allStyles}
     response = jsonify(payload)
     response.status_code = 200
@@ -43,6 +50,7 @@ def getStyleInfo(style_id):
     try:
         style = db.session.query(Style).filter_by(id=style_id).first()
         s = {
+            'type' : "style",
             'id' : style.id,
             'name' : style.name,
             'desicription' : style.description,

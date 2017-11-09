@@ -10,12 +10,14 @@ def getBreweries():
     
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
+    order = request.args.get('order')
     breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
     totalCount = db.session.query(Brewery.id).count()
 
     for brewery in breweries:
         b = {
+            'type' : "brewery",
             'id': brewery.id,
             'name': brewery.name,
             'city': brewery.city,
@@ -29,6 +31,11 @@ def getBreweries():
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
+    
+    if order == "asc":
+        allBreweries = allBreweries.sort()
+    elif order == "desc":
+        allBreweries = (allBreweries.sort())[::-1]
 
     payload = {'totalCount': totalCount, 'records': allBreweries}
     response = jsonify(payload)
@@ -42,6 +49,7 @@ def getBreweryInfo(brewery_id):
     try:
         brewery = db.session.query(Brewery).filter_by(id=brewery_id).first()
         b = {
+                'type' : "brewery",
                 'id': brewery.id,
                 'name': brewery.name,
                 'city': brewery.city,
