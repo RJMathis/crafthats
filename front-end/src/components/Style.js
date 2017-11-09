@@ -39,8 +39,6 @@ export default class Style extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log("in style")
-        console.log(this.state.item);
         return (
             <div className="container">
                 <div className="row">

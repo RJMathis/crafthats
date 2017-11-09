@@ -71,8 +71,6 @@ export default class SearchResults extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-
-        console.log(this.state.searchTerm)
         // Create an array of X components with 1 for each result gathered from Search
         if (this.state.results.length === 0) {
             return (<div className="container">

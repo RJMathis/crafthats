@@ -28,7 +28,6 @@ export default class Search extends Component {
     }
 
     callAPI = () => {
-        console.log("in callAPI")
         let self = this
         let beerKeys = ["abv", "ibu", "brewery", "name", "style"]
         let breweryKeys = ["beers", "city", "country", "description", "established", "name", "state", "styles"]
@@ -43,8 +42,6 @@ export default class Search extends Component {
         ])
             .then(axios.spread((beers, breweries, styles, reviews) => {
                 // Set state with result
-                console.log("in then, finished get requests")
-
                 let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
                 let allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
                 self.searchData(allRecords, allKeys)
@@ -55,7 +52,6 @@ export default class Search extends Component {
     }
 
     searchData = (records, keys) => {
-        console.log("in searchData")
         let options = {
             shouldSort: true,
             threshold: 0.2,
@@ -70,7 +66,6 @@ export default class Search extends Component {
 
 
     render() {
-        console.log("in render")
 
         if (this.state.navigate) {
             return <Redirect to={{pathname: '/SearchResults', state: {results: this.state.results, navigate: false, searchTerm: this.state.searchTerm}}} push={true} />;

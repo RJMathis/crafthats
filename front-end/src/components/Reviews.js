@@ -62,7 +62,6 @@ export default class Reviews extends Component {
     }
 
     callAPI = () => {
-        console.log("in callAPI")
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this

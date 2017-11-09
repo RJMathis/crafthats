@@ -43,7 +43,6 @@ export default class SearchSelector extends Component {
 
     handleNavigation = (e) => {
         e.preventDefault()
-        console.log("in handle navigation")
         this.setState({
             navigate: true
         })

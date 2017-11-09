@@ -39,9 +39,7 @@ export default class Beer extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.item);
         let review = this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed";
-        console.log(review.type);
 
         return (
             <div className="container">

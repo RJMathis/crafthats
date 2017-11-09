@@ -38,19 +38,14 @@ export default class Result extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.item);
 
         if ('organic' in this.state.item) {               // This is a beer item
-            console.log("found a beer item")
             return <Beer item={this.state.item} />
         } else if ('established' in this.state.item) {    // This is a brewery item
-            console.log("found a brewery item")
             return <Brewery item={this.state.item} />
         } else if ('comment' in this.state.item) {        // This is a review item
-            console.log("found a review item")
             return <Review item={this.state.item} />
         } else if ('abv_max' in this.state.item) {        // This is a style item
-            console.log("found a style item")
             return <Style item={this.state.item} />
         }
     }
