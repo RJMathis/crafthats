@@ -31,9 +31,9 @@ def getReviews():
         allReviews.append(r)
 
     if order == "asc":
-        allReviews = sorted(allReviews, key=lambda review: review['name'])
+        allReviews = sorted(allReviews, key=lambda review: review['rating'])
     elif order == "desc":
-        allReviews = sorted(allReviews, key=lambda review: review['name'])[::-1]
+        allReviews = sorted(allReviews, key=lambda review: review['rating'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allReviews}
     response = jsonify(payload)
