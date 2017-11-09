@@ -1,0 +1,594 @@
+{
+	"info": {
+		"name": "Brewtiful_world_API_tests",
+		"_postman_id": "c249f276-5973-d27c-8f9e-b62ed248e0df",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://backend-staging-183303.appspot.com/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"//Test has to change to have auth and json body {Authorized}",
+							"pm.test(\"Body correct\", function () {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.have.body(\"hello world\"); ",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Hitting Brewtiful.world API"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/beers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has abv\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"abv\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has brewery\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"brewery\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has ibu\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"ibu\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has image\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"image\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has organic\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"organic\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has style\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"style\")).to.be.true;\r",
+							"});\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/beers",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"beers"
+					]
+				},
+				"description": "Check all attributes in beers json"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/breweries",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has state\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"state\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has country\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"country\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has description\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"description\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has styles\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"styles\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has website\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"website\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has established\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"established\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has beers\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"beers\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has city\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.records[0].city);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has image\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.records[0].image);\r",
+							"});\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/breweries",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"breweries"
+					]
+				},
+				"description": "Checking all breweries attributes"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/styles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has srm\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"srm\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has ibu_min\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"ibu_min\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has ibu_max\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"ibu_max\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has abv_max\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"abv_max\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has abv_min\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"abv_min\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has beers\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"beers\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has breweries\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"breweries\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has description\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"description\")).to.be.true;\r",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/styles",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"styles"
+					]
+				},
+				"description": "checking all attributes in Styles"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/reviews",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has beer_name\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"beer_name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has brewery_name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"brewery_name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has date\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"date\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has rating\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"rating\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData.records[0]\r",
+							"    pm.expect(obj.hasOwnProperty(\"comment\")).to.be.true;\r",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/reviews",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"reviews"
+					]
+				},
+				"description": "checking attributes in reviews"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/beers/2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has abv\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"abv\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has ibu\", function () {\r",
+							"   var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"ibu\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has organic\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"organic\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has reviews\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"reviews\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has style\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"style\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has brewery\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"brewery\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has image\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"images\")).to.be.true;\r",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/beers/2",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"beers",
+						"2"
+					]
+				},
+				"description": "brewetiful beer id\nbeer/{id}"
+			},
+			"response": []
+		},
+		{
+			"name": "https://backend-staging-183303.appspot.com/breweries/2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Response is ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has beers\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"beers\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has city\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"city\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has country\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"country\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has description\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"description\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has established\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"established\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"id\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has images\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"images\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"name\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has state\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"state\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has style\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"styles\")).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Has website\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var obj = jsonData\r",
+							"    pm.expect(obj.hasOwnProperty(\"website\")).to.be.true;\r",
+							"});\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://backend-staging-183303.appspot.com/breweries/2",
+					"protocol": "https",
+					"host": [
+						"backend-staging-183303",
+						"appspot",
+						"com"
+					],
+					"path": [
+						"breweries",
+						"2"
+					]
+				},
+				"description": "brwertiful brewery id\nbrewery/{id}"
+			},
+			"response": []
+		}
+	]
+}

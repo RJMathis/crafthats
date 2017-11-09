@@ -1,0 +1,10 @@
+If you want to run these scripts:
+open a cldsql proxy
+
+In another terminal
+from within the flask_app folder run:
+
+python -m unit_test.<script_name>
+
+with NO .py at the end
+
