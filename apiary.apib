@@ -257,6 +257,226 @@ We have added the query URI template parameter's - `order`. This parameter is us
 
 + Response 500 (application/json)
 
+### Breweries By State [/breweries/state/{state_name}{?limit,offset}] 
+
++ Parameters
+    + state_name: Ohio (required, string) - The state or region where the brewery is located
+    
+#### View a Brewery By State [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+
+
++ Response 200 (application/json)
+
+        {
+        "beers": [
+          "Rusty Rail Pale Ale"
+        ], 
+        "city": "Willoughby", 
+        "country": "United States", 
+        "description": "Serving the best food and craft beer in Lake County, featuring live entertainment 3 nights per week in an amazing atmosphere. Come see what's brewing!!", 
+        "established": 1998, 
+        "id": 1, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/TAgaBk/upload_K7e1wP-squareLarge.png", 
+        "name": "Willoughby Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "American Pale"
+        ], 
+        "type": "brewery", 
+        "website": "http://willoughbybrewing.com/"
+        }, 
+        {
+        "beers": [
+          "B.O.R.I.S. The Crusher Oatmeal-Imperial Stout", 
+          "Barrel Aged Turbo Shandy", 
+          "Gulden Fraug Belgian Ale"
+        ], 
+        "city": "Akron", 
+        "country": "United States", 
+        "description": "", 
+        "established": 2006, 
+        "id": 9, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/w5OOQ5/upload_j5DrDQ-squareLarge.png", 
+        "name": "Hoppin' Frog Brewery", 
+        "state": "Ohio", 
+        "styles": [
+          "British Imperial Stout", 
+          "Fruit Beer", 
+          "Belgian Pale Strong"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.hoppinfrog.com/"
+        }, 
+        {
+        "beers": [
+          "Planetary IPA"
+        ], 
+        "city": "Cincinnati", 
+        "country": "United States", 
+        "description": "", 
+        "established": 1991, 
+        "id": 28, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/iZqGpm/upload_gfNI1S-squareLarge.png", 
+        "name": "Listermann Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "American IPA"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.listermann.com/"
+        }, 
+        {
+        "beers": [
+          "Jolly Tar", 
+          "The Radler"
+        ], 
+        "city": "Dayton", 
+        "country": "United States", 
+        "description": "Dayton based craft brewery committed to brewing proprietary beer styles and warped interpretations of existing styles.", 
+        "established": 2014, 
+        "id": 40, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/4UcPMq/upload_gN3iiV-squareLarge.png", 
+        "name": "Warped Wing Brewing", 
+        "state": "Ohio", 
+        "styles": [
+          "Euro Dark", 
+          "Fruit Beer"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.warpedwing.com"
+        }, 
+        {
+        "beers": [
+          "Golden Ratio"
+        ], 
+        "city": "Columbus", 
+        "country": "United States", 
+        "description": "", 
+        "established": 2012, 
+        "id": 42, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/G72ke8/upload_gtduBX-squareLarge.png", 
+        "name": "Seventh Son Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "American IPA"
+        ], 
+        "type": "brewery", 
+        "website": "http://seventhsonbrewing.com"
+        }, 
+        {
+        "beers": [
+          "The Bee's Knees\u2122"
+        ], 
+        "city": "Kettering", 
+        "country": "United States", 
+        "description": "", 
+        "established": 2012, 
+        "id": 50, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/KWQ56O/upload_ncdAd7-squareLarge.png", 
+        "name": "Eudora Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "Amber"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.EudoraBrewing.com"
+        }, 
+        {
+        "beers": [
+          "Barrel-Aged Blackout Stout (2014)", 
+          "The Wright Pils"
+        ], 
+        "city": "Cleveland", 
+        "country": "United States", 
+        "description": "", 
+        "established": 1988, 
+        "id": 57, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/uSFO4T/upload_JF7uqw-squareLarge.png", 
+        "name": "Great Lakes Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "American Imperial Stout", 
+          "American Pilsener"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.greatlakesbrewing.com/"
+        }, 
+        {
+        "beers": [
+          "Dinghy"
+        ], 
+        "city": "Cincinnati", 
+        "country": "United States", 
+        "description": "", 
+        "established": 2013, 
+        "id": 62, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/0s8yID/upload_aZOo67-squareLarge.png", 
+        "name": "Rhinegeist", 
+        "state": "Ohio", 
+        "styles": [
+          "American Pale"
+        ], 
+        "type": "brewery", 
+        "website": "http://rhinegeist.com/"
+        }, 
+        {
+        "beers": [
+          "Misnomer"
+        ], 
+        "city": "Cincinnati", 
+        "country": "United States", 
+        "description": "", 
+        "established": 2013, 
+        "id": 129, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/2REili/upload_CuSuLP-squareLarge.png", 
+        "name": "MadTree Brewing Company", 
+        "state": "Ohio", 
+        "styles": [
+          "Wheat Ale"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.madtreebrewing.com/"
+        }
+
+### Breweries By Country [/breweries/country/{country_name}{?limit,offset}] 
+
++ Parameters
+    + country_name: Mexico (required, string) - The state or region where the brewery is located
+    
+#### View a Brewery By Country [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+
++ Response 200 (application/json)
+
+        {
+        "beers": [
+          "Corona Extra"
+        ], 
+        "city": "Mexico City", 
+        "country": "Mexico", 
+        "description": "", 
+        "established": 1925, 
+        "id": 174, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/wadu38/upload_lFh8A2-squareLarge.png", 
+        "name": "Grupo Modelo S.A. de C.V.", 
+        "state": "Distrito Federal Mexico", 
+        "styles": [
+          "American Premium Lager"
+        ], 
+        "type": "brewery", 
+        "website": "http://www.gmodelo.com.mx/"
+        }
+
+
 # Group Beers
 
 ## Beer [/beers/{beer_id}]
@@ -449,6 +669,127 @@ We have added the query URI template parameter's - `order`. This parameter is us
 
 + Response 500 (application/json)
 
+### Beers By Organic [/beers/organic/{yes_no}{?limit,offset}] 
+This route is used to return organic or non-organic beers.
+
++ Parameters
+    + yes_no: Y (required, string) - Y for yes or N for no
+    
+#### View a Beer by Organic [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+
++ Response 200 (application/json)
+
+        {
+        "abv": 6.5, 
+        "brewery": "3 Sheeps Brewing Co", 
+        "ibu": 29.0, 
+        "id": 25, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/20SOhe/upload_kMXciF-large.png", 
+        "name": "Cashmere Hammer", 
+        "organic": "Y", 
+        "style": "Oatmeal Stout", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 5.7000000000000002, 
+        "brewery": "Warped Wing Brewing", 
+        "ibu": 40.0, 
+        "id": 41, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/3vjZYY/upload_V4kw8C-large.png", 
+        "name": "Jolly Tar", 
+        "organic": "Y", 
+        "style": "Euro Dark", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 7.2000000000000002, 
+        "brewery": "Boulder Beer Company", 
+        "ibu": 70.0, 
+        "id": 85, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/HnwuGy/upload_qIAIcD-large.png", 
+        "name": "Nitro Mojo IPA", 
+        "organic": "Y", 
+        "style": "American IPA", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 4.5999999999999996, 
+        "brewery": "8th Wonder Brewery", 
+        "ibu": 18.0, 
+        "id": 146, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/3i8Rg5/upload_0bxwAM-large.png", 
+        "name": "Rocket Fuel", 
+        "organic": "Y", 
+        "style": "Coffee Beer", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 5.0999999999999996, 
+        "brewery": "Brewtus Brewing Company", 
+        "ibu": 37.0, 
+        "id": 196, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/U4v5y0/upload_7GyWWz-large.png", 
+        "name": "Shenango Valley Steamer", 
+        "organic": "Y", 
+        "style": "California Common", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 10.0, 
+        "brewery": "O'Fallon Brewery", 
+        "ibu": 50.0, 
+        "id": 220, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/OxAukw/upload_NNdY9b-large.png", 
+        "name": "Imperial Pumpkin", 
+        "organic": "Y", 
+        "style": "Pumpkin Beer", 
+        "type": "beer"
+        }
+
+### Beers By Style [/beers/style/{style_name}{?limit,offset}] 
+This route is used to return organic or non-organic beers.
+
++ Parameters
+    + style_name: Blonde (required, string) - Y for yes or N for no
+    
+#### View a Beer By Style [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+
++ Response 200 (application/json)
+
+        {
+        "abv": 6.5, 
+        "brewery": "Valiant Brewing", 
+        "ibu": 24.0, 
+        "id": 136, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/F8QJ1e/upload_iMLbcC-large.png", 
+        "name": "Crescendo", 
+        "organic": "N", 
+        "style": "Blonde", 
+        "type": "beer"
+        }, 
+        {
+        "abv": 5.2000000000000002, 
+        "brewery": "Kannah Creek Brewing Company", 
+        "ibu": 25.0, 
+        "id": 208, 
+        "image": "https://s3.amazonaws.com/brewerydbapi/beer/rK2bQr/upload_JDN03O-large.png", 
+        "name": "Island Mesa Blonde Ale", 
+        "organic": "N", 
+        "style": "Blonde", 
+        "type": "beer"
+        }
+
+
 # Group Styles
 
 ## Styles [/styles/{style_id}]
@@ -525,7 +866,7 @@ A Stle object has the following attributes:
             "name": "American Pale", 
             "srm": 10.0, 
             "type": "style"
-        }    
+            }    
 
 ### All Styles [/styles{?limit,offset,order}] 
 A resource representing all of the styles in the database.
@@ -822,10 +1163,83 @@ We have added the query URI template parameter's - `order`. This parameter is us
 
 + Response 500 (application/json)
 
+### Styles By SRM [/styles/srm/{srm_val}{?limit,offset}] 
+This route is used to return styles by SRU. Given a floating point value X.YZ, a list of styles with srm in the range X.00 to X.99
+
++ Parameters
+    + srm_val: 2.3 (required, string) - Y for yes or N for no
+    
+#### View a Style By SRM [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+
++ Response 200 (application/json)
+
+        {
+        "abv_max": 5.0999999999999996, 
+        "abv_min": 4.0, 
+        "beers": [
+          "Limp Puppet Session IPA"
+        ], 
+        "breweries": [
+          "Great Lakes Brewery"
+        ], 
+        "description": "Any style of beer can be made lower in strength than described in the classic style guidelines. The goal should be to reach a balance between the style's character and the lower alcohol content. Drinkability is a character in the overall balance of these beers. Beers in this category must not exceed 4.1% alcohol by weight (5.1% alcohol by volume).", 
+        "ibu_max": 30.0, 
+        "ibu_min": 10.0, 
+        "id": 28, 
+        "name": "Session", 
+        "srm": 2.0, 
+        "type": "style"
+        }
+
+### Styles By ABV [/styles/srm/{abv_val}{?limit,offset}] 
+This route is used to return styles by ABV. Given a floating point value X.YZ, a list of styles with abv in the range of the styles abv_min and abv_max of styles is returned. 
+
++ Parameters
+    + abv_val: 13.3 (required, string) - Y for yes or N for no
+    
+#### View a Style By ABV [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+        
++ Response 200 (application json)
+
+        {
+        "abv_max": 14.0, 
+        "abv_min": 9.0, 
+        "beers": [
+          "Inner Sanctum"
+        ], 
+        "breweries": [
+          "Potosi Brewing Company"
+        ], 
+        "description": "Quadrupels or \"Quads\" are characterized by the immense presence of alcohol and balanced flavor, bitterness and aromas. Its color is deep amber to rich chestnut/garnet brown. Often characterized by a mousse-like dense, sometimes amber head will top off a properly poured and served quad. Complex fruity aroma and flavor emerge reminiscent of raisins, dates, figs, grapes, plums often accompanied with a hint of winy character. Caramel, dark sugar and malty sweet flavors and aromas can be intense, not cloying, while complementing fruitiness. Though well attenuated it usually has a full, creamy body. Hop characters do not dominate; low to low-medium bitterness is perceived. Perception of alcohol can be extreme. Clove-like phenolic flavor and aroma should not be evident. Chill haze is acceptable at low serving temperatures. Diacetyl and DMS should not be perceived. Well balanced with savoring/sipping drinkability. Oxidative character if evident in aged Quads should be mild and pleasant.", 
+        "ibu_max": 50.0, 
+        "ibu_min": 25.0, 
+        "id": 59, 
+        "name": "Belgian Quad", 
+        "srm": 14.0, 
+        "type": "style"
+        }
+
+
 # Group Reviews
 
 ## Reviews [/reviews/{review_id}]
 A Review object has the following attributes:
++ beer_name - the beer being reviewed
++ brewery_name - the brewer of the beer
++ comment 
++ date
++ id
++ rating
 + Parameters
     + review_id: 1 (required, number) - ID of the Review in form of an integer
 
@@ -885,4 +1299,90 @@ We have added the query URI template parameter's - `order`. This parameter is us
                 }
             ], 
             "totalCount": 596
+        }
+        
+### Reviews by Rating [/reviews/rating/{rating_val}{?limit,offset}] 
+This route is used to return reviews by rating. Given a floating point value, a list of reviews with that rating is returned.
+
++ Parameters
+    + rating_val: 2.0 (required, string) - A floating point value
+    
+#### View a Reviews by Rating [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`   
+        
++ Response 200 (application/json)
+
+        {
+        "beer_name": "Superfluid", 
+        "brewery_name": "Short's Brewing Company", 
+        "comment": "Standard golden amber with small head that lasts forever. Decent hop aroma with some citrus and pine. flavor is off, though. Really not a lot of flavor, but some very intense bitterness. This could really benefit from some sweet malty body, but there is none. Nope, don\u2019t like this one bit.", 
+        "date": "2017-08-19", 
+        "id": 25, 
+        "rating": 2.0, 
+        "type": "review"
+        }
+
+### Reviews by Beer [/reviews/beer/{beer_name}{?limit,offset}] 
+This route is used to return reviews by a given beer name. 
+
++ Parameters
+    + beer_name: Rusty Rail Pale Ale (required, string) - A floating point value
+    
+#### View Reviews by Beer [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9` 
+        
++ Response 200 (application/json)
+
+        {
+        "beer_name": "Rusty Rail Pale Ale", 
+        "brewery_name": "Willoughby Brewing Company", 
+        "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
+        "date": "2014-07-22", 
+        "id": 1, 
+        "rating": 3.5, 
+        "type": "review"
+        }, 
+        {
+        "beer_name": "Rusty Rail Pale Ale", 
+        "brewery_name": "Willoughby Brewing Company", 
+        "comment": "Draft at Pigskin in Athens during Ohio Brew Week. Pours a clear orange color with a small off-white head that laces the glass. Notes of florals, citrus fruits, dry grains, pale malts, grass, and straw. Light-bodied, with moderate carbonation and a bitter mouthfeel. Decent APA.", 
+        "date": "2014-07-16", 
+        "id": 2, 
+        "rating": 3.2999999999999998, 
+        "type": "review"
+        }, 
+        {
+        "beer_name": "Rusty Rail Pale Ale", 
+        "brewery_name": "Willoughby Brewing Company", 
+        "comment": "A: Reddish/Llightly Briwn Hue, Passes Through Some Light, Thick White Head, Good Lacing \r\n\r\nS: Citrus, Mild Resin, Mild Malts \r\n\r\nT: Piney, Resin, Malty Finish \r\n\r\nM: Good Carbonation, Medium Bodied, Dry, Bitter \r\n\r\nOverall, a really good Pale Ale that teeters on the IPA boundaries but maintains a good balance with the malt flavors on the back end.", 
+        "date": "2013-10-19", 
+        "id": 3, 
+        "rating": 4.4000000000000004, 
+        "type": "review"
+        }, 
+        {
+        "beer_name": "Rusty Rail Pale Ale", 
+        "brewery_name": "Willoughby Brewing Company", 
+        "comment": "Pint on tap at the Pigskin in Athens, OH during Ohio Brew Week. Clear amber color. Big foamy off-white head. Good lace. Good light crisp carbonation, dry texture. Awesome dry hoppiness - pine, some citrus. Nice bitterness, good zestiness. Really good pale ale.", 
+        "date": "2012-07-08", 
+        "id": 4, 
+        "rating": 3.7000000000000002, 
+        "type": "review"
+        }, 
+        {
+        "beer_name": "Rusty Rail Pale Ale", 
+        "brewery_name": "Willoughby Brewing Company", 
+        "comment": "on tap at WBC 10Feb2012, Nice and amber with a nose of light hops, taste is fair and crisp. easy to finish easy to drink. doesnt linger, doesnt offend solid offering.", 
+        "date": "2012-02-13", 
+        "id": 5, 
+        "rating": 3.0, 
+        "type": "review"
         }
