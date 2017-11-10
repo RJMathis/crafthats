@@ -31,6 +31,9 @@ handlers:
 - url: ".*/styles/[0-9]+"
   script: main.app
 
+- url: ".*/styles/srm/.*"
+  script: main.app
+
 - url: /breweries
   script: main.app
 
@@ -39,7 +42,10 @@ handlers:
 
 - url: ".*/breweries/state/.*"
   script: main.app
-  
+
+- url: ".*/breweries/country/.*"
+  script: main.app
+
 - url: /reviews
   script: main.app
 
