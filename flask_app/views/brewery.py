@@ -92,7 +92,7 @@ def filterByState(state_name):
 
     return jsonify(allBreweries)
 @app.route('/breweries/country/<country_name>', methods = ['GET'])
-def filterByState(country_name):
+def filterByCountry(country_name):
     allBreweries = []
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)

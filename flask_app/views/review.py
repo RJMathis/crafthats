@@ -1,7 +1,7 @@
 #This is where the review routes are defined.
 from flask import Flask, request, jsonify
 from main import app
-from models import db, Review
+from models import db, Review,Beer
 
 #GET ALL REVIEWS
 @app.route('/reviews', methods = ['GET'])
@@ -77,5 +77,25 @@ def filterReviewByRating(rating):
         allReviews.append(r)
 
     return jsonify(allReviews)
+@app.route('/reviews/beer/<beer_name>', methods = ['GET'])
+def filterReviewByBeer(beer_name):
+    allReviews = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    beer = db.session.query(Beer).filter_by(name=beer_name).first()
+    beer_id = beer.id
+    reviews = db.session.query(Review).filter_by(beer_name=beer_id).limit(lim).offset(off).all()
 
+    for review in reviews:
+        r = {
+        'type' : "review",
+        'id' : review.id,
+        'date': review.date,
+        'rating' : review.rating,
+        'comment' : review.comment,
+        'beer_name' : review.beer.name,
+        'brewery_name' : review.beer.brewery.name
+        }
+        allReviews.append(r)
 
+    return jsonify(allReviews)
