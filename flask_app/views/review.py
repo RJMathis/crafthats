@@ -29,7 +29,8 @@ def getReviews():
         'rating' : review.rating,
         'comment' : review.comment,
         'beer_name' : review.beer.name,
-        'brewery_name' : review.beer.brewery.name
+        'brewery_name' : review.beer.brewery.name,
+        'image': review.beer.images
         }
         allReviews.append(r)
 
@@ -51,7 +52,8 @@ def getReviewInfo(review_id):
             'rating' : review.rating,
             'comment' : review.comment,
             'beer_name' : review.beer.name,
-            'brewery_name': review.beer.brewery.name
+            'brewery_name': review.beer.brewery.name,
+            'image' : review.beer.images
             }
     except AttributeError:
         return "Server Error 500: Invalid review_id"
