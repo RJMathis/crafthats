@@ -238,7 +238,7 @@ export default class About extends Component {
                   <div className="col-md-3 ">
                       <div className="text-center">
                           <h1><u>Technical</u></h1>
-                              <a href="https://utexas.app.box.com/s/s9iv2im949pci0cp5xmraw6k2mr6tc76"><h4>Technical Report</h4></a>
+                              <a href="https://utexas.app.box.com/s/zw7p11doplzjvv2ozdlamqgiaieknboj"><h4>Technical Report</h4></a>
                               <a href="https://yuml.me/12ee86c4.pdf"><h4>UML Diagram</h4></a>
                       </div>
                   </div>
