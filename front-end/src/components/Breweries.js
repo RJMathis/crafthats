@@ -54,8 +54,9 @@ export default class Breweries extends Component {
     }
 
     sort = (order, e) => {
-        console.log('in sort')
-        e.preventDefault()
+        if (e) {
+            e.preventDefault()
+        }
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this
@@ -96,7 +97,11 @@ export default class Breweries extends Component {
 
     componentDidUpdate(prevState, nextState) {
         if (nextState.page !== this.state.page) {
-            this.callAPI()
+            if (this.state.order !== "") {
+                this.sort(this.state.order)
+            } else {
+                this.callAPI()
+            }
             window.scrollTo({
                 top: 0,
                 left: 0,
