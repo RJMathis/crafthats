@@ -55,6 +55,12 @@ handlers:
 - url: ".*/reviews/[0-9]+"
   script: main.app
 
+- url: ".*/reviews/rating/.*"
+  script: main.app
+
+- url: ".*/reviews/beer/.*"
+  script: main.app
+
 libraries:
 - name: MySQLdb
   version: "1.2.5"
