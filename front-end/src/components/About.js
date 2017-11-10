@@ -48,12 +48,12 @@ export default class About extends Component {
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong> 34
+                                      <strong>Commits:</strong> 5
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong> 5
+                                      <strong>Issues Closed:</strong> 10
                                   </td>
                               </tr>
                               <tr>
@@ -82,17 +82,17 @@ export default class About extends Component {
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong> 16
+                                      <strong>Commits:</strong> 44
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong> 6
+                                      <strong>Issues Closed:</strong> 17
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong> 0
+                                      <strong>Unit Tests:</strong> 4
                                   </td>
                               </tr>
                               </tbody>
@@ -115,17 +115,17 @@ export default class About extends Component {
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong> 2
+                                      <strong>Commits:</strong> 14
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong> 6
+                                      <strong>Issues Closed:</strong> 12
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong> 0
+                                      <strong>Unit Tests:</strong> 2
                                   </td>
                               </tr>
                               </tbody>
@@ -152,17 +152,17 @@ export default class About extends Component {
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong> 27
+                                      <strong>Commits:</strong> 34
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong> 3
+                                      <strong>Issues Closed:</strong> 10
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong> 0
+                                      <strong>Unit Tests:</strong> 72
                                   </td>
                               </tr>
                               </tbody>
@@ -185,17 +185,17 @@ export default class About extends Component {
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Commits:</strong> 18
+                                      <strong>Commits:</strong> 26
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Issues Closed:</strong> 1
+                                      <strong>Issues Closed:</strong> 7
                                   </td>
                               </tr>
                               <tr>
                                   <td>
-                                      <strong>Unit Tests:</strong> 0
+                                      <strong>Unit Tests:</strong> 4
                                   </td>
                               </tr>
                               </tbody>
@@ -208,9 +208,9 @@ export default class About extends Component {
                       <div className="text-center">
                           <h1><u>Stats</u></h1>
                           <ul>
-                              <li className="text-left"><h4><strong>total no. of commits:</strong> 107</h4></li>
-                              <li className="text-left"><h4><strong>total no. of issues:</strong> 20</h4></li>
-                              <li className="text-left"><h4><strong>total no. of unit tests:</strong> 10</h4></li>
+                              <li className="text-left"><h4><strong>total no. of commits:</strong> 260</h4></li>
+                              <li className="text-left"><h4><strong>total no. of issues:</strong> 73</h4></li>
+                              <li className="text-left"><h4><strong>total no. of unit tests:</strong> 91</h4></li>
                               <li className="text-left"><a href="http://docs.crafthats.apiary.io/"><h4>Apiary API</h4></a></li>
                               <li className="text-left"><a href="https://github.com/RJMathis/crafthats"><h4>GitHub Repo</h4></a></li>
                               <li className="text-left"><a href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>Trello</h4></a></li>
