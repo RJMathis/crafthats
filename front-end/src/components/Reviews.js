@@ -112,6 +112,7 @@ export default class Reviews extends Component {
                         <thead>
                         <tr>
                             <th>Beer</th>
+                            <th>Image</th>
                             <th>Date</th>
                             <th>Rating</th>
                         </tr>

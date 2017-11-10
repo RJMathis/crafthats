@@ -51,7 +51,7 @@ export default class Review extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img  src={this.state.item.image} alt={this.state.item.beer_name} />
+                            <img className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
