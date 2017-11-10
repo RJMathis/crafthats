@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import chunk from 'lodash.chunk';
 import axios from 'axios';
 
+
 import ItemSelector from './ItemSelector';
 import PageSelector from './PageSelector';
 
@@ -12,7 +13,7 @@ export default class Beers extends Component {
             beers: [],
             page: 0,
             numPages: 5,
-            pgSize: 10,
+            pgSize: 9,
             pathname: "/Beers"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/beers';
@@ -32,7 +33,6 @@ export default class Beers extends Component {
 
     handlePageChange = (page, e) => {
         e.preventDefault()
-        console.log("in handlePageChange")
         //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
     }
@@ -51,8 +51,24 @@ export default class Beers extends Component {
         }
     }
 
+    sort = (order, e) => {
+        if (e) {
+            e.preventDefault()
+        }
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
+        let self = this
+        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+            .then((res) => {
+                // Set state with result
+                self.setState({beers: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     callAPI = () => {
-        console.log("in callAPI")
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this
@@ -61,7 +77,6 @@ export default class Beers extends Component {
             .then((res) => {
                 // Set state with result
                 self.setState({beers: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
-
             })
             .catch((error) => {
                 console.log(error)
@@ -78,10 +93,12 @@ export default class Beers extends Component {
      */
 
     componentDidUpdate(prevState, nextState) {
-        console.log("updated component")
-        console.log(this.state.page, nextState.page)
         if (nextState.page !== this.state.page) {
-            this.callAPI()
+            if (this.state.order !== "") {
+                this.sort(this.state.order)
+            } else {
+                this.callAPI()
+            }
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -99,7 +116,6 @@ export default class Beers extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.beers)
 
         // Create an array of X components with 1 for each beer gathered from API call
         let beerComponents = this.state.beers.map(function(beer) {
@@ -110,6 +126,11 @@ export default class Beers extends Component {
 
         return (
           <div className="container">
+              <strong>{"Sort By: "}</strong>
+              <div className="button btn-group">
+                  <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
+                  <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+              </div>
               {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
               { chunk(beerComponents, 3).map(function(row) {
                   return (

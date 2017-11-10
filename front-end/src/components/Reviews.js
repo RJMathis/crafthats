@@ -14,6 +14,7 @@ export default class Reviews extends Component {
             numPages: 5,
             pgSize: 10,
             navigate: false,
+            sort: "",
             navigateTo: '/Review'
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/reviews';
@@ -60,6 +61,24 @@ export default class Reviews extends Component {
         }
     }
 
+    sort = (order, e) => {
+        if (e) {
+            e.preventDefault()
+        }
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
+        let self = this
+        this.setState({sort: order})
+        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+            .then((res) => {
+                // Set state with result
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     callAPI = () => {
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
@@ -83,7 +102,11 @@ export default class Reviews extends Component {
 
     componentDidUpdate(prevState, nextState) {
         if (nextState.page !== this.state.page) {
-            this.callAPI()
+            if (this.state.order !== "") {
+                this.sort(this.state.order)
+            } else {
+                this.callAPI()
+            }
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -106,6 +129,11 @@ export default class Reviews extends Component {
         // Add column for Brewery
         return (
             <div className="container">
+                <strong>{"Sort By: "}</strong>
+                <div className="button btn-group">
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+                </div>
                 <div className="col-xs-12">
                     <h2 className="sub-header">Beers</h2>
                     <table className="table table-responsive table-striped">
