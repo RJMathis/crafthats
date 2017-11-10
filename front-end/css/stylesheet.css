@@ -1,7 +1,7 @@
 .title {
-  font-family: 'Fascinate Inline', cursive;
+  font-family: 'Oswald', sans-serif;
   float: left;
-  width: 40%;
+  width: 100%;
 }
 
 .nav {
@@ -65,8 +65,19 @@
   -ms-transform: translate(-50%, -50%);
 }
 
+.style-text {
+  width: 45%;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.style-image {
+  padding-top: 11.3%;
+}
+
 .img-thumbnail {
+  cursor: pointer;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+  width: 100%
 }
 
 .img-about {
@@ -92,4 +103,35 @@
 .border {
     display: flex;
     border: 1px solid black;
+}
+
+
+/*style-image*/
+.foam,
+.rim-accent,
+.pint-outline {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+ 
+.highlight {
+    opacity: 0.3;
+    fill: #FFFFFF;
+}
+ 
+.rim-accent { stroke: #B1B3B6; }
+.glass { fill: #E2E2E2; }
+.head, .foam { fill: #FFFFFF; }
+.shadow { opacity: 0.2; }
+ 
+.beerColorRange {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
 }
