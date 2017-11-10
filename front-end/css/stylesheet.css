@@ -93,3 +93,34 @@
     display: flex;
     border: 1px solid black;
 }
+
+
+/*style-image*/
+.foam,
+.rim-accent,
+.pint-outline {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+ 
+.highlight {
+    opacity: 0.3;
+    fill: #FFFFFF;
+}
+ 
+.rim-accent { stroke: #B1B3B6; }
+.glass { fill: #E2E2E2; }
+.head, .foam { fill: #FFFFFF; }
+.shadow { opacity: 0.2; }
+ 
+.beerColorRange {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+}
