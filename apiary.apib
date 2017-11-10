@@ -2,42 +2,34 @@ FORMAT: 1A
 HOST: https://backend-staging-183303.appspot.com/
 
 # BrewtifulWorld API
-Brewtiful.world is a simple web service that allows developers and beer afficionados to view various beers, breweries, styles and reviews. 
+Brewtiful.world is a simple web service that allows developers and beer afficionados to view various beers, breweries, styles and reviews from all over the world. 
 + [This: Raw API Blueprint](https://raw.githubusercontent.com/RJMathis/crafthats/unit_test/apiary.apib)
 
 ## Error 
 Error Response Code: 500 + ERROR MESSAGE
 + Response 500 (text/plain)
     + Headers
-        Error Message: #
+        Error Message: <Message error number>
     + Body
-        error: An internal error occurred: See logs for full stacktrace.
+        error: A message describing the error
             
-## BrewtifulWorld API Root [/]
-+ Response 200 (text/plain)
-    + Headers
-        Link: <https://brewtiful.world/>;rel="self",<https://brewtiful.world/breweries>;rel="breweries",
-              <https://brewtiful.world/beers>;rel="beers",<https://brewtiful.world/styles>;rel="styles",
-              <https://brewtiful.world/reviews>;rel="reviews",<https://brewtiful.world/brewery>;rel="brewery"
-    + Body
-        hello world
 
-<!--# Group Breweries -->
-<!--Resources related to Brewery of *BrewtifulWorld API*.-->
 
-# Breweries [/breweries/{brewery_id}]
+# Group Breweries 
+
+## Brewery [/breweries/{brewery_id}]
 A Brewery object has the following attributes:
-
 + beers - A dictionary of beers brewed by brewery
 + established - An integer year when the Brewery was established.
-+ city
-+ country
++ city - The city where the brewery is located
++ country - The country where the brewery is located
 + description - A short blurb on brewery
-+ established
-+ id
++ established - The year the brewery opened
++ id - The primary key in the database of the brewery
 + name - Name of brewery
-+ state
++ state - The state or region the brewery is in
 + styles - an assocation table for breweries and the styles the brewery brews
++ website - a link to the brewery website
 + Parameters
     + brewery_id: 1 (required, number) - ID of the Brewery in form of an integer
 
@@ -63,16 +55,16 @@ A Brewery object has the following attributes:
             "website": "http://willoughbybrewing.com/"
         }
 
-## All Breweries [/breweries{?limit,offset}] 
-A resource representing all of the beers in the database.
+### All Breweries [/breweries{?limit,offset,order}] 
+A resource representing all of the breweries in the database.
 
-We have added the query URI template parameter's - `limit`. This parameter is
-used for limiting the number of results returned by some actions on this
-resource. 
+We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
 
-We have added the query URI template parameter's - `offset`. This parameter is
-used for selecting the page number relative to `limit` of results returned by some actions on this
-resource.
+We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
+
+We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
++ results - a list of all styles
++ totalCount - the number of all styles in the database
 
 #### Retrieve all Breweries [GET]
 + Parameters
@@ -80,47 +72,817 @@ resource.
         + Default: `9`
     + offset (number, optional) - The offset number of results to return.
         + Default: `9`
+    + order (string, optional) - The string must be 'asc' or 'desc'
 
 + Response 200 (application/json)
 
         {
-            "records": [
-                {
-                "beers": [
-                    "Rusty Rail Pale Ale"
-                ], 
-                "city": "Willoughby", 
-                "country": "United States", 
-                "description": "Serving the best food and craft beer in Lake County, featuring live entertainment 3 nights per week in an amazing atmosphere. Come see what's brewing!!", 
-                "established": 1998, 
-                "id": 1, 
-                "image": "https://s3.amazonaws.com/brewerydbapi/brewery/TAgaBk/upload_K7e1wP-squareLarge.png", 
-                "name": "Willoughby Brewing Company", 
-                "state": "Ohio", 
-                "styles": [
-                    "American Pale"
-                ], 
-                "website": "http://willoughbybrewing.com/"
-                }, 
-                {
-                "beers": [
-                    "Quince Anos"
-                ], 
-                "city": "Durango", 
-                "country": "United States", 
-                "description": "", 
-                "established": 1996, 
-                "id": 2, 
-                "image": "https://s3.amazonaws.com/brewerydbapi/brewery/ASNS0q/upload_qaJsne-squareLarge.png", 
-                "name": "Steamworks Brewing Company", 
-                "state": "Colorado", 
-                "styles": [
-                    "American Barleywine"
-                ], 
-                "website": "http://www.steamworksbrewing.com/"
-                }
-            ], 
-            "totalCount": 194
+          "records": [
+            {
+              "beers": [
+                "Rusty Rail Pale Ale"
+              ], 
+              "city": "Willoughby", 
+              "country": "United States", 
+              "description": "Serving the best food and craft beer in Lake County, featuring live entertainment 3 nights per week in an amazing atmosphere. Come see what's brewing!!", 
+              "established": 1998, 
+              "id": 1, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/TAgaBk/upload_K7e1wP-squareLarge.png", 
+              "name": "Willoughby Brewing Company", 
+              "state": "Ohio", 
+              "styles": [
+                "American Pale"
+              ], 
+              "type": "brewery", 
+              "website": "http://willoughbybrewing.com/"
+            }, 
+            {
+              "beers": [
+                "Quince Anos"
+              ], 
+              "city": "Durango", 
+              "country": "United States", 
+              "description": "", 
+              "established": 1996, 
+              "id": 2, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/ASNS0q/upload_qaJsne-squareLarge.png", 
+              "name": "Steamworks Brewing Company", 
+              "state": "Colorado", 
+              "styles": [
+                "American Barleywine"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.steamworksbrewing.com/"
+            }, 
+            {
+              "beers": [
+                "420 Extra Pale Ale"
+              ], 
+              "city": "Atlanta", 
+              "country": "United States", 
+              "description": "", 
+              "established": 1997, 
+              "id": 3, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/TMc6H2/upload_3il9e7-squareLarge.png", 
+              "name": "SweetWater Brewing Company", 
+              "state": "Georgia", 
+              "styles": [
+                "American Pale"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.sweetwaterbrew.com/"
+            }, 
+            {
+              "beers": [
+                "Beyond The Pale Ale"
+              ], 
+              "city": "Olympia", 
+              "country": "United States", 
+              "description": "", 
+              "established": 1993, 
+              "id": 4, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/5K9U34/upload_0iGnbd-squareLarge.png", 
+              "name": "Fish Brewing Company", 
+              "state": "Washington", 
+              "styles": [
+                "American Pale"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.fishbrewing.com/"
+            }, 
+            {
+              "beers": [
+                "Exile Red Ale"
+              ], 
+              "city": "Delmar", 
+              "country": "United States", 
+              "description": "Our mission is to produce the finest local ales in the Mid Atlantic Region. We are a Craft Brewing company focused on producing well balanced handcrafted ales.", 
+              "established": 2009, 
+              "id": 5, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/Ysh6PO/upload_viWo9q-squareLarge.png", 
+              "name": "Evolution Craft Brewing Company", 
+              "state": "Delaware", 
+              "styles": [
+                "Amber"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.evolutioncraftbrewing.com/"
+            }, 
+            {
+              "beers": [
+                "Double Take Amber Ale", 
+                "Double Take Pale Ale", 
+                "Double Take IPA"
+              ], 
+              "city": "Novato", 
+              "country": "United States", 
+              "description": "", 
+              "established": 1999, 
+              "id": 6, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/ytIKJu/upload_GwaU28-squareLarge.png", 
+              "name": "World Brews, Winery Exchange", 
+              "state": "California", 
+              "styles": [
+                "Amber", 
+                "American Pale", 
+                "American IPA"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.wineryexchange.com/"
+            }, 
+            {
+              "beers": [
+                "Superfluid", 
+                "Juicy Tree", 
+                "Bonafide Legit"
+              ], 
+              "city": "Bellaire", 
+              "country": "United States", 
+              "description": "", 
+              "established": 2004, 
+              "id": 7, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/Oj9rBb/upload_ljskfg-squareLarge.png", 
+              "name": "Short's Brewing Company", 
+              "state": "Michigan", 
+              "styles": [
+                "Imperial IPA", 
+                "American IPA"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.shortsbrewing.com/"
+            }, 
+            {
+              "beers": [
+                "Memento Mori"
+              ], 
+              "city": "Sawyer", 
+              "country": "United States", 
+              "description": "", 
+              "established": 2011, 
+              "id": 8, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/QJRQhZ/upload_8f50pf-squareLarge.png", 
+              "name": "Greenbush Brewing Co", 
+              "state": "Michigan", 
+              "styles": [
+                "American Oktoberfest"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.greenbushbrewing.com/"
+            }, 
+            {
+              "beers": [
+                "B.O.R.I.S. The Crusher Oatmeal-Imperial Stout", 
+                "Barrel Aged Turbo Shandy", 
+                "Gulden Fraug Belgian Ale"
+              ], 
+              "city": "Akron", 
+              "country": "United States", 
+              "description": "", 
+              "established": 2006, 
+              "id": 9, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/brewery/w5OOQ5/upload_j5DrDQ-squareLarge.png", 
+              "name": "Hoppin' Frog Brewery", 
+              "state": "Ohio", 
+              "styles": [
+                "British Imperial Stout", 
+                "Fruit Beer", 
+                "Belgian Pale Strong"
+              ], 
+              "type": "brewery", 
+              "website": "http://www.hoppinfrog.com/"
+            }
+          ], 
+          "totalCount": 194
         }
 
 + Response 500 (application/json)
+
+# Group Beers
+
+## Beer [/beers/{beer_id}]
+A Beer object has the following attributes:
++ abv - A float that represent the alcoholic by volume in the beer
++ brewery - The brewer
++ ibu - The international bitterness unit for a beer
++ id - The primary key in the database
++ images - A link to the label image of a beer
++ name - Name of the beer
++ organic - A string "Y" or "N" that says whether the beer is organic
++ reviews - A list of reviews for the beer
++ style - The style of the beer
++ Parameters
+    + beer_id: 1 (required, number) - ID of the Brewery in form of an integer
+
+### View a Beer [GET]
+
++ Response 200 (application/json)
+
+        {
+            "abv": 5.2999999999999998, 
+            "brewery": "Willoughby Brewing Company", 
+            "ibu": 29.0, 
+            "id": 1, 
+            "images": "https://s3.amazonaws.com/brewerydbapi/beer/w9ftpF/upload_r2OXLm-large.png", 
+            "name": "Rusty Rail Pale Ale", 
+            "organic": "N", 
+            "reviews": [
+            {
+                "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
+                "date": "2014-07-22", 
+                "id": 1, 
+                "rating": 3.5
+            }, 
+            {
+                "comment": "Draft at Pigskin in Athens during Ohio Brew Week. Pours a clear orange color with a small off-white head that laces the glass. Notes of florals, citrus fruits, dry grains, pale malts, grass, and straw. Light-bodied, with moderate carbonation and a bitter mouthfeel. Decent APA.", 
+                "date": "2014-07-16", 
+                "id": 2, 
+                "rating": 3.2999999999999998
+            }, 
+            {
+                "comment": "A: Reddish/Llightly Briwn Hue, Passes Through Some Light, Thick White Head, Good Lacing \r\n\r\nS: Citrus, Mild Resin, Mild Malts \r\n\r\nT: Piney, Resin, Malty Finish \r\n\r\nM: Good Carbonation, Medium Bodied, Dry, Bitter \r\n\r\nOverall, a really good Pale Ale that teeters on the IPA boundaries but maintains a good balance with the malt flavors on the back end.", 
+                "date": "2013-10-19", 
+                "id": 3, 
+                "rating": 4.4000000000000004
+            }, 
+            {
+                "comment": "Pint on tap at the Pigskin in Athens, OH during Ohio Brew Week. Clear amber color. Big foamy off-white head. Good lace. Good light crisp carbonation, dry texture. Awesome dry hoppiness - pine, some citrus. Nice bitterness, good zestiness. Really good pale ale.", 
+                "date": "2012-07-08", 
+                "id": 4, 
+                "rating": 3.7000000000000002
+            }, 
+            {
+                "comment": "on tap at WBC 10Feb2012, Nice and amber with a nose of light hops, taste is fair and crisp. easy to finish easy to drink. doesnt linger, doesnt offend solid offering.", 
+                "date": "2012-02-13", 
+                "id": 5, 
+                "rating": 3.0
+            }
+            ], 
+            "style": "American Pale", 
+            "type": "beer"
+        }
+
+### All Beers [/beers{?limit,offset,order}] 
+A resource representing all of the breweries in the database.
+
+We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
+
+We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
+
+We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
++ results - a list of all styles
++ totalCount - the number of all styles in the database
+
+#### Retrieve all Beers [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+    + order (string, optional) - The string must be 'asc' or 'desc'
+
++ Response 200 (application/json)
+
+        {
+          "records": [
+            {
+              "abv": 5.2999999999999998, 
+              "brewery": "Willoughby Brewing Company", 
+              "ibu": 29.0, 
+              "id": 1, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/w9ftpF/upload_r2OXLm-large.png", 
+              "name": "Rusty Rail Pale Ale", 
+              "organic": "N", 
+              "style": "American Pale", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 10.6, 
+              "brewery": "Steamworks Brewing Company", 
+              "ibu": 72.0, 
+              "id": 2, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/vckmP1/upload_9zalMS-large.png", 
+              "name": "Quince Anos", 
+              "organic": "N", 
+              "style": "American Barleywine", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 5.4000000000000004, 
+              "brewery": "SweetWater Brewing Company", 
+              "ibu": 41.0, 
+              "id": 3, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/NoNhan/upload_FgWgmB-large.png", 
+              "name": "420 Extra Pale Ale", 
+              "organic": "N", 
+              "style": "American Pale", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 5.0, 
+              "brewery": "Fish Brewing Company", 
+              "ibu": 35.0, 
+              "id": 4, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/aVnXNm/upload_72yAS0-large.png", 
+              "name": "Beyond The Pale Ale", 
+              "organic": "N", 
+              "style": "American Pale", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 5.9000000000000004, 
+              "brewery": "Evolution Craft Brewing Company", 
+              "ibu": 48.0, 
+              "id": 5, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/TMLHMl/upload_c0P1Oi-large.png", 
+              "name": "Exile Red Ale", 
+              "organic": "N", 
+              "style": "Amber", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 5.0999999999999996, 
+              "brewery": "World Brews, Winery Exchange", 
+              "ibu": 30.0, 
+              "id": 6, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/Imada4/upload_8ugQrE-large.png", 
+              "name": "Double Take Amber Ale", 
+              "organic": "N", 
+              "style": "Amber", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 8.0, 
+              "brewery": "Short's Brewing Company", 
+              "ibu": 71.0, 
+              "id": 7, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/6mHyRa/upload_BFeqdz-large.png", 
+              "name": "Superfluid", 
+              "organic": "N", 
+              "style": "Imperial IPA", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 6.2999999999999998, 
+              "brewery": "Greenbush Brewing Co", 
+              "ibu": 27.0, 
+              "id": 8, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/TyFwTu/upload_rhpdn9-large.png", 
+              "name": "Memento Mori", 
+              "organic": "N", 
+              "style": "American Oktoberfest", 
+              "type": "beer"
+            }, 
+            {
+              "abv": 9.4000000000000004, 
+              "brewery": "Hoppin' Frog Brewery", 
+              "ibu": 60.0, 
+              "id": 9, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/Tzy7eJ/upload_iJOlfL-large.png", 
+              "name": "B.O.R.I.S. The Crusher Oatmeal-Imperial Stout", 
+              "organic": "N", 
+              "style": "British Imperial Stout", 
+              "type": "beer"
+            }
+          ], 
+          "totalCount": 243
+        }
+
++ Response 500 (application/json)
+
+# Group Styles
+
+## Styles [/styles/{style_id}]
+A Stle object has the following attributes:
++ abv_max - The alcoholic by volume maximum for this style
++ abv_min - The alcoholic by volume minimum for this style
++ beers - A list of beers that are this style
++ breweries - A list of breweries that make this style
++ description - A blurb about this style
++ ibu_min - The international bitterness unit minimum for this style
++ ibu_max - The international bitterness unit maximum for this style
++ id - The primary key for this style in the database
++ srm - The average standard reference method average for this style 
++ Parameters
+    + style_id: 1 (required, number) - ID of the Style in form of an integer
+
+### View a Style [GET]
+
++ Response 200 (application/json)
+
+        {
+            "abv_max": 5.5999999999999996, 
+            "abv_min": 4.5, 
+            "beers": [
+                "Rusty Rail Pale Ale", 
+                "420 Extra Pale Ale", 
+                "Beyond The Pale Ale", 
+                "Headwaters Ale", 
+                "Double Take Pale Ale", 
+                "Dinghy", 
+                "Samuel Adams Pale Ale", 
+                "Copperhead Pale Ale", 
+                "Absolom's Ale", 
+                "Mango Mosaic Pale Ale", 
+                "Dale's Pale Ale", 
+                "Sideways", 
+                "Pale Ale", 
+                "Pale Ale", 
+                "Shenanigans", 
+                "First Bite", 
+                "30th Anniversary Ale", 
+                "Field to Ferment", 
+                "Healy Heights Pale Ale", 
+                "Golden Ale", 
+                "Hop Fro"
+            ], 
+            "breweries": [
+                "Willoughby Brewing Company", 
+                "SweetWater Brewing Company", 
+                "Fish Brewing Company", 
+                "Victory Brewing Company", 
+                "World Brews, Winery Exchange", 
+                "Rhinegeist", 
+                "Boston Beer Company", 
+                "Snoqualmie Falls Brewing Company", 
+                "White Rabbit Brewing Company", 
+                "Breckenridge Brewery", 
+                "Oskar Blues Brewery", 
+                "Nomad Brewing Co.", 
+                "Backcountry Brewery", 
+                "Good People Brewing Company", 
+                "Indeed Brewing Company", 
+                "Spider Bite Beer Co.", 
+                "Mendocino Brewing Company", 
+                "Fremont Brewing", 
+                "Sasquatch Brewery", 
+                "St. George Brewing Company", 
+                "Fat Head's Brewery"
+            ], 
+            "desicription": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.", 
+            "ibu_max": 42.0, 
+            "ibu_min": 30.0, 
+            "id": 1, 
+            "name": "American Pale", 
+            "srm": 10.0, 
+            "type": "style"
+        }    
+
+### All Styles [/styles{?limit,offset,order}] 
+A resource representing all of the styles in the database.
+
+We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
+
+We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
+
+We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
++ results - a list of all styles
++ totalCount - the number of all styles in the database
+
+#### Retrieve all Styles [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+    + order (string, optional) - The string must be 'asc' or 'desc'
+
++ Response 200 (application/json)
+
+        {
+          "records": [
+            {
+              "abv_max": 5.5999999999999996, 
+              "abv_min": 4.5, 
+              "beers": [
+                "Rusty Rail Pale Ale", 
+                "420 Extra Pale Ale", 
+                "Beyond The Pale Ale", 
+                "Headwaters Ale", 
+                "Double Take Pale Ale", 
+                "Dinghy", 
+                "Samuel Adams Pale Ale", 
+                "Copperhead Pale Ale", 
+                "Absolom's Ale", 
+                "Mango Mosaic Pale Ale", 
+                "Dale's Pale Ale", 
+                "Sideways", 
+                "Pale Ale", 
+                "Pale Ale", 
+                "Shenanigans", 
+                "First Bite", 
+                "30th Anniversary Ale", 
+                "Field to Ferment", 
+                "Healy Heights Pale Ale", 
+                "Golden Ale", 
+                "Hop Fro"
+              ], 
+              "breweries": [
+                "Willoughby Brewing Company", 
+                "SweetWater Brewing Company", 
+                "Fish Brewing Company", 
+                "Victory Brewing Company", 
+                "World Brews, Winery Exchange", 
+                "Rhinegeist", 
+                "Boston Beer Company", 
+                "Snoqualmie Falls Brewing Company", 
+                "White Rabbit Brewing Company", 
+                "Breckenridge Brewery", 
+                "Oskar Blues Brewery", 
+                "Nomad Brewing Co.", 
+                "Backcountry Brewery", 
+                "Good People Brewing Company", 
+                "Indeed Brewing Company", 
+                "Spider Bite Beer Co.", 
+                "Mendocino Brewing Company", 
+                "Fremont Brewing", 
+                "Sasquatch Brewery", 
+                "St. George Brewing Company", 
+                "Fat Head's Brewery"
+              ], 
+              "description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.", 
+              "ibu_max": 42.0, 
+              "ibu_min": 30.0, 
+              "id": 1, 
+              "name": "American Pale", 
+              "srm": 10.0, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 12.0, 
+              "abv_min": 8.4000000000000004, 
+              "beers": [
+                "Quince Anos", 
+                "Old Barrel Dweller", 
+                "Beer Camp: Dry-Hopped Barleywine-Style Ale (2017)"
+              ], 
+              "breweries": [
+                "Steamworks Brewing Company", 
+                "Driftwood Brewery", 
+                "Avery Brewing Company"
+              ], 
+              "description": "American style barley wines range from amber to deep copper-garnet in color and have a full body and high residual malty sweetness. Complexity of alcohols and fruity-ester characters are often high and counterbalanced by assertive bitterness and extraordinary alcohol content. Hop aroma and flavor are at medium to very high levels. American type hops are often used but not necessary for this style. Very low levels of diacetyl may be acceptable. A caramel and/or toffee aroma and flavor are often part of the character. Characters indicating oxidation, such as vinous (sometimes sherry-like) aromas and/or flavors, are not generally acceptable in American-style Barley Wine Ale, however if a low level of age-induced oxidation character harmonizes and enhances the overall experience this can be regarded favorably. Chill haze is allowable at cold temperatures.", 
+              "ibu_max": 100.0, 
+              "ibu_min": 60.0, 
+              "id": 2, 
+              "name": "American Barleywine", 
+              "srm": 16.5, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 6.0, 
+              "abv_min": 4.5, 
+              "beers": [
+                "Exile Red Ale", 
+                "Double Take Amber Ale", 
+                "The Bee's Knees\u2122", 
+                "Bleeding Heart", 
+                "Red Tag Ale", 
+                "Native Amber", 
+                "Levity Amber Ale", 
+                "Free Range Red Ale", 
+                "Ale Camino Amber Ale"
+              ], 
+              "breweries": [
+                "Evolution Craft Brewing Company", 
+                "World Brews, Winery Exchange", 
+                "Eudora Brewing Company", 
+                "Second Self Beer Company", 
+                "Petaluma Hills Brewing Co", 
+                "COOP Ale Works", 
+                "Odell Brewing Company", 
+                "Laurelwood Brewing Company", 
+                "Tap It Brewing Co"
+              ], 
+              "description": "American amber/red ales range from light copper to light brown in color. They are characterized by American-variety hops used to produce the perception of medium hop bitterness, flavor, and medium aroma. Amber ales have medium-high to high maltiness with medium to low caramel character. They should have medium to medium-high body. The style may have low levels of fruityester flavor and aroma. Diacetyl can be either absent or barely perceived at very low levels. Chill haze is allowable at cold temperatures. Slight yeast haze is acceptable for bottle-conditioned products.", 
+              "ibu_max": 40.0, 
+              "ibu_min": 30.0, 
+              "id": 3, 
+              "name": "Amber", 
+              "srm": 14.5, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 10.5, 
+              "abv_min": 7.5, 
+              "beers": [
+                "Superfluid", 
+                "Acceleration", 
+                "Tri PA", 
+                "Crowd Control", 
+                "Heelch O\u2019 Hops", 
+                "Hop Rising", 
+                "Cannonball Double IPA", 
+                "Hop Juice Double IPA", 
+                "Rock-N-Rolla", 
+                "DUO", 
+                "Boss Tweed NE DIPA", 
+                "Boss Tweed NE DIPA", 
+                "Mr. Delicious", 
+                "Dodgy Knight", 
+                "Blind Tiger", 
+                "Perpetual IPA", 
+                "Hoot'n & Holler'n", 
+                "Big Eddy Imperial IPA", 
+                "Beavertown / Garage Project / Stone Fruitallica"
+              ], 
+              "breweries": [
+                "Short's Brewing Company", 
+                "Gravity Brewing", 
+                "Full Pint Brewing Company", 
+                "Southern Prohibition Brewing", 
+                "Anderson Valley Brewing Company", 
+                "Squatters Craft Beers", 
+                "Natty Greene's Brewing Co.", 
+                "Left Coast Brewing", 
+                "Danny Boy Beer Works", 
+                "Lucid Brewing", 
+                "Old Nation Brewing Company", 
+                "Arbor Brewing Company", 
+                "TailGate Brewery", 
+                "Speakeasy Ales and Lagers", 
+                "Tr\u00f6egs Brewing Company", 
+                "Jekyll Brewing", 
+                "Jacob Leinenkugel Brewing Company", 
+                "Stone Brewing"
+              ], 
+              "description": "Imperial or Double India Pale Ales have intense hop bitterness, flavor and aroma. Alcohol content is medium-high to high and notably evident. They range from deep golden to medium copper in color. The style may use any variety of hops. Though the hop character is intense it's balanced with complex alcohol flavors, moderate to high fruity esters and medium to high malt character. Hop character should be fresh and lively and should not be harsh in quality. The use of large amounts of hops may cause a degree of appropriate hop haze. Imperial or Double India Pale Ales have medium-high to full body. Diacetyl should not be perceived. The intention of this style of beer is to exhibit the fresh and bright character of hops. Oxidative character and aged character should not be present.", 
+              "ibu_max": 100.0, 
+              "ibu_min": 65.0, 
+              "id": 4, 
+              "name": "Imperial IPA", 
+              "srm": 9.0, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 5.9000000000000004, 
+              "abv_min": 5.2999999999999998, 
+              "beers": [
+                "Memento Mori", 
+                "Dragonhosen", 
+                "Oktoberfest"
+              ], 
+              "breweries": [
+                "Greenbush Brewing Co", 
+                "Boulder Beer Company", 
+                "Rhinelander Brewing Company"
+              ], 
+              "description": "The American style of these classic German beers is distinguished by a comparatively greater degree of hop character. In general the style is characterized by a medium body and broad range of color from golden to reddish brown. Sweet maltiness should dominate over clean hop bitterness. The bitterness should not be aggressive or harsh. Malt character should be light-toasted rather than strongly caramel (though a low level of light caramel character is acceptable). Bread or biscuit-like malt character is acceptable in aroma and flavor. Hop aroma and flavor should be notable but at low to medium levels. Fruity esters should not be perceived. Diacetyl and chill haze should not be perceived.", 
+              "ibu_max": 30.0, 
+              "ibu_min": 20.0, 
+              "id": 5, 
+              "name": "American Oktoberfest", 
+              "srm": 9.5, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 12.0, 
+              "abv_min": 7.0, 
+              "beers": [
+                "B.O.R.I.S. The Crusher Oatmeal-Imperial Stout"
+              ], 
+              "breweries": [
+                "Hoppin' Frog Brewery"
+              ], 
+              "description": "Dark copper to very dark brown, British-style imperial stouts typically have high alcohol content. The extremely rich malty flavor (often characterized as toffee-like or caramel-like) and aroma are balanced with medium hopping and high fruity-ester characteristics. Bitterness should be moderate and balanced with sweet malt character. The bitterness may be higher in the darker versions. Roasted malt astringency is very low or absent. Bitterness should not overwhelm the overall character. Hop aroma can be subtle to moderately hop-floral, -citrus or -herbal. Diacetyl (butterscotch) levels should be absent.", 
+              "ibu_max": 65.0, 
+              "ibu_min": 45.0, 
+              "id": 6, 
+              "name": "British Imperial Stout", 
+              "srm": 27.5, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 6.4000000000000004, 
+              "abv_min": 4.0, 
+              "beers": [
+                "Fireside Nut Brown", 
+                "Gillespie Brown Ale", 
+                "Pub Brown"
+              ], 
+              "breweries": [
+                "Jacob Leinenkugel Brewing Company", 
+                "Twisted Manzanita Ales", 
+                "Sprecher Brewing Company"
+              ], 
+              "description": "American brown ales range from deep copper to brown in color. Roasted malt caramel-like and chocolate-like characters should be of medium intensity in both flavor and aroma. American brown ales have evident low to medium hop flavor and aroma, medium to high hop bitterness, and a medium body. Estery and fruity-ester characters should be subdued. Diacetyl should not be perceived. Chill haze is allowable at cold temperatures.", 
+              "ibu_max": 45.0, 
+              "ibu_min": 25.0, 
+              "id": 7, 
+              "name": "American Brown", 
+              "srm": 20.5, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 12.0, 
+              "abv_min": 7.0, 
+              "beers": [
+                "Rolling Thunder Imperial Stout", 
+                "Mimi's Breakfast Stout", 
+                "Barrel-Aged Blackout Stout (2014)", 
+                "Huge Arker", 
+                "Bourbon County Rare (2010)"
+              ], 
+              "breweries": [
+                "Rogue Ales", 
+                "Indiana City Brewing Co.", 
+                "Great Lakes Brewing Company", 
+                "Anderson Valley Brewing Company", 
+                "Goose Island Beer Company"
+              ], 
+              "description": "Black in color, American-style imperial stouts typically have a high alcohol content. Generally characterized as very robust. The extremely rich malty flavor and aroma are balanced with assertive hopping and fruity-ester characteristics. Bitterness should be moderately high to very high and balanced with full sweet malt character. Roasted malt astringency and bitterness can be moderately perceived but should not overwhelm the overall character. Hop aroma is usually moderately-high to overwhelmingly hop-floral, -citrus or -herbal. Diacetyl (butterscotch) levels should be absent.", 
+              "ibu_max": 80.0, 
+              "ibu_min": 50.0, 
+              "id": 8, 
+              "name": "American Imperial Stout", 
+              "srm": 40.0, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 11.0, 
+              "abv_min": 7.0, 
+              "beers": [
+                "Holiday Bonus Strong Ale", 
+                "Snow Dazed Winter Ale"
+              ], 
+              "breweries": [
+                "Strike Brewing Co", 
+                "Rochester Mills Beer Company"
+              ], 
+              "description": "Light amber to mid-range brown in color, strong ales are medium to full bodied with a malty sweetness and may have low levels of roast malt character. Hop aroma should be minimal and flavor can vary from none to medium in character intensity. Fruity-ester flavors and aromas can contribute to the character of this ale. Bitterness should be minimal but evident and balanced with malt and/or caramel-like sweetness. Alcohol types can be varied and complex. A rich, often sweet and complex estery character may be evident. Very low levels of diacetyl are acceptable. Chill haze is acceptable at low temperatures. (This style may often be split into two categories, strong and very strong.)", 
+              "ibu_max": 65.0, 
+              "ibu_min": 30.0, 
+              "id": 9, 
+              "name": "Strong Ale", 
+              "srm": 14.5, 
+              "type": "style"
+            }
+          ], 
+          "totalCount": 65
+        }
+
++ Response 500 (application/json)
+
+# Group Reviews
+
+## Reviews [/reviews/{review_id}]
+A Review object has the following attributes:
++ Parameters
+    + review_id: 1 (required, number) - ID of the Review in form of an integer
+
+### View a Review [GET]
++ Response 200 (application/json)
+
+        {
+            "beer_name": "Rusty Rail Pale Ale", 
+            "brewery_name": "Willoughby Brewing Company", 
+            "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
+            "date": "2014-07-22", 
+            "id": 1, 
+            "rating": 3.5, 
+            "type": "review"
+        }
+
+### All Reviews [/reviews{?limit,offset,order}] 
+A resource representing all of the styles in the database.
+
+We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
+
+We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
+
+We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
++ results - a list of all reviews
++ totalCount - the number of all reviews in the database
+
+#### Retrieve all Reviews [GET]
++ Parameters
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: `9`
+    + offset (number, optional) - The offset number of results to return.
+        + Default: `9`
+    + order (string, optional) - The string must be 'asc' or 'desc'
+    
++ Response 200 (application/json)
+        
+        {
+            "records": [
+                {
+                    "beer_name": "Rusty Rail Pale Ale", 
+                    "brewery_name": "Willoughby Brewing Company", 
+                    "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
+                    "date": "2014-07-22", 
+                    "id": 1, 
+                    "rating": 3.5, 
+                    "type": "review"
+                }, 
+                {
+                    "beer_name": "Rusty Rail Pale Ale", 
+                    "brewery_name": "Willoughby Brewing Company", 
+                    "comment": "Draft at Pigskin in Athens during Ohio Brew Week. Pours a clear orange color with a small off-white head that laces the glass. Notes of florals, citrus fruits, dry grains, pale malts, grass, and straw. Light-bodied, with moderate carbonation and a bitter mouthfeel. Decent APA.", 
+                    "date": "2014-07-16", 
+                    "id": 2, 
+                    "rating": 3.2999999999999998, 
+                    "type": "review"
+                }
+            ], 
+            "totalCount": 596
+        }

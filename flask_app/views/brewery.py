@@ -8,16 +8,18 @@ from models import db, Brewery
 def getBreweries():
     allBreweries = []
     totalCount = db.session.query(Brewery.id).count()
-    
-    order = request.args.get('order')
-    if order == "asc" or order == "desc":
-        lim = totalCount
-    else:
-        lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
-        
-    breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
+    order = request.args.get('order')
+    lim = request.args.get('limit', '9').encode('utf-8')
+    off = request.args.get('offset', '0').encode('utf-8')
+    lim = int(lim)
+    off = int(off)
+    if order == "asc":
+        breweries = db.session.query(Brewery).order_by(Brewery.name).limit(lim).offset(off).all()
+    elif order == "desc":
+        breweries = db.session.query(Brewery).order_by(Brewery.name.desc()).limit(lim).offset(off).all()
+    else:
+        breweries = db.session.query(Brewery).limit(lim).offset(off).all()
 
     for brewery in breweries:
         b = {
@@ -35,11 +37,6 @@ def getBreweries():
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
-
-    if order == "asc":
-        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])
-    elif order == "desc":
-        allBreweries = sorted(allBreweries, key=lambda brewery: brewery['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allBreweries}
     response = jsonify(payload)
