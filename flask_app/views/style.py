@@ -11,16 +11,17 @@ def getStyles():
     allStyles = []
     totalCount = db.session.query(Style.id).count()
 
-
     order = request.args.get('order')
-    if order == "asc" or order == "desc":
-        lim = totalCount
+    lim = request.args.get('limit', '9').encode('utf-8')
+    off = request.args.get('offset', '0').encode('utf-8')
+    lim = int(lim)
+    off = int(off)
+    if order == "asc":
+        styles = db.session.query(Style).order_by(Style.name).limit(lim).offset(off).all()
+    elif order == "desc":
+        styles = db.session.query(Style).order_by(Style.name.desc()).limit(lim).offset(off).all()
     else:
-        lim = request.args.get('limit', 9)
-        
-    off = request.args.get('offset',0)
-
-    styles = db.session.query(Style).limit(lim).offset(off).all()
+        styles = db.session.query(Style).limit(lim).offset(off).all()
 
 
     for style in styles:
@@ -38,11 +39,6 @@ def getStyles():
         'breweries':[brewery.serializeName for brewery in style.breweries]
         }
         allStyles.append(s)
-
-    if order == "asc":
-        allStyles = sorted(allStyles, key=lambda style: style['name'])
-    elif order == "desc":
-        allStyles = sorted(allStyles, key=lambda style: style['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allStyles}
     response = jsonify(payload)

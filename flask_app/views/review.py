@@ -10,13 +10,16 @@ def getReviews():
     totalCount = db.session.query(Review.id).count()
 
     order = request.args.get('order')
-    if order == "asc" or order == "desc":
-        lim = totalCount
+    lim = request.args.get('limit', '9').encode('utf-8')
+    off = request.args.get('offset', '0').encode('utf-8')
+    lim = int(lim)
+    off = int(off)
+    if order == "asc":
+        reviews = db.session.query(Review).order_by(Review.rating).limit(lim).offset(off).all()
+    elif order == "desc":
+        reviews = db.session.query(Review).order_by(Review.rating.desc()).limit(lim).offset(off).all()
     else:
-        lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
-
-    reviews = db.session.query(Review).limit(lim).offset(off).all()
+        reviews = db.session.query(Review).limit(lim).offset(off).all()
 
     for review in reviews:
         r = {
@@ -29,11 +32,6 @@ def getReviews():
         'brewery_name' : review.beer.brewery.name
         }
         allReviews.append(r)
-
-    if order == "asc":
-        allReviews = sorted(allReviews, key=lambda review: review['rating'])
-    elif order == "desc":
-        allReviews = sorted(allReviews, key=lambda review: review['rating'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allReviews}
     response = jsonify(payload)

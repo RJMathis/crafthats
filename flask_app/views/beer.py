@@ -11,13 +11,16 @@ def getBeers():
     totalCount = db.session.query(Beer.id).count()
 
     order = request.args.get('order')
-    if order == "asc" or order == "desc":
-        lim = totalCount
+    lim = request.args.get('limit', '9').encode('utf-8')
+    off = request.args.get('offset','0').encode('utf-8')
+    lim = int(lim)
+    off = int(off)
+    if order == "asc":
+        beers = db.session.query(Beer).order_by(Beer.name).limit(lim).offset(off).all()
+    elif order == "desc":
+        beers = db.session.query(Beer).order_by(Beer.name.desc()).limit(lim).offset(off).all()
     else:
-        lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
-    
-    beers = db.session.query(Beer).limit(lim).offset(off).all()
+        beers = db.session.query(Beer).limit(lim).offset(off).all()
 
 
     for beer in beers:
@@ -33,11 +36,6 @@ def getBeers():
             'style': beer.style.name
         }
         allBeers.append(b)
-
-    if order == "asc":
-        allBeers = sorted(allBeers, key=lambda beer: beer['name'])
-    elif order == "desc":
-        allBeers = sorted(allBeers, key=lambda beer: beer['name'])[::-1]
 
     payload = {'totalCount': totalCount, 'records': allBeers}
     response = jsonify(payload)
