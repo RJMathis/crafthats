@@ -60,6 +60,21 @@ export default class Reviews extends Component {
         }
     }
 
+    sort = (order, e) => {
+        e.preventDefault()
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
+        let self = this
+        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+            .then((res) => {
+                // Set state with result
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     callAPI = () => {
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
@@ -106,6 +121,11 @@ export default class Reviews extends Component {
         // Add column for Brewery
         return (
             <div className="container">
+                <strong>{"Sort By: "}</strong>
+                <div className="button btn-group">
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+                </div>
                 <div className="col-xs-12">
                     <h2 className="sub-header">Beers</h2>
                     <table className="table table-responsive table-striped">

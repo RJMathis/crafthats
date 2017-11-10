@@ -50,6 +50,21 @@ export default class Styles extends Component {
         }
     }
 
+    sort = (order, e) => {
+        e.preventDefault()
+        let limit = this.state.pgSize
+        let offset = this.state.page * this.state.pgSize
+        let self = this
+        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+            .then((res) => {
+                // Set state with result
+                self.setState({styles: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     callAPI = () => {
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
@@ -103,6 +118,11 @@ export default class Styles extends Component {
 
         return (
             <div className="container">
+                <strong>{"Sort By: "}</strong>
+                <div className="button btn-group">
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
+                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+                </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
                 { chunk(styleComponents, 3).map(function(row) {
                     return (
