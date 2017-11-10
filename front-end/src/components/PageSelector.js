@@ -8,7 +8,8 @@ export default class PageSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentId: 0
+            currentId: 0,
+
         }
     }
 

@@ -67,11 +67,11 @@ export default class Beer extends Component {
                             </tr>
                             <tr>
                                 <td>Style:</td>
-                                <td>Rye Ale</td>
+                                <td>{this.state.item.style}</td>
                             </tr>
                             <tr>
                                 <td>Review:</td>
-                                <td>{ this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed"}</td>
+                                <td>{review}</td>
                             </tr>
                             </tbody>
                         </table>

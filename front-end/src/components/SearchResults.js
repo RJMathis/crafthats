@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom';
 
 import SearchSelector from './SearchSelector';
 import PageSelector from './PageSelector';
 
-export default class SearchResults extends Component {
+class SearchResults extends Component {
     constructor (props) {
         super (props);
         this.state = {
@@ -13,6 +14,9 @@ export default class SearchResults extends Component {
             pgSize: 10,
             searchTerm: this.props.location.state.searchTerm,
             pathname: "/SearchResults"
+        }
+        this.contextTypes = {
+            router: () => true, // replace with PropTypes.object if you use them
         }
     }
 
@@ -53,8 +57,21 @@ export default class SearchResults extends Component {
      * componentDidUpdate()
      */
 
-    componentDidUpdate(prevState, nextState) {
-        if (nextState.page !== this.state.page) {
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
+            console.log("props weren't equal")
+            this.setState({
+                searchTerm: nextProps.location.state.searchTerm,
+                results: nextProps.location.state.results
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.searchTerm !== this.state.searchTerm) {
+            this.forceUpdate();
+        }
+        if (prevState.page !== this.state.page) {
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -73,16 +90,22 @@ export default class SearchResults extends Component {
     render() {
         // Create an array of X components with 1 for each result gathered from Search
         if (this.state.results.length === 0) {
-            return (<div className="container">
-                        <div className="col-12">
-                            <h3>No results were found</h3>
+            return (<div className="container" style={{height: 100}}>
+                        <div className="mh-50">
+                            <div className="col-12">
+                                <h3>No results were found</h3>
+                            </div>
+                            <div className="row align-items-center">
+                                <button className="btn btn-link"
+                                        onClick={this.props.history.goBack}>Go Back</button>
+                            </div>
                         </div>
                     </div>);
         }
         let searchTerm = this.state.searchTerm
         let resultRows = this.state.results.map(function(result) {
             return (
-                <SearchSelector item={result} searchTerm={searchTerm} navigateTo="/Result"/>
+                <SearchSelector key={result.id} item={result} searchTerm={searchTerm} navigateTo="/Result"/>
             );
         })
 
@@ -90,6 +113,7 @@ export default class SearchResults extends Component {
             <div className="container">
                 <div className="col-xs-12">
                     <h2 className="sub-header">Search Results</h2>
+                    <h4>Found: {this.state.results.length} results</h4>
                     <table className="table table-responsive table-hover">
                         <tbody>
                         {resultRows}
@@ -105,3 +129,5 @@ export default class SearchResults extends Component {
         );
     }
 }
+
+export default withRouter(SearchResults);
