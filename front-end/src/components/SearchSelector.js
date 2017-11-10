@@ -54,46 +54,73 @@ export default class SearchSelector extends Component {
             return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.item}}} push={true} />;
         }
 
-        let attr1;
-        let attr2;
-        let attr3;
+        let attributes = {}
+        let name
 
-        if ('organic' in this.state.item) {               // This is a beer item
-            attr1 = this.state.item.name
-            attr2 = this.state.item.style
-            attr3 = this.state.item.brewery
+        if (this.state.item.type === "beer") {             // This is a beer item
+            name = this.state.item.name
+            attributes = {
+                name: this.state.item.name,
+                style: this.state.item.style,
+                brewery: this.state.item.brewery,
+                abv: this.state.item.abv,
+                ibu: this.state.item.ibu,
+                organic: this.state.item.organic
+            }
 
-        } else if ('established' in this.state.item) {    // This is a brewery item
-            attr1 = this.state.item.name
-            attr2 = this.state.item.state
-            attr3 = this.state.item.styles
+        } else if (this.state.item.type === "brewery") {    // This is a brewery item
+            name = this.state.item.name
+            attributes = {
+                name: this.state.item.name,
+                state: this.state.item.state,
+                styles: this.state.item.styles,
+                beers: this.state.item.beers,
+                city: this.state.item.city,
+                country: this.state.item.country,
+                established: this.state.item.established,
+                description: this.state.item.description ? truncate(this.state.item.description, 300) : "No description available"
+            }
 
-        } else if ('comment' in this.state.item) {    // This is a review item
-            attr1 = this.state.item.beer_name
-            attr2 = this.state.item.brewery_name
-            attr3 = this.state.item.comment
+        } else if (this.state.item.type === "review") {    // This is a review item
+            name = this.state.item.beer_name
+            attributes = {
+                beer_name: this.state.item.beer_name,
+                brewery_name: this.state.item.brewery_name,
+                date: this.state.item.date,
+                rating: this.state.item.rating,
+                comment: this.state.item.comment ? truncate(this.state.item.comment, 300) : "No comment available"
+            }
 
-        } else if ('abv_max' in this.state.item) {    // This is a style item
-            attr1 = this.state.item.name
-            attr2 = ''
-            attr3 = truncate(this.state.item.description, 300)
-
+        } else if (this.state.item.type === "style") {    // This is a style item
+            name = this.state.item.name
+            attributes = {
+                name: this.state.item.name,
+                srm: this.state.item.srm,
+                beers: this.state.item.beers,
+                breweries: this.state.item.breweries,
+                abv_min: this.state.item.abv_min,
+                abv_max: this.state.item.abv_max,
+                ibu_min: this.state.item.ibu_min,
+                ibu_max: this.state.item.ibu_max,
+                description: this.state.item.description ? truncate(this.state.item.description, 300) : "No description available"
+            }
         }
+
+        let self = this
+        let searchRows = Object.keys(attributes).map(function(key) {
+            return (
+                <tr>
+                    <td className="col-md-2"><strong>{key + ":  "}</strong><Highlighter searchWords={[self.state.searchTerm]} textToHighlight={attributes[key].toString()} /></td>
+                </tr>
+            );
+        })
 
         return (
             <tr className="clickable-row" onClick={this.handleNavigation}>
                 <tr>
-                    <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}><h3><strong>{attr1}</strong></h3></button></td>
+                    <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}><h3><strong>{this.state.item.type} - {name}</strong></h3></button></td>
                 </tr>
-                <tr>
-                    <strong>
-                        <td className="col-md-2"><Highlighter searchWords={[this.state.searchTerm]} textToHighlight={attr1.toString()} /></td>
-                        <td className="col-md-2"><Highlighter searchWords={[this.state.searchTerm]} textToHighlight={attr2.toString()} /></td>
-                    </strong>
-                </tr>
-                <tr>
-                    <td className="col-md-10"><Highlighter searchWords={[this.state.searchTerm]} textToHighlight={attr3.toString()} /></td>
-                </tr>
+                {searchRows}
             </tr>
         );
     }

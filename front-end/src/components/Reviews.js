@@ -42,7 +42,6 @@ export default class Reviews extends Component {
 
     handlePageChange = (page, e) => {
         e.preventDefault()
-        console.log("in handlePageChange")
         //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
     }

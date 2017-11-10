@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Fuse from 'fuse.js';
 import {Redirect} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 
 
-export default class Search extends Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,26 +16,26 @@ export default class Search extends Component {
             totalCount: 0,
             numPages: 0,
             pgSize: 9,
+            loading: false,
             navigate: false
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/';
     }
 
     handleSearch = (e) => {
-        if (e) {
-            e.preventDefault()
-        }
+        e.preventDefault()
         this.setState({ searchTerm: this.input.value });
         this.callAPI()
     }
 
     callAPI = () => {
         let self = this
-        let beerKeys = ["abv", "ibu", "brewery", "name", "style"]
+        let beerKeys = ["abv", "ibu", "brewery", "name", "style", "organic"]
         let breweryKeys = ["beers", "city", "country", "description", "established", "name", "state", "styles"]
-        let styleKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
-        let reviewKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name"]
+        let reviewKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
+        let styleKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name", "srm"]
 
+        this.setState({loading: true})
         axios.all([
             axios.get(self.apiUrl+"/beers?limit=500"),
             axios.get(self.apiUrl+"/breweries?limit=500"),
@@ -42,6 +44,7 @@ export default class Search extends Component {
         ])
             .then(axios.spread((beers, breweries, styles, reviews) => {
                 // Set state with result
+                this.setState({loading: false})
                 let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
                 let allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
                 self.searchData(allRecords, allKeys)
@@ -61,18 +64,27 @@ export default class Search extends Component {
         };
         let fuse = new Fuse(records, options);
         let result = fuse.search(this.state.searchTerm);
-        this.setState({ results: result, navigate: true });
+        this.setState({ results: result, navigate: true, loading: false });
     }
 
 
     render() {
 
         if (this.state.navigate) {
-            return <Redirect to={{pathname: '/SearchResults', state: {results: this.state.results, navigate: false, searchTerm: this.state.searchTerm}}} push={true} />;
-
+            this.setState({navigate: false})
+            return <Redirect to={{pathname: '/SearchResults', state: {results: this.state.results, searchTerm: this.state.searchTerm}}} push={true} />;
         }
         return (
             <form className="navbar-form navbar-right" onSubmit={this.handleSearch}>
+                <div>
+                    <div className='sweet-loading'>
+                        <RingLoader
+                            color={'#003b6f'}
+                            loading={this.state.loading}
+                        />
+                    </div>
+                    {this.state.loading ? "Loading..." : ""}
+                </div>
                 <div className="form-group">
                     <div className="input-group">
                         <input type="text"
@@ -91,3 +103,5 @@ export default class Search extends Component {
         );
     }
 }
+
+export default withRouter(Search);

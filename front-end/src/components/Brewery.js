@@ -77,10 +77,6 @@ export default class Brewery extends Component {
                                 <td>Styles:</td>
                                 <td>{this.state.item.styles}</td>
                             </tr>
-                            <tr>
-                                <td>Review:</td>
-                                <td>{this.state.item.review}</td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>

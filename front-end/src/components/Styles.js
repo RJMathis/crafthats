@@ -32,7 +32,6 @@ export default class Styles extends Component {
 
     handlePageChange = (page, e) => {
         e.preventDefault()
-        console.log("in handlePageChange")
         //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
     }
@@ -52,7 +51,6 @@ export default class Styles extends Component {
     }
 
     callAPI = () => {
-        console.log("in callAPI")
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this
@@ -77,8 +75,6 @@ export default class Styles extends Component {
      */
 
     componentDidUpdate(prevState, nextState) {
-        console.log("updated component")
-        console.log(this.state.page, nextState.page)
         if (nextState.page !== this.state.page) {
             this.callAPI()
             window.scrollTo({

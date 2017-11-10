@@ -99,6 +99,10 @@ export default class Style extends Component {
                                 <td>{this.state.item.abv_max}</td>
                             </tr>
                             <tr>
+                                <td>SRM:</td>
+                                <td>{this.state.item.srm}</td>
+                            </tr>
+                            <tr>
                                 <td>Beers:</td>
                                 <td>{this.state.item.beers}</td>
                             </tr>
