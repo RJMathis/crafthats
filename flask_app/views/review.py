@@ -58,3 +58,26 @@ def getReviewInfo(review_id):
     except AttributeError:
         return "Server Error 500: Invalid review_id"
     return jsonify(r)
+
+@app.route('/reviews/rating/<float:rating>', methods = ['GET'])
+def filterReviewByRating(rating):
+    allReviews = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    reviews = db.session.query(Review).filter_by(rating=rating).limit(lim).offset(off).all()
+
+    for review in reviews:
+        r = {
+        'type' : "review",
+        'id' : review.id,
+        'date': review.date,
+        'rating' : review.rating,
+        'comment' : review.comment,
+        'beer_name' : review.beer.name,
+        'brewery_name' : review.beer.brewery.name
+        }
+        allReviews.append(r)
+
+    return jsonify(allReviews)
+
+
