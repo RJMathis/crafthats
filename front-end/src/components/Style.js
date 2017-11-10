@@ -60,7 +60,7 @@ export default class Style extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <div className="style-image" data-srm={this.state.item.srm} alt={this.state.item.name}>
+                            <div className="style-image" alt={this.state.item.name}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="175" height="333" viewBox="0 0 264 504.7" className="beerGlass js-beerGlass">
                                     <path className="foam" d="M231.7 49.3c-4.3 0-8.3 1.2-11.7 3.2-1.4-17.1-15.7-30.5-33.1-30.5-11.3 0-21.2 5.6-27.2 14.2C150.2 16.6 130.2 3 107 3 81.2 3 59.3 19.8 51.7 43c-3.5-1.5-7.3-2.3-11.3-2.3-16 0-29 13-29 29h243.2c-1.3-11.5-11.1-20.4-22.9-20.4z"/>
                                     <path className="glass" d="M43 501.7h178l40-432H3z"/>
@@ -75,7 +75,7 @@ export default class Style extends Component {
                         </div>
                     </div>
                     <div className="col-md-6">
-                        <h2 className="sub-header">{this.state.name}</h2>
+                        <h2 className="sub-header">{this.state.item.name}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>

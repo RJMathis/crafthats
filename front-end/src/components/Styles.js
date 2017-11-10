@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import chunk from 'lodash.chunk';
 import axios from 'axios';
 
-import ItemSelector from './ItemSelector';
+import StyleSelector from './StyleSelector';
 import PageSelector from './PageSelector';
 
 export default class Styles extends Component {
@@ -101,7 +101,7 @@ export default class Styles extends Component {
         // Create an array of X components with 1 for each Style gathered from API call
         let styleComponents = this.state.styles.map(function(style) {
             return (
-                <ItemSelector item={style} navigateTo="/Style"/>
+                <StyleSelector item={style} navigateTo="/Style"/>
             );
         })
 

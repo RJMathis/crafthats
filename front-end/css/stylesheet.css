@@ -1,7 +1,7 @@
 .title {
-  font-family: 'Fascinate Inline', cursive;
+  font-family: 'Oswald', sans-serif;
   float: left;
-  width: 40%;
+  width: 100%;
 }
 
 .nav {
@@ -65,8 +65,19 @@
   -ms-transform: translate(-50%, -50%);
 }
 
+.style-text {
+  width: 45%;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.style-image {
+  padding-top: 11.3%;
+}
+
 .img-thumbnail {
+  cursor: pointer;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+  width: 100%
 }
 
 .img-about {
