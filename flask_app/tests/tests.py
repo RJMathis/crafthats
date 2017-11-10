@@ -35,6 +35,17 @@ class DBASE(unittest.TestCase):
         self.assertEqual(b.name, "Brewery1")
         self.assertEqual(b.id, 1)
 
+    def testBeerById(self):
+        b = Beer(name="Beer1", organic="Y", abv=10, ibu=15, brewery_id=None, style_id=None,
+                      images="thisisalink.html")
+        db.session.add(b)
+        db.session.commit()
+        beer = getBeerInfo(1)
+        self.assertEqual(beer.abv, 15)
+        self.assertEqual(beer.name, "Brewery1")
+        self.assertEqual(beer.id, 1)
+
+
     def testReview(self):
         rev = Review(date="1982-08-09", rating=5, comment="Review1 was great!", beer_name=None, brewery_name=None)
         db.session.add(rev)
@@ -43,6 +54,16 @@ class DBASE(unittest.TestCase):
         self.assertEqual(rev.rating, 5)
         self.assertEqual(rev.comment, "Review1 was great!")
         self.assertEqual(rev.id, 1)
+
+    def testReviewById(self):
+        rev = Review(date="1982-08-09", rating=5, comment="Review1 was great!", beer_name=None, brewery_name=None)
+        db.session.add(rev)
+        db.session.commit()
+        review = getReviewInfo(1)
+        self.assertEqual(review.rating, 5)
+        self.assertEqual(review.comment, "Review1 was great!")
+        self.assertEqual(review.id, 1)
+
 
     def Update(self):
         b = Beer(name="Beer1", organic="Y", abv=10, ibu=15, brewery_id=None, style_id=None,
