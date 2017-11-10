@@ -80,6 +80,11 @@
   width: 100%
 }
 
+.reviews-img-thumbnail {
+  width: 150px;
+  height: 150px;
+}
+
 .img-about {
   width: 318px;
 }

@@ -54,6 +54,9 @@ export default class ReviewSelector extends Component {
         return (
             <tr>
                 <td><button type="button" className="btn btn-link" onClick={this.handleNavigation}>{this.state.item.beer_name}</button></td>
+                <td>
+                    <img className="img-thumbnail reviews-img-thumbnail" src={this.state.item.image} alt={this.state.item.beer_name} />
+                </td>
                 <td>{this.state.item.date}</td>
                 <td>{this.state.item.rating}</td>
             </tr>
