@@ -93,5 +93,29 @@ def filterStyleBySRM(srm_val):
         allStyles.append(s)
 
     return jsonify(allStyles)
+@app.route('/styles/abv/<float:abv>', methods = ['GET'])
+def filterStyleByAbv(abv):
+    allStyles = []
+    lim = request.args.get('limit', 9)
+    off = request.args.get('offset',0)
+    styles = Style.query.filter(Style.abv_min <= abv).filter(Style.abv_max >= abv).limit(lim).offset(off).all()
+    for style in styles:
+        s = {
+        'type' : "style",
+        'id' : style.id,
+        'name' : style.name,
+        'description' : style.description,
+        'ibu_min' : style.ibu_min,
+        'ibu_max' : style.ibu_max,
+        'abv_min' : style.abv_min,
+        'abv_max' : style.abv_max,
+        'srm'     : style.srm,
+        'beers' : [beer.serializeName for beer in style.beers],
+        'breweries':[brewery.serializeName for brewery in style.breweries]
+        }
+        allStyles.append(s)
+    
+    return jsonify(allStyles)
+
 
 
