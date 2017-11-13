@@ -11,10 +11,11 @@ export default class Reviews extends Component {
         this.state = {
             reviews: [],
             page: 0,
-            numPages: 5,
-            pgSize: 10,
+            numPages: 0,
+            totalCount: 0,
+            pgSize: 9,
+            order: "",
             navigate: false,
-            sort: "",
             navigateTo: '/Review'
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/reviews';
@@ -65,14 +66,16 @@ export default class Reviews extends Component {
         if (e) {
             e.preventDefault()
         }
+        this.setState({order: order})
+
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this
-        this.setState({sort: order})
-        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+        let url = self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset
+        axios.get(url)
             .then((res) => {
                 // Set state with result
-                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+                self.setState({ reviews: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
             })
             .catch((error) => {
                 console.log(error)
@@ -87,8 +90,7 @@ export default class Reviews extends Component {
         axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
-
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
             })
             .catch((error) => {
                 console.log(error)
@@ -102,11 +104,7 @@ export default class Reviews extends Component {
 
     componentDidUpdate(prevState, nextState) {
         if (nextState.page !== this.state.page) {
-            if (this.state.order !== "") {
-                this.sort(this.state.order)
-            } else {
-                this.callAPI()
-            }
+            this.sort(this.state.order)
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -131,29 +129,36 @@ export default class Reviews extends Component {
             <div className="container">
                 <strong>{"Sort By: "}</strong>
                 <div className="button btn-group">
-                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
-                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+                    <button type="button"
+                            className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
+                            onClick={(e) => this.sort("asc", e)}>Ascending</button>
+                    <button type="button"
+                            className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
+                            onClick={(e) => this.sort("desc", e)}>Descending</button>
                 </div>
-                <div className="col-xs-12">
-                    <h2 className="sub-header">Beers</h2>
-                    <table className="table table-responsive table-striped">
-                        <thead>
-                        <tr>
-                            <th>Beer</th>
-                            <th>Image</th>
-                            <th>Date</th>
-                            <th>Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {reviewRows}
-                        </tbody>
-                    </table>
+                <div className="row">
+                    <div className="col-xs-12">
+                        <h2 className="sub-header">Beers</h2>
+                        <table className="table table-responsive table-striped">
+                            <thead>
+                            <tr>
+                                <th>Beer</th>
+                                <th>Image</th>
+                                <th>Date</th>
+                                <th>Rating</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {reviewRows}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <PageSelector handlePageChange={this.handlePageChange}
                               handlePrev={this.handlePrev}
                               handleNext={this.handleNext}
                               numPages={this.state.numPages}
+                              currentPage={this.state.page}
                               navigateTo="/Reviews"/>
             </div>
         );

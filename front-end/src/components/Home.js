@@ -44,7 +44,7 @@ export default class Home extends Component {
             </div>
             <div className="container">
                 <div className="text-center"><h1 className="title">About Brewtiful World</h1></div>
-                <div className="text-center"><h2>A Brewtiful place to find brews and brewries!</h2></div>
+                <div className="text-center"><h2>A Brewtiful place to find brews and breweries!</h2></div>
             </div>
         </div>
     );
