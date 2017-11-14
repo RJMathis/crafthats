@@ -60,10 +60,13 @@ class SearchResults extends Component {
      */
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps.location.state)
+        console.log(this.props.location.state)
+
         if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
             this.setState({
                 searchTerm: nextProps.location.state.searchTerm,
-                results: chunk(this.props.location.state.results, 10)
+                results: chunk(nextProps.location.state.results, 10)
             });
         }
     }
@@ -90,9 +93,10 @@ class SearchResults extends Component {
 
     render() {
         console.log(this.state.results)
-        console.log(this.state.results[this.state.page])
+        console.log(this.state.results.length)
+
         // Create an array of X components with 1 for each result gathered from Search
-        if (this.props.location.state.results === 0) {
+        if (this.state.results.length === 0) {
             return (<div className="container" style={{height: 100}}>
                         <div className="mh-50">
                             <div className="col-12">
