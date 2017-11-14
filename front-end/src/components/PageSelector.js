@@ -8,8 +8,8 @@ export default class PageSelector extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentId: 0,
-
+            minPage: 0,
+            maxPage: 5
         }
     }
 
@@ -30,30 +30,53 @@ export default class PageSelector extends Component {
      * componentDidUpdate()
      */
 
+    componentWillReceiveProps() {
+        if (this.props.currentPage < this.state.minPage) {
+            this.setState({minPage: this.state.minPage - 5, maxPage: this.state.maxPage - 5})
+        }
+        else if (this.props.currentPage >= this.state.maxPage) {
+            this.setState({minPage: this.state.minPage + 5, maxPage: this.state.maxPage + 5})
+        }
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()
      */
 
+    handleEllipsis(min, max) {
+        this.setState({minPage: min, maxPage: max});
+    }
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
         let pageNumbers = [];
 
-        for (let i = 0; i < this.props.numPages; i++) {
+        for (let i = this.state.minPage; i < this.props.numPages && i < this.state.maxPage; i++) {
+            if (i === this.state.minPage && this.state.minPage !== 0) {
+                pageNumbers.push(
+                    <li>
+                        <a key={i} onClick={(e) => this.handleEllipsis(this.state.minPage - 5, this.state.maxPage - 5)}>...</a>
+                    </li>);
+            }
             pageNumbers.push(
-                <li>
-                    <a key={i}
-                       className={i === this.state.activeId ? "active" : ""}
-                       href={this.props.navigateTo}
+                <li key={i} className={i === this.props.currentPage ? "active" : ""}>
+                    <a href={this.props.navigateTo}
                        onClick={(e) => this.props.handlePageChange(i, e)}>{i+1}</a>
                 </li>);
+            if (i === this.state.maxPage - 1) {
+                pageNumbers.push(
+                    <li>
+                        <a key={i} onClick={(e) => this.handleEllipsis(this.state.minPage + 5, this.state.maxPage + 5)}>...</a>
+                    </li>);
+            }
         }
 
         return (
             <div className="row">
                 <div className="col-md-12 container-thumbnail">
                     <div className="text-center">
+                        <div>Page {this.props.currentPage + 1} of {this.props.numPages} pages</div>
                         <ul className="pagination pagination-lg">
                             <li><a href={this.props.navigateTo} onClick={(e) => this.props.handlePrev(e)}>Prev</a></li>
                             {pageNumbers}
