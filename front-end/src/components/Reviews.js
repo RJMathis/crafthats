@@ -127,14 +127,14 @@ export default class Reviews extends Component {
         // Add column for Brewery
         return (
             <div className="container">
-                <strong>{"Sort By: "}</strong>
+                <strong>{"Sort By Rating: "}</strong>
                 <div className="button btn-group">
                     <button type="button"
                             className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("asc", e)}>Ascending</button>
+                            onClick={(e) => this.sort("desc", e)}>High - Low</button>
                     <button type="button"
                             className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("desc", e)}>Descending</button>
+                            onClick={(e) => this.sort("asc", e)}>Low - High</button>
                 </div>
                 <div className="row">
                     <div className="col-xs-12">
