@@ -73,6 +73,7 @@ def filterByState(state_name):
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     breweries = db.session.query(Brewery).filter_by(state=state_name).limit(lim).offset(off).all()
+    totalCount = db.session.query(Brewery).filter_by(state=state_name).count()
     for brewery in breweries:
         b = {
             'type' : "brewery",
@@ -89,14 +90,15 @@ def filterByState(state_name):
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
-
-    return Response(json.dumps(allBreweries), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allBreweries}
+    return Response(json.dumps(payload), mimetype='application/json')
 @app.route('/breweries/country/<country_name>', methods = ['GET'])
 def filterByCountry(country_name):
     allBreweries = []
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     breweries = db.session.query(Brewery).filter_by(country=country_name).limit(lim).offset(off).all()
+    totalCount = db.session.query(Brewery).filter_by(country=country_name).count()
     for brewery in breweries:
         b = {
             'type' : "brewery",
@@ -114,4 +116,5 @@ def filterByCountry(country_name):
         }
         allBreweries.append(b)
 
-    return Response(json.dumps(allBreweries), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allBreweries}
+    return Response(json.dumps(payload), mimetype='application/json')
