@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
-import ReviewSelector from './ReviewSelector';
-
 
 export default class Beer extends Component {
     constructor (props) {
@@ -52,13 +50,11 @@ export default class Beer extends Component {
 
     getReviews = () => {
         let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
-        console.log(url)
         let self = this
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data)
-                self.setState({reviews: res.data, totalCount: res.data.length});
+                self.setState({reviews: res.data.records, totalCount: res.data.length});
             })
             .catch((error) => {
                 console.log(error)
@@ -85,9 +81,7 @@ export default class Beer extends Component {
         if (this.state.totalCount > 0) {
             let self = this
              beerReviews = this.state.reviews.map(function(review) {
-                 console.log(review)
                  review.image = self.state.item.image
-                 console.log(review)
                 return (
                     <tr className="clickable-row" onClick={(e) => self.handleNavigation(review, e)}>
                         <td><strong>{review.rating}</strong></td>
