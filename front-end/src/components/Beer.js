@@ -42,7 +42,7 @@ export default class Beer extends Component {
         let review = this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed";
 
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">

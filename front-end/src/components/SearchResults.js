@@ -93,7 +93,7 @@ class SearchResults extends Component {
         console.log(this.state.results[this.state.page])
         // Create an array of X components with 1 for each result gathered from Search
         if (this.props.location.state.results === 0) {
-            return (<div className="container" style={{height: 100}}>
+            return (<div className="container sub-container" style={{height: 100}}>
                         <div className="mh-50">
                             <div className="col-12">
                                 <h3>No results were found</h3>
@@ -113,7 +113,7 @@ class SearchResults extends Component {
         })
 
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-xs-12">
                         <h2 className="sub-header">Search Results</h2>

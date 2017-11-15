@@ -123,15 +123,14 @@ export default class Breweries extends Component {
         })
 
         return (
-            <div className="container">
-                <strong>{"Sort By: "}</strong>
+            <div className="container sub-container">
                 <div className="button btn-group">
                     <button type="button"
                             className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("asc", e)}>Ascending</button>
+                            onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
                     <button type="button"
                             className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("desc", e)}>Descending</button>
+                            onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"></i></button>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
                 { chunk(breweryComponents, 3).map(function(row) {

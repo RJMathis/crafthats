@@ -1,7 +1,21 @@
-.title {
-  font-family: 'Oswald', sans-serif;
+h1, h2, .title, .title-nav .title-home, .modal-title {
+  font-family: 'Myriad Pro', sans-serif;
+  font-weight: bold;
+}
+.title .title-sub {
   float: left;
+  margin-bottom: 20px;
+  color: #000;
   width: 100%;
+}
+
+.title-logo, .title-nav {
+  display: inline-block;
+}
+
+.title-logo {
+  position: absolute;
+  top: 14px;
 }
 
 .nav {
@@ -11,7 +25,7 @@
   margin-top: 20px;
 }
 
-.navbar-static-top {
+.navbar-fixed-top {
     background-color: #fff;
     border: none;
     box-shadow: none;
@@ -20,6 +34,28 @@
 
 .navbar > .container {
   padding-bottom: 0;
+}
+
+.navbar-toggle {
+  margin-top: 23px;
+}
+
+.sub-container {
+  margin-top: 90px;
+}
+
+.banner {
+  width: 100%;
+  margin-top: 90px;
+  overflow: hidden;
+  position: relative;
+  height: 365px;
+}
+
+#home-banner {
+  position: absolute;
+  bottom: -188px;
+  width: 100%;
 }
 
 .container {
@@ -33,26 +69,19 @@
     align-items: center;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: rgba( 255, 255, 255, 0.8 );
-}
-
-.container-thumbnail:hover .overlay {
-  opacity: 1;
-}
-
 .container-thumbnail {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.col-home {
+  background: rgba(0,0,0,.4)
+}
+
+.title-home {
+  margin-bottom: 100px;
+  margin-top: 100px;
+  color: #fff;
 }
 
 .text {
@@ -71,13 +100,20 @@
 }
 
 .style-image {
-  padding-top: 11.3%;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .img-thumbnail {
   cursor: pointer;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .5); 
+  -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, .5); 
   width: 100%
+}
+
+.col-md-6 .img-thumbnail {
+  margin-top: 61px;
 }
 
 .reviews-img-thumbnail {
@@ -86,11 +122,27 @@
   height: 150px;
 }
 
+.img-thumbnail:hover {
+  -moz-box-shadow:    inset 0 0 10px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, .5);
+  box-shadow:         inset 0 0 10px rgba(0, 0, 0, .5);
+}
+
+.reviews-img-thumbnail:hover,
+.col-md-6 .img-thumbnail:hover {
+  cursor: initial;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .5); 
+  -moz-box-shadow: 3px 3px 5px rgba(0, 0, 0, .5); 
+}
+
 .img-about {
   width: 318px;
+  max-width: 100%;
 }
 
 .about-description {
+  overflow-y: scroll
   height: 100px;
 }
 
@@ -111,6 +163,19 @@
     border: 1px solid black;
 }
 
+.btn-table {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-table-group > .active {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-table-group {
+  padding-left: 10px;
+}
 
 /*style-image*/
 .foam,
