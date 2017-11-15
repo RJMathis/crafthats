@@ -87,7 +87,7 @@ def filterByOrganic(organic_bool):
         }
         allBeers.append(b)
 
-    return jsonify(allBeers)
+    return Response(json.dumps(allBeers), mimetype='application/json')
 
 @app.route('/beers/style/<style_name>', methods = ['GET'])
 def filterByStyle(style_name):
@@ -112,7 +112,7 @@ def filterByStyle(style_name):
         }
         allBeers.append(b)
 
-    return jsonify(allBeers)
+    return Response(json.dumps(allBeers), mimetype='application/json')
 
 
 
