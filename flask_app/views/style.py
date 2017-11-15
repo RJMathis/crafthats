@@ -76,6 +76,7 @@ def filterStyleBySRM(srm_val):
     srm_val = math.floor(srm_val)
     mod = 1.0 - (srm_val % 1)
     styles = Style.query.filter(Style.srm >= srm_val).filter(Style.srm < (srm_val + mod)).limit(lim).offset(off).all()
+    totalCount = Style.query.filter(Style.srm >= srm_val).filter(Style.srm < (srm_val + mod)).count()
     for style in styles:
         s = {
         'type' : "style",
@@ -92,13 +93,16 @@ def filterStyleBySRM(srm_val):
         }
         allStyles.append(s)
 
-    return Response(json.dumps(allStyles), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allStyles}
+    response = Response(json.dumps(payload), mimetype='application/json')
+    return response
 @app.route('/styles/abv/<float:abv>', methods = ['GET'])
 def filterStyleByAbv(abv):
     allStyles = []
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     styles = Style.query.filter(Style.abv_min <= abv).filter(Style.abv_max >= abv).limit(lim).offset(off).all()
+    totalCount = Style.query.filter(Style.abv_min <= abv).filter(Style.abv_max >= abv).count()
     for style in styles:
         s = {
         'type' : "style",
@@ -115,7 +119,9 @@ def filterStyleByAbv(abv):
         }
         allStyles.append(s)
     
-    return Response(json.dumps(allStyles), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allStyles}
+    response = Response(json.dumps(payload), mimetype='application/json')
+    return response
 
 
 
