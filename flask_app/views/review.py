@@ -1,5 +1,5 @@
 #This is where the review routes are defined.
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, json
 from main import app
 from models import db, Review,Beer
 
@@ -35,7 +35,7 @@ def getReviews():
         allReviews.append(r)
 
     payload = {'totalCount': totalCount, 'records': allReviews}
-    response = jsonify(payload)
+    response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
 
     return response
@@ -57,7 +57,7 @@ def getReviewInfo(review_id):
             }
     except AttributeError:
         return "Server Error 500: Invalid review_id"
-    return jsonify(r)
+    return Response(json.dumps(r), mimetype='application/json')
 
 @app.route('/reviews/rating/<float:rating>', methods = ['GET'])
 def filterReviewByRating(rating):
@@ -78,7 +78,7 @@ def filterReviewByRating(rating):
         }
         allReviews.append(r)
 
-    return jsonify(allReviews)
+    return Response(json.dumps(allReviews), mimetype='application/json')
 @app.route('/reviews/beer/<beer_name>', methods = ['GET'])
 def filterReviewByBeer(beer_name):
     allReviews = []
@@ -100,4 +100,4 @@ def filterReviewByBeer(beer_name):
         }
         allReviews.append(r)
 
-    return jsonify(allReviews)
+    return Response(json.dumps(allReviews), mimetype='application/json')
