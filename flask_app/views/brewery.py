@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, json
 from main import app
 from models import db, Brewery
 
@@ -39,7 +39,7 @@ def getBreweries():
         allBreweries.append(b)
 
     payload = {'totalCount': totalCount, 'records': allBreweries}
-    response = jsonify(payload)
+    response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
 
     return response
@@ -65,7 +65,7 @@ def getBreweryInfo(brewery_id):
             }
     except AttributeError:
         return "Server Error 500: Invalid brewery_id"
-    return jsonify(b)
+    return Response(json.dumps(b), mimetype='application/json')
 
 @app.route('/breweries/state/<state_name>', methods = ['GET'])
 def filterByState(state_name):
@@ -73,6 +73,7 @@ def filterByState(state_name):
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     breweries = db.session.query(Brewery).filter_by(state=state_name).limit(lim).offset(off).all()
+    totalCount = db.session.query(Brewery).filter_by(state=state_name).count()
     for brewery in breweries:
         b = {
             'type' : "brewery",
@@ -89,14 +90,15 @@ def filterByState(state_name):
             'styles': [style.serializeName for style in brewery.styles]
         }
         allBreweries.append(b)
-
-    return jsonify(allBreweries)
+    payload = {'totalCount': totalCount, 'records': allBreweries}
+    return Response(json.dumps(payload), mimetype='application/json')
 @app.route('/breweries/country/<country_name>', methods = ['GET'])
 def filterByCountry(country_name):
     allBreweries = []
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     breweries = db.session.query(Brewery).filter_by(country=country_name).limit(lim).offset(off).all()
+    totalCount = db.session.query(Brewery).filter_by(country=country_name).count()
     for brewery in breweries:
         b = {
             'type' : "brewery",
@@ -114,4 +116,5 @@ def filterByCountry(country_name):
         }
         allBreweries.append(b)
 
-    return jsonify(allBreweries)
+    payload = {'totalCount': totalCount, 'records': allBreweries}
+    return Response(json.dumps(payload), mimetype='application/json')
