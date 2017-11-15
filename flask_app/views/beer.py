@@ -1,6 +1,6 @@
 #This is where the brewery routes are defined.
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, json
 from main import app
 from models import db, Beer, Style
 
@@ -38,10 +38,10 @@ def getBeers():
         allBeers.append(b)
 
     payload = {'totalCount': totalCount, 'records': allBeers}
-    response = jsonify(payload)
-    response.status_code = 200
+    # response = jsonify(payload)
+    # response.status_code = 200
 
-    return response
+    return Response(json.dumps(payload), mimetype='application/json')
 #
 # GET BEER BY ID
 @app.route('/beers/<beer_id>', methods = ['GET'])
