@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
 import axios from 'axios';
 
-import ReviewSelector from './ReviewSelector';
-
 
 export default class Beer extends Component {
     constructor (props) {
@@ -57,8 +55,8 @@ export default class Beer extends Component {
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data)
-                self.setState({reviews: res.data, totalCount: res.data.length});
+                console.log(res.data.records)
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount});
             })
             .catch((error) => {
                 console.log(error)
@@ -126,6 +124,10 @@ export default class Beer extends Component {
                             <tr>
                                 <td>Style:</td>
                                 <td>{this.state.item.style}</td>
+                            </tr>
+                            <tr>
+                                <td>Organic:</td>
+                                <td>{this.state.item.organic}</td>
                             </tr>
                             </tbody>
                         </table>
