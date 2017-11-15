@@ -1,5 +1,5 @@
 #This is where the style routes are defined.
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,Response,json
 from main import app
 from models import db, Style
 import math
@@ -41,7 +41,7 @@ def getStyles():
         allStyles.append(s)
 
     payload = {'totalCount': totalCount, 'records': allStyles}
-    response = jsonify(payload)
+    response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
 
     return response
@@ -66,7 +66,7 @@ def getStyleInfo(style_id):
             }
     except AttributeError:
         return "Server Error 500: Invalid style_id"
-    return jsonify(s)
+    return Response(json.dumps(s), mimetype='application/json')
 
 @app.route('/styles/srm/<float:srm_val>', methods = ['GET'])
 def filterStyleBySRM(srm_val):
@@ -92,7 +92,7 @@ def filterStyleBySRM(srm_val):
         }
         allStyles.append(s)
 
-    return jsonify(allStyles)
+    return Response(json.dumps(allStyles), mimetype='application/json')
 @app.route('/styles/abv/<float:abv>', methods = ['GET'])
 def filterStyleByAbv(abv):
     allStyles = []
@@ -115,7 +115,7 @@ def filterStyleByAbv(abv):
         }
         allStyles.append(s)
     
-    return jsonify(allStyles)
+    return Response(json.dumps(allStyles), mimetype='application/json')
 
 
 
