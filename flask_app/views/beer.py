@@ -61,7 +61,7 @@ def getBeerInfo(beer_id):
             'style' : beer.style.name,
             'reviews': [review.serialize for review in beer.reviews]
         }
-        response = jsonify(b)
+        response = Response(json.dumps(b), mimetype='application/json')
     except AttributeError:
         response = "Server Error 500: Invalid beer_id"
 
