@@ -65,7 +65,7 @@ def filterReviewByRating(rating):
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     reviews = db.session.query(Review).filter_by(rating=rating).limit(lim).offset(off).all()
-
+    totalCount = db.session.query(Review).filter_by(rating=rating).count()
     for review in reviews:
         r = {
         'type' : "review",
@@ -78,7 +78,9 @@ def filterReviewByRating(rating):
         }
         allReviews.append(r)
 
-    return Response(json.dumps(allReviews), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allReviews}
+    response = Response(json.dumps(payload), mimetype='application/json')
+    return response
 @app.route('/reviews/beer/<beer_name>', methods = ['GET'])
 def filterReviewByBeer(beer_name):
     allReviews = []
@@ -87,7 +89,8 @@ def filterReviewByBeer(beer_name):
     beer = db.session.query(Beer).filter_by(name=beer_name).first()
     beer_id = beer.id
     reviews = db.session.query(Review).filter_by(beer_name=beer_id).limit(lim).offset(off).all()
-
+    totalCount = db.session.query(Review).filter_by(beer_name=beer.id).count()
+    
     for review in reviews:
         r = {
         'type' : "review",
@@ -100,4 +103,6 @@ def filterReviewByBeer(beer_name):
         }
         allReviews.append(r)
 
-    return Response(json.dumps(allReviews), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allReviews}
+    response = Response(json.dumps(payload), mimetype='application/json')
+    return response
