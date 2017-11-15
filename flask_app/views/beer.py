@@ -72,7 +72,7 @@ def filterByOrganic(organic_bool):
     lim = request.args.get('limit', 9)
     off = request.args.get('offset',0)
     beers = db.session.query(Beer).filter_by(organic=organic_bool).limit(lim).offset(off).all()
-
+    totalCount = db.session.query(Beer).filter_by(organic=organic_bool).count()
     for beer in beers:
         b = {
             'type' : "beer",
@@ -86,8 +86,8 @@ def filterByOrganic(organic_bool):
             'style': beer.style.name
         }
         allBeers.append(b)
-
-    return Response(json.dumps(allBeers), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allBeers}
+    return Response(json.dumps(payload), mimetype='application/json')
 
 @app.route('/beers/style/<style_name>', methods = ['GET'])
 def filterByStyle(style_name):
@@ -97,7 +97,7 @@ def filterByStyle(style_name):
     style = db.session.query(Style).filter_by(name=style_name).first()
     style_id = style.id
     beers = db.session.query(Beer).filter_by(style_id=style_id).limit(lim).offset(off).all()
-
+    totalCount = db.session.query(Beer).filter_by(style_id=style_id).count()
     for beer in beers:
         b = {
             'type' : "beer",
@@ -112,7 +112,8 @@ def filterByStyle(style_name):
         }
         allBeers.append(b)
 
-    return Response(json.dumps(allBeers), mimetype='application/json')
+    payload = {'totalCount': totalCount, 'records': allBeers}
+    return Response(json.dumps(payload), mimetype='application/json')
 
 
 
