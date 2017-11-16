@@ -15,9 +15,9 @@ export default class Beers extends Component {
             page: 0,
             numPages: 0,
             totalCount: 0,
-            pgSize: 9,
-            order: "",
-            organic: false,
+            pgSize: 12,
+            sortBy: "",
+            organic: "false",
             selectedStyle: "",
             pathname: "/Beers"
         }
@@ -39,7 +39,6 @@ export default class Beers extends Component {
 
     handlePageChange = (page, e) => {
         e.preventDefault()
-        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
         this.setState({page: page})
     }
 
@@ -65,43 +64,28 @@ export default class Beers extends Component {
         this.setState({selectedStyle: e.target.value})
     }
 
-    sort = (order, e) => {
-        if (e) {
-            e.preventDefault()
-        }
-        this.setState({order: order})
-
-        let limit = this.state.pgSize
-        let offset = this.state.page * this.state.pgSize
-        let self = this
-        let url = self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset
-        axios.get(url)
-            .then((res) => {
-                // Set state with result
-                self.setState({ beers: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+    sort = (order) => {
+        this.setState({sortBy: order})
     }
 
-    callAPI = (organic) => {
-        if (organic === undefined) {
-            organic = false
-        }
+    callAPI = () => {
+
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let limOff = "?limit="+limit+"&offset="+offset
-        let url = ""
+        let url = "https://backend-staging-183303.appspot.com/beers"+limOff
 
-        console.log(organic)
-        if (organic) {
-            console.log("organic api call")
-            url = "https://backend-staging-183303.appspot.com/beers/organic/Y"+limOff
-        } else {
-            console.log("not organic call")
-            url = this.apiUrl+limOff
+        if (this.state.organic !== "false") {
+            url += "&organic=true"
         }
+        if (this.state.selectedStyle !== "" && this.state.selectedStyle !== "All") {
+            url += "&style="+this.state.selectedStyle
+        }
+        if (this.state.sortBy !== "") {
+            url += "&sortBy="+this.state.sortBy
+        }
+
+        console.log(url)
 
         let self = this
         axios.get(url)
@@ -116,7 +100,7 @@ export default class Beers extends Component {
 
     getStyles = () => {
         let url = 'https://backend-staging-183303.appspot.com/styles?limit=100';
-        let styles = []
+        let styles = ["All"]
 
         let self = this
         axios.get(url)
@@ -142,12 +126,15 @@ export default class Beers extends Component {
      */
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.organic !== this.state.organic) {
-            this.callAPI(this.state.organic)
+        if (prevState.organic !== this.state.organic ||
+            prevState.selectedStyle !== this.state.selectedStyle ||
+            prevState.sortBy !== this.state.sortBy)
+        {
+            this.callAPI()
         }
 
         if (prevState.page !== this.state.page) {
-            this.sort(this.state.order)
+            this.callAPI()
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -194,11 +181,11 @@ export default class Beers extends Component {
                             <strong>Sort By: </strong>
                             <div className="button btn-group">
                                 <button type="button"
-                                        className={this.state.order === "asc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={(e) => this.sort("asc", e)}>Ascending</button>
+                                        className={this.state.sortBy === "asc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
+                                        onClick={() => this.sort("asc")}>Ascending</button>
                                 <button type="button"
-                                        className={this.state.order === "desc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={(e) => this.sort("desc", e)}>Descending</button>
+                                        className={this.state.sortBy === "desc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
+                                        onClick={() => this.sort("desc")}>Descending</button>
                             </div>
                         </label>
                     </div>
@@ -206,8 +193,8 @@ export default class Beers extends Component {
                         <label>
                             <strong>Organic:  </strong>
                             <select value={this.state.organic} onChange={this.handleOrganic}>
-                                <option value={false}>No</option>
-                                <option value={true}>Yes</option>
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
                             </select>
                         </label>
                     </div>
