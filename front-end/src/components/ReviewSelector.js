@@ -31,6 +31,12 @@ export default class ReviewSelector extends Component {
      * componentDidUpdate()
      */
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props !== nextProps) {
+            this.setState({item: nextProps.item})
+        }
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()

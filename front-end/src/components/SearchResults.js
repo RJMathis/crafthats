@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withRouter} from 'react-router-dom';
+import chunk from 'lodash.chunk';
 
 import SearchSelector from './SearchSelector';
 import PageSelector from './PageSelector';
@@ -8,9 +9,10 @@ class SearchResults extends Component {
     constructor (props) {
         super (props);
         this.state = {
-            results: this.props.location.state.results,
+            results: chunk(this.props.location.state.results, 10),
             page: 0,
-            numPages: 5,
+            numPages: Math.ceil(this.props.location.state.results.length/10),
+            totalResults: this.props.location.state.results.length,
             pgSize: 10,
             searchTerm: this.props.location.state.searchTerm,
             pathname: "/SearchResults"
@@ -59,18 +61,14 @@ class SearchResults extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
-            console.log("props weren't equal")
             this.setState({
                 searchTerm: nextProps.location.state.searchTerm,
-                results: nextProps.location.state.results
+                results: chunk(nextProps.location.state.results, 10)
             });
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.searchTerm !== this.state.searchTerm) {
-            this.forceUpdate();
-        }
         if (prevState.page !== this.state.page) {
             window.scrollTo({
                 top: 0,
@@ -88,6 +86,7 @@ class SearchResults extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
+
         // Create an array of X components with 1 for each result gathered from Search
         if (this.state.results.length === 0) {
             return (<div className="container" style={{height: 100}}>
@@ -103,7 +102,7 @@ class SearchResults extends Component {
                     </div>);
         }
         let searchTerm = this.state.searchTerm
-        let resultRows = this.state.results.map(function(result) {
+        let resultRows = this.state.results[this.state.page].map(function(result) {
             return (
                 <SearchSelector key={result.id} item={result} searchTerm={searchTerm} navigateTo="/Result"/>
             );
@@ -113,7 +112,12 @@ class SearchResults extends Component {
             <div className="container">
                 <div className="col-xs-12">
                     <h2 className="sub-header">Search Results</h2>
-                    <h4>Found: {this.state.results.length} results</h4>
+                    <div>
+                        <h4 style={{display: 'inline'}}>Showing:</h4>
+                            <strong> {this.state.page*this.state.pgSize + 1}</strong> -
+                            <strong>{this.state.page*this.state.pgSize + 10 < this.state.totalResults ? this.state.page*this.state.pgSize + 10 : this.state.totalResults}</strong> of
+                            <strong> {this.state.totalResults}</strong> results
+                    </div>
                     <table className="table table-responsive table-hover">
                         <tbody>
                         {resultRows}
@@ -124,6 +128,7 @@ class SearchResults extends Component {
                               handlePrev={this.handlePrev}
                               handleNext={this.handleNext}
                               numPages={this.state.numPages}
+                              currentPage={this.state.page}
                               navigateTo="/SearchResults"/>
             </div>
         );

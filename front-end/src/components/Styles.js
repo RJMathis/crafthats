@@ -11,8 +11,10 @@ export default class Styles extends Component {
         this.state = {
             styles: [],
             page: 0,
-            numPages: 5,
+            numPages: 0,
+            totalCount: 0,
             pgSize: 9,
+            order: "",
             pathname: "/Styles"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/styles';
@@ -54,13 +56,16 @@ export default class Styles extends Component {
         if (e) {
             e.preventDefault()
         }
+        this.setState({order: order})
+
         let limit = this.state.pgSize
         let offset = this.state.page * this.state.pgSize
         let self = this
-        axios.get(self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset)
+        let url = self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset
+        axios.get(url)
             .then((res) => {
                 // Set state with result
-                self.setState({styles: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+                self.setState({ styles: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
             })
             .catch((error) => {
                 console.log(error)
@@ -75,7 +80,7 @@ export default class Styles extends Component {
         axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
             .then((res) => {
                 // Set state with result
-                self.setState({styles: res.data.records, totalCount: res.data.totalCount, numPages: res.data.totalCount/self.state.pgSize});
+                self.setState({styles: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
             })
             .catch((error) => {
                 console.log(error)
@@ -93,11 +98,7 @@ export default class Styles extends Component {
 
     componentDidUpdate(prevState, nextState) {
         if (nextState.page !== this.state.page) {
-            if (this.state.order !== "") {
-                this.sort(this.state.order)
-            } else {
-                this.callAPI()
-            }
+            this.sort(this.state.order)
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -126,8 +127,12 @@ export default class Styles extends Component {
             <div className="container">
                 <strong>{"Sort By: "}</strong>
                 <div className="button btn-group">
-                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("asc", e)} >Ascending</button>
-                    <button type="button" className="btn btn-default" onClick={(e) => this.sort("desc", e)} >Descending</button>
+                    <button type="button"
+                            className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
+                            onClick={(e) => this.sort("asc", e)}>Ascending</button>
+                    <button type="button"
+                            className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
+                            onClick={(e) => this.sort("desc", e)}>Descending</button>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
                 { chunk(styleComponents, 3).map(function(row) {
@@ -141,6 +146,7 @@ export default class Styles extends Component {
                               handlePrev={this.handlePrev}
                               handleNext={this.handleNext}
                               numPages={this.state.numPages}
+                              currentPage={this.state.page}
                               navigateTo="/Styles"/>
             </div>
         );
