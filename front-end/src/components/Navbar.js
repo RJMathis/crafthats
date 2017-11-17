@@ -4,7 +4,7 @@ import Search from './Search';
 export default class Navbar extends Component {
   render() {
     return (
-        <div className="navbar navbar-home navbar-default navbar-fixed-top">
+        <div className="navbar navbar-home navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,7 +33,7 @@ export default class Navbar extends Component {
                   <li><a href="/Breweries">Breweries</a></li>
                   <li><a href="/Styles">Styles</a></li>
                   <li><a href="/Reviews">Reviews</a></li>
-                  <li><a href="/#About">About</a></li>
+                  <li><a href="/#about">About</a></li>
                   <Search />
                 </ul>
             </div>

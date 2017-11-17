@@ -1,22 +1,43 @@
 import React, { Component } from 'react';
 
 export default class Home extends Component {
+
+  /* Mounting
+        These methods are called when an instance of a component is being created and inserted into the DOM:
+            * constructor()
+            * componentWillMount()
+            * render()
+            * componentDidMount()
+     */
+
+    /* Updating
+        An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
+            * componentWillReceiveProps()
+            * shouldComponentUpdate()
+            * componentWillUpdate()
+            * render()
+            * componentDidUpdate()
+     */
+
+    /* Unmounting
+        This method is called when a component is being removed from the DOM:
+            * componentWillUnmount()
+     */
+
+    /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
+
   render() {
     return (
         <div>
-          
-          <div className="banner">
-            <img id="home-banner" src="../images/brewtiful.gif" alt="Brewtiful Banner" />
-          </div>
 
-          <div class="row">
-            <div className="col-md-12 col-home">
-              <div className="text-center">
-                <h1 className="title title-home">A Brewtiful place to find Brews and Breweries!</h1>
-              </div>
+          <div className="banner">
+            <img id="home-banner" src="../images/brewtiful.png" alt="Brewtiful Banner" />
+            <div className="home-banner-text">
+              <p>Welcome to</p>
+              <p>Brewtiful World</p>
             </div>
           </div>
-
+                
           <div className="container">
 
             <div id="about">

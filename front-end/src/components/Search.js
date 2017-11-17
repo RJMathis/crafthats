@@ -3,8 +3,6 @@ import axios from 'axios';
 import Fuse from 'fuse.js';
 import {Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
-import { RingLoader } from 'react-spinners';
-
 
 class Search extends Component {
     constructor(props) {
@@ -24,6 +22,8 @@ class Search extends Component {
 
     handleSearch = (e) => {
         e.preventDefault()
+        this.refs.loader.style = "display: block";
+        console.log('passed')
         this.setState({ searchTerm: this.input.value });
         this.callAPI()
     }
@@ -35,7 +35,6 @@ class Search extends Component {
         let reviewKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
         let styleKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name", "srm"]
 
-        this.setState({loading: true})
         axios.all([
             axios.get(self.apiUrl+"/beers?limit=500"),
             axios.get(self.apiUrl+"/breweries?limit=500"),
@@ -44,7 +43,6 @@ class Search extends Component {
         ])
             .then(axios.spread((beers, breweries, styles, reviews) => {
                 // Set state with result
-                this.setState({loading: false})
                 let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
                 let allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
                 self.searchData(allRecords, allKeys)
@@ -64,7 +62,7 @@ class Search extends Component {
         };
         let fuse = new Fuse(records, options);
         let result = fuse.search(this.state.searchTerm);
-        this.setState({ results: result, navigate: true, loading: false });
+        this.setState({ results: result, navigate: true});
     }
 
 
@@ -77,13 +75,28 @@ class Search extends Component {
         return (
             <form className="navbar-form navbar-right" onSubmit={this.handleSearch}>
                 <div>
-                    <div className='sweet-loading'>
-                        <RingLoader
-                            color={'#003b6f'}
-                            loading={this.state.loading}
-                        />
+                   <div className="loading-animation" ref="loader">
+                        <div id="container">
+                            <div className="white"></div>
+                            <div id="beaker">
+                                <div className="beer-foam">
+                                    <div className="foam-1"></div>
+                                    <div className="foam-2"></div>
+                                    <div className="foam-3"></div>
+                                    <div className="foam-4"></div>
+                                    <div className="foam-5"></div>
+                                    <div className="foam-6"></div>
+                                </div>
+                                <div id="liquid">
+                                    <div className="bubble bubble1"></div>
+                                    <div className="bubble bubble2"></div>
+                                    <div className="bubble bubble3"></div>
+                                    <div className="bubble bubble4"></div>
+                                    <div className="bubble bubble5"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {this.state.loading ? "Loading..." : ""}
                 </div>
                 <div className="form-group">
                     <div className="input-group">
