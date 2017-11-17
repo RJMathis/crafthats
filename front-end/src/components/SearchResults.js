@@ -89,7 +89,7 @@ class SearchResults extends Component {
 
         // Create an array of X components with 1 for each result gathered from Search
         if (this.state.results.length === 0) {
-            return (<div className="container" style={{height: 100}}>
+            return (<div className="container sub-container" style={{height: 100}}>
                         <div className="mh-50">
                             <div className="col-12">
                                 <h3>No results were found</h3>
@@ -109,27 +109,29 @@ class SearchResults extends Component {
         })
 
         return (
-            <div className="container">
-                <div className="col-xs-12">
-                    <h2 className="sub-header">Search Results</h2>
-                    <div>
-                        <h4 style={{display: 'inline'}}>Showing:</h4>
-                            <strong> {this.state.page*this.state.pgSize + 1}</strong> -
-                            <strong>{this.state.page*this.state.pgSize + 10 < this.state.totalResults ? this.state.page*this.state.pgSize + 10 : this.state.totalResults}</strong> of
-                            <strong> {this.state.totalResults}</strong> results
+            <div className="container sub-container">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <h2 className="sub-header">Search Results</h2>
+                        <div>
+                            <h4 style={{display: 'inline'}}>Showing:</h4>
+                                <strong> {this.state.page*this.state.pgSize + 1}</strong> -
+                                <strong>{this.state.page*this.state.pgSize + 10 < this.state.totalResults ? this.state.page*this.state.pgSize + 10 : this.state.totalResults}</strong> of
+                                <strong> {this.state.totalResults}</strong> results
+                        </div>
+                        <table className="table table-responsive table-hover">
+                            <tbody>
+                            {resultRows}
+                            </tbody>
+                        </table>
                     </div>
-                    <table className="table table-responsive table-hover">
-                        <tbody>
-                        {resultRows}
-                        </tbody>
-                    </table>
                 </div>
                 <PageSelector handlePageChange={this.handlePageChange}
-                              handlePrev={this.handlePrev}
-                              handleNext={this.handleNext}
-                              numPages={this.state.numPages}
-                              currentPage={this.state.page}
-                              navigateTo="/SearchResults"/>
+                                handlePrev={this.handlePrev}
+                                handleNext={this.handleNext}
+                                numPages={this.state.numPages}
+                                currentPage={this.state.page}
+                                navigateTo="/SearchResults"/>
             </div>
         );
     }

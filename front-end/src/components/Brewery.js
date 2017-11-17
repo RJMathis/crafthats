@@ -41,7 +41,7 @@ export default class Brewery extends Component {
     render() {
         console.log(this.state.item)
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">

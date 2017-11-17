@@ -9,7 +9,6 @@ import Beers from './Beers';
 import Breweries from './Breweries';
 import Styles from './Styles';
 import Reviews from './Reviews';
-import About from './About';
 import Beer from './Beer';
 import Brewery from './Brewery';
 import Style from './Style';
@@ -33,7 +32,6 @@ export default class App extends Component {
                       <Route exact path="/Style" component={Style} />
                       <Route exact path="/Reviews" component={Reviews} />
                       <Route exact path="/Review" component={Review} />
-                      <Route exact path="/About" component={About} />
                       <Route exact path="/SearchResults" component={SearchResults} />
                       <Route exact path="/Result" component={Result} />
                       <Route component={NotFound} />

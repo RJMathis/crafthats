@@ -94,7 +94,7 @@ export default class Beer extends Component {
         }
 
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
