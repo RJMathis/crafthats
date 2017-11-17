@@ -6,7 +6,7 @@ import {Redirect} from 'react-router-dom';
 
 export default class StyleSelector extends Component {
     constructor (props) {
-         var srmColors = [ '#FDE69D', '#FCD87F', '#FCCA63', '#FBC050', 
+         var srmArray = [ '#FDE69D', '#FCD87F', '#FCCA63', '#FBC050',
                 '#F5B238', '#F3A728', '#EC9D26', '#E48F23', 
                 '#E18822', '#D87E1F', '#D1741D', '#C96C1B', 
                 '#C4641A', '#BD5C18', '#B45315', '#AE4F14', 
@@ -20,7 +20,8 @@ export default class StyleSelector extends Component {
         super (props);
             this.state = {
                 item: this.props.item,
-                srmHex: srmColors[Math.round(this.props.item.srm) - 1],
+                srmHex: srmArray[Math.round(this.props.item.srm) - 1],
+                srmColors: srmArray,
                 navigate: false,
                 navigateTo: this.props.navigateTo
             }
@@ -48,7 +49,7 @@ export default class StyleSelector extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props !== nextProps) {
-            this.setState({item: nextProps.item})
+            this.setState({item: nextProps.item, srmHex: this.state.srmColors[Math.round(this.props.item.srm) - 1]})
         }
     }
 

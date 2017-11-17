@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
+import axios from 'axios';
+
 
 export default class Beer extends Component {
     constructor (props) {
@@ -10,8 +13,13 @@ export default class Beer extends Component {
             item = this.props.item
         }
         this.state = {
-            item: item
+            item: item,
+            reviews: [],
+            totalCount: 0,
+            selectedReview: "",
+            navigate: false
         }
+        this.apiUrl = 'https://backend-staging-183303.appspot.com/beers';
     }
 
     /* Mounting
@@ -21,6 +29,10 @@ export default class Beer extends Component {
      * render()
      * componentDidMount()
      */
+
+    componentDidMount () {
+        this.getReviews()
+    }
 
     /* Updating
      An update can be caused by changes to props or state. These methods are called when a component is being re-rendered:
@@ -36,10 +48,50 @@ export default class Beer extends Component {
      * componentWillUnmount()
      */
 
+    getReviews = () => {
+        let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
+        let self = this
+        axios.get(url)
+            .then((res) => {
+                // Set state with result
+                self.setState({reviews: res.data.records, totalCount: res.data.length});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+    handleNavigation = (review, e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            selectedReview: review
+        })
+    }
+
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        let review = this.state.item.review ? this.state.item.review : "This beer hasn't been reviewed";
+
+        if (this.state.navigate) {
+            return <Redirect to={{pathname: "/Review", state: {item: this.state.selectedReview}}} push={true} />;
+        }
+
+        let beerReviews
+        if (this.state.totalCount > 0) {
+            let self = this
+             beerReviews = this.state.reviews.map(function(review) {
+                 review.image = self.state.item.image
+                return (
+                    <tr className="clickable-row" onClick={(e) => self.handleNavigation(review, e)}>
+                        <td><strong>{review.rating}</strong></td>
+                        <td>{truncate(review.comment)}</td>
+                    </tr>
+                );
+            })
+        } else {
+            beerReviews = "No reviews are currently available for this beer"
+        }
 
         return (
             <div className="container sub-container">
@@ -69,10 +121,18 @@ export default class Beer extends Component {
                                 <td>Style:</td>
                                 <td>{this.state.item.style}</td>
                             </tr>
+                            </tbody>
+                        </table>
+                        <h3 className="sub-header">Reviews</h3>
+                        <table className="table table-responsive table-hover">
+                            <thead>
                             <tr>
-                                <td>Review:</td>
-                                <td>{review}</td>
+                                <th>Rating</th>
+                                <th>Comment</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            {beerReviews}
                             </tbody>
                         </table>
                     </div>
@@ -81,3 +141,10 @@ export default class Beer extends Component {
         );
     }
 }
+
+export const truncate = (str, length = 100, ending = '...') => {
+    if (str.length > length) {
+        return str.substring(0, length - ending.length) + ending;
+    }
+    return str;
+};

@@ -63,15 +63,12 @@ class SearchResults extends Component {
         if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
             this.setState({
                 searchTerm: nextProps.location.state.searchTerm,
-                results: chunk(this.props.location.state.results, 10)
+                results: chunk(nextProps.location.state.results, 10)
             });
         }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.searchTerm !== this.state.searchTerm) {
-            this.forceUpdate();
-        }
         if (prevState.page !== this.state.page) {
             window.scrollTo({
                 top: 0,
@@ -89,10 +86,9 @@ class SearchResults extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     render() {
-        console.log(this.state.results)
-        console.log(this.state.results[this.state.page])
+
         // Create an array of X components with 1 for each result gathered from Search
-        if (this.props.location.state.results === 0) {
+        if (this.state.results.length === 0) {
             return (<div className="container sub-container" style={{height: 100}}>
                         <div className="mh-50">
                             <div className="col-12">
