@@ -154,6 +154,10 @@ h1, h2, .title, .title-nav .title-home, .modal-title {
   background: rgba(255, 255, 255, 0.6);
 }
 
+mark {
+  background-color:rgba(255,255,0,0.6);
+}
+
 .style-image {
   padding-top: 20px;
   padding-bottom: 20px;
