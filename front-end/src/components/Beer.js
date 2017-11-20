@@ -50,12 +50,10 @@ export default class Beer extends Component {
 
     getReviews = () => {
         let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
-        console.log(url)
         let self = this
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data.records)
                 self.setState({reviews: res.data.records, totalCount: res.data.totalCount});
             })
             .catch((error) => {
@@ -83,9 +81,7 @@ export default class Beer extends Component {
         if (this.state.totalCount > 0) {
             let self = this
              beerReviews = this.state.reviews.map(function(review) {
-                 console.log(review)
                  review.image = self.state.item.image
-                 console.log(review)
                 return (
                     <tr className="clickable-row" onClick={(e) => self.handleNavigation(review, e)}>
                         <td><strong>{review.rating}</strong></td>
@@ -98,7 +94,7 @@ export default class Beer extends Component {
         }
 
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">

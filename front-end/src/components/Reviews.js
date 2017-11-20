@@ -173,9 +173,10 @@ export default class Reviews extends Component {
 
         // Add column for Brewery
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-xs-12">
+                        <h2 className="sub-header">Beer Reviews</h2>
                         <label>
                             <strong>Sort By: </strong>
                             <div className="button btn-group">
@@ -214,7 +215,16 @@ export default class Reviews extends Component {
                                 <th>Beer</th>
                                 <th>Image</th>
                                 <th>Date</th>
-                                <th>Rating</th>
+                                <th>Rating
+                                    <div className="button btn-table-group btn-group">
+                                        <button type="button"
+                                                className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-table btn-default"}
+                                                onClick={(e) => this.sort("desc", e)}><i className="fa fa-arrow-up" aria-hidden="true"></i></button>
+                                        <button type="button"
+                                                className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-table btn-default"}
+                                                onClick={(e) => this.sort("asc", e)}><i className="fa fa-arrow-down" aria-hidden="true"></i></button>
+                                    </div>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>

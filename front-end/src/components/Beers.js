@@ -174,18 +174,15 @@ export default class Beers extends Component {
         }
 
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
-                    <div className="col-md-4">
-                        <label>
-                            <strong>Sort By: </strong>
-                            <div className="button btn-group">
-                                <button type="button"
-                                        className={this.state.sortBy === "asc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={() => this.sort("asc")}>Ascending</button>
-                                <button type="button"
-                                        className={this.state.sortBy === "desc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={() => this.sort("desc")}>Descending</button>
+                    <div className="button btn-group">
+                      <button type="button"
+                              className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
+                              onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
+                      <button type="button"
+                              className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
+                              onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"></i></button>
                             </div>
                         </label>
                     </div>
