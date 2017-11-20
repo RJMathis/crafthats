@@ -6,9 +6,11 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy
 from sqlalchemy.orm import lazyload
 from flask_cors import CORS
+from werkzeug.contrib.cache import SimpleCache
 
 app = Flask(__name__)
 CORS(app)
+cache = SimpleCache()
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:downing@127.0.0.1/stagingdb'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']

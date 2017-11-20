@@ -1,12 +1,14 @@
 #This is where the brewery routes are defined.
 
 from flask import Flask, request, jsonify, Response, json
-from main import app
+from main import app,cache
 from models import db, Beer, Style
 
 #GET ALL BEERS
 @app.route('/beers', methods=['GET'])
 def getBeers():
+     
+
     allBeers = []
     totalCount = db.session.query(Beer.id).count()
     organic = request.args.get('organic', 'None').encode('utf-8')
@@ -16,6 +18,10 @@ def getBeers():
     off = request.args.get('offset','0').encode('utf-8')
     lim = int(lim)
     off = int(off)
+    cachestr = organic+style+order+str(lim)+str(off)
+    rv = cache.get(cachestr)
+    if rv is not None:
+        return Response(json.dumps(rv),mimetype='application/json')
 
     if style != 'None':
         style = db.session.query(Style).filter_by(name=style).first()
@@ -55,7 +61,7 @@ def getBeers():
     payload = {'totalCount': totalCount, 'records': allBeers}
     # response = jsonify(payload)
     # response.status_code = 200
-
+    cache.set(cachestr,payload, timeout= 5*60)
     return Response(json.dumps(payload), mimetype='application/json')
 #
 # GET BEER BY ID
