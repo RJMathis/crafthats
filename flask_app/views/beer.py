@@ -10,7 +10,6 @@ def getBeers():
      
 
     allBeers = []
-    totalCount = db.session.query(Beer.id).count()
     organic = request.args.get('organic', 'None').encode('utf-8')
     style = request.args.get('style', 'None').encode('utf-8')
     order = request.args.get('sort_by','default').encode('utf-8')
@@ -42,6 +41,8 @@ def getBeers():
         beers = query.order_by(Beer.name.desc()).limit(lim).offset(off).all()
     else:
         beers = query.limit(lim).offset(off).all()
+        
+    totalCount = query.count()
 
 
     for beer in beers:
