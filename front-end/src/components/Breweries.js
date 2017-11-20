@@ -11,11 +11,15 @@ export default class Breweries extends Component {
         super (props);
         this.state = {
             breweries: [],
+            allStates: [],
+            allCountries: [],
+            selectedState: "",
+            selectedCountry: "",
             page: 0,
             numPages: 0,
             totalCount: 0,
-            pgSize: 9,
-            order: "",
+            pageLimit: 12,
+            sortBy: "",
             pathname: "/Breweries"
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/breweries';
@@ -31,6 +35,7 @@ export default class Breweries extends Component {
 
     componentDidMount () {
         this.callAPI()
+        this.getStatesCountries()
     }
 
     handlePageChange = (page, e) => {
@@ -53,35 +58,62 @@ export default class Breweries extends Component {
         }
     }
 
-    sort = (order, e) => {
-        if (e) {
-            e.preventDefault()
-        }
-        this.setState({order: order})
+    handleCountry = (e) => {
+        this.setState({selectedCountry: e.target.value})
+    }
 
-        let limit = this.state.pgSize
-        let offset = this.state.page * this.state.pgSize
+    handleState = (e) => {
+        this.setState({selectedState: e.target.value})
+    }
+
+    sort = (order) => {
+        this.setState({sortBy: order})
+    }
+
+    callAPI = () => {
+
+        let limit = this.state.pageLimit
+        let offset = this.state.page * this.state.pageLimit
+        let limOff = "?limit="+limit+"&offset="+offset
+        let url = "https://backend-staging-183303.appspot.com/breweries"+limOff
+
+        if (this.state.selectedState !== "All" && this.state.selectedState !== "") {
+            url += "&state="+this.state.selectedState
+        }
+        if (this.state.selectedCountry !== "All" && this.state.selectedCountry !== "") {
+            url += "&country="+this.state.selectedCountry
+        }
+        if (this.state.sortBy !== "") {
+            url += "&sort_by="+this.state.sortBy
+        }
+
+        console.log(url)
+
         let self = this
-        let url = self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                self.setState({ breweries: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
+                self.setState({breweries: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pageLimit)});
             })
             .catch((error) => {
                 console.log(error)
             });
     }
 
-    callAPI = () => {
-        let limit = this.state.pgSize
-        let offset = this.state.page * this.state.pgSize
-        let self = this
+    getStatesCountries = () => {
+        let url = 'https://backend-staging-183303.appspot.com/breweries?limit=1000';
+        let states = new Set(["All"])
+        let countries = new Set(["All"])
 
-        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
+        let self = this
+        axios.get(url)
             .then((res) => {
-                // Set state with result
-                self.setState({breweries: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
+                // Set state with names of styles
+                res.data.records.forEach((brewery) => {
+                    states.add(brewery.state);
+                    countries.add(brewery.country)
+                })
+                self.setState({allStates: Array.from(states), allCountries: Array.from(countries)});
             })
             .catch((error) => {
                 console.log(error)
@@ -97,9 +129,17 @@ export default class Breweries extends Component {
             * componentDidUpdate()
      */
 
-    componentDidUpdate(prevState, nextState) {
-        if (nextState.page !== this.state.page) {
-            this.sort(this.state.order)
+    componentDidUpdate(prevProps, prevState) {
+
+        if (prevState.selectedState !== this.state.selectedState ||
+            prevState.selectedCountry !== this.state.selectedCountry ||
+            prevState.sortBy !== this.state.sortBy ||
+            prevState.page !== this.state.page)
+        {
+            this.callAPI()
+        }
+
+        if (prevState.page !== this.state.page) {
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -115,6 +155,9 @@ export default class Breweries extends Component {
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
     render () {
+        let stateMenu = []
+        let countryMenu = []
+
         // Create an array of X components with 1 for each brewery gathered from API call
         let breweryComponents = this.state.breweries.map(function(brewery) {
             return (
@@ -122,15 +165,51 @@ export default class Breweries extends Component {
             );
         })
 
+        if (this.state.allCountries !== undefined) {
+            stateMenu = this.state.allStates.map((country) => {
+                return (
+                    <option value={country}>{country}</option>
+                );
+            })
+        }
+
+        if (this.state.allStates !== undefined) {
+            countryMenu = this.state.allCountries.map((state) => {
+                return (
+                    <option value={state}>{state}</option>
+                );
+            })
+        }
+
         return (
             <div className="container sub-container">
-                <div className="button btn-group">
-                    <button type="button"
-                            className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
-                    <button type="button"
-                            className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"></i></button>
+                <div className="row">
+                    <div className="col-md-4">
+                        <div className="button btn-group">
+                            <button type="button"
+                                    className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
+                                    onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"/></button>
+                            <button type="button"
+                                    className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
+                                    onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"/></button>
+                        </div>
+                    </div>
+                    <div className="col-md-4">
+                        <label>
+                            <strong>Country:  </strong>
+                        </label><span> </span>
+                        <select value={this.state.selectedCountry} onChange={this.handleCountry}>
+                                {countryMenu}
+                            </select>
+                    </div>
+                    <div className="col-md-4">
+                        <label>
+                            <strong>State:  </strong>
+                        </label><span> </span>
+                        <select value={this.state.selectedState} onChange={this.handleState}>
+                                {stateMenu}
+                            </select>
+                    </div>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
                 { chunk(breweryComponents, 3).map(function(row) {

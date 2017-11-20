@@ -54,7 +54,7 @@ export default class Beer extends Component {
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                self.setState({reviews: res.data.records, totalCount: res.data.length});
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount});
             })
             .catch((error) => {
                 console.log(error)
@@ -120,6 +120,10 @@ export default class Beer extends Component {
                             <tr>
                                 <td>Style:</td>
                                 <td>{this.state.item.style}</td>
+                            </tr>
+                            <tr>
+                                <td>Organic:</td>
+                                <td>{this.state.item.organic}</td>
                             </tr>
                             </tbody>
                         </table>
