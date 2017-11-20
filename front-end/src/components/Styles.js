@@ -81,7 +81,7 @@ export default class Styles extends Component {
             url += "&srm="+this.state.selectedSrm
         }
         if (this.state.sortBy !== "") {
-            url += "&sortBy="+this.state.sortBy
+            url += "&sort_by="+this.state.sortBy
         }
 
         console.log(url)
@@ -155,15 +155,15 @@ export default class Styles extends Component {
         return (
             <div className="container sub-container">
                 <div className="row">
-                    <div className="button btn-group">
-                    <button type="button"
-                            className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
-                    <button type="button"
-                            className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
-                            onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"></i></button>
-                            </div>
-                        </label>
+                    <div className="col-md-4">
+                        <div className="button btn-group">
+                            <button type="button"
+                                    className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
+                                    onClick={(e) => this.sort("asc", e)}><i className="fa fa-sort-alpha-asc" aria-hidden="true"/></button>
+                            <button type="button"
+                                    className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-default"}
+                                    onClick={(e) => this.sort("desc", e)}><i className="fa fa-sort-alpha-desc" aria-hidden="true"/></button>
+                        </div>
                     </div>
                     <div className="col-md-4">
                         <label>

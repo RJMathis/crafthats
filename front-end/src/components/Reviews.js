@@ -91,7 +91,7 @@ export default class Reviews extends Component {
             url += "&beer="+this.state.selectedBeer
         }
         if (this.state.sortBy !== "") {
-            url += "&sortBy="+this.state.sortBy
+            url += "&sort_by="+this.state.sortBy
         }
 
         console.log(url)
@@ -175,21 +175,7 @@ export default class Reviews extends Component {
         return (
             <div className="container sub-container">
                 <div className="row">
-                    <div className="col-xs-12">
-                        <h2 className="sub-header">Beer Reviews</h2>
-                        <label>
-                            <strong>Sort By: </strong>
-                            <div className="button btn-group">
-                                <button type="button"
-                                        className={this.state.sortBy === "asc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={() => this.sort("asc")}>Ascending</button>
-                                <button type="button"
-                                        className={this.state.sortBy === "desc" ? "btn btn-sm btn-default active" : "btn btn-sm btn-default"}
-                                        onClick={() => this.sort("desc")}>Descending</button>
-                            </div>
-                        </label>
-                    </div>
-                    <div className="col-md-2">
+                    <div className="col-md-4">
                         <label>
                             <strong>Rating:  </strong>
                         </label><span> </span>
