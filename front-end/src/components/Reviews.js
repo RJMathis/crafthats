@@ -191,7 +191,7 @@ export default class Reviews extends Component {
                     <div className="col-md-2">
                         <label>
                             <strong>Rating:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedRating} onChange={this.handleRating}>
                              {ratingMenu}
                         </select>
@@ -199,7 +199,7 @@ export default class Reviews extends Component {
                     <div className="col-md-6">
                         <label>
                             <strong>Beer:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedBeer} onChange={this.handleBeer}>
                             {beerMenu}
                         </select>

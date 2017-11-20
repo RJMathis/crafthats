@@ -200,7 +200,7 @@ export default class Breweries extends Component {
                     <div className="col-md-4">
                         <label>
                             <strong>Country:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedCountry} onChange={this.handleCountry}>
                                 {countryMenu}
                             </select>
@@ -208,7 +208,7 @@ export default class Breweries extends Component {
                     <div className="col-md-4">
                         <label>
                             <strong>State:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedState} onChange={this.handleState}>
                                 {stateMenu}
                             </select>

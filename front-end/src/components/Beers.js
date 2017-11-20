@@ -192,19 +192,19 @@ export default class Beers extends Component {
                     <div className="col-md-3">
                         <label>
                             <strong>Organic:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.organic} onChange={this.handleOrganic}>
                                 <option value="false">No</option>
                                 <option value="true">Yes</option>
-                            </select>
+                        </select>
                     </div>
                     <div className="col-md-4">
                         <label>
                             <strong>Style:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.style} onChange={this.handleStyle}>
                                 {styleMenu}
-                            </select>
+                        </select>
                     </div>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}

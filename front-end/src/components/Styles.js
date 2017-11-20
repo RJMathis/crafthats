@@ -171,7 +171,7 @@ export default class Styles extends Component {
                     <div className="col-md-4">
                         <label>
                             <strong>ABV Range:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedAbv} onChange={this.handleAbv}>
                                 {abvMenu}
                             </select>
@@ -179,7 +179,7 @@ export default class Styles extends Component {
                     <div className="col-md-4">
                         <label>
                             <strong>SRM Range:  </strong>
-                        </label>
+                        </label><span> </span>
                         <select value={this.state.selectedSrm} onChange={this.handleSrm}>
                                 {srmMenu}
                             </select>
