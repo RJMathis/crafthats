@@ -51,6 +51,7 @@ def getBreweries():
             'description': brewery.description,
             'website' : brewery.website,
             'beers': [beer.serializeName for beer in brewery.beers],
+            'beer_ids':[beer.id for beer in brewery.beers],
             'image': brewery.images,
             'styles': [style.serializeName for style in brewery.styles],
             'style_ids':[style.id for style in brewery.styles]
@@ -80,8 +81,10 @@ def getBreweryInfo(brewery_id):
                 'website': brewery.website,
                 'description': brewery.description,
                 'beers':  [beer.name for beer in brewery.beers],
+                'beer_ids':[beer.id for beer in brewery.beers],
                 'images': brewery.images,
-                'styles': [style.serializeName for style in brewery.styles]
+                'styles': [style.serializeName for style in brewery.styles],
+                'style_ids':[style.id for style in brewery.styles]
             }
     except AttributeError:
         return "Server Error 500: Invalid brewery_id"

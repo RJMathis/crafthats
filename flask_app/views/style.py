@@ -14,7 +14,7 @@ def getStyles():
     abv_max = request.args.get('abv_max','None').encode('utf-8')
     srm_min = request.args.get('srm_min','None').encode('utf-8')
     srm_max = request.args.get('srm_max',"None").encode('utf-8')
-    order = request.args.get('order','default').encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
     lim = request.args.get('limit', '9').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
     lim = int(lim)
@@ -54,7 +54,9 @@ def getStyles():
         'abv_max' : style.abv_max,
         'srm'     : style.srm,
         'beers' : [beer.serializeName for beer in style.beers],
-        'breweries':[brewery.serializeName for brewery in style.breweries]
+        'beer_ids':[beer.id for beer in style.beers],
+        'breweries':[brewery.serializeName for brewery in style.breweries],
+        'brewery_ids':[brewery.id for brewery in style.breweries]
         }
         allStyles.append(s)
 
@@ -80,7 +82,9 @@ def getStyleInfo(style_id):
             'abv_max' : style.abv_max,
             'srm': style.srm,
             'beers' : [beer.serializeName for beer in style.beers],
-            'breweries':[brewery.serializeName for brewery in style.breweries]
+            'beer_ids':[beer.id for beer in style.beers],
+            'breweries':[brewery.serializeName for brewery in style.breweries],
+            'brewery_ids':[brewery.id for brewery in style.breweries]
             }
     except AttributeError:
         return "Server Error 500: Invalid style_id"
