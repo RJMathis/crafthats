@@ -1,9 +1,11 @@
 #This is where the brewery routes are defined.
 
 from flask import Flask, request, jsonify, Response, json
-from main import app,cache
+from main import app
 from models import db, Beer, Style
+from werkzeug.contrib.cache import SimpleCache
 
+cache = SimpleCache()
 #GET ALL BEERS
 @app.route('/beers', methods=['GET'])
 def getBeers():
@@ -20,7 +22,7 @@ def getBeers():
     cachestr = organic+style+order+str(lim)+str(off)
     rv = cache.get(cachestr)
     if rv is not None:
-        return Response(json.dumps(rv),mimetype='application/json')
+        return rv
 
     if style != 'None':
         style = db.session.query(Style).filter_by(name=style).first()
@@ -62,7 +64,7 @@ def getBeers():
     payload = {'totalCount': totalCount, 'records': allBeers}
     # response = jsonify(payload)
     # response.status_code = 200
-    cache.set(cachestr,payload, timeout= 5*60)
+    cache.set(cachestr,Response(json.dumps(payload), mimetype='application/json'), timeout= 5*60)
     return Response(json.dumps(payload), mimetype='application/json')
 #
 # GET BEER BY ID

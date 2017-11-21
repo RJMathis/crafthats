@@ -1,8 +1,10 @@
 
 from flask import Flask, request, jsonify, Response, json
-from main import app,cache
+from main import app
 from models import db, Brewery
+from werkzeug.contrib.cache import SimpleCache
 
+cache = SimpleCache()
 # GET ALL BREWERIES
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
