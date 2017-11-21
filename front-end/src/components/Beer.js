@@ -51,6 +51,7 @@ export default class Beer extends Component {
 
     getReviews = () => {
         let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
+        console.log(url)
         let self = this
         axios.get(url)
             .then((res) => {
@@ -64,6 +65,7 @@ export default class Beer extends Component {
 
     handleReviewNavigation = (review, e) => {
         e.preventDefault()
+        console.log(review.id)
         this.setState({
             navigate: true,
             navigateTo: "/Review",
@@ -76,6 +78,7 @@ export default class Beer extends Component {
         this.setState({
             navigate: true,
             navigateTo: "/Brewery",
+            breweryId: 9 //this.state.item.brewery_id
         })
     }
 
