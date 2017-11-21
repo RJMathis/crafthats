@@ -82,6 +82,7 @@ def getBeerInfo(beer_id):
             'ibu'  : beer.ibu,
             'images' :beer.images,
             'brewery' : beer.brewery.name,
+            'brewery_id':beer.brewery.id,
             'style' : beer.style.name,
             'reviews': [review.serialize for review in beer.reviews]
         }
