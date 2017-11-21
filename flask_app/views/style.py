@@ -27,7 +27,7 @@ def getStyles():
 
     query = db.session.query(Style)
     if abv_min != 'None' and abv_max != 'None':
-        query = query.filter(Style.abv_min<=(float(abv_min)+1.0)).filter(Style.abv_max<=abv_max) 
+        query = query.filter(Style.abv_min>=abv_min).filter(Style.abv_max<=abv_max) 
     if srm_min != 'None' and srm_max != 'None':
         query = query.filter(Style.srm>=srm_min).filter(Style.srm<=srm_max)
     
