@@ -17,7 +17,8 @@ export default class Beer extends Component {
             reviews: [],
             totalCount: 0,
             selectedReview: "",
-            navigate: false
+            navigate: false,
+            navigateTo: ""
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/beers';
     }
@@ -61,11 +62,28 @@ export default class Beer extends Component {
             });
     }
 
-    handleNavigation = (review, e) => {
+    handleReviewNavigation = (review, e) => {
         e.preventDefault()
         this.setState({
             navigate: true,
+            navigateTo: "/Review",
             selectedReview: review
+        })
+    }
+
+    handleBreweryNavigation = (e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            navigateTo: "/Brewery",
+        })
+    }
+
+    handleStyleNavigation = (e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            navigateTo: "/Style",
         })
     }
 
@@ -74,7 +92,7 @@ export default class Beer extends Component {
     render() {
 
         if (this.state.navigate) {
-            return <Redirect to={{pathname: "/Review", state: {item: this.state.selectedReview}}} push={true} />;
+            return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.selectedReview}}} push={true} />;
         }
 
         let beerReviews
@@ -83,7 +101,7 @@ export default class Beer extends Component {
              beerReviews = this.state.reviews.map(function(review) {
                  review.image = self.state.item.image
                 return (
-                    <tr className="clickable-row" onClick={(e) => self.handleNavigation(review, e)}>
+                    <tr className="clickable-row" onClick={(e) => self.handleReviewNavigation(review, e)}>
                         <td><strong>{review.rating}</strong></td>
                         <td>{truncate(review.comment)}</td>
                     </tr>
@@ -115,11 +133,11 @@ export default class Beer extends Component {
                             </tr>
                             <tr>
                                 <td>Brewery:</td>
-                                <td>{this.state.item.brewery}</td>
+                                <td><button type="button" className="btn btn-link" onClick={this.handleBreweryNavigation}>{this.state.item.brewery}</button></td>
                             </tr>
                             <tr>
                                 <td>Style:</td>
-                                <td>{this.state.item.style}</td>
+                                <td><button type="button" className="btn btn-link" onClick={this.handleStyleNavigation}>{this.state.item.style}</button></td>
                             </tr>
                             <tr>
                                 <td>Organic:</td>

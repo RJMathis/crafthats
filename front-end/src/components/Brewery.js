@@ -38,7 +38,22 @@ export default class Brewery extends Component {
 
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
+    handleBeerNavigation = (e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            navigateTo: "/Beer"
+        })
+    }
+
     render() {
+
+        let beerLinks = this.state.item.beers.map((beer) => {
+            return (
+                <div><button type="button" className="btn btn-link" onClick={this.handleBeerNavigation}>{beer}</button><p>, </p></div>
+            );
+        })
+
         console.log(this.state.item)
         return (
             <div className="container sub-container">
@@ -72,10 +87,13 @@ export default class Brewery extends Component {
                                 <td>Website:</td>
                                 <td><a href={this.state.item.website}>{this.state.item.website}</a></td>
                             </tr>
-
+                            <tr>
+                                <td>Beers:</td>
+                                <td>{beerLinks}</td>
+                            </tr>
                             <tr>
                                 <td>Styles:</td>
-                                <td>{this.state.item.styles}</td>
+                                <td>{this.state.item.styles.join(", ")}</td>
                             </tr>
                             </tbody>
                         </table>
