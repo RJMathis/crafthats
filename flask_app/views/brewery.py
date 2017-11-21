@@ -52,7 +52,8 @@ def getBreweries():
             'website' : brewery.website,
             'beers': [beer.serializeName for beer in brewery.beers],
             'image': brewery.images,
-            'styles': [style.serializeName for style in brewery.styles]
+            'styles': [style.serializeName for style in brewery.styles],
+            'style_ids':[style.id for style in brewery.styles]
         }
         allBreweries.append(b)
 
