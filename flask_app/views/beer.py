@@ -57,7 +57,9 @@ def getBeers():
             'ibu': beer.ibu,
             'image': beer.images,
             'brewery': beer.brewery.name,
-            'style': beer.style.name
+            'brewery_id':beer.brewery.id,
+            'style': beer.style.name,
+            'style_id':beer.style.id
         }
         allBeers.append(b)
 
@@ -84,6 +86,7 @@ def getBeerInfo(beer_id):
             'brewery' : beer.brewery.name,
             'brewery_id':beer.brewery.id,
             'style' : beer.style.name,
+            'style_id':beer.style.id,
             'reviews': [review.serialize for review in beer.reviews]
         }
         response = Response(json.dumps(b), mimetype='application/json')
