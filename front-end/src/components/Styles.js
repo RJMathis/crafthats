@@ -12,6 +12,10 @@ export default class Styles extends Component {
             styles: [],
             abvMenu: ["All", "0-2", "3-4", "4-6", "7-10", "11-30", "31-60", "60+"],
             srmMenu: ["All", "0-5", "6-10", "11-15", "16-20", "20-25", "25-30", "30-35", "35-40", "40+"],
+            selectedAbvMin: "",
+            selectedAbvMax: "",
+            selectedSrmMin: "",
+            selectedSrmMax: "",
             selectedAbv: "",
             selectedSrm: "",
             page: 0,
@@ -56,11 +60,33 @@ export default class Styles extends Component {
     }
 
     handleAbv = (e) => {
-        this.setState({selectedAbv: e.target.value})
+        let abvRange
+
+        if (e.target.value === "All") {
+            this.setState({selectedAbvMin: "All"})
+        } else {
+            if (e.target.value[2] === "+") {
+                e.target.value.replace("+", "-100")
+            }
+            abvRange = e.target.value.split("-")
+
+            this.setState({selectedAbv: e.target.value ,selectedAbvMin: abvRange[0], selectedAbvMax: abvRange[1]})
+        }
     }
 
     handleSrm = (e) => {
-        this.setState({selectedSrm: e.target.value})
+        let srmRange
+
+        if (e.target.value === "All") {
+            this.setState({selectedSrmMin: "All"})
+        } else {
+            if (e.target.value[2] === "+") {
+                e.target.value.replace("+", "-100")
+            }
+            srmRange = e.target.value.split("-")
+
+            this.setState({selectedSrm: e.target.value ,selectedSrmMin: srmRange[0], selectedSrmMax: srmRange[1]})
+        }
     }
 
     sort = (order) => {
@@ -74,11 +100,11 @@ export default class Styles extends Component {
         let limOff = "?limit="+limit+"&offset="+offset
         let url = "https://backend-staging-183303.appspot.com/styles"+limOff
 
-        if (this.state.selectedAbv !== "All" && this.state.selectedAbv !== "") {
-            url += "&abv="+this.state.selectedAbv
+        if (this.state.selectedAbvMin !== "All" && this.state.selectedAbvMin !== "") {
+            url += "&abv_min="+this.state.selectedAbvMin+"&abv_max="+this.state.selectedAbvMax
         }
-        if (this.state.selectedSrm !== "All" && this.state.selectedSrm !== "") {
-            url += "&srm="+this.state.selectedSrm
+        if (this.state.selectedSrmMin !== "All" && this.state.selectedSrmMax !== "") {
+            url += "&srm_min="+this.state.selectedSrmMin+"&srm_max="+this.state.selectedSrmMax
         }
         if (this.state.sortBy !== "") {
             url += "&sort_by="+this.state.sortBy

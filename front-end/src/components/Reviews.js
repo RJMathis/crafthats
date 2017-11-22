@@ -10,7 +10,7 @@ export default class Reviews extends Component {
         super (props);
         this.state = {
             reviews: [],
-            ratingMenu: ["All", "< 1", "1-2", "2-3", "3-4", "4+"],
+            ratingMenu: ["All", "0", "1", "2", "3", "4", "5"],
             beerMenu: ["All"],
             selectedRating: "",
             selectedBeer: "",
@@ -66,7 +66,11 @@ export default class Reviews extends Component {
     }
 
     handleRating = (e) => {
-        this.setState({selectedRating: e.target.value})
+        if (e.target.value === "All") {
+            this.setState({selectedRating: "All"})
+        } else {
+            this.setState({selectedRating: e.target.value})
+        }
     }
 
     handleBeer = (e) => {
@@ -88,7 +92,7 @@ export default class Reviews extends Component {
             url += "&rating="+this.state.selectedRating
         }
         if (this.state.selectedBeer !== "All" && this.state.selectedBeer !== "") {
-            url += "&beer="+this.state.selectedBeer
+            url += "&beer_name="+this.state.selectedBeer
         }
         if (this.state.sortBy !== "") {
             url += "&sort_by="+this.state.sortBy
