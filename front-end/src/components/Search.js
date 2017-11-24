@@ -9,7 +9,6 @@ import { RingLoader } from 'react-spinners';
 class Search extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props)
         this.state = {
             allData: this.props.allData,
             results: [],
@@ -29,10 +28,6 @@ class Search extends Component {
         this.allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
     }
 
-    // componentDidMount() {
-    //     this.callAPI()
-    // }
-
     handleSearch = (e) => {
         e.preventDefault()
         this.setState({ searchTerm: this.input.value });
@@ -40,27 +35,13 @@ class Search extends Component {
         this.searchData(this.input.value)
     }
 
-    // callAPI = () => {
-    //     let self = this
-    //
-    //     //this.setState({loading: true})
-    //     axios.all([
-    //         axios.get(self.apiUrl+"/beers?limit=500"),
-    //         axios.get(self.apiUrl+"/breweries?limit=500"),
-    //         axios.get(self.apiUrl+"/styles?limit=500"),
-    //         axios.get(self.apiUrl+"/reviews?limit=500")
-    //     ])
-    //         .then(axios.spread((beers, breweries, styles, reviews) => {
-    //             // Set state with result
-    //             //this.setState({loading: false})
-    //             let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
-    //             this.setState({allData: allRecords})
-    //             //self.searchData(allRecords, allKeys)
-    //         }))
-    //         .catch((error) => {
-    //             console.log(error)
-    //         });
-    // }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.allData !== this.props.allData) {
+            this.setState({
+                allData: nextProps.allData
+            });
+        }
+    }
 
     searchData = (searchTerm) => {
         let options = {
@@ -74,7 +55,6 @@ class Search extends Component {
         let result = fuse.search(searchTerm);
         this.setState({ results: result, navigate: true, loading: false });
     }
-
 
     render() {
 
