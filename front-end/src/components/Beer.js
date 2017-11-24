@@ -34,7 +34,6 @@ export default class Beer extends Component {
 
     componentDidMount () {
         this.callAPI()
-        this.getReviews()
     }
 
     /* Updating
@@ -46,13 +45,20 @@ export default class Beer extends Component {
      * componentDidUpdate()
      */
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.item.name !== this.state.item.name)
+        {
+            this.getReviews()
+        }
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()
      */
 
     getReviews = () => {
-        let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
+        let url = "https://backend-staging-183303.appspot.com/reviews?beer_name=" + this.state.item.name
         let self = this
         axios.get(url)
             .then((res) => {
@@ -83,12 +89,13 @@ export default class Beer extends Component {
             });
     }
 
-    handleReviewNavigation = (review, e) => {
+    handleReviewNavigation = (reviewId, e) => {
         e.preventDefault()
         this.setState({
             navigate: true,
             navigateTo: "/Review",
-            selectedReview: review
+            selectedId: reviewId,
+            selectedReview: reviewId
         })
     }
 
@@ -114,9 +121,7 @@ export default class Beer extends Component {
 
     render() {
 
-        if (this.state.navigate && this.state.selectedReview !== "") {
-            return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.selectedReview}}} push={true} />;
-        } else if (this.state.navigate) {
+        if (this.state.navigate) {
             return <Redirect to={{pathname: this.state.navigateTo, state: {selectedId: this.state.selectedId}}} push={true} />;
         }
 
@@ -126,7 +131,7 @@ export default class Beer extends Component {
              beerReviews = this.state.reviews.map((review) => {
                  review.image = self.state.item.image
                 return (
-                    <tr className="clickable-row" onClick={(e) => self.handleReviewNavigation(review, e)}>
+                    <tr className="clickable-row" onClick={(e) => self.handleReviewNavigation(review.id, e)}>
                         <td><strong>{review.rating}</strong></td>
                         <td>{truncate(review.comment)}</td>
                     </tr>
