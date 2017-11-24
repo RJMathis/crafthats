@@ -84,8 +84,6 @@ export default class Styles extends Component {
             url += "&sort_by="+this.state.sortBy
         }
 
-        console.log(url)
-
         let self = this
         axios.get(url)
             .then((res) => {

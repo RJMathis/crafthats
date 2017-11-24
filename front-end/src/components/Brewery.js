@@ -5,7 +5,6 @@ import axios from 'axios';
 export default class Brewery extends Component {
     constructor (props) {
         super (props);
-        console.log(this.props)
         let item = "";
         if ('location' in this.props  && this.props.location.state.item !== undefined) {
             item = this.props.location.state.item
@@ -49,7 +48,6 @@ export default class Brewery extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     handleBeerNavigation = (beerId, e) => {
-        console.log(beerId)
         e.preventDefault()
         this.setState({
             navigate: true,
@@ -59,7 +57,6 @@ export default class Brewery extends Component {
     }
 
     handleStyleNavigation = (styleId, e) => {
-        console.log(styleId)
         e.preventDefault()
         this.setState({
             navigate: true,
@@ -69,7 +66,6 @@ export default class Brewery extends Component {
     }
 
     callAPI = () => {
-        console.log(this.state)
         let url
         if (this.props.location.state.selectedId !== undefined) {
             url = "https://backend-staging-183303.appspot.com/breweries/"+this.props.location.state.selectedId
@@ -77,13 +73,10 @@ export default class Brewery extends Component {
             url = "https://backend-staging-183303.appspot.com/breweries/"+this.state.item.id
         }
 
-        console.log(url)
-
         let self = this
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data)
                 self.setState({item: res.data});
             })
             .catch((error) => {
@@ -97,7 +90,6 @@ export default class Brewery extends Component {
             return <Redirect to={{pathname: this.state.navigateTo, state: {selectedId: this.state.selectedId}}} push={true} />;
         }
 
-        console.log(this.state.item)
         let beerLinks, styleLinks
         if (this.state.item !== "") {
             beerLinks = this.state.item.beers.map((beer, index) => {

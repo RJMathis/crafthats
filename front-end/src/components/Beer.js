@@ -53,7 +53,6 @@ export default class Beer extends Component {
 
     getReviews = () => {
         let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
-        console.log(url)
         let self = this
         axios.get(url)
             .then((res) => {
@@ -66,8 +65,6 @@ export default class Beer extends Component {
     }
 
     callAPI = () => {
-        console.log(this.state)
-        console.log(this.props)
         let url
         if (this.props.location.state.selectedId !== undefined) {
             url = "https://backend-staging-183303.appspot.com/beers/"+this.props.location.state.selectedId
@@ -75,13 +72,10 @@ export default class Beer extends Component {
             url = "https://backend-staging-183303.appspot.com/beers/"+this.state.item.id
         }
 
-        console.log(url)
-
         let self = this
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data)
                 self.setState({item: res.data});
             })
             .catch((error) => {
@@ -91,7 +85,6 @@ export default class Beer extends Component {
 
     handleReviewNavigation = (review, e) => {
         e.preventDefault()
-        console.log(review.id)
         this.setState({
             navigate: true,
             navigateTo: "/Review",

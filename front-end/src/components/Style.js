@@ -63,7 +63,6 @@ export default class Style extends Component {
     /* More information about the React.Component lifecycle here: https://reactjs.org/docs/react-component.html */
 
     handleBeerNavigation = (beerId, e) => {
-        console.log(beerId)
         e.preventDefault()
         this.setState({
             navigate: true,
@@ -73,7 +72,6 @@ export default class Style extends Component {
     }
 
     handleBreweryNavigation = (breweryId, e) => {
-        console.log(breweryId)
         e.preventDefault()
         this.setState({
             navigate: true,
@@ -85,13 +83,10 @@ export default class Style extends Component {
     callAPI = () => {
         let url = "https://backend-staging-183303.appspot.com/styles/"+this.props.location.state.selectedId
 
-        console.log(url)
-
         let self = this
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                console.log(res.data)
                 self.setState({item: res.data, srmHex: this.state.srmColors[Math.round(res.data.srm) - 1],});
             })
             .catch((error) => {
