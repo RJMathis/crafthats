@@ -6,10 +6,10 @@ import axios from 'axios';
 export default class Beer extends Component {
     constructor (props) {
         super (props);
-        let item;
-        if ('location' in this.props) {
+        let item = "";
+        if ('location' in this.props  && this.props.location.state.item !== undefined) {
             item = this.props.location.state.item
-        } else {
+        } else if (this.props.item !== undefined) {
             item = this.props.item
         }
         this.state = {
@@ -17,6 +17,7 @@ export default class Beer extends Component {
             reviews: [],
             totalCount: 0,
             selectedReview: "",
+            selectedId: "",
             navigate: false,
             navigateTo: ""
         }
@@ -32,6 +33,7 @@ export default class Beer extends Component {
      */
 
     componentDidMount () {
+        this.callAPI()
         this.getReviews()
     }
 
@@ -63,6 +65,30 @@ export default class Beer extends Component {
             });
     }
 
+    callAPI = () => {
+        console.log(this.state)
+        console.log(this.props)
+        let url
+        if (this.props.location.state.selectedId !== undefined) {
+            url = "https://backend-staging-183303.appspot.com/beers/"+this.props.location.state.selectedId
+        } else {
+            url = "https://backend-staging-183303.appspot.com/beers/"+this.state.item.id
+        }
+
+        console.log(url)
+
+        let self = this
+        axios.get(url)
+            .then((res) => {
+                // Set state with result
+                console.log(res.data)
+                self.setState({item: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     handleReviewNavigation = (review, e) => {
         e.preventDefault()
         console.log(review.id)
@@ -78,7 +104,7 @@ export default class Beer extends Component {
         this.setState({
             navigate: true,
             navigateTo: "/Brewery",
-            breweryId: 9 //this.state.item.brewery_id
+            selectedId: this.state.item.brewery_id
         })
     }
 
@@ -87,6 +113,7 @@ export default class Beer extends Component {
         this.setState({
             navigate: true,
             navigateTo: "/Style",
+            selectedId: this.state.item.style_id
         })
     }
 
@@ -94,14 +121,16 @@ export default class Beer extends Component {
 
     render() {
 
-        if (this.state.navigate) {
+        if (this.state.navigate && this.state.selectedReview !== "") {
             return <Redirect to={{pathname: this.state.navigateTo, state: {item: this.state.selectedReview}}} push={true} />;
+        } else if (this.state.navigate) {
+            return <Redirect to={{pathname: this.state.navigateTo, state: {selectedId: this.state.selectedId}}} push={true} />;
         }
 
         let beerReviews
         if (this.state.totalCount > 0) {
             let self = this
-             beerReviews = this.state.reviews.map(function(review) {
+             beerReviews = this.state.reviews.map((review) => {
                  review.image = self.state.item.image
                 return (
                     <tr className="clickable-row" onClick={(e) => self.handleReviewNavigation(review, e)}>
@@ -119,7 +148,7 @@ export default class Beer extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img   className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
+                            <img   className="img-thumbnail" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
