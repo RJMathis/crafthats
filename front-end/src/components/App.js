@@ -35,10 +35,10 @@ export default class App extends Component {
 
         //this.setState({loading: true})
         axios.all([
-            axios.get(self.state.apiUrl+"/beers?limit=500"),
-            axios.get(self.state.apiUrl+"/breweries?limit=500"),
-            axios.get(self.state.apiUrl+"/styles?limit=500"),
-            axios.get(self.state.apiUrl+"/reviews?limit=500")
+            axios.get(self.state.apiUrl+"/beers?limit=1000"),
+            axios.get(self.state.apiUrl+"/breweries?limit=1000"),
+            axios.get(self.state.apiUrl+"/styles?limit=1000"),
+            axios.get(self.state.apiUrl+"/reviews?limit=1000")
         ])
             .then(axios.spread((beers, breweries, styles, reviews) => {
                 // Set state with result
