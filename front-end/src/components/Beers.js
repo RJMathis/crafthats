@@ -15,7 +15,7 @@ export default class Beers extends Component {
             page: 0,
             numPages: 0,
             totalCount: 0,
-            pgSize: 12,
+            pgSize: 16,
             sortBy: "",
             organic: "false",
             selectedStyle: "",
@@ -176,7 +176,7 @@ export default class Beers extends Component {
         return (
             <div className="container sub-container">
                 <div className="row">
-                    <div className="col-md-5">
+                    <div className="col-md-3">
                         <div className="button btn-group">
                             <button type="button"
                                   className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
@@ -205,7 +205,7 @@ export default class Beers extends Component {
                     </div>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
-                { chunk(beerComponents, 3).map((row) => {
+                { chunk(beerComponents, 4).map((row) => {
                     return (
                         <div className="row">
                             { row }

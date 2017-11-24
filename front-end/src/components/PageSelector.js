@@ -74,7 +74,7 @@ export default class PageSelector extends Component {
 
         return (
             <div className="row">
-                <div className="col-md-12 container-thumbnail">
+                <div className="col-md-12">
                     <div className="text-center">
                         <div>Page {this.props.currentPage + 1} of {this.props.numPages} pages</div>
                         <ul className="pagination pagination-lg">
