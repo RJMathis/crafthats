@@ -6,10 +6,10 @@ import axios from 'axios';
 export default class Beer extends Component {
     constructor (props) {
         super (props);
-        let item;
-        if ('location' in this.props) {
+        let item = "";
+        if ('location' in this.props  && this.props.location.state.item !== undefined) {
             item = this.props.location.state.item
-        } else {
+        } else if (this.props.item !== undefined) {
             item = this.props.item
         }
         this.state = {
@@ -17,7 +17,9 @@ export default class Beer extends Component {
             reviews: [],
             totalCount: 0,
             selectedReview: "",
-            navigate: false
+            selectedId: "",
+            navigate: false,
+            navigateTo: ""
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/beers';
     }
@@ -31,7 +33,7 @@ export default class Beer extends Component {
      */
 
     componentDidMount () {
-        this.getReviews()
+        this.callAPI()
     }
 
     /* Updating
@@ -43,13 +45,20 @@ export default class Beer extends Component {
      * componentDidUpdate()
      */
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.item.name !== this.state.item.name)
+        {
+            this.getReviews()
+        }
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()
      */
 
     getReviews = () => {
-        let url = "https://backend-staging-183303.appspot.com/reviews/beer/" + this.state.item.name
+        let url = "https://backend-staging-183303.appspot.com/reviews?beer_name=" + this.state.item.name
         let self = this
         axios.get(url)
             .then((res) => {
@@ -61,11 +70,50 @@ export default class Beer extends Component {
             });
     }
 
-    handleNavigation = (review, e) => {
+    callAPI = () => {
+        let url
+        if (this.props.location.state.selectedId !== undefined) {
+            url = "https://backend-staging-183303.appspot.com/beers/"+this.props.location.state.selectedId
+        } else {
+            url = "https://backend-staging-183303.appspot.com/beers/"+this.state.item.id
+        }
+
+        let self = this
+        axios.get(url)
+            .then((res) => {
+                // Set state with result
+                self.setState({item: res.data});
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
+    handleReviewNavigation = (reviewId, e) => {
         e.preventDefault()
         this.setState({
             navigate: true,
-            selectedReview: review
+            navigateTo: "/Review",
+            selectedId: reviewId,
+            selectedReview: reviewId
+        })
+    }
+
+    handleBreweryNavigation = (e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            navigateTo: "/Brewery",
+            selectedId: this.state.item.brewery_id
+        })
+    }
+
+    handleStyleNavigation = (e) => {
+        e.preventDefault()
+        this.setState({
+            navigate: true,
+            navigateTo: "/Style",
+            selectedId: this.state.item.style_id
         })
     }
 
@@ -74,16 +122,16 @@ export default class Beer extends Component {
     render() {
 
         if (this.state.navigate) {
-            return <Redirect to={{pathname: "/Review", state: {item: this.state.selectedReview}}} push={true} />;
+            return <Redirect to={{pathname: this.state.navigateTo, state: {selectedId: this.state.selectedId}}} push={true} />;
         }
 
         let beerReviews
         if (this.state.totalCount > 0) {
             let self = this
-             beerReviews = this.state.reviews.map(function(review) {
+             beerReviews = this.state.reviews.map((review) => {
                  review.image = self.state.item.image
                 return (
-                    <tr className="clickable-row" onClick={(e) => self.handleNavigation(review, e)}>
+                    <tr className="clickable-row" onClick={(e) => self.handleReviewNavigation(review.id, e)}>
                         <td><strong>{review.rating}</strong></td>
                         <td>{truncate(review.comment)}</td>
                     </tr>
@@ -98,7 +146,7 @@ export default class Beer extends Component {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">
-                            <img   className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} />
+                            <img   className="img-thumbnail" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -115,11 +163,11 @@ export default class Beer extends Component {
                             </tr>
                             <tr>
                                 <td>Brewery:</td>
-                                <td>{this.state.item.brewery}</td>
+                                <td><button type="button" className="btn btn-link" onClick={this.handleBreweryNavigation}>{this.state.item.brewery}</button></td>
                             </tr>
                             <tr>
                                 <td>Style:</td>
-                                <td>{this.state.item.style}</td>
+                                <td><button type="button" className="btn btn-link" onClick={this.handleStyleNavigation}>{this.state.item.style}</button></td>
                             </tr>
                             <tr>
                                 <td>Organic:</td>

@@ -98,8 +98,6 @@ export default class Reviews extends Component {
             url += "&sort_by="+this.state.sortBy
         }
 
-        console.log(url)
-
         let self = this
         axios.get(url)
             .then((res) => {
@@ -209,10 +207,10 @@ export default class Reviews extends Component {
                                     <div className="button btn-table-group btn-group">
                                         <button type="button"
                                                 className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-table btn-default"}
-                                                onClick={(e) => this.sort("desc", e)}><i className="fa fa-arrow-up" aria-hidden="true"></i></button>
+                                                onClick={(e) => this.sort("desc", e)}><i className="fa fa-arrow-up" aria-hidden="true"/></button>
                                         <button type="button"
                                                 className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-table btn-default"}
-                                                onClick={(e) => this.sort("asc", e)}><i className="fa fa-arrow-down" aria-hidden="true"></i></button>
+                                                onClick={(e) => this.sort("asc", e)}><i className="fa fa-arrow-down" aria-hidden="true"/></button>
                                     </div>
                                 </th>
                             </tr>
