@@ -82,7 +82,7 @@ def getBeerInfo(beer_id):
             'organic' : beer.organic,
             'abv'  : beer.abv,
             'ibu'  : beer.ibu,
-            'images' :beer.images,
+            'image' :beer.images,
             'brewery' : beer.brewery.name,
             'brewery_id':beer.brewery.id,
             'style' : beer.style.name,

@@ -75,7 +75,7 @@ def getStyleInfo(style_id):
             'type' : "style",
             'id' : style.id,
             'name' : style.name,
-            'desicription' : style.description,
+            'description' : style.description,
             'ibu_min' : style.ibu_min,
             'ibu_max' : style.ibu_max,
             'abv_min' : style.abv_min,
