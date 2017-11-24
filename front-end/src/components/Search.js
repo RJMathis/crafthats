@@ -8,8 +8,9 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allData: [],
+            allData: this.props.allData,
             results: [],
+            searchKeys: [],
             searchTerm: "",
             totalCount: 0,
             numPages: 0,
@@ -18,53 +19,40 @@ class Search extends Component {
             navigate: false
         }
         this.apiUrl = 'https://backend-staging-183303.appspot.com/';
+        let beerKeys = ["abv", "ibu", "brewery", "name", "style", "organic"]
+        let breweryKeys = ["beers", "city", "country", "description", "established", "name", "state", "styles"]
+        let reviewKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
+        let styleKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name", "srm"]
+        this.allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
     }
 
     handleSearch = (e) => {
         e.preventDefault()
         this.refs.loader.style = "display: block";
-        console.log('passed')
         this.setState({ searchTerm: this.input.value });
-        this.callAPI()
+        this.searchData(this.input.value)
     }
 
-    callAPI = () => {
-        let self = this
-        let beerKeys = ["abv", "ibu", "brewery", "name", "style", "organic"]
-        let breweryKeys = ["beers", "city", "country", "description", "established", "name", "state", "styles"]
-        let reviewKeys = ["beer_name", "brewery_name", "comment", "date", "rating"]
-        let styleKeys = ["abv_max", "abv_min", "breweries", "beers", "description", "ibu_max", "ibu_min", "name", "srm"]
-
-        axios.all([
-            axios.get(self.apiUrl+"/beers?limit=500"),
-            axios.get(self.apiUrl+"/breweries?limit=500"),
-            axios.get(self.apiUrl+"/styles?limit=500"),
-            axios.get(self.apiUrl+"/reviews?limit=500")
-        ])
-            .then(axios.spread((beers, breweries, styles, reviews) => {
-                // Set state with result
-                let allRecords = beers.data.records.concat(breweries.data.records).concat(styles.data.records).concat(reviews.data.records)
-                let allKeys = beerKeys.concat(breweryKeys).concat(styleKeys).concat(reviewKeys)
-                self.searchData(allRecords, allKeys)
-            }))
-            .catch((error) => {
-                console.log(error)
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.allData !== this.props.allData) {
+            this.setState({
+                allData: nextProps.allData
             });
+        }
     }
 
-    searchData = (records, keys) => {
+    searchData = (searchTerm) => {
         let options = {
             shouldSort: true,
             threshold: 0.2,
             maxPatternLength: 16,
             minMatchCharLength: 1,
-            keys: keys
+            keys: this.allKeys
         };
-        let fuse = new Fuse(records, options);
-        let result = fuse.search(this.state.searchTerm);
-        this.setState({ results: result, navigate: true});
+        let fuse = new Fuse(this.state.allData, options);
+        let result = fuse.search(searchTerm);
+        this.setState({ results: result, navigate: true, loading: false });
     }
-
 
     render() {
 

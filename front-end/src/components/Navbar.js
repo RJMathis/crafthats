@@ -34,7 +34,7 @@ export default class Navbar extends Component {
                   <li><a href="/Styles">Styles</a></li>
                   <li><a href="/Reviews">Reviews</a></li>
                   <li><a href="/#about">About</a></li>
-                  <Search />
+                  <Search allData={this.props.allData}/>
                 </ul>
             </div>
           </div>
