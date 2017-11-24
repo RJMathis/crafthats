@@ -29,9 +29,7 @@ class Search extends Component {
     handleSearch = (e) => {
         e.preventDefault()
         this.refs.loader.style = "display: block";
-        console.log('passed')
         this.setState({ searchTerm: this.input.value });
-        //this.callAPI()
         this.searchData(this.input.value)
     }
 
