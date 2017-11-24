@@ -21,7 +21,7 @@ export default class Styles extends Component {
             page: 0,
             numPages: 0,
             totalCount: 0,
-            pageLimit: 12,
+            pageLimit: 16,
             sortBy: "",
             pathname: "/Styles"
         }
@@ -179,7 +179,7 @@ export default class Styles extends Component {
         return (
             <div className="container sub-container">
                 <div className="row">
-                    <div className="col-md-4">
+                    <div className="col-md-3">
                         <div className="button btn-group">
                             <button type="button"
                                     className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-default"}
@@ -207,7 +207,7 @@ export default class Styles extends Component {
                     </div>
                 </div>
                 {/* Break array into separate arrays and wrap each array containing 3 components in a row div */}
-                { chunk(styleComponents, 3).map(function(row) {
+                { chunk(styleComponents, 4).map(function(row) {
                     return (
                         <div className="row">
                             { row }
