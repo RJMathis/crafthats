@@ -47,7 +47,7 @@ export default class Review extends Component {
             return <Redirect to={{pathname: this.state.navigateTo}} push={true} />
         }
         return (
-            <div className="container">
+            <div className="container sub-container">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="text-center">

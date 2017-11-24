@@ -34,6 +34,12 @@ export default class SearchSelector extends Component {
      * componentDidUpdate()
      */
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props !== nextProps) {
+            this.setState({item: nextProps.item, searchTerm: nextProps.searchTerm})
+        }
+    }
+
     /* Unmounting
      This method is called when a component is being removed from the DOM:
      * componentWillUnmount()

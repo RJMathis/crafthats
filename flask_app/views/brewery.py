@@ -2,24 +2,42 @@
 from flask import Flask, request, jsonify, Response, json
 from main import app
 from models import db, Brewery
+from werkzeug.contrib.cache import SimpleCache
 
+cache = SimpleCache()
 # GET ALL BREWERIES
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
     allBreweries = []
-    totalCount = db.session.query(Brewery.id).count()
-
-    order = request.args.get('order')
+     
+    state = request.args.get('state','None').encode('utf-8')
+    country = request.args.get('country','None').encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
     lim = request.args.get('limit', '9').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
     lim = int(lim)
     off = int(off)
+    cachestr = state+country+order+str(lim)+str(off)
+    rv = cache.get(cachestr)
+    if rv is not None:
+        return rv
+    filtersDict = {
+        'state':state,
+        'country':country
+    }
+    query = db.session.query(Brewery)
+    for attr,value in filtersDict.iteritems():
+        if value != 'None':
+            query = query.filter(getattr(Brewery,attr)==value)
+
     if order == "asc":
-        breweries = db.session.query(Brewery).order_by(Brewery.name).limit(lim).offset(off).all()
+        breweries = query.order_by(Brewery.name).limit(lim).offset(off).all()
     elif order == "desc":
-        breweries = db.session.query(Brewery).order_by(Brewery.name.desc()).limit(lim).offset(off).all()
+        breweries = query.order_by(Brewery.name.desc()).limit(lim).offset(off).all()
     else:
-        breweries = db.session.query(Brewery).limit(lim).offset(off).all()
+        breweries = query.limit(lim).offset(off).all()
+
+    totalCount = query.count()
 
     for brewery in breweries:
         b = {
@@ -33,15 +51,18 @@ def getBreweries():
             'description': brewery.description,
             'website' : brewery.website,
             'beers': [beer.serializeName for beer in brewery.beers],
+            'beer_ids':[beer.id for beer in brewery.beers],
             'image': brewery.images,
-            'styles': [style.serializeName for style in brewery.styles]
+            'styles': [style.serializeName for style in brewery.styles],
+            'style_ids':[style.id for style in brewery.styles]
         }
         allBreweries.append(b)
 
+    
     payload = {'totalCount': totalCount, 'records': allBreweries}
     response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
-
+    cache.set(cachestr,response, timeout= 5*60)
     return response
 
 # GET BREWERY BY ID
@@ -60,61 +81,12 @@ def getBreweryInfo(brewery_id):
                 'website': brewery.website,
                 'description': brewery.description,
                 'beers':  [beer.name for beer in brewery.beers],
+                'beer_ids':[beer.id for beer in brewery.beers],
                 'images': brewery.images,
-                'styles': [style.serializeName for style in brewery.styles]
+                'styles': [style.serializeName for style in brewery.styles],
+                'style_ids':[style.id for style in brewery.styles]
             }
     except AttributeError:
         return "Server Error 500: Invalid brewery_id"
     return Response(json.dumps(b), mimetype='application/json')
 
-@app.route('/breweries/state/<state_name>', methods = ['GET'])
-def filterByState(state_name):
-    allBreweries = []
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
-    breweries = db.session.query(Brewery).filter_by(state=state_name).limit(lim).offset(off).all()
-    totalCount = db.session.query(Brewery).filter_by(state=state_name).count()
-    for brewery in breweries:
-        b = {
-            'type' : "brewery",
-            'id': brewery.id,
-            'name': brewery.name,
-            'city': brewery.city,
-            'state': brewery.state,
-            'country': brewery.country,
-            'established': brewery.established,
-            'description': brewery.description,
-            'website' : brewery.website,
-            'beers': [beer.serializeName for beer in brewery.beers],
-            'image': brewery.images,
-            'styles': [style.serializeName for style in brewery.styles]
-        }
-        allBreweries.append(b)
-    payload = {'totalCount': totalCount, 'records': allBreweries}
-    return Response(json.dumps(payload), mimetype='application/json')
-@app.route('/breweries/country/<country_name>', methods = ['GET'])
-def filterByCountry(country_name):
-    allBreweries = []
-    lim = request.args.get('limit', 9)
-    off = request.args.get('offset',0)
-    breweries = db.session.query(Brewery).filter_by(country=country_name).limit(lim).offset(off).all()
-    totalCount = db.session.query(Brewery).filter_by(country=country_name).count()
-    for brewery in breweries:
-        b = {
-            'type' : "brewery",
-            'id': brewery.id,
-            'name': brewery.name,
-            'city': brewery.city,
-            'state': brewery.state,
-            'country': brewery.country,
-            'established': brewery.established,
-            'description': brewery.description,
-            'website' : brewery.website,
-            'beers': [beer.serializeName for beer in brewery.beers],
-            'image': brewery.images,
-            'styles': [style.serializeName for style in brewery.styles]
-        }
-        allBreweries.append(b)
-
-    payload = {'totalCount': totalCount, 'records': allBreweries}
-    return Response(json.dumps(payload), mimetype='application/json')

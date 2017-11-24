@@ -3,8 +3,6 @@ import axios from 'axios';
 import Fuse from 'fuse.js';
 import {Redirect} from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
-import { RingLoader } from 'react-spinners';
-
 
 class Search extends Component {
     constructor(props) {
@@ -30,6 +28,8 @@ class Search extends Component {
 
     handleSearch = (e) => {
         e.preventDefault()
+        this.refs.loader.style = "display: block";
+        console.log('passed')
         this.setState({ searchTerm: this.input.value });
         //this.callAPI()
         this.searchData(this.input.value)
@@ -65,13 +65,28 @@ class Search extends Component {
         return (
             <form className="navbar-form navbar-right" onSubmit={this.handleSearch}>
                 <div>
-                    <div className='sweet-loading'>
-                        <RingLoader
-                            color={'#003b6f'}
-                            loading={this.state.loading}
-                        />
+                   <div className="loading-animation" ref="loader">
+                        <div id="container">
+                            <div className="white"></div>
+                            <div id="beaker">
+                                <div className="beer-foam">
+                                    <div className="foam-1"></div>
+                                    <div className="foam-2"></div>
+                                    <div className="foam-3"></div>
+                                    <div className="foam-4"></div>
+                                    <div className="foam-5"></div>
+                                    <div className="foam-6"></div>
+                                </div>
+                                <div id="liquid">
+                                    <div className="bubble bubble1"></div>
+                                    <div className="bubble bubble2"></div>
+                                    <div className="bubble bubble3"></div>
+                                    <div className="bubble bubble4"></div>
+                                    <div className="bubble bubble5"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {this.state.loading ? "Loading..." : ""}
                 </div>
                 <div className="form-group">
                     <div className="input-group">
