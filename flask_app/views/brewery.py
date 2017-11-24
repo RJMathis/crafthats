@@ -82,7 +82,7 @@ def getBreweryInfo(brewery_id):
                 'description': brewery.description,
                 'beers':  [beer.name for beer in brewery.beers],
                 'beer_ids':[beer.id for beer in brewery.beers],
-                'images': brewery.images,
+                'image': brewery.images,
                 'styles': [style.serializeName for style in brewery.styles],
                 'style_ids':[style.id for style in brewery.styles]
             }
