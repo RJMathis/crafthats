@@ -2,10 +2,10 @@
 
 # Brewtiful World
 
-#### blurb about our great app*
+#### Whether looking to discover a great new beer or looking for a brewery to visit this weekend, we've got you covered.
 <br>
 <br>
-<span class="byline">[ Rita, Audric, ... ]</span>
+<span class="byline">[ Samuil Borisov, Rita Mathis, Audric Ganser, Travis Reed, Pablo Velasco ]</span>
 
 ---
 
@@ -28,9 +28,12 @@ blah blah
 
 @title[User Interface]
 
-### Talk about UI
+### Front-end: User Interface
 <br>
-yada yada
+* React.js
+* Fuse.js
+* axios
+* react-highlight-words
 <br>
 <br>
 #### Front-end stuff
