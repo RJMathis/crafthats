@@ -45,12 +45,14 @@ blah blah
 ---
 
 @title[Demonstration]
+#### Demo
 
 [Our Brewtiful World](https://brewtiful.world)
 
 ---
 
 @title[Self Critique]
+#### Self Critique
 
 * What did we do well?
 * What did we learn?
@@ -60,6 +62,7 @@ blah blah
 ---
 
 @title[Other Critique]
+#### Critique another project
 
 * What did they do well?
 * What did we learn from their website?
@@ -69,3 +72,4 @@ blah blah
 ---
 
 @title[Visualization]
+#### Visualization
