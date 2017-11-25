@@ -25,7 +25,7 @@ def getBeers():
     style = request.args.get('style', 'None').encode('utf-8')
     abv = request.args.get('abv', 'None').encode('utf-8')
     order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '9').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset','0').encode('utf-8')
     lim = int(lim)
     off = int(off)
