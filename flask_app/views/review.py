@@ -10,7 +10,7 @@ cache = SimpleCache()
 """
 /reviews endpoint
 ?params:
-    +beer_name - string
+    +beer - string
     +rating - float
     +offset - int, default 0
     +limit - int, default 12
@@ -23,9 +23,9 @@ def getReviews():
 
     # get optional params
     rating = request.args.get('rating','None').encode('utf-8')
-    beer_name = request.args.get('beer_name','None').encode('utf-8')
-    order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '12').encode('utf-8')
+    beer_name = request.args.get('beer','None').encode('utf-8')
+    order = request.args.get('order','default').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
 
     #cast

@@ -10,10 +10,10 @@ cache = SimpleCache()
 """
 /styles endpoint
 ?params:
-    +abv_min - int
-    +abv_max - int
-    +srm_min - int
-    +srm_max - int
+    +abvmin - int
+    +abvmax - int
+    +srmmin - int
+    +srmmax - int
     +offset - int, default 0
     +limit - int, default 12
     +order - int
@@ -24,12 +24,12 @@ def getStyles():
     allStyles = []
 
     # get optional params
-    abv_min = request.args.get('abv_min','None').encode('utf-8')
-    abv_max = request.args.get('abv_max','None').encode('utf-8')
-    srm_min = request.args.get('srm_min','None').encode('utf-8')
-    srm_max = request.args.get('srm_max',"None").encode('utf-8')
-    order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '9').encode('utf-8')
+    abv_min = request.args.get('abvmin','None').encode('utf-8')
+    abv_max = request.args.get('abvmax','None').encode('utf-8')
+    srm_min = request.args.get('srmmin','None').encode('utf-8')
+    srm_max = request.args.get('srmmax',"None").encode('utf-8')
+    order = request.args.get('order','default').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
 
     #cast
@@ -79,7 +79,7 @@ def getStyles():
     response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
     cache.set(cachestr,response, timeout= 5*60)
-    return response
+    return jsonify(payload)
 
 #GET STYLE BY STYLE_ID
 """
