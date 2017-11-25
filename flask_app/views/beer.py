@@ -12,23 +12,29 @@ cache = SimpleCache()
 /beers endpoint
 ?params:
     +style - string
-    +organic - float
+    +organic - string 'Y' or 'N'
     +offset - int, default 0
-    +limit - int, default 12
-    +order - int
+    +limit - int, default 25
+    +sort_by - string 'asc' or 'desc'
 """
 @app.route('/beers', methods=['GET'])
 def getBeers():
-
+    # beers to return
     allBeers = []
+
+    # get optional params
     organic = request.args.get('organic', 'None').encode('utf-8')
     style = request.args.get('style', 'None').encode('utf-8')
-    order = request.args.get('order','default').encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
     lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset','0').encode('utf-8')
+
+    #cast
     lim = int(lim)
     off = int(off)
-    cachestr = organic+style+order+str(lim)+str(off)+abv
+
+    #cachestr
+    cachestr = organic+style+order+str(lim)+str(off)
     rv = cache.get(cachestr)
     if rv is not None:
         return rv

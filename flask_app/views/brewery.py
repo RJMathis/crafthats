@@ -14,7 +14,7 @@ cache = SimpleCache()
     +country - string
     +offset - int
     +limit - int
-    +order - int
+    +sort_by - string 'asc' or 'desc'
 """
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
@@ -24,7 +24,7 @@ def getBreweries():
     #get optional params
     state = request.args.get('state','None').encode('utf-8')
     country = request.args.get('country','None').encode('utf-8')
-    order = request.args.get('order','default').encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
     lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
 
