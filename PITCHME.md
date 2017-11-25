@@ -2,7 +2,7 @@
 
 # Brewtiful World
 
-#### Whether looking to discover a great new beer or looking for a brewery to visit this weekend, we've got you covered.
+#### The Beer Place
 <br>
 <br>
 <span class="byline">[ Samuil Borisov, Rita Mathis, Audric Ganser, Travis Reed, Pablo Velasco ]</span>
@@ -11,7 +11,7 @@
 
 @title[DataBase]
 
-#### Our database info
+#### Who? What contribution?
 <br>
 <span class="aside">blah, blah</span>
 
@@ -19,7 +19,7 @@
 
 @title[API]
 
-### Talk about the API
+### Who? What contribution?
 <br>
 
 blah blah
@@ -29,6 +29,7 @@ blah blah
 @title[User Interface]
 
 ### Front-end: User Interface
+##### Travis Reed
 <br>
 * React.js
 * Fuse.js
@@ -36,4 +37,31 @@ blah blah
 * react-highlight-words
 <br>
 <br>
-#### Front-end stuff
+
+---
+
+@title[Demonstration]
+
+[Our Brewtiful World](https://brewtiful.world)
+
+---
+
+@title[Self Critique]
+
+* What did we do well?
+* What did we learn?
+* What can we do better?
+* What puzzles us?
+
+---
+
+@title[Other Critique]
+
+* What did they do well?
+* What did we learn from their website?
+* What can they do better?
+* What puzzles us about their website?
+
+---
+
+@title[Visualization]
