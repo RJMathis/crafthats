@@ -13,8 +13,6 @@ cache = SimpleCache()
 ?params:
     +style - string
     +organic - float
-    +abv - int
-    +ibu - int
     +offset - int, default 0
     +limit - int, default 12
     +order - int
