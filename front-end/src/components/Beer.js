@@ -34,6 +34,7 @@ export default class Beer extends Component {
 
     componentDidMount () {
         this.callAPI()
+        this.getReviews()
     }
 
     /* Updating
