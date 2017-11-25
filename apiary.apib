@@ -6,6 +6,7 @@ Brewtiful.world is a simple web service that allows developers and beer afficion
 + [This: Raw API Blueprint](https://raw.githubusercontent.com/RJMathis/crafthats/master/apiary.apib)
 
 ## Error 
+
 Error Response Code: 500 + ERROR MESSAGE
 + Response 500 (text/plain)
     + Headers
@@ -13,7 +14,19 @@ Error Response Code: 500 + ERROR MESSAGE
     + Body
         error: A message describing the error
             
+## Parameters
 
+The `limit`,`offset`, and `order` parameters can be applied to the following endpoints
++ /beers 
++ /breweries 
++ /styles 
++ /reviews 
+
+`limit` -  This parameter is used for limiting the number of results returned by some actions on this resource.
+
+`offset` -  This parameter is used for selecting the page number relative to limit of results returned by some actions on this resource.
+
+`order` -  This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input "asc" and "desc". "asc" will order alphabetically from A-Z and "desc" will order Z-A. For reviews, order is done according to highest and lowest ratings.
 
 # Group Breweries 
 
@@ -55,24 +68,18 @@ A Brewery object has the following attributes:
             "website": "http://willoughbybrewing.com/"
         }
 
-### All Breweries [/breweries{?limit,offset,order}] 
-A resource representing all of the breweries in the database.
+### Breweries [/breweries{?limit,offset,order,state,country}] 
+A resource representing all of the breweries in the database. These results can be filtered. 
 
-We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
++ results - a list of breweries
++ totalCount - the number of breweries returned
 
-We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
-
-We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
-+ results - a list of all styles
-+ totalCount - the number of all styles in the database
-
-#### Retrieve all Breweries [GET]
+#### Retrieve Breweries [GET]
 + Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-    + order (string, optional) - The string must be 'asc' or 'desc'
+    + limit: 12 (number, optional) - The maximum number of results to return.
+    + offset: 0 (number, optional) - The offset number of results to return.
+    + order: asc (string, optional) - The string must be 'asc' or 'desc'
+    + state: Ohio (string, optional) - The name of a state or region
 
 + Response 200 (application/json)
 
@@ -120,98 +127,6 @@ We have added the query URI template parameter's - `order`. This parameter is us
         }
 
 + Response 500 (application/json)
-
-### Breweries By State [/breweries/state/{state_name}{?limit,offset}] 
-
-+ Parameters
-    + state_name: Ohio (required, string) - The state or region where the brewery is located
-    
-#### View a Brewery By State [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-
-
-+ Response 200 (application/json)
-
-        {
-        "beers": [
-          "Rusty Rail Pale Ale"
-        ], 
-        "city": "Willoughby", 
-        "country": "United States", 
-        "description": "Serving the best food and craft beer in Lake County, featuring live entertainment 3 nights per week in an amazing atmosphere. Come see what's brewing!!", 
-        "established": 1998, 
-        "id": 1, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/TAgaBk/upload_K7e1wP-squareLarge.png", 
-        "name": "Willoughby Brewing Company", 
-        "state": "Ohio", 
-        "styles": [
-          "American Pale"
-        ], 
-        "type": "brewery", 
-        "website": "http://willoughbybrewing.com/"
-        }, 
-        {
-        "beers": [
-          "B.O.R.I.S. The Crusher Oatmeal-Imperial Stout", 
-          "Barrel Aged Turbo Shandy", 
-          "Gulden Fraug Belgian Ale"
-        ], 
-        "city": "Akron", 
-        "country": "United States", 
-        "description": "", 
-        "established": 2006, 
-        "id": 9, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/w5OOQ5/upload_j5DrDQ-squareLarge.png", 
-        "name": "Hoppin' Frog Brewery", 
-        "state": "Ohio", 
-        "styles": [
-          "British Imperial Stout", 
-          "Fruit Beer", 
-          "Belgian Pale Strong"
-        ], 
-        "type": "brewery", 
-        "website": "http://www.hoppinfrog.com/"
-        },
-        ...
-        }
-
-### Breweries By Country [/breweries/country/{country_name}{?limit,offset}] 
-
-+ Parameters
-    + country_name: Mexico (required, string) - The country where the brewery is located
-    
-#### View a Brewery By Country [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-
-+ Response 200 (application/json)
-
-        {
-        "beers": [
-          "Corona Extra"
-        ], 
-        "city": "Mexico City", 
-        "country": "Mexico", 
-        "description": "", 
-        "established": 1925, 
-        "id": 174, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/brewery/wadu38/upload_lFh8A2-squareLarge.png", 
-        "name": "Grupo Modelo S.A. de C.V.", 
-        "state": "Distrito Federal Mexico", 
-        "styles": [
-          "American Premium Lager"
-        ], 
-        "type": "brewery", 
-        "website": "http://www.gmodelo.com.mx/"
-        }
-
 
 # Group Beers
 
@@ -277,24 +192,22 @@ A Beer object has the following attributes:
             "type": "beer"
         }
 
-### All Beers [/beers{?limit,offset,order}] 
-A resource representing all of the breweries in the database.
+### Beers [/beers{?limit,offset,order,style,organic}] 
+A resource representing all of the beers in the database. These results can be filtered.
 
-We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
-
-We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
-
-We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
 + results - a list of all beers
 + totalCount - the number of all beers in the database
 
-#### Retrieve all Beers [GET]
+#### Retrieve Beers [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
+        + Default: `25`
     + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
+        + Default: `0`
     + order (string, optional) - The string must be 'asc' or 'desc'
+    + style: Blonde (string, optional) - The name of a style
+    + organic: Y (string, optional) - A string of "Y" or "N" to indicate yes or no, respectively, for organic beers
+    
 
 + Response 200 (application/json)
 
@@ -329,91 +242,12 @@ We have added the query URI template parameter's - `order`. This parameter is us
 
 + Response 500 (application/json)
 
-### Beers By Organic [/beers/organic/{yes_no}{?limit,offset}] 
-This route is used to return organic or non-organic beers.
-
-+ Parameters
-    + yes_no: Y (required, string) - Y for yes or N for no
-    
-#### View a Beer by Organic [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-
-+ Response 200 (application/json)
-
-        {
-        "abv": 6.5, 
-        "brewery": "3 Sheeps Brewing Co", 
-        "ibu": 29.0, 
-        "id": 25, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/beer/20SOhe/upload_kMXciF-large.png", 
-        "name": "Cashmere Hammer", 
-        "organic": "Y", 
-        "style": "Oatmeal Stout", 
-        "type": "beer"
-        }, 
-        {
-        "abv": 5.7000000000000002, 
-        "brewery": "Warped Wing Brewing", 
-        "ibu": 40.0, 
-        "id": 41, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/beer/3vjZYY/upload_V4kw8C-large.png", 
-        "name": "Jolly Tar", 
-        "organic": "Y", 
-        "style": "Euro Dark", 
-        "type": "beer"
-        }, 
-        ...
-        }
-
-### Beers By Style [/beers/style/{style_name}{?limit,offset}] 
-This route is used to return beers of a specific style
-
-+ Parameters
-    + style_name: Blonde (required, string) - Y for yes or N for no
-    
-#### View a Beer By Style [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-
-+ Response 200 (application/json)
-
-        {
-        "abv": 6.5, 
-        "brewery": "Valiant Brewing", 
-        "ibu": 24.0, 
-        "id": 136, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/beer/F8QJ1e/upload_iMLbcC-large.png", 
-        "name": "Crescendo", 
-        "organic": "N", 
-        "style": "Blonde", 
-        "type": "beer"
-        }, 
-        {
-        "abv": 5.2000000000000002, 
-        "brewery": "Kannah Creek Brewing Company", 
-        "ibu": 25.0, 
-        "id": 208, 
-        "image": "https://s3.amazonaws.com/brewerydbapi/beer/rK2bQr/upload_JDN03O-large.png", 
-        "name": "Island Mesa Blonde Ale", 
-        "organic": "N", 
-        "style": "Blonde", 
-        "type": "beer"
-        }
-
-
 # Group Styles
 
-## Styles [/styles/{style_id}]
-A Stle object has the following attributes:
-+ abv_max - The alcoholic by volume maximum for this style
-+ abv_min - The alcoholic by volume minimum for this style
+## Style [/styles/{style_id}]
+A style object has the following attributes:
++ abv_max -  The alcohol by volume maximum for this style
++ abv_min -  The alcohol by volume minimum for this style
 + beers - A list of beers that are this style
 + breweries - A list of breweries that make this style
 + description - A blurb about this style
@@ -429,134 +263,88 @@ A Stle object has the following attributes:
 + Response 200 (application/json)
 
         {
-            "abv_max": 5.5999999999999996, 
-            "abv_min": 4.5, 
-            "beers": [
-                "Rusty Rail Pale Ale", 
-                "420 Extra Pale Ale", 
-                "Beyond The Pale Ale", 
-                "Headwaters Ale", 
-                "Double Take Pale Ale", 
-                "Dinghy", 
-                "Samuel Adams Pale Ale", 
-                "Copperhead Pale Ale", 
-                "Absolom's Ale", 
-                "Mango Mosaic Pale Ale", 
-                "Dale's Pale Ale", 
-                "Sideways", 
-                "Pale Ale", 
-                "Pale Ale", 
-                "Shenanigans", 
-                "First Bite", 
-                "30th Anniversary Ale", 
-                "Field to Ferment", 
-                "Healy Heights Pale Ale", 
-                "Golden Ale", 
-                "Hop Fro"
-            ], 
-            "breweries": [
-                "Willoughby Brewing Company", 
-                "SweetWater Brewing Company", 
-                "Fish Brewing Company", 
-                "Victory Brewing Company", 
-                "World Brews, Winery Exchange", 
-                "Rhinegeist", 
-                "Boston Beer Company", 
-                "Snoqualmie Falls Brewing Company", 
-                "White Rabbit Brewing Company", 
-                "Breckenridge Brewery", 
-                "Oskar Blues Brewery", 
-                "Nomad Brewing Co.", 
-                "Backcountry Brewery", 
-                "Good People Brewing Company", 
-                "Indeed Brewing Company", 
-                "Spider Bite Beer Co.", 
-                "Mendocino Brewing Company", 
-                "Fremont Brewing", 
-                "Sasquatch Brewery", 
-                "St. George Brewing Company", 
-                "Fat Head's Brewery"
-            ], 
-            "desicription": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.", 
-            "ibu_max": 42.0, 
-            "ibu_min": 30.0, 
-            "id": 1, 
-            "name": "American Pale", 
-            "srm": 10.0, 
-            "type": "style"
-            }    
+          "abv_max": 5.6, 
+          "abv_min": 4.5, 
+          "beer_ids": [1,  3,  4,   16,   18,   ...
+          ], 
+          "beers": [
+            "Rusty Rail Pale Ale", 
+            "420 Extra Pale Ale", 
+            "Beyond The Pale Ale", 
+            "Headwaters Ale", 
+            "Double Take Pale Ale", 
+            ...
+          ], 
+          "breweries": [
+            "Willoughby Brewing Company", 
+            "SweetWater Brewing Company", 
+            "Fish Brewing Company", 
+            ...
+          ], 
+          "brewery_ids": [
+            1, 
+            3, 
+            4, ...
+          ], 
+          "description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.", 
+          "ibu_max": 42.0, 
+          "ibu_min": 30.0, 
+          "id": 1, 
+          "name": "American Pale", 
+          "srm": 10.0, 
+          "type": "style"
+        }
+        
++ Response 500 (application/json)
 
-### All Styles [/styles{?limit,offset,order}] 
-A resource representing all of the styles in the database.
+### Styles [/styles{?limit,offset,order,abvmin,abvmax,srmmin,srmmax}] 
+A resource representing all of the styles in the database. These results can be filtered.
 
-We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
+`abv_min` and `abv_max` must both be non null values to filter styles by abv
 
-We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
+`srm_min` and `srm_max` must both be non null values to filter styles by srm
 
-We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
-+ results - a list of all styles
-+ totalCount - the number of all styles in the database
-
-#### Retrieve all Styles [GET]
+#### Retrieve Styles [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
+        + Default: `25`
     + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
+        + Default: `0`
     + order (string, optional) - The string must be 'asc' or 'desc'
+    + abvmin: 1.0 (number, optional) - Used in conjuction with abv_max to filter styles by abv values
+    + abvmax: 8.0 (number, optional) - Used in conjuction with abv_min to filter styles by abv values
+    + srmmin: 10.0 (number, optional) - Used in conjuction with srm_max to filter styles by abv values
+    + srmmax: 14.0 (number, optional) - Used in conjuction with srm_min to filter styles by abv values
 
 + Response 200 (application/json)
-
+        
         {
           "records": [
             {
-              "abv_max": 5.5999999999999996, 
+              "abv_max": 5.6, 
               "abv_min": 4.5, 
+              "beer_ids": [
+                1, 
+                3, 
+                4,...
+              ], 
               "beers": [
                 "Rusty Rail Pale Ale", 
                 "420 Extra Pale Ale", 
                 "Beyond The Pale Ale", 
-                "Headwaters Ale", 
-                "Double Take Pale Ale", 
-                "Dinghy", 
-                "Samuel Adams Pale Ale", 
-                "Copperhead Pale Ale", 
-                "Absolom's Ale", 
-                "Mango Mosaic Pale Ale", 
-                "Dale's Pale Ale", 
-                "Sideways", 
-                "Pale Ale", 
-                "Pale Ale", 
-                "Shenanigans", 
-                "First Bite", 
-                "30th Anniversary Ale", 
-                "Field to Ferment", 
-                "Healy Heights Pale Ale", 
-                "Golden Ale", 
-                "Hop Fro"
+                ...
               ], 
               "breweries": [
                 "Willoughby Brewing Company", 
                 "SweetWater Brewing Company", 
                 "Fish Brewing Company", 
-                "Victory Brewing Company", 
-                "World Brews, Winery Exchange", 
-                "Rhinegeist", 
-                "Boston Beer Company", 
-                "Snoqualmie Falls Brewing Company", 
-                "White Rabbit Brewing Company", 
-                "Breckenridge Brewery", 
-                "Oskar Blues Brewery", 
-                "Nomad Brewing Co.", 
-                "Backcountry Brewery", 
-                "Good People Brewing Company", 
-                "Indeed Brewing Company", 
-                "Spider Bite Beer Co.", 
-                "Mendocino Brewing Company", 
-                "Fremont Brewing", 
-                "Sasquatch Brewery", 
-                "St. George Brewing Company", 
-                "Fat Head's Brewery"
+                ...
+              ], 
+              "brewery_ids": [
+                1, 
+                3, 
+                4, 
+                ...
               ], 
               "description": "American pale ales range from deep golden to copper in color. The style is characterized by fruity, floral and citrus-like American-variety hop character producing medium to medium-high hop bitterness, flavor, and aroma. Note that the \"traditional\" style of this beer has its origins with certain floral, fruity, citrus-like, piney, resinous, or sulfur-like American hop varietals. One or more of these hop characters is the perceived end, but the perceived hop characters may be a result of the skillful use of hops of other national origins. American pale ales have medium body and low to medium maltiness. Low caramel character is allowable. Fruity-ester flavor and aroma should be moderate to strong. Diacetyl should be absent or present at very low levels. Chill haze is allowable at cold temperatures.", 
               "ibu_max": 42.0, 
@@ -566,83 +354,73 @@ We have added the query URI template parameter's - `order`. This parameter is us
               "srm": 10.0, 
               "type": "style"
             }, 
-            ...
+            {
+              "abv_max": 8.0, 
+              "abv_min": 4.5, 
+              "beer_ids": [
+                43, 
+                157
+              ], 
+              "beers": [
+                "Beerland Do\u00f1a Neta", 
+                "Biere De Marc"
+              ], 
+              "breweries": [
+                "Dragoon Brewing Company", 
+                "Good Nature Farm Brewery"
+              ], 
+              "brewery_ids": [
+                41, 
+                133
+              ], 
+              "description": "Beers in this category are golden to deep copper or light brown in color. They are light to medium in body. This style of beer is characterized by a toasted malt aroma, slight malt sweetness in flavor, and low to medium hop bitterness. Noble-type hop aromas and flavors should be low to medium. Fruity esters can be light to medium in intensity. Flavor of alcohol is evident. Earthy, cellarlike, musty aromas are okay. Diacetyl should not be perceived but chill haze is okay. Often bottle conditioned with some yeast character. French-Style Bi\u00e9re de Garde may have Brettanomyces characters that are slightly acidity, fruity, horsey, goaty and/or leather-like.", 
+              "ibu_max": 30.0, 
+              "ibu_min": 20.0, 
+              "id": 23, 
+              "name": "Bi\u00e8re de Garde", 
+              "srm": 12.0, 
+              "type": "style"
+            }, 
+            {
+              "abv_max": 5.4, 
+              "abv_min": 4.8, 
+              "beer_ids": [
+                51, 
+                155, 
+                203
+              ], 
+              "beers": [
+                "Cow Creek", 
+                "Barking Squirrel Lager", 
+                "Going (Coco) Nuts"
+              ], 
+              "breweries": [
+                "Twisted X Brewing Company", 
+                "Hop City Brewing Co.", 
+                "Four Sons Brewing"
+              ], 
+              "brewery_ids": [
+                49, 
+                132, 
+                163
+              ], 
+              "description": "American-style amber lagers are light amber to amber or copper colored. They are medium bodied. There is a noticeable degree of caramel-type malt character in flavor and often in aroma. This is a broad category in which the hop bitterness, flavor, and aroma may be accentuated or may only be present at relatively low levels, yet noticeable. Fruity esters, diacetyl, and chill haze should be absent.", 
+              "ibu_max": 30.0, 
+              "ibu_min": 18.0, 
+              "id": 30, 
+              "name": "American Amber Lager", 
+              "srm": 10.0, 
+              "type": "style"
+            }, ...
           ], 
-          "totalCount": 65
+          "totalCount": 7
         }
-
-+ Response 500 (application/json)
-
-### Styles By SRM [/styles/srm/{srm_val}{?limit,offset}] 
-This route is used to return styles by SRMe. Given a floating point value X.YZ, a list of styles with srm in the range X.00 to X.99
-
-+ Parameters
-    + srm_val: 2.3 (required, float) - The srm value as a float
-    
-#### View a Style By SRM [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-
-+ Response 200 (application/json)
-
-        {
-        "abv_max": 5.0999999999999996, 
-        "abv_min": 4.0, 
-        "beers": [
-          "Limp Puppet Session IPA"
-        ], 
-        "breweries": [
-          "Great Lakes Brewery"
-        ], 
-        "description": "Any style of beer can be made lower in strength than described in the classic style guidelines. The goal should be to reach a balance between the style's character and the lower alcohol content. Drinkability is a character in the overall balance of these beers. Beers in this category must not exceed 4.1% alcohol by weight (5.1% alcohol by volume).", 
-        "ibu_max": 30.0, 
-        "ibu_min": 10.0, 
-        "id": 28, 
-        "name": "Session", 
-        "srm": 2.0, 
-        "type": "style"
-        }
-
-### Styles By ABV [/styles/srm/{abv_val}{?limit,offset}] 
-This route is used to return styles by ABV. Given a floating point value X.YZ, a list of styles with abv in the range of the styles abv_min and abv_max of styles is returned. 
-
-+ Parameters
-    + abv_val: 13.3 (required, float) - the alcohol value as a float
-    
-#### View a Style By ABV [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
         
-+ Response 200 (application json)
-
-        {
-        "abv_max": 14.0, 
-        "abv_min": 9.0, 
-        "beers": [
-          "Inner Sanctum"
-        ], 
-        "breweries": [
-          "Potosi Brewing Company"
-        ], 
-        "description": "Quadrupels or \"Quads\" are characterized by the immense presence of alcohol and balanced flavor, bitterness and aromas. Its color is deep amber to rich chestnut/garnet brown. Often characterized by a mousse-like dense, sometimes amber head will top off a properly poured and served quad. Complex fruity aroma and flavor emerge reminiscent of raisins, dates, figs, grapes, plums often accompanied with a hint of winy character. Caramel, dark sugar and malty sweet flavors and aromas can be intense, not cloying, while complementing fruitiness. Though well attenuated it usually has a full, creamy body. Hop characters do not dominate; low to low-medium bitterness is perceived. Perception of alcohol can be extreme. Clove-like phenolic flavor and aroma should not be evident. Chill haze is acceptable at low serving temperatures. Diacetyl and DMS should not be perceived. Well balanced with savoring/sipping drinkability. Oxidative character if evident in aged Quads should be mild and pleasant.", 
-        "ibu_max": 50.0, 
-        "ibu_min": 25.0, 
-        "id": 59, 
-        "name": "Belgian Quad", 
-        "srm": 14.0, 
-        "type": "style"
-        }
-
++ Response 500 (application/json)
 
 # Group Reviews
 
-## Reviews [/reviews/{review_id}]
+## Review [/reviews/{review_id}]
 A Review object has the following attributes:
 + beer_name - the beer being reviewed
 + brewery_name - the brewer of the beer
@@ -666,133 +444,42 @@ A Review object has the following attributes:
             "type": "review"
         }
 
-### All Reviews [/reviews{?limit,offset,order}] 
-A resource representing all of the styles in the database.
++ Response 500 (application/json)
 
-We have added the query URI template parameter's - `limit`. This parameter is used for limiting the number of results returned by some actions on this resource. 
+### Reviews [/reviews{?limit,offset,order,beer,rating}] 
+A resource representing all of the reviews in the database. Results can be filtered.
 
-We have added the query URI template parameter's - `offset`. This parameter is used for selecting the page number relative to `limit` of results returned by some actions on this resource.
-
-We have added the query URI template parameter's - `order`. This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input `asc` and `desc`. `asc` will order alphabetically from A-Z and `desc` will order Z-A.
 + results - a list of all reviews
 + totalCount - the number of all reviews in the database
 
-#### Retrieve all Reviews [GET]
+#### Retrieve Reviews [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
         + Default: `9`
     + offset (number, optional) - The offset number of results to return.
         + Default: `9`
     + order (string, optional) - The string must be 'asc' or 'desc'
+    + beer: Rusty Rail Pale Ale (string, optional) - A name of a specific beer 
+    + rating: 4.4 (number, optional) - A float of a rating, ratings equal or higher than this will be returned
     
 + Response 200 (application/json)
         
         {
-            "records": [
-                {
-                    "beer_name": "Rusty Rail Pale Ale", 
-                    "brewery_name": "Willoughby Brewing Company", 
-                    "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
-                    "date": "2014-07-22", 
-                    "id": 1, 
-                    "rating": 3.5, 
-                    "type": "review"
-                }, 
-                {
-                    "beer_name": "Rusty Rail Pale Ale", 
-                    "brewery_name": "Willoughby Brewing Company", 
-                    "comment": "Draft at Pigskin in Athens during Ohio Brew Week. Pours a clear orange color with a small off-white head that laces the glass. Notes of florals, citrus fruits, dry grains, pale malts, grass, and straw. Light-bodied, with moderate carbonation and a bitter mouthfeel. Decent APA.", 
-                    "date": "2014-07-16", 
-                    "id": 2, 
-                    "rating": 3.2999999999999998, 
-                    "type": "review"
-                }
-            ], 
-            "totalCount": 596
+          "records": [
+            {
+              "beer_id": 1, 
+              "beer_name": "Rusty Rail Pale Ale", 
+              "brewery_id": 1, 
+              "brewery_name": "Willoughby Brewing Company", 
+              "comment": "A: Reddish/Llightly Briwn Hue, Passes Through Some Light, Thick White Head, Good Lacing \r\n\r\nS: Citrus, Mild Resin, Mild Malts \r\n\r\nT: Piney, Resin, Malty Finish \r\n\r\nM: Good Carbonation, Medium Bodied, Dry, Bitter \r\n\r\nOverall, a really good Pale Ale that teeters on the IPA boundaries but maintains a good balance with the malt flavors on the back end.", 
+              "date": "2013-10-19", 
+              "id": 3, 
+              "image": "https://s3.amazonaws.com/brewerydbapi/beer/w9ftpF/upload_r2OXLm-large.png", 
+              "rating": 4.4, 
+              "type": "review"
+            }
+          ], 
+          "totalCount": 1
         }
-        
-### Reviews by Rating [/reviews/rating/{rating_val}{?limit,offset}] 
-This route is used to return reviews by rating. Given a floating point value, a list of reviews with that rating is returned.
-
-+ Parameters
-    + rating_val: 2.0 (required, string) - A floating point value
-    
-#### View a Reviews by Rating [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9`   
-        
-+ Response 200 (application/json)
-
-        {
-        "beer_name": "Superfluid", 
-        "brewery_name": "Short's Brewing Company", 
-        "comment": "Standard golden amber with small head that lasts forever. Decent hop aroma with some citrus and pine. flavor is off, though. Really not a lot of flavor, but some very intense bitterness. This could really benefit from some sweet malty body, but there is none. Nope, don\u2019t like this one bit.", 
-        "date": "2017-08-19", 
-        "id": 25, 
-        "rating": 2.0, 
-        "type": "review"
-        }
-
-### Reviews by Beer [/reviews/beer/{beer_name}{?limit,offset}] 
-This route is used to return reviews by a given beer name. 
-
-+ Parameters
-    + beer_name: Rusty Rail Pale Ale (required, string) - A floating point value
-    
-#### View Reviews by Beer [GET]
-+ Parameters
-    + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
-    + offset (number, optional) - The offset number of results to return.
-        + Default: `9` 
-        
-+ Response 200 (application/json)
-
-        {
-        "beer_name": "Rusty Rail Pale Ale", 
-        "brewery_name": "Willoughby Brewing Company", 
-        "comment": "Tap sample at OBW. Poured clear copper hue with an average frothy white head that mostly lasted with good lacing. Moderate aroma of citrus hops and sweet malt. Medium body with a slick texture and soft carbonation. Well balanced flavor of malt and hops with a medium bittersweet finish of moderate duration. This is a solid drinkable brew.", 
-        "date": "2014-07-22", 
-        "id": 1, 
-        "rating": 3.5, 
-        "type": "review"
-        }, 
-        {
-        "beer_name": "Rusty Rail Pale Ale", 
-        "brewery_name": "Willoughby Brewing Company", 
-        "comment": "Draft at Pigskin in Athens during Ohio Brew Week. Pours a clear orange color with a small off-white head that laces the glass. Notes of florals, citrus fruits, dry grains, pale malts, grass, and straw. Light-bodied, with moderate carbonation and a bitter mouthfeel. Decent APA.", 
-        "date": "2014-07-16", 
-        "id": 2, 
-        "rating": 3.2999999999999998, 
-        "type": "review"
-        }, 
-        {
-        "beer_name": "Rusty Rail Pale Ale", 
-        "brewery_name": "Willoughby Brewing Company", 
-        "comment": "A: Reddish/Llightly Briwn Hue, Passes Through Some Light, Thick White Head, Good Lacing \r\n\r\nS: Citrus, Mild Resin, Mild Malts \r\n\r\nT: Piney, Resin, Malty Finish \r\n\r\nM: Good Carbonation, Medium Bodied, Dry, Bitter \r\n\r\nOverall, a really good Pale Ale that teeters on the IPA boundaries but maintains a good balance with the malt flavors on the back end.", 
-        "date": "2013-10-19", 
-        "id": 3, 
-        "rating": 4.4000000000000004, 
-        "type": "review"
-        }, 
-        {
-        "beer_name": "Rusty Rail Pale Ale", 
-        "brewery_name": "Willoughby Brewing Company", 
-        "comment": "Pint on tap at the Pigskin in Athens, OH during Ohio Brew Week. Clear amber color. Big foamy off-white head. Good lace. Good light crisp carbonation, dry texture. Awesome dry hoppiness - pine, some citrus. Nice bitterness, good zestiness. Really good pale ale.", 
-        "date": "2012-07-08", 
-        "id": 4, 
-        "rating": 3.7000000000000002, 
-        "type": "review"
-        }, 
-        {
-        "beer_name": "Rusty Rail Pale Ale", 
-        "brewery_name": "Willoughby Brewing Company", 
-        "comment": "on tap at WBC 10Feb2012, Nice and amber with a nose of light hops, taste is fair and crisp. easy to finish easy to drink. doesnt linger, doesnt offend solid offering.", 
-        "date": "2012-02-13", 
-        "id": 5, 
-        "rating": 3.0, 
-        "type": "review"
-        }
+ 
++ Response 500 (application/json)
