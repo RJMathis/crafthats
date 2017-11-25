@@ -63,7 +63,10 @@ class SearchResults extends Component {
         if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
             this.setState({
                 searchTerm: nextProps.location.state.searchTerm,
-                results: chunk(nextProps.location.state.results, 10)
+                results: chunk(nextProps.location.state.results, 10),
+                numPages: Math.ceil(nextProps.location.state.results.length/10),
+                totalResults: nextProps.location.state.results.length,
+                page: 0
             });
         }
     }
@@ -102,7 +105,7 @@ class SearchResults extends Component {
                     </div>);
         }
         let searchTerm = this.state.searchTerm
-        let resultRows = this.state.results[this.state.page].map(function(result) {
+        let resultRows = this.state.results[this.state.page].map((result) => {
             return (
                 <SearchSelector key={result.id} item={result} searchTerm={searchTerm} navigateTo="/Result"/>
             );

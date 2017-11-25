@@ -65,22 +65,22 @@ class Search extends Component {
                 <div>
                    <div className="loading-animation" ref="loader">
                         <div id="container">
-                            <div className="white"></div>
+                            <div className="white"/>
                             <div id="beaker">
                                 <div className="beer-foam">
-                                    <div className="foam-1"></div>
-                                    <div className="foam-2"></div>
-                                    <div className="foam-3"></div>
-                                    <div className="foam-4"></div>
-                                    <div className="foam-5"></div>
-                                    <div className="foam-6"></div>
+                                    <div className="foam-1"/>
+                                    <div className="foam-2"/>
+                                    <div className="foam-3"/>
+                                    <div className="foam-4"/>
+                                    <div className="foam-5"/>
+                                    <div className="foam-6"/>
                                 </div>
                                 <div id="liquid">
-                                    <div className="bubble bubble1"></div>
-                                    <div className="bubble bubble2"></div>
-                                    <div className="bubble bubble3"></div>
-                                    <div className="bubble bubble4"></div>
-                                    <div className="bubble bubble5"></div>
+                                    <div className="bubble bubble1"/>
+                                    <div className="bubble bubble2"/>
+                                    <div className="bubble bubble3"/>
+                                    <div className="bubble bubble4"/>
+                                    <div className="bubble bubble5"/>
                                 </div>
                             </div>
                         </div>
