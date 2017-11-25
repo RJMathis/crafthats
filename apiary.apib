@@ -16,7 +16,7 @@ Error Response Code: 500 + ERROR MESSAGE
             
 ## Parameters
 
-The `limit`,`offset`, and `order` parameters can be applied to the following endpoints
+The `limit`,`offset`, and `sort_by` parameters can be applied to the following endpoints
 + /beers 
 + /breweries 
 + /styles 
@@ -26,7 +26,7 @@ The `limit`,`offset`, and `order` parameters can be applied to the following end
 
 `offset` -  This parameter is used for selecting the page number relative to limit of results returned by some actions on this resource.
 
-`order` -  This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input "asc" and "desc". "asc" will order alphabetically from A-Z and "desc" will order Z-A. For reviews, order is done according to highest and lowest ratings.
+`sort_by` -  This parameter is used for ordering the data in the database by alphabetical order. It tolerates the input "asc" and "desc". "asc" will order alphabetically from A-Z and "desc" will order Z-A. For reviews, order is done according to highest and lowest ratings.
 
 # Group Breweries 
 
@@ -68,7 +68,7 @@ A Brewery object has the following attributes:
             "website": "http://willoughbybrewing.com/"
         }
 
-### Breweries [/breweries{?limit,offset,order,state,country}] 
+### Breweries [/breweries{?limit,offset,sort_by,state,country}] 
 A resource representing all of the breweries in the database. These results can be filtered. 
 
 + results - a list of breweries
@@ -76,10 +76,13 @@ A resource representing all of the breweries in the database. These results can 
 
 #### Retrieve Breweries [GET]
 + Parameters
-    + limit: 12 (number, optional) - The maximum number of results to return.
-    + offset: 0 (number, optional) - The offset number of results to return.
-    + order: asc (string, optional) - The string must be 'asc' or 'desc'
+    + limit (number, optional) - The maximum number of results to return.
+        + Default: 25
+    + offset (number, optional) - The offset number of results to return.
+        + Default: 0
+    + sort_by: asc (string, optional) - The string must be 'asc' or 'desc'
     + state: Ohio (string, optional) - The name of a state or region
+    + country: United States (string, optional) - The name of a state or region
 
 + Response 200 (application/json)
 
@@ -192,7 +195,7 @@ A Beer object has the following attributes:
             "type": "beer"
         }
 
-### Beers [/beers{?limit,offset,order,style,organic}] 
+### Beers [/beers{?limit,offset,sort_by,style,organic}] 
 A resource representing all of the beers in the database. These results can be filtered.
 
 + results - a list of all beers
@@ -201,10 +204,10 @@ A resource representing all of the beers in the database. These results can be f
 #### Retrieve Beers [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
-        + Default: `25`
+        + Default: 25
     + offset (number, optional) - The offset number of results to return.
-        + Default: `0`
-    + order (string, optional) - The string must be 'asc' or 'desc'
+        + Default: 0
+    + sort_by (string, optional) - The string must be 'asc' or 'desc'
     + style: Blonde (string, optional) - The name of a style
     + organic: Y (string, optional) - A string of "Y" or "N" to indicate yes or no, respectively, for organic beers
     
@@ -297,7 +300,7 @@ A style object has the following attributes:
         
 + Response 500 (application/json)
 
-### Styles [/styles{?limit,offset,order,abvmin,abvmax,srmmin,srmmax}] 
+### Styles [/styles{?limit,offset,sort_by,abv_min,abv_max,srm_min,srm_max}] 
 A resource representing all of the styles in the database. These results can be filtered.
 
 `abv_min` and `abv_max` must both be non null values to filter styles by abv
@@ -307,14 +310,14 @@ A resource representing all of the styles in the database. These results can be 
 #### Retrieve Styles [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
-        + Default: `25`
+        + Default: 25
     + offset (number, optional) - The offset number of results to return.
-        + Default: `0`
-    + order (string, optional) - The string must be 'asc' or 'desc'
-    + abvmin: 1.0 (number, optional) - Used in conjuction with abv_max to filter styles by abv values
-    + abvmax: 8.0 (number, optional) - Used in conjuction with abv_min to filter styles by abv values
-    + srmmin: 10.0 (number, optional) - Used in conjuction with srm_max to filter styles by abv values
-    + srmmax: 14.0 (number, optional) - Used in conjuction with srm_min to filter styles by abv values
+        + Default: 0
+    + sort_by: asc (string, optional) - The string must be 'asc' or 'desc'
+    + `abv_min`: 4.0 (number, optional) - Used in conjuction with abv_max to filter styles by abv values
+    + `abv_max`: 8.0 (number, optional) - Used in conjuction with abvmin to filter styles by abv values
+    + `srm_min`: 10.0 (number, optional) - Used in conjuction with srmmax to filter styles by abv values
+    + `srm_max`: 14.0 (number, optional) - Used in conjuction with srmmin to filter styles by abv values
 
 + Response 200 (application/json)
         
@@ -446,7 +449,7 @@ A Review object has the following attributes:
 
 + Response 500 (application/json)
 
-### Reviews [/reviews{?limit,offset,order,beer,rating}] 
+### Reviews [/reviews{?limit,offset,sort_by,beer_name,rating}] 
 A resource representing all of the reviews in the database. Results can be filtered.
 
 + results - a list of all reviews
@@ -455,11 +458,11 @@ A resource representing all of the reviews in the database. Results can be filte
 #### Retrieve Reviews [GET]
 + Parameters
     + limit (number, optional) - The maximum number of results to return.
-        + Default: `9`
+        + Default: 25
     + offset (number, optional) - The offset number of results to return.
-        + Default: `9`
-    + order (string, optional) - The string must be 'asc' or 'desc'
-    + beer: Rusty Rail Pale Ale (string, optional) - A name of a specific beer 
+        + Default: 0
+    + sort_by: asc (string, optional) - The string must be 'asc' or 'desc'
+    + beer_name: Rusty Rail Pale Ale (string, optional) - A name of a specific beer or a substring of a beer name
     + rating: 4.4 (number, optional) - A float of a rating, ratings equal or higher than this will be returned
     
 + Response 200 (application/json)
