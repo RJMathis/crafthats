@@ -82,7 +82,7 @@ A resource representing all of the breweries in the database. These results can 
         + Default: 0
     + sort_by: asc (string, optional) - The string must be 'asc' or 'desc'
     + state: Ohio (string, optional) - The name of a state or region
-    + country: United States (string, optional) - The name of a state or region
+    + country: United States (string, optional) - The name of a country
 
 + Response 200 (application/json)
 
@@ -319,8 +319,8 @@ A resource representing all of the styles in the database. These results can be 
     + sort_by: asc (string, optional) - The string must be 'asc' or 'desc'
     + `abv_min`: 4.0 (number, optional) - Used in conjuction with abv_max to filter styles by abv values
     + `abv_max`: 8.0 (number, optional) - Used in conjuction with abvmin to filter styles by abv values
-    + `srm_min`: 10.0 (number, optional) - Used in conjuction with srmmax to filter styles by abv values
-    + `srm_max`: 14.0 (number, optional) - Used in conjuction with srmmin to filter styles by abv values
+    + `srm_min`: 10.0 (number, optional) - Used in conjuction with srmmax to filter styles by srm values
+    + `srm_max`: 14.0 (number, optional) - Used in conjuction with srmmin to filter styles by srm values
 
 + Response 200 (application/json)
         
