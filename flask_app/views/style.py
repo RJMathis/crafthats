@@ -27,9 +27,9 @@ def getStyles():
     abv_min = request.args.get('abv_min','None').encode('utf-8')
     abv_max = request.args.get('abv_max','None').encode('utf-8')
     srm_min = request.args.get('srm_min','None').encode('utf-8')
-    srm_max = request.args.get('srm_max','None').encode('utf-8')
-    order = request.args.get('order','default').encode('utf-8')
-    lim = request.args.get('limit', '12').encode('utf-8')
+    srm_max = request.args.get('srm_max',"None").encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
+    lim = request.args.get('limit', '9').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
 
     #cast
@@ -45,7 +45,7 @@ def getStyles():
     #build up the query with filters and store resulting list in styles array
     query = db.session.query(Style)
     if abv_min != 'None' and abv_max != 'None':
-        query = query.filter(Style.abv_min>=abv_min).filter(Style.abv_max<=abv_max)
+        query = query.filter(Style.abv_min>=abv_min).filter(Style.abv_max<=abv_max) 
     if srm_min != 'None' and srm_max != 'None':
         query = query.filter(Style.srm>=srm_min).filter(Style.srm<=srm_max)
     if order == "asc":
@@ -69,7 +69,9 @@ def getStyles():
         'abv_max' : style.abv_max,
         'srm'     : style.srm,
         'beers' : [beer.serializeName for beer in style.beers],
-        'breweries':[brewery.serializeName for brewery in style.breweries]
+        'beer_ids':[beer.id for beer in style.beers],
+        'breweries':[brewery.serializeName for brewery in style.breweries],
+        'brewery_ids':[brewery.id for brewery in style.breweries]
         }
         allStyles.append(s)
 
@@ -92,14 +94,16 @@ def getStyleInfo(style_id):
             'type' : "style",
             'id' : style.id,
             'name' : style.name,
-            'desicription' : style.description,
+            'description' : style.description,
             'ibu_min' : style.ibu_min,
             'ibu_max' : style.ibu_max,
             'abv_min' : style.abv_min,
             'abv_max' : style.abv_max,
             'srm': style.srm,
             'beers' : [beer.serializeName for beer in style.beers],
-            'breweries':[brewery.serializeName for brewery in style.breweries]
+            'beer_ids':[beer.id for beer in style.beers],
+            'breweries':[brewery.serializeName for brewery in style.breweries],
+            'brewery_ids':[brewery.id for brewery in style.breweries]
             }
     except AttributeError:
         return "Server Error 500: Invalid style_id"

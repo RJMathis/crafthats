@@ -10,11 +10,15 @@ export default class Reviews extends Component {
         super (props);
         this.state = {
             reviews: [],
+            ratingMenu: ["All", "0", "1", "2", "3", "4", "5"],
+            beerMenu: ["All"],
+            selectedRating: "",
+            selectedBeer: "",
             page: 0,
             numPages: 0,
             totalCount: 0,
-            pgSize: 9,
-            order: "",
+            pageLimit: 9,
+            sortBy: "",
             navigate: false,
             navigateTo: '/Review'
         }
@@ -40,11 +44,10 @@ export default class Reviews extends Component {
 
     componentDidMount () {
         this.callAPI()
+        this.getBeers()
     }
 
-    handlePageChange = (page, e) => {
-        e.preventDefault()
-        //return <Redirect to={{pathname: this.state.pathname, state: {page: page}}} push={true} />;
+    handlePageChange = (page) => {
         this.setState({page: page})
     }
 
@@ -62,35 +65,62 @@ export default class Reviews extends Component {
         }
     }
 
-    sort = (order, e) => {
-        if (e) {
-            e.preventDefault()
+    handleRating = (e) => {
+        if (e.target.value === "All") {
+            this.setState({selectedRating: "All"})
+        } else {
+            this.setState({selectedRating: e.target.value})
         }
-        this.setState({order: order})
+    }
 
-        let limit = this.state.pgSize
-        let offset = this.state.page * this.state.pgSize
+    handleBeer = (e) => {
+        this.setState({selectedBeer: e.target.value})
+    }
+
+    sort = (order) => {
+        this.setState({sortBy: order})
+    }
+
+    callAPI = () => {
+
+        let limit = this.state.pageLimit
+        let offset = this.state.page * this.state.pageLimit
+        let limOff = "?limit="+limit+"&offset="+offset
+        let url = "https://backend-staging-183303.appspot.com/reviews"+limOff
+
+        if (this.state.selectedRating !== "All" && this.state.selectedRating !== "") {
+            url += "&rating="+this.state.selectedRating
+        }
+        if (this.state.selectedBeer !== "All" && this.state.selectedBeer !== "") {
+            url += "&beer_name="+this.state.selectedBeer
+        }
+        if (this.state.sortBy !== "") {
+            url += "&sort_by="+this.state.sortBy
+        }
+
         let self = this
-        let url = self.apiUrl+"?order="+order+"&limit="+limit+"&offset="+offset
         axios.get(url)
             .then((res) => {
                 // Set state with result
-                self.setState({ reviews: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
+                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pageLimit)});
             })
             .catch((error) => {
                 console.log(error)
             });
     }
 
-    callAPI = () => {
-        let limit = this.state.pgSize
-        let offset = this.state.page * this.state.pgSize
-        let self = this
+    getBeers = () => {
+        let url = 'https://backend-staging-183303.appspot.com/beers?limit=500';
+        let beers = ["All"]
 
-        axios.get(self.apiUrl+"?limit="+limit+"&offset="+offset)
+        let self = this
+        axios.get(url)
             .then((res) => {
-                // Set state with result
-                self.setState({reviews: res.data.records, totalCount: res.data.totalCount, numPages: Math.ceil(res.data.totalCount/self.state.pgSize)});
+                // Set state with names of styles
+                res.data.records.map((beer) => {
+                    return beers.push(beer.name)
+                })
+                self.setState({beerMenu: beers});
             })
             .catch((error) => {
                 console.log(error)
@@ -102,9 +132,16 @@ export default class Reviews extends Component {
      * componentWillUnmount()
      */
 
-    componentDidUpdate(prevState, nextState) {
-        if (nextState.page !== this.state.page) {
-            this.sort(this.state.order)
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.selectedRating !== this.state.selectedRating ||
+            prevState.selectedBeer !== this.state.selectedBeer ||
+            prevState.sortBy !== this.state.sortBy ||
+            prevState.page !== this.state.page)
+        {
+            this.callAPI()
+        }
+
+        if (prevState.page !== this.state.page) {
             window.scrollTo({
                 top: 0,
                 left: 0,
@@ -112,7 +149,6 @@ export default class Reviews extends Component {
             })
         }
     }
-
 
     /* More information about the React.Component lifecyle here: https://reactjs.org/docs/react-component.html */
 
@@ -124,12 +160,43 @@ export default class Reviews extends Component {
                 <ReviewSelector item={review} navigateTo="/Review"/>
             );
         })
+
+        let ratingMenu = this.state.ratingMenu.map((rating) => {
+            return (
+                <option value={rating}>{rating}</option>
+            );
+        })
+
+        let beerMenu = this.state.beerMenu.map((beer) => {
+            return (
+                <option value={beer}>{beer}</option>
+            );
+        })
+
         // Add column for Brewery
         return (
             <div className="container sub-container">
                 <div className="row">
+                    <div className="col-md-4">
+                        <label>
+                            <strong>Rating:  </strong>
+                        </label><span> </span>
+                        <select value={this.state.selectedRating} onChange={this.handleRating}>
+                             {ratingMenu}
+                        </select>
+                    </div>
+                    <div className="col-md-6">
+                        <label>
+                            <strong>Beer:  </strong>
+                        </label><span> </span>
+                        <select value={this.state.selectedBeer} onChange={this.handleBeer}>
+                            {beerMenu}
+                        </select>
+                    </div>
+                </div>
+                <div className="row">
                     <div className="col-xs-12">
-                        <h2 className="sub-header">Beer Reviews</h2>
+                        <h2 className="sub-header">Reviews</h2>
                         <table className="table table-responsive table-striped">
                             <thead>
                             <tr>
@@ -140,10 +207,10 @@ export default class Reviews extends Component {
                                     <div className="button btn-table-group btn-group">
                                         <button type="button"
                                                 className={this.state.order === "asc" ? "btn btn-default active" : "btn btn-table btn-default"}
-                                                onClick={(e) => this.sort("desc", e)}><i className="fa fa-arrow-up" aria-hidden="true"></i></button>
+                                                onClick={(e) => this.sort("desc", e)}><i className="fa fa-arrow-up" aria-hidden="true"/></button>
                                         <button type="button"
                                                 className={this.state.order === "desc" ? "btn btn-default active" : "btn btn-table btn-default"}
-                                                onClick={(e) => this.sort("asc", e)}><i className="fa fa-arrow-down" aria-hidden="true"></i></button>
+                                                onClick={(e) => this.sort("asc", e)}><i className="fa fa-arrow-down" aria-hidden="true"/></button>
                                     </div>
                                 </th>
                             </tr>

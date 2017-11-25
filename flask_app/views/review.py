@@ -64,7 +64,9 @@ def getReviews():
         'rating' : review.rating,
         'comment' : review.comment,
         'beer_name' : review.beer.name,
+        'beer_id': review.beer.id,
         'brewery_name' : review.beer.brewery.name,
+        'brewery_id': review.beer.brewery.id,
         'image': review.beer.images
         }
         allReviews.append(r)
@@ -91,7 +93,9 @@ def getReviewInfo(review_id):
             'rating' : review.rating,
             'comment' : review.comment,
             'beer_name' : review.beer.name,
+            'beer_id': review.beer.id,
             'brewery_name': review.beer.brewery.name,
+            'brewery_id': review.beer.brewery.id,
             'image' : review.beer.images
             }
     except AttributeError:
