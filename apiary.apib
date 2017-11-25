@@ -198,8 +198,8 @@ A Beer object has the following attributes:
 ### Beers [/beers{?limit,offset,sort_by,style,organic}] 
 A resource representing all of the beers in the database. These results can be filtered.
 
-+ results - a list of all beers
-+ totalCount - the number of all beers in the database
++ results - a list of beers
++ totalCount - the number of beers returned
 
 #### Retrieve Beers [GET]
 + Parameters
@@ -306,6 +306,9 @@ A resource representing all of the styles in the database. These results can be 
 `abv_min` and `abv_max` must both be non null values to filter styles by abv
 
 `srm_min` and `srm_max` must both be non null values to filter styles by srm
+
++ results - a list of styles
++ totalCount - the number of styles returned
 
 #### Retrieve Styles [GET]
 + Parameters
@@ -452,8 +455,8 @@ A Review object has the following attributes:
 ### Reviews [/reviews{?limit,offset,sort_by,beer_name,rating}] 
 A resource representing all of the reviews in the database. Results can be filtered.
 
-+ results - a list of all reviews
-+ totalCount - the number of all reviews in the database
++ results - a list of reviews
++ totalCount - the number of reviews returned
 
 #### Retrieve Reviews [GET]
 + Parameters
