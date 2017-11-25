@@ -8,9 +8,6 @@ runtime_config:
 handlers:
 - url: /
   script: main.app
-#
-# - url: /.*
-#   script: main.app
 
 ###BEER HANDLERS
 - url: /beers
@@ -19,47 +16,27 @@ handlers:
 - url: ".*/beers/[0-9]+"
   script: main.app
 
-- url: ".*/beers/organic/(Y|N)"
-  script: main.app
-
-- url: ".*/beers/style/.*"
-  script: main.app
-
+###STYLE HANDLERS
 - url: /styles
   script: main.app
 
 - url: ".*/styles/[0-9]+"
   script: main.app
 
-- url: ".*/styles/srm/.*"
-  script: main.app
-
-- url: ".*/styles/abv/.*"
-  script: main.app
-
+###BREWERY HANDLERS
 - url: /breweries
   script: main.app
 
 - url: ".*/breweries/[0-9]+"
   script: main.app
 
-- url: ".*/breweries/state/.*"
-  script: main.app
-
-- url: ".*/breweries/country/.*"
-  script: main.app
-
+###REVIEW HANDLERS
 - url: /reviews
   script: main.app
 
 - url: ".*/reviews/[0-9]+"
   script: main.app
 
-- url: ".*/reviews/rating/.*"
-  script: main.app
-
-- url: ".*/reviews/beer/.*"
-  script: main.app
 
 libraries:
 - name: MySQLdb

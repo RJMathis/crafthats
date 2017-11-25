@@ -5,27 +5,48 @@ from models import db, Brewery
 from werkzeug.contrib.cache import SimpleCache
 
 cache = SimpleCache()
+
 # GET ALL BREWERIES
+"""
+/breweries endpoint
+?params:
+    +state - string 
+    +country - string
+    +offset - int
+    +limit - int
+    +order - int
+"""
 @app.route('/breweries', methods=['GET'])
 def getBreweries():
+    # breweries to return
     allBreweries = []
-     
+
+    #get optional params
     state = request.args.get('state','None').encode('utf-8')
     country = request.args.get('country','None').encode('utf-8')
-    order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '9').encode('utf-8')
+    order = request.args.get('order','default').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
+
+    #cast
     lim = int(lim)
     off = int(off)
+
+    #caching
     cachestr = state+country+order+str(lim)+str(off)
     rv = cache.get(cachestr)
     if rv is not None:
         return rv
+
+    # filter parameters
     filtersDict = {
         'state':state,
         'country':country
     }
+
+    #build up the query with filters and store resulting list in breweries array
     query = db.session.query(Brewery)
+
     for attr,value in filtersDict.iteritems():
         if value != 'None':
             query = query.filter(getattr(Brewery,attr)==value)
@@ -66,6 +87,10 @@ def getBreweries():
     return response
 
 # GET BREWERY BY ID
+"""
+/breweries/<brewery_id> endpoint
+brewery_id - integer
+"""
 @app.route('/breweries/<brewery_id>', methods = ['GET'])
 def getBreweryInfo(brewery_id):
     try:

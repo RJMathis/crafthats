@@ -1,4 +1,4 @@
-#This is where the brewery routes are defined.
+#This is where the beer routes are defined.
 
 from flask import Flask, request, jsonify, Response, json
 from main import app
@@ -6,20 +6,29 @@ from models import db, Beer, Style
 from werkzeug.contrib.cache import SimpleCache
 
 cache = SimpleCache()
+
 #GET ALL BEERS
+"""
+/beers endpoint
+?params:
+    +style - string
+    +organic - float
+    +offset - int, default 0
+    +limit - int, default 12
+    +order - int
+"""
 @app.route('/beers', methods=['GET'])
 def getBeers():
-     
 
     allBeers = []
     organic = request.args.get('organic', 'None').encode('utf-8')
     style = request.args.get('style', 'None').encode('utf-8')
-    order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '9').encode('utf-8')
+    order = request.args.get('order','default').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset','0').encode('utf-8')
     lim = int(lim)
     off = int(off)
-    cachestr = organic+style+order+str(lim)+str(off)
+    cachestr = organic+style+order+str(lim)+str(off)+abv
     rv = cache.get(cachestr)
     if rv is not None:
         return rv
@@ -27,9 +36,10 @@ def getBeers():
     if style != 'None':
         style = db.session.query(Style).filter_by(name=style).first()
         style = style.id
+
     filtersDict = {
-       'organic' : organic,
-       'style_id'   : style 
+       'organic'    : organic,
+       'style_id'   : style
     }
 
     query = db.session.query(Beer)
@@ -64,10 +74,10 @@ def getBeers():
         allBeers.append(b)
 
     payload = {'totalCount': totalCount, 'records': allBeers}
-    # response = jsonify(payload)
-    # response.status_code = 200
+    response = Response(json.dumps(payload), mimetype='application/json')
+    response.status_code = 200
     cache.set(cachestr,Response(json.dumps(payload), mimetype='application/json'), timeout= 5*60)
-    return Response(json.dumps(payload), mimetype='application/json')
+    return response
 #
 # GET BEER BY ID
 @app.route('/beers/<beer_id>', methods = ['GET'])

@@ -7,31 +7,47 @@ from werkzeug.contrib.cache import SimpleCache
 cache = SimpleCache()
 
 #GET ALL STYLES
+"""
+/styles endpoint
+?params:
+    +abvmin - int
+    +abvmax - int
+    +srmmin - int
+    +srmmax - int
+    +offset - int, default 0
+    +limit - int, default 12
+    +order - int
+"""
 @app.route('/styles',methods=['GET'])
 def getStyles():
+    # styles to return
     allStyles = []
-    abv_min = request.args.get('abv_min','None').encode('utf-8')
-    abv_max = request.args.get('abv_max','None').encode('utf-8')
-    srm_min = request.args.get('srm_min','None').encode('utf-8')
-    srm_max = request.args.get('srm_max',"None").encode('utf-8')
-    order = request.args.get('sort_by','default').encode('utf-8')
-    lim = request.args.get('limit', '9').encode('utf-8')
+
+    # get optional params
+    abv_min = request.args.get('abvmin','None').encode('utf-8')
+    abv_max = request.args.get('abvmax','None').encode('utf-8')
+    srm_min = request.args.get('srmmin','None').encode('utf-8')
+    srm_max = request.args.get('srmmax',"None").encode('utf-8')
+    order = request.args.get('order','default').encode('utf-8')
+    lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
+
+    #cast
     lim = int(lim)
     off = int(off)
-    
+
+    #caching
     cachestr = abv_min+abv_max+srm_min+srm_max+order+str(lim)+str(off)
     rv = cache.get(cachestr)
     if rv is not None:
         return rv
 
+    #build up the query with filters and store resulting list in styles array
     query = db.session.query(Style)
     if abv_min != 'None' and abv_max != 'None':
         query = query.filter(Style.abv_min>=abv_min).filter(Style.abv_max<=abv_max) 
     if srm_min != 'None' and srm_max != 'None':
         query = query.filter(Style.srm>=srm_min).filter(Style.srm<=srm_max)
-    
-
     if order == "asc":
         styles = query.order_by(Style.name).limit(lim).offset(off).all()
     elif order == "desc":
@@ -40,7 +56,6 @@ def getStyles():
         styles = query.limit(lim).offset(off).all()
 
     totalCount = query.count()
-
 
     for style in styles:
         s = {
@@ -64,9 +79,13 @@ def getStyles():
     response = Response(json.dumps(payload), mimetype='application/json')
     response.status_code = 200
     cache.set(cachestr,response, timeout= 5*60)
-    return response
+    return jsonify(payload)
 
-
+#GET STYLE BY STYLE_ID
+"""
+/styles/<style_id> endpoint
+style_id - integer
+"""
 @app.route('/styles/<style_id>', methods = ['GET'])
 def getStyleInfo(style_id):
     try:
