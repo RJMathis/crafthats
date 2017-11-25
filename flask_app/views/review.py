@@ -10,11 +10,11 @@ cache = SimpleCache()
 """
 /reviews endpoint
 ?params:
-    +beer - string
+    +beer_name - string
     +rating - float
     +offset - int, default 0
     +limit - int, default 12
-    +order - int
+    +sort_by - string 'asc' or 'desc'
 """
 @app.route('/reviews', methods = ['GET'])
 def getReviews():
@@ -23,8 +23,8 @@ def getReviews():
 
     # get optional params
     rating = request.args.get('rating','None').encode('utf-8')
-    beer_name = request.args.get('beer','None').encode('utf-8')
-    order = request.args.get('order','default').encode('utf-8')
+    beer_name = request.args.get('beer_name','None').encode('utf-8')
+    order = request.args.get('sort_by','default').encode('utf-8')
     lim = request.args.get('limit', '25').encode('utf-8')
     off = request.args.get('offset', '0').encode('utf-8')
 
@@ -40,10 +40,23 @@ def getReviews():
 
     #build up the query with filters and store resulting list in styles array
     query = db.session.query(Review)
+
+    # find beers that contains beer_name
     if beer_name != 'None':
-        beer = db.session.query(Beer).filter_by(name=beer_name).first()
-        beer_name= beer.id
-        query = query.filter(Review.beer_name == beer_name)
+        beers_query = db.session.query(Beer).filter(Beer.name.contains(beer_name)).all()
+
+        if not beers_query:
+            response_text = "Server Error 500: No beers containing '" + beer_name +  "' were found"
+            response = Response(response_text, mimetype='application/json')
+            response.status_code = 500
+            return response
+        # filter Review query by beer id's that contained a substring of beer_name
+        beer_ids = []
+        for beer in beers_query:
+            beer_ids.append(beer.id)
+        query =  query.filter(Review.beer_name.in_(beer_ids))
+
+    # return ratings >= rating_param
     if rating != 'None':
         query = query.filter(Review.rating >= rating)
     
