@@ -12,33 +12,50 @@
 @title[DataBase]
 
 #### Database
+##### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
 <br>
-Who? What contribution?
+* Models
+	* Beer, Style, Breweries, Reviews
+* API's
+	* brewerydb.com
+	* ratebeer.com
+* How We Scraped
+	* brewerydb (beer, style, breweries)
+	* ratebeer (beer reviews)
 <br>
-<span class="aside">blah, blah</span>
+
+Note:
+all work and no play makes jack a dull boy
 
 ---
 
 @title[API]
 
 ### API
+##### Rita Mathis, Samuil Borisov, Pablo Velasco
 <br>
-Who? What contribution?
+* SQLAlchemy
+	* sql
+* Routes/endpoints
+	* 
+	* 
 <br>
 
-blah blah
+Note:
+all work and no play makes jack a dull boy
 
 ---
 
 @title[User Interface]
 
 ### Front-end: User Interface
-##### Travis Reed
+##### Travis Reed, Audric Ganser
 <br>
 * React.js
 * Fuse.js
 * axios
 * react-highlight-words
+* CSS
 <br>
 <br>
 
@@ -55,21 +72,45 @@ blah blah
 #### Self Critique
 
 * What did we do well?
+	* Good design
+	* Fast search
+	* Good data
 * What did we learn?
+	* All the SQL
+	* GCP
+	* Libraries
 * What can we do better?
+	* Scalability
+	* More robust data
 * What puzzles us?
+	* Service workers and how they work
 
+Note:
+Scalability (search in backend)
+More robust data (Handle all data from api's even if the data needed was missing)
 ---
 
 @title[Other Critique]
 #### Critique another project
 
 * What did they do well?
+	* N/A
 * What did we learn from their website?
+	* RPG and Adventure games were the highest rated
 * What can they do better?
+	* N/A
 * What puzzles us about their website?
+	* Service workers and how they work
 
 ---
 
 @title[Visualization]
 #### Visualization
+##### Audric Ganser
+
+* D3 V4
+* gamingdb.com
+* Jquery
+* HTML/CSS
+
+[Gaming DB Visualization](https://aganser.com/visualization.html)
