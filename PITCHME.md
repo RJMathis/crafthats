@@ -80,6 +80,7 @@ all work and no play makes jack a dull boy
 	* GCP
 	* Libraries
 * What can we do better?
+	* Mobile design
 	* Scalability
 	* More robust data
 * What puzzles us?
@@ -91,21 +92,21 @@ More robust data (Handle all data from api's even if the data needed was missing
 ---
 
 @title[Other Critique]
-#### Critique another project
+###### Critique another project
 
 * What did they do well?
-	* N/A
+	* Design, Responsive layout, Good Data, back-end Pagination
 * What did we learn from their website?
 	* RPG and Adventure games were the highest rated
 * What can they do better?
-	* N/A
+	* Cross Browser design, Better front-end pagination
 * What puzzles us about their website?
-	* Service workers and how they work
+	* What is "Teams Top Pick" based off of?
 
 ---
 
 @title[Visualization]
-### Visualization
+###### Visualization
 #### Audric Ganser
 
 * D3 V4
