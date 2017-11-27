@@ -2,17 +2,17 @@
 
 # Brewtiful World
 
-#### The Beer Place
+##### The Beer Place
 <br>
 <br>
-<span class="byline">[ Samuil Borisov, Rita Mathis, Audric Ganser, Travis Reed, Pablo Velasco ]</span>
+<span class="byline">Samuil Borisov, Rita Mathis, Audric Ganser, Travis Reed, Pablo Velasco</span>
 
 ---
 
 @title[DataBase]
 
-### Database
-#### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
+##### Database
+###### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
 <br>
 * Models
 	* Beer, Style, Breweries, Reviews
@@ -31,14 +31,13 @@ all work and no play makes jack a dull boy
 
 @title[API]
 
-### API
-#### Rita Mathis, Samuil Borisov, Pablo Velasco
+##### API
+###### Rita Mathis, Samuil Borisov, Pablo Velasco
 <br>
 * SQLAlchemy
-	* sql
-* Routes/endpoints
-	* 
-	* 
+* Routes/Endpoints
+	* beers, beers/{id}...
+	* filters
 <br>
 
 Note:
@@ -48,8 +47,8 @@ all work and no play makes jack a dull boy
 
 @title[User Interface]
 
-### Front-end: User Interface
-##### Travis Reed, Audric Ganser
+##### Front-end: User Interface
+###### Travis Reed, Audric Ganser
 <br>
 * React.js
 * Fuse.js
@@ -62,37 +61,32 @@ all work and no play makes jack a dull boy
 ---
 
 @title[Demonstration]
-#### Demo
+##### Demo
 
 [Our Brewtiful World](https://brewtiful.world)
 
 ---
 
 @title[Self Critique]
-#### Self Critique
+##### Self Critique
 
 * What did we do well?
-	* Good design
-	* Fast search
-	* Good data
+	* Good design, Fast search
 * What did we learn?
-	* All the SQL
-	* GCP
-	* Libraries
+	* All the SQL, GCP, Libraries
 * What can we do better?
-	* Mobile design
-	* Scalability
-	* More robust data
+	* Mobile design, Scalability, More robust data
 * What puzzles us?
 	* Service workers and how they work
 
 Note:
 Scalability (search in backend)
 More robust data (Handle all data from api's even if the data needed was missing)
+Libraries (Fuse.io etc)
 ---
 
 @title[Other Critique]
-###### Critique another project
+##### Critique another project
 
 * What did they do well?
 	* Design, Responsive layout, Good Data, back-end Pagination
@@ -106,8 +100,8 @@ More robust data (Handle all data from api's even if the data needed was missing
 ---
 
 @title[Visualization]
-###### Visualization
-#### Audric Ganser
+##### Visualization
+###### Audric Ganser
 
 * D3 V4
 * gamingdb.com
