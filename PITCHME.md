@@ -11,8 +11,8 @@
 
 @title[DataBase]
 
-#### Database
-##### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
+### Database
+#### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
 <br>
 * Models
 	* Beer, Style, Breweries, Reviews
@@ -32,7 +32,7 @@ all work and no play makes jack a dull boy
 @title[API]
 
 ### API
-##### Rita Mathis, Samuil Borisov, Pablo Velasco
+#### Rita Mathis, Samuil Borisov, Pablo Velasco
 <br>
 * SQLAlchemy
 	* sql
@@ -105,8 +105,8 @@ More robust data (Handle all data from api's even if the data needed was missing
 ---
 
 @title[Visualization]
-#### Visualization
-##### Audric Ganser
+### Visualization
+#### Audric Ganser
 
 * D3 V4
 * gamingdb.com
