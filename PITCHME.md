@@ -98,4 +98,4 @@ Libraries (Fuse.io etc)
 * Jquery
 * HTML/CSS
 
-[Gaming DB Visualization](https://aganser.com/visualization.html)
+[Gaming DB Visualization](http://aganser.com/visualization.html)
