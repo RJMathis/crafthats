@@ -11,14 +11,13 @@
 
 @title[DataBase]
 
-##### Database
+### Database
 ###### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
 <br>
 * Models
 	* Beer, Style, Breweries, Reviews
 * API's
-	* brewerydb.com
-	* ratebeer.com
+	* brewerydb.com, ratebeer.com
 * How We Scraped
 	* brewerydb (beer, style, breweries)
 	* ratebeer (beer reviews)
@@ -31,7 +30,7 @@ all work and no play makes jack a dull boy
 
 @title[API]
 
-##### API
+### API
 ###### Rita Mathis, Samuil Borisov, Pablo Velasco
 <br>
 * SQLAlchemy
@@ -47,7 +46,7 @@ all work and no play makes jack a dull boy
 
 @title[User Interface]
 
-##### Front-end: User Interface
+### Front-end: User Interface
 ###### Travis Reed, Audric Ganser
 <br>
 * React.js
@@ -61,14 +60,14 @@ all work and no play makes jack a dull boy
 ---
 
 @title[Demonstration]
-##### Demo
+### Demo
 
 [Our Brewtiful World](https://brewtiful.world)
 
 ---
 
 @title[Self Critique]
-##### Self Critique
+### Self Critique
 
 * What did we do well?
 	* Good design, Fast search
@@ -86,7 +85,7 @@ Libraries (Fuse.io etc)
 ---
 
 @title[Other Critique]
-##### Critique another project
+### Critique another project
 
 * What did they do well?
 	* Design, Responsive layout, Good Data, back-end Pagination
@@ -100,7 +99,7 @@ Libraries (Fuse.io etc)
 ---
 
 @title[Visualization]
-##### Visualization
+### Visualization
 ###### Audric Ganser
 
 * D3 V4
