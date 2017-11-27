@@ -3,8 +3,8 @@
 # Brewtiful World
 
 ##### The Beer Place
-<br>
-<br>
+
+
 <span class="byline">Samuil Borisov, Rita Mathis, Audric Ganser, Travis Reed, Pablo Velasco</span>
 
 ---
@@ -13,7 +13,6 @@
 
 ### Database
 ###### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
-<br>
 * Models
 	* Beer, Style, Breweries, Reviews
 * API's
@@ -21,7 +20,6 @@
 * How We Scraped
 	* brewerydb (beer, style, breweries)
 	* ratebeer (beer reviews)
-<br>
 
 Note:
 all work and no play makes jack a dull boy
@@ -32,12 +30,10 @@ all work and no play makes jack a dull boy
 
 ### API
 ###### Rita Mathis, Samuil Borisov, Pablo Velasco
-<br>
 * SQLAlchemy
 * Routes/Endpoints
 	* beers, beers/{id}...
 	* filters
-<br>
 
 Note:
 all work and no play makes jack a dull boy
@@ -48,14 +44,12 @@ all work and no play makes jack a dull boy
 
 ### Front-end: User Interface
 ###### Travis Reed, Audric Ganser
-<br>
 * React.js
 * Fuse.js
 * axios
 * react-highlight-words
 * CSS
-<br>
-<br>
+
 
 ---
 
@@ -68,7 +62,6 @@ all work and no play makes jack a dull boy
 
 @title[Self Critique]
 ### Self Critique
-
 * What did we do well?
 	* Good design, Fast search
 * What did we learn?
@@ -86,7 +79,6 @@ Libraries (Fuse.io etc)
 
 @title[Other Critique]
 ### Critique another project
-
 * What did they do well?
 	* Design, Responsive layout, Good Data, back-end Pagination
 * What did we learn from their website?
@@ -101,7 +93,6 @@ Libraries (Fuse.io etc)
 @title[Visualization]
 ### Visualization
 ###### Audric Ganser
-
 * D3 V4
 * gamingdb.com
 * Jquery
