@@ -41,7 +41,7 @@ export default class Home extends Component {
           <div className="container">
 
             <div id="about">
-              <div class="row">
+              <div className="row">
                 <div className="col-md-12">
                   <div className="text-center">
                     <h1 className="title">The Team</h1>
