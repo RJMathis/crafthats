@@ -15,7 +15,10 @@ class PythonOrgSearch(unittest.TestCase):
         print(driver.title)
         #self.assertIn("Python", driver.title)
         elem = driver.find_element_by_class_name("title-nav")
-        self.assertIn("Brewtiful World", elem)
+        beer_link = driver.find_element_by_link_text("Beers")
+        print(beer_link)
+        #beer_link.click()
+        #self.assertIn("Brewtiful World", elem)
         #elem.send_keys("pycon")
         #elem.send_keys(Keys.RETURN)
         assert "No results found." not in driver.page_source
