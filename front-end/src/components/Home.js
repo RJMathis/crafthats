@@ -411,6 +411,7 @@ export default class Home extends Component {
                                         <h1><u>Technical</u></h1>
                                         <a href="https://travisreed7.gitbooks.io/technical-documentation/content/"><h4>Technical Report</h4></a>
                                         <a href="https://yuml.me/12ee86c4.pdf"><h4>UML Diagram</h4></a>
+										<a href="http://aganser.com/visualization.html"><h4>Visualization</h4></a>
                                     </div>
                                 </div>
                             </div>
