@@ -40,7 +40,7 @@ Population of database only occured if all attributes of a model were present
 
 Note:
 Sort functionality used either name or rating of respective model
-Filter functionality per model were unique to one another (except limit and offset)
+Filter functionality per model was unique to one another (except limit and offset)
 	Mix and matching available filters to a model possible (nothing is required)
 
 ---
@@ -78,7 +78,7 @@ Filter functionality per model were unique to one another (except limit and offs
 
 Note:
 Scalability (search in backend)
-More robust data (Handle all data from api's even if the data needed was missing)
+More robust data (Handle all data from api's even if the data needed was missing, more API's to scrape from)
 Cron jobs implementation to update or import new data
 Libraries (Fuse.io etc)
 ---
