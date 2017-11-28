@@ -13,8 +13,9 @@ CORS(app)
 cache = SimpleCache()
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:downing@127.0.0.1/stagingdb'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://root:downing@/stagingdb?unix_socket=/cloudsql/backend-staging-183303:us-central1:stagingdb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 from models import db
 from views import views, beer, brewery, style, review
