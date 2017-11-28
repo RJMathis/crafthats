@@ -74,6 +74,7 @@ all work and no play makes jack a dull boy
 Note:
 Scalability (search in backend)
 More robust data (Handle all data from api's even if the data needed was missing)
+Need to implement Cron jobs for updating data
 Libraries (Fuse.io etc)
 ---
 
