@@ -8,10 +8,6 @@ python:
 install:
     - pip install --upgrade pip
     - pip install coverage
-    - pip install mypy
-    - pip install numpy
-    - pip install pylint
-    - pip install selenium
     - pip install -r requirements.txt
 
 before_script:
