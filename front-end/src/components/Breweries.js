@@ -100,8 +100,8 @@ export default class Breweries extends Component {
 
     getStatesCountries = () => {
         let url = 'https://backend-staging-183303.appspot.com/breweries?limit=1000';
-        let states = new Set(["All"])
-        let countries = new Set(["All"])
+        let states = new Set([])
+        let countries = new Set([])
 
         let self = this
         axios.get(url)
