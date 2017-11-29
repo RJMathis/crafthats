@@ -68,19 +68,22 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[Self Critique]
 ### Self Critique
 * What did we do well?
-	* Good design, Fast search
+	* Team Communication & Planning.
+	* Adapting to new design requirements
+	* Design/Develop/Refine
 * What did we learn?
-	* All the SQL, GCP, Libraries
+	* New technology stack
 * What can we do better?
-	* Mobile design, Scalability, More robust data
+	* Mobile design, Search Scalability, Data Collection
 * What puzzles us?
-	* Service workers and how they work
+	* Service workers
 
 Note:
 Scalability (search in backend)
 More robust data (Handle all data from api's even if the data needed was missing, more API's to scrape from)
 Cron jobs implementation to update or import new data
 Libraries (Fuse.io etc)
+SQLAlchemy, GCP, Flask, ReactJS 
 ---
 
 @title[Other Critique]
