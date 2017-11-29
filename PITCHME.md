@@ -33,10 +33,10 @@ Population of database only occured if all attributes of a model were present
 ### API
 ###### Rita Mathis, Samuil Borisov, Pablo Velasco
 * SQLAlchemy
-* Routes/Endpoints
-	* beers, beers/{id}...
-	* filters
-	* sorting
+* Flask
+* unittest
+* RESTful API best practices
+
 
 Note:
 Sort functionality used either name or rating of respective model
@@ -54,6 +54,7 @@ Filter functionality per model was unique to one another (except limit and offse
 * axios
 * react-highlight-words
 * CSS
+* Bootstrap
 
 
 ---
