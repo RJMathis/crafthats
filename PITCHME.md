@@ -94,9 +94,9 @@ SQLAlchemy, GCP, Flask, ReactJS
 * What did we learn from their website?
 	* Music games were the highest rated
 * What can they do better?
-	* Cross Browser design, Better front-end pagination
+	* Cross Browser design, pages for pagination
 * What puzzles us about their website?
-	* What is "Teams Top Pick" based off of?
+	* "Teams Top Picks"
 
 ---
 
