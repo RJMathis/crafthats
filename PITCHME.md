@@ -88,7 +88,7 @@ SQLAlchemy, GCP, Flask, ReactJS
 ---
 
 @title[Other Critique]
-### Critique http://www.gamingdb.info/
+### Critique of gamingdb.info
 * What did they do well?
 	* Design, Responsive layout, Good Data, back-end Pagination
 * What did we learn from their website?
