@@ -104,7 +104,7 @@ export default class Style extends Component {
         if (this.state.item !== "") {
             beerLinks = this.state.item.beers.map((beer, index) => {
                 return (
-                    <div>
+                    <div className="text-center">
                         <button type="button" className="btn btn-link"
                                 onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer}
                         </button>
@@ -114,7 +114,7 @@ export default class Style extends Component {
 
             breweryLinks = this.state.item.breweries.map((brewery, index) => {
                 return (
-                    <div>
+                    <div className="text-center">
                         <button type="button" className="btn btn-link"
                                 onClick={(e) => this.handleBreweryNavigation(this.state.item.brewery_ids[index], e)}>{brewery}
                         </button>
@@ -125,9 +125,9 @@ export default class Style extends Component {
             return (
                 <div className="container sub-container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-4">
                             <div className="text-center">
-                                <div className="img-thumbnail style-image" alt={this.state.item.name}>
+                                <div className="img-thumbnail img-thumbnail-sm style-image" alt={this.state.item.name}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="175" height="333"
                                          viewBox="0 0 264 504.7" className="beerGlass js-beerGlass">
                                         <path className="foam"
@@ -146,7 +146,7 @@ export default class Style extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-8">
                             <h2 className="sub-header text-center">{this.state.item.name}</h2>
                             <table className="table table-responsive table-striped style-image">
                                 <tbody>

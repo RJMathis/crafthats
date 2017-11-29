@@ -7,12 +7,12 @@ export default class Navbar extends Component {
         <div className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
+              <h1 className="title-nav" onClick={console.log('clicked')}>Brewtiful World</h1>
               <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span className="icon-bar"/>
                 <span className="icon-bar"/>
                 <span className="icon-bar"/>
               </button>
-              <h1 className="title-nav text-white">Brewtiful World</h1>
             </div>
             <div className="navbar-collapse collapse">
                 <ul className="nav navbar-nav">

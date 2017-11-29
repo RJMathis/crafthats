@@ -8,8 +8,10 @@ import PageSelector from './PageSelector';
 class SearchResults extends Component {
     constructor (props) {
         super (props);
+        let results = this.props.location.state.results === "Error" ? "Error" : chunk(this.props.location.state.results, 10)
+
         this.state = {
-            results: chunk(this.props.location.state.results, 10),
+            results: results,
             page: 0,
             numPages: Math.ceil(this.props.location.state.results.length/10),
             totalResults: this.props.location.state.results.length,
@@ -60,7 +62,8 @@ class SearchResults extends Component {
      */
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm) {
+        if (nextProps.location.state.searchTerm !== this.props.location.state.searchTerm ||
+            nextProps.location.state.results !== this.props.location.state.results) {
             this.setState({
                 searchTerm: nextProps.location.state.searchTerm,
                 results: chunk(nextProps.location.state.results, 10),
@@ -91,6 +94,7 @@ class SearchResults extends Component {
     render() {
 
         // Create an array of X components with 1 for each result gathered from Search
+        console.log(this.state.results)
         if (this.state.results.length === 0) {
             return (<div className="container sub-container" style={{height: 100}}>
                         <div className="mh-50">
@@ -103,6 +107,18 @@ class SearchResults extends Component {
                             </div>
                         </div>
                     </div>);
+        } else if (this.state.results === "Error") {
+            return (<div className="container sub-container" style={{height: 100}}>
+                <div className="mh-50">
+                    <div className="col-12">
+                        <h3>Sorry, there was an error on our end. Please try your search again.</h3>
+                    </div>
+                    <div className="row align-items-center">
+                        <button className="btn btn-link"
+                                onClick={this.props.history.goBack}>Go Back</button>
+                    </div>
+                </div>
+            </div>);
         }
         let searchTerm = this.state.searchTerm
         let resultRows = this.state.results[this.state.page].map((result) => {

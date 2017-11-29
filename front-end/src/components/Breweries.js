@@ -111,7 +111,9 @@ export default class Breweries extends Component {
                     states.add(brewery.state);
                     countries.add(brewery.country)
                 })
-                self.setState({allStates: Array.from(states), allCountries: Array.from(countries)});
+                states = ['All',...Array.from(states).sort()]
+                countries = ['All',...Array.from(countries).sort()]
+                self.setState({allStates: states, allCountries: countries});
             })
             .catch((error) => {
                 console.log(error)

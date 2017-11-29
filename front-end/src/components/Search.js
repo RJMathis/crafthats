@@ -42,6 +42,7 @@ class Search extends Component {
     }
 
     searchData = (searchTerm) => {
+        let result
         let options = {
             shouldSort: true,
             threshold: 0.2,
@@ -49,8 +50,13 @@ class Search extends Component {
             minMatchCharLength: 1,
             keys: this.allKeys
         };
-        let fuse = new Fuse(this.state.allData, options);
-        let result = fuse.search(searchTerm);
+        if (this.state.allData.length === 0) {
+            result = "Error"
+        } else {
+            let fuse = new Fuse(this.state.allData, options);
+            result = fuse.search(searchTerm);
+        }
+        console.log(result)
         this.setState({ results: result, navigate: true, loading: false });
     }
 
@@ -86,7 +92,7 @@ class Search extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="form-group">
+                <div className="form-group search-bar">
                     <div className="input-group">
                         <input type="text"
                                className="form-control"

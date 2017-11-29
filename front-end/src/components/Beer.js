@@ -145,12 +145,12 @@ export default class Beer extends Component {
         return (
             <div className="container sub-container">
                 <div className="row">
-                    <div className="col-md-6">
+                    <div className="col-md-4">
                         <div className="text-center">
-                            <img   className="img-thumbnail" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name} />
+                            <img   className=" img-thumbnail img-thumbnail-sm" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name} />
                         </div>
                     </div>
-                    <div className="col-md-6">
+                    <div className="col-md-8">
                         <h2 className="sub-header">{this.state.item.name}</h2>
                         <table className="table table-responsive table-striped">
                             <tbody>

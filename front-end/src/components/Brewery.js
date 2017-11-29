@@ -94,7 +94,7 @@ export default class Brewery extends Component {
         if (this.state.item !== "") {
             beerLinks = this.state.item.beers.map((beer, index) => {
                 return (
-                    <div>
+                    <div className="text-center">
                         <button type="button" className="btn btn-link" onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer}</button>
                     </div>
                 );
@@ -102,7 +102,7 @@ export default class Brewery extends Component {
 
             styleLinks = this.state.item.styles.map((style, index) => {
                 return (
-                    <div>
+                    <div className="text-center">
                         <button type="button" className="btn btn-link" onClick={(e) => this.handleStyleNavigation(this.state.item.style_ids[index], e)}>{style}</button>
                     </div>
                 );
@@ -111,12 +111,12 @@ export default class Brewery extends Component {
             return (
                 <div className="container sub-container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-4">
                             <div className="text-center">
-                                <img className="img-thumbnail" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name}/>
+                                <img className="img-thumbnail img-thumbnail-sm" src={this.state.item.image === undefined ? this.state.item.images : this.state.item.image} alt={this.state.item.name}/>
                             </div>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-8">
                             <h2 className="sub-header text-center">{this.state.item.name}</h2>
                             <table className="table table-responsive table-striped">
                                 <tbody>
