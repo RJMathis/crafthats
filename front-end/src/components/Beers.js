@@ -107,7 +107,7 @@ export default class Beers extends Component {
                 res.data.records.map((style) => {
                     return styles.push(style.name)
                 })
-                self.setState({allStyles: styles});
+                self.setState({allStyles: styles.sort()});
             })
             .catch((error) => {
                 console.log(error)

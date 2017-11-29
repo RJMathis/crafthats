@@ -120,7 +120,7 @@ export default class Reviews extends Component {
                 res.data.records.map((beer) => {
                     return beers.push(beer.name)
                 })
-                self.setState({beerMenu: beers});
+                self.setState({beerMenu: beers.sort()});
             })
             .catch((error) => {
                 console.log(error)
