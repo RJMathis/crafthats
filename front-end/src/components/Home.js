@@ -45,34 +45,6 @@ export default class Home extends Component {
     callAPI = () => {
         let url = "https://api.github.com/repos/RJMathis/crafthats/stats/contributors"
 
-          <div className="banner">
-            <img id="home-banner" src="../images/brewtiful.png" alt="Brewtiful Banner" />
-            <div className="home-banner-text">
-              <p>Welcome to</p>
-              <p>Brewtiful World</p>
-            </div>
-          </div>
-                
-          <div className="container">
-
-            <div id="about">
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="text-center">
-                    <h1 className="title">The Team</h1>
-                    <h3 className="title-sub">We Drink, We Code, We Work</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div className="row">
-                <div className="col-md-4">
-                  <div className="text-center">
-                    <img className="img-about img-thumbnail" src="images/travis_bitmoji.png" alt="Travis Bitmoji" data-toggle="modal" data-target="#travisModal" />
-                    <h2>Travis Reed</h2>
-                    <p>Front-end/Technical Documentation</p>
-                  </div>
-                </div>
         let self = this
         axios.get(url)
             .then((res) => {
