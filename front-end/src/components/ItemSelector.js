@@ -54,7 +54,7 @@ export default class ItemSelector extends Component {
         }
 
         return (
-            <div className="col-md-4 container-thumbnail">
+            <div className="col-md-3 container-thumbnail">
                 <div className="text-center">
                     <div onClick={() => this.setState({navigate: true})}>
                         <img className="img-thumbnail" src={this.state.item.image} alt={this.state.item.name} title={this.state.item.name} />

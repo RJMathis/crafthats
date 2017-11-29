@@ -106,7 +106,7 @@ export default class Style extends Component {
                 return (
                     <div>
                         <button type="button" className="btn btn-link"
-                                onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer},
+                                onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer}
                         </button>
                     </div>
                 );
@@ -116,7 +116,7 @@ export default class Style extends Component {
                 return (
                     <div>
                         <button type="button" className="btn btn-link"
-                                onClick={(e) => this.handleBreweryNavigation(this.state.item.brewery_ids[index], e)}>{brewery},
+                                onClick={(e) => this.handleBreweryNavigation(this.state.item.brewery_ids[index], e)}>{brewery}
                         </button>
                     </div>
                 );
@@ -147,39 +147,53 @@ export default class Style extends Component {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <h2 className="sub-header">{this.state.item.name}</h2>
-                            <table className="table table-responsive table-striped">
+                            <h2 className="sub-header text-center">{this.state.item.name}</h2>
+                            <table className="table table-responsive table-striped style-image">
                                 <tbody>
                                 <tr>
-                                    <td>Description:</td>
+                                    <td><strong>Description:</strong></td>
                                     <td>{this.state.item.description ? this.state.item.description : "No Description Available"}</td>
                                 </tr>
                                 <tr>
-                                    <td>IBU Min:</td>
+                                    <td><strong>IBU Min:</strong></td>
                                     <td>{this.state.item.ibu_min}</td>
                                 </tr>
                                 <tr>
-                                    <td>IBU Max:</td>
+                                    <td><strong>IBU Max:</strong></td>
                                     <td>{this.state.item.ibu_max}</td>
                                 </tr>
                                 <tr>
-                                    <td>ABV Min:</td>
+                                    <td><strong>ABV Min:</strong></td>
                                     <td>{this.state.item.abv_min}</td>
                                 </tr>
                                 <tr>
-                                    <td>ABV Max:</td>
+                                    <td><strong>ABV Max:</strong></td>
                                     <td>{this.state.item.abv_max}</td>
                                 </tr>
                                 <tr>
-                                    <td>SRM:</td>
+                                    <td><strong>SRM:</strong></td>
                                     <td>{this.state.item.srm}</td>
                                 </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="row mt-3">
+                        <div className="col-md-6">
+                            <h4 className="sub-header text-center">Check out some {this.state.item.name} beers</h4>
+                            <table className="table table-responsive">
+                                <tbody>
                                 <tr>
-                                    <td>Beers:</td>
                                     <td>{beerLinks}</td>
                                 </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-md-6">
+                            <h4 className="sub-header text-center">Breweries offering {this.state.item.name} beers</h4>
+                            <table className="table table-responsive">
+                                <tbody>
                                 <tr>
-                                    <td>Breweries:</td>
                                     <td>{breweryLinks}</td>
                                 </tr>
                                 </tbody>

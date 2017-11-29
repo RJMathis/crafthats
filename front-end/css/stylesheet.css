@@ -26,15 +26,16 @@ h1, h2, .title, .title-nav .title-home, .modal-title {
   float: right;
   text-transform: uppercase;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 15px;
+  /*margin-bottom: 10px;*/
 }
 
 .navbar {
-  background-color: #fff;
-  border: none;
-  box-shadow: none;
-  background-image: none;
   margin-bottom: 0;
+}
+
+.navbar-inverse {
+    border-radius: 0;
 }
 
 .navbar > .container {
@@ -51,6 +52,8 @@ h1, h2, .title, .title-nav .title-home, .modal-title {
 
 .sub-container {
   margin-top: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 .banner {
@@ -131,7 +134,7 @@ h1, h2, .title, .title-nav .title-home, .modal-title {
 .container-thumbnail {
   padding-top: 20px;
   padding-bottom: 20px;
-  width: 25%;
+  /*width: 25%;*/
 }
 
 .overlay {

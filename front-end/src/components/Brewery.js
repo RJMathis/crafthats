@@ -95,7 +95,7 @@ export default class Brewery extends Component {
             beerLinks = this.state.item.beers.map((beer, index) => {
                 return (
                     <div>
-                        <button type="button" className="btn btn-link" onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer}, </button>
+                        <button type="button" className="btn btn-link" onClick={(e) => this.handleBeerNavigation(this.state.item.beer_ids[index], e)}>{beer}</button>
                     </div>
                 );
             })
@@ -103,7 +103,7 @@ export default class Brewery extends Component {
             styleLinks = this.state.item.styles.map((style, index) => {
                 return (
                     <div>
-                        <button type="button" className="btn btn-link" onClick={(e) => this.handleStyleNavigation(this.state.item.style_ids[index], e)}>{style}, </button>
+                        <button type="button" className="btn btn-link" onClick={(e) => this.handleStyleNavigation(this.state.item.style_ids[index], e)}>{style}</button>
                     </div>
                 );
             })
@@ -117,35 +117,53 @@ export default class Brewery extends Component {
                             </div>
                         </div>
                         <div className="col-md-6">
-                            <h2 className="sub-header">{this.state.item.name}</h2>
+                            <h2 className="sub-header text-center">{this.state.item.name}</h2>
                             <table className="table table-responsive table-striped">
                                 <tbody>
                                 <tr>
-                                    <td>State:</td>
+                                    <td><strong>Country:</strong></td>
+                                    <td>{this.state.item.country}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>State:</strong></td>
                                     <td>{this.state.item.state}</td>
                                 </tr>
                                 <tr>
-                                    <td>City:</td>
+                                    <td><strong>City:</strong></td>
                                     <td>{this.state.item.city}</td>
                                 </tr>
                                 <tr>
-                                    <td>Description:</td>
+                                    <td><strong>Description:</strong></td>
                                     <td>{this.state.item.description ? this.state.item.description : "No Description Available"}</td>
                                 </tr>
                                 <tr>
-                                    <td>Established:</td>
+                                    <td><strong>Established:</strong></td>
                                     <td>{this.state.item.established}</td>
                                 </tr>
                                 <tr>
-                                    <td>Website:</td>
+                                    <td><strong>Website:</strong></td>
                                     <td><a href={this.state.item.website}>{this.state.item.website}</a></td>
                                 </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="row mt-3">
+                        <div className="col-md-6">
+                            <h4 className="sub-header text-center">More Beers from {this.state.item.name}</h4>
+                            <table className="table table-responsive">
+                                <tbody>
                                 <tr>
-                                    <td>Beers:</td>
                                     <td>{beerLinks}</td>
                                 </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="col-md-6">
+                            <h4 className="sub-header text-center">More Styles Offered By {this.state.item.name}</h4>
+                            <table className="table table-responsive">
+                                <tbody>
                                 <tr>
-                                    <td>Styles:</td>
                                     <td>{styleLinks}</td>
                                 </tr>
                                 </tbody>
