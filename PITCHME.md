@@ -88,11 +88,11 @@ SQLAlchemy, GCP, Flask, ReactJS
 ---
 
 @title[Other Critique]
-### Critique another project
+### Critique http://www.gamingdb.info/
 * What did they do well?
 	* Design, Responsive layout, Good Data, back-end Pagination
 * What did we learn from their website?
-	* RPG and Adventure games were the highest rated
+	* Music games were the highest rated
 * What can they do better?
 	* Cross Browser design, Better front-end pagination
 * What puzzles us about their website?
@@ -102,7 +102,7 @@ SQLAlchemy, GCP, Flask, ReactJS
 
 @title[Visualization]
 ### Visualization
-###### Audric Ganser
+###### Audric Ganser, Rita Mathis
 * D3 V4
 * gamingdb.com
 * Jquery
