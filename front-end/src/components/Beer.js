@@ -155,23 +155,23 @@ export default class Beer extends Component {
                         <table className="table table-responsive table-striped">
                             <tbody>
                             <tr>
-                                <td>ABV:</td>
+                                <td><strong>ABV:</strong></td>
                                 <td>{this.state.item.abv}</td>
                             </tr>
                             <tr>
-                                <td>IBU:</td>
+                                <td><strong>IBU:</strong></td>
                                 <td>{this.state.item.ibu}</td>
                             </tr>
                             <tr>
-                                <td>Brewery:</td>
+                                <td><strong>Brewery:</strong></td>
                                 <td><button type="button" className="btn btn-link" onClick={this.handleBreweryNavigation}>{this.state.item.brewery}</button></td>
                             </tr>
                             <tr>
-                                <td>Style:</td>
+                                <td><strong>Style:</strong></td>
                                 <td><button type="button" className="btn btn-link" onClick={this.handleStyleNavigation}>{this.state.item.style}</button></td>
                             </tr>
                             <tr>
-                                <td>Organic:</td>
+                                <td><strong>Organic:</strong></td>
                                 <td>{this.state.item.organic}</td>
                             </tr>
                             </tbody>

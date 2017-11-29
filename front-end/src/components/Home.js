@@ -187,13 +187,13 @@ export default class Home extends Component {
                                                         <tr>
                                                             <td>
                                                                 <strong>Issues Closed:</strong>
-                                                                <p>10</p>
+                                                                <p>25</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <strong>Unit Tests:</strong>
-                                                                <p>10</p>
+                                                                <p>20</p>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -236,7 +236,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <td>
                                                                 <strong>Issues Closed:</strong>
-                                                                <p>17</p>
+                                                                <p>34</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -284,13 +284,13 @@ export default class Home extends Component {
                                                         <tr>
                                                             <td>
                                                                 <strong>Issues Closed:</strong>
-                                                                <p>12</p>
+                                                                <p>22</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <strong>Unit Tests:</strong>
-                                                                <p>2</p>
+                                                                <p>46</p>
                                                             </td>
                                                         </tr>
                                                         </tbody>
@@ -334,7 +334,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <td>
                                                                 <strong>Issues Closed:</strong>
-                                                                <p>10</p>
+                                                                <p>25</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -383,7 +383,7 @@ export default class Home extends Component {
                                                         <tr>
                                                             <td>
                                                                 <strong>Issues Closed:</strong>
-                                                                <p>7</p>
+                                                                <p>20</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -422,7 +422,6 @@ export default class Home extends Component {
                                         <ul>
                                             <li className="text-left"><h4>PlanIt Poker</h4></li>
                                             <li className="text-left"><h4>Slack</h4></li>
-                                            <li className="text-left"><h4>Facebook</h4></li>
                                             <li className="text-left"><h4>Google Hangouts</h4></li>
                                         </ul>
                                     </div>
@@ -440,6 +439,7 @@ export default class Home extends Component {
                                         <a href="https://travisreed7.gitbooks.io/technical-documentation/content/"><h4>Technical Report</h4></a>
                                         <a href="https://yuml.me/12ee86c4.pdf"><h4>UML Diagram</h4></a>
 										<a href="http://aganser.com/visualization.html"><h4>Visualization</h4></a>
+                                        <a href="https://gitpitch.com/RJMathis/crafthats/gitPitch"><h4>Presentation</h4></a>
                                     </div>
                                 </div>
                             </div>

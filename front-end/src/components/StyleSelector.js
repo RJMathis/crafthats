@@ -67,7 +67,7 @@ export default class StyleSelector extends Component {
         }
 
         return (
-            <div className="col-md-4 container-thumbnail">
+            <div className="col-md-3 container-thumbnail">
                 <div className="text-center">
                     <div onClick={() => this.setState({navigate: true})}>
                         <div className="img-thumbnail" alt={this.state.item.name} title={this.state.item.name}>
