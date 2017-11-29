@@ -10,7 +10,7 @@ export default class Reviews extends Component {
         super (props);
         this.state = {
             reviews: [],
-            ratingMenu: ["All", "0", "1", "2", "3", "4", "5"],
+            ratingMenu: ["All", "0+", "1+", "2+", "3+", "4+", "5+"],
             beerMenu: ["All"],
             selectedRating: "",
             selectedBeer: "",
