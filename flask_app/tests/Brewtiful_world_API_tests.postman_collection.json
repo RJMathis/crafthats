@@ -460,7 +460,7 @@
 							"pm.test(\"Has image\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    var obj = jsonData\r",
-							"    pm.expect(obj.hasOwnProperty(\"images\")).to.be.true;\r",
+							"    pm.expect(obj.hasOwnProperty(\"image\")).to.be.true;\r",
 							"});"
 						]
 					}
@@ -538,7 +538,7 @@
 							"pm.test(\"Has images\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    var obj = jsonData\r",
-							"    pm.expect(obj.hasOwnProperty(\"images\")).to.be.true;\r",
+							"    pm.expect(obj.hasOwnProperty(\"image\")).to.be.true;\r",
 							"});\r",
 							"\r",
 							"pm.test(\"Has name\", function () {\r",
