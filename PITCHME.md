@@ -12,7 +12,6 @@
 @title[DataBase]
 
 ### Database
-###### Rita Mathis, Pablo Velasco, Audric Ganser, Samuil Borisov
 * Models
 	* Beer, Style, Breweries, Reviews
 * API's
@@ -31,7 +30,6 @@ Population of database only occured if all attributes of a model were present
 @title[API]
 
 ### API
-###### Rita Mathis, Samuil Borisov, Pablo Velasco
 * SQLAlchemy
 * Flask
 * unittest
@@ -48,7 +46,6 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[User Interface]
 
 ### Front-end: User Interface
-###### Travis Reed, Audric Ganser
 * React.js
 * Fuse.js
 * axios
