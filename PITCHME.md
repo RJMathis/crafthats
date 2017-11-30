@@ -75,7 +75,7 @@ Filter functionality per model was unique to one another (except limit and offse
 	
 ---
 * What did we learn?
----?image=http://spark.apache.org/docs/latest/img/cluster-overview.png
+---?image=https://outlivinglife.files.wordpress.com/2013/02/information_hose.jpg
 
 ---
 * New technology stack
