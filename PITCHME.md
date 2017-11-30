@@ -16,9 +16,6 @@
 	* Beer, Style, Breweries, Reviews
 * API's
 	* brewerydb.com, ratebeer.com
-* How We Scraped
-	* brewerydb (beer, style, breweries)
-	* ratebeer (beer reviews)
 
 Note:
 (Talk about their relationship to each other or what their attributes were?)
