@@ -31,6 +31,7 @@ Population of database only occured if all attributes of a model were present
 * Flask
 * unittest
 * RESTful API best practices
+* Caching
 
 
 Note:
