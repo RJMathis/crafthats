@@ -64,7 +64,7 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[Self Critique]
 ### Self Critique
 * What did we do well?
-	* Team Communication & Planning.
+	* Team Communication & Planning
 	* Adapting to new design requirements
 	* Design/Develop/Refine
 	
