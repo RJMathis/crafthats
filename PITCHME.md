@@ -75,7 +75,7 @@ Filter functionality per model was unique to one another (except limit and offse
 	
 ---
 * What did we learn?
----?image=https://outlivinglife.files.wordpress.com/2013/02/information_hose.jpg
+---?image=https://outlivinglife.files.wordpress.com/2013/02/information_hose.jpg?size=70% 70%
 
 ---
 * New technology stack
