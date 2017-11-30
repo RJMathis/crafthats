@@ -13,9 +13,9 @@
 
 ### Database
 * GCP MySQL Storage
-* Models
+* Tables
 	* Beer, Style, Breweries, Reviews
-* API's
+* API Scraping
 	* brewerydb.com, ratebeer.com
 
 Note:
