@@ -103,7 +103,6 @@ SQLAlchemy, GCP, Flask, ReactJS
 
 @title[Visualization]
 ### Visualization
-###### Audric Ganser, Rita Mathis
 * D3 V4
 * gamingdb.com
 * Jquery
