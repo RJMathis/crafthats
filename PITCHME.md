@@ -44,7 +44,7 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[User Interface]
 
 ### Front-end: User Interface
-* CSS
+* html/CSS
 * Bootstrap
 * React.js
 * Fuse.js
