@@ -44,12 +44,12 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[User Interface]
 
 ### Front-end: User Interface
+* CSS
+* Bootstrap
 * React.js
 * Fuse.js
 * axios
 * react-highlight-words
-* CSS
-* Bootstrap
 
 
 ---
