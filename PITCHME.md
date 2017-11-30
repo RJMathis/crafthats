@@ -15,11 +15,10 @@
 * GCP MySQL Storage
 * Tables
 	* Beer, Style, Breweries, Reviews
-* API Scraping
+* Populating
 	* brewerydb.com, ratebeer.com
 
 Note:
-(Talk about their relationship to each other or what their attributes were?)
 Naming convention of beers across API's were different
 Population of database only occured if all attributes of a model were present
 
