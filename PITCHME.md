@@ -72,8 +72,14 @@ Filter functionality per model was unique to one another (except limit and offse
 	* Team Communication & Planning.
 	* Adapting to new design requirements
 	* Design/Develop/Refine
+	
+---
 * What did we learn?
-	* New technology stack
+---?image=http://spark.apache.org/docs/latest/img/cluster-overview.png
+
+---
+* New technology stack
+---
 * What can we do better?
 	* Mobile design, Search Scalability, Data Collection
 * What puzzles us?
