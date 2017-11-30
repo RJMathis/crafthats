@@ -12,6 +12,7 @@
 @title[DataBase]
 
 ### Database
+* GCP MySQL Storage
 * Models
 	* Beer, Style, Breweries, Reviews
 * API's
