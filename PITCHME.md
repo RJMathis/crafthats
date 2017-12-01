@@ -100,7 +100,7 @@ Cron jobs implementation to update or import new data
 * What did we learn from their website?
 	* Navigating Backwards
 * What can they do better?
-	* Pages for pagination
+	* Adding page numbers to pagination
 	* Resize images on model page
 * What puzzles us about their website?
 	* Ambiguous "Teams Top Picks"
