@@ -98,7 +98,7 @@ Cron jobs implementation to update or import new data
 * What did they do well?
 	* Design, Fast loading
 * What did we learn from their website?
-	* Navigating Backwards
+	* Filtering search results by models is useful
 * What can they do better?
 	* Adding page numbers to pagination
 	* Resize images on model page
