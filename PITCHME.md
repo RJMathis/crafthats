@@ -64,19 +64,26 @@ Filter functionality per model was unique to one another (except limit and offse
 @title[Self Critique]
 ### Self Critique
 * What did we do well?
-	* Team Communication & Planning
-	* Adapting to new design requirements
-	* Design/Develop/Refine
+	* Agile Development
+	* Minimal, Elegant User Interface
+	* Separated Services
+	
+Note:
+Google Hangout meetups, Scrum Master: made sure issues were tracked in Trello, Post-class standups, Sprint planning at the beginning of each phase, Github: protected master branch, PR template, code reviews
 	
 ---
 * What did we learn?
----?image=https://outlivinglife.files.wordpress.com/2013/02/information_hose.jpg&size=70% 70%
+	* GCP
+	* SQLAlchemy
+	* Testing Tools
+	* Full-stack Development
+	
+Note: python unittest module, postman, selenium
 
 ---
-* New technology stack
----
 * What can we do better?
-	* Mobile design, Search Scalability, Data Collection
+	* Search Scalability
+	* Data Collection
 * What puzzles us?
 	* Service workers
 
@@ -84,20 +91,19 @@ Note:
 Scalability (search in backend)
 More robust data (Handle all data from api's even if the data needed was missing, more API's to scrape from)
 Cron jobs implementation to update or import new data
-Libraries (Fuse.io etc)
-SQLAlchemy, GCP, Flask, ReactJS 
 ---
 
 @title[Other Critique]
 ### Critique of gamingdb.info
 * What did they do well?
-	* Design, Good Data
+	* Design, Fast loading
 * What did we learn from their website?
-	* Music games were the highest rated
+	* Navigating Backwards
 * What can they do better?
-	* Cross Browser design, pages for pagination
+	* Pages for pagination
+	* Resize images on model page
 * What puzzles us about their website?
-	* "Teams Top Picks"
+	* Ambiguous "Teams Top Picks"
 
 ---
 
