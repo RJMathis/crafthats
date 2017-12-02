@@ -374,21 +374,21 @@ export default class Home extends Component {
                                 </div>
                             </div>
 
-                            <div className="row border">
-                                <div className="col-md-3 container border-right">
+                            <div className="row">
+                                <div className="col-md-3 container data-thumbnail">
                                     <div className="text-center">
                                         <h1><u>Stats</u></h1>
                                         <ul>
                                             <li className="text-left"><h4><strong>total no. of commits:</strong> {this.state.totalCommits}</h4></li>
-                                            <li className="text-left"><h4><strong>total no. of issues:</strong> 73</h4></li>
-                                            <li className="text-left"><h4><strong>total no. of unit tests:</strong> 91</h4></li>
+                                            <li className="text-left"><h4><strong>total no. of issues:</strong> 126</h4></li>
+                                            <li className="text-left"><h4><strong>total no. of unit tests:</strong> 146</h4></li>
                                             <li className="text-left"><a href="http://docs.crafthats.apiary.io/"><h4>Apiary API</h4></a></li>
                                             <li className="text-left"><a href="https://github.com/RJMathis/crafthats"><h4>GitHub Repo</h4></a></li>
                                             <li className="text-left"><a href="https://trello.com/b/gV83PBgA/swe-project-1"><h4>Trello</h4></a></li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="col-md-3  container border-right">
+                                <div className="col-md-3 container data-thumbnail">
                                     <div className="text-center">
                                         <h1><u>Tools</u></h1>
                                         <ul>
@@ -398,14 +398,14 @@ export default class Home extends Component {
                                         </ul>
                                     </div>
                                 </div>
-                                <div className="col-md-3 container border-right">
+                                <div className="col-md-3 container data-thumbnail">
                                     <div className="text-center">
                                         <h1><u>Data</u></h1>
                                         <p><strong>Brewery DB:</strong> Used API to collect data via HTTP GET requests</p>
                                         <p><strong>RateBeer:</strong>   Used API to collect data via HTTP POST requests</p>
                                     </div>
                                 </div>
-                                <div className="col-md-3 container">
+                                <div className="col-md-3 container data-thumbnail">
                                     <div className="text-center">
                                         <h1><u>Technical</u></h1>
                                         <a href="https://travisreed7.gitbooks.io/technical-documentation/content/"><h4>Technical Report</h4></a>
